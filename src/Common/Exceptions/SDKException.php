@@ -1,9 +1,5 @@
 <?php
 
-    /**
-     * Copyright (C) 2019 Paytm.
-     */
-
     namespace mmpsdk\Common\Exceptions;
 
     use Exception;
