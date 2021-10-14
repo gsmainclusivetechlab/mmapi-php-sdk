@@ -39,6 +39,14 @@ class ResponseUtil
                     $decodedResponse->clientCorrelationId = $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
+                    if(is_array($decodedResponse) && !empty($decodedResponse)){
+                        $objectArray = array();
+                        foreach($decodedResponse as $item){
+                            $object = clone $obj;
+                            array_push($objectArray, $object->hydrate($item));
+                        }
+                        return $objectArray;
+                    }
                     return $obj->hydrate($decodedResponse);
                 } else {
                     return $decodedResponse;
@@ -63,16 +71,20 @@ class ResponseUtil
 
                 break;
             case self::NOT_FOUND:
-                throw new Exception('Resource Not Found');
+                $errorObject = json_decode($response->result);
+                if(isset($errorObject->errorCode))
+                    throw new SDKException(self::NOT_FOUND, new Error($errorObject));
+                else
+                    throw new SDKException('Resource Not Found');
                 break;
             case self::INTERNAL_SERVER_ERROR:
-                throw new Exception('Internal Server Error');
+                throw new SDKException('Internal Server Error');
                 break;
             case self::SERVICE_UNAVAILABLE:
-                throw new Exception('Service Unavailable');
+                throw new SDKException('Service Unavailable');
                 break;
             default:
-                throw new Exception('Unknown Response', $response);
+                throw new SDKException('Unknown Response', $response);
         }
     }
 }

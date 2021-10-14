@@ -3,8 +3,6 @@
 namespace mmpsdk\MerchantPayment\Process;
 
 use Exception;
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
-use mmpsdk\MerchantPayment\Validation\TransactionValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 
@@ -13,6 +11,7 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\AccountIdentifier;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\MerchantPayment\Models\AuthorisationCode;
 use mmpsdk\MerchantPayment\Validation\AuthorisationCodeValidator;
 
@@ -20,35 +19,27 @@ use mmpsdk\MerchantPayment\Validation\AuthorisationCodeValidator;
  * Class AuthorisedPaymentCode
  * @package mmpsdk\MerchantPayment\Process
  */
-class AuthorisedPaymentCode
+class CreateAuthorisationCode
 {
     /**
      * Generate an authorisation code which can in turn be used at a merchant to authorise a payment.
      * Asynchronous flow is used with a final callback.
      *
-     * @param array $accountId
+     * @param array $accountIdentifier
      * @param AuthorisationCode $authorisationCode
      * @param string $callBackUrl
      * @return RequestState|Exception
      */
-    public static function execute($accountId, AuthorisationCode $authorisationCode, $callBackUrl = null)
+    public static function execute($accountIdentifier, AuthorisationCode $authorisationCode, $callBackUrl = null)
     {
-        //Validation
-        $validator = new AuthorisationCodeValidator($authorisationCode);
+        $accountIdentifier = CommonUtil::DeserializeToSupportObject($accountIdentifier);
 
-        // if ($accountId != null) {
-        //     $accountIdentifierArray = array();
-        //     foreach ($accountId as $key => $value) {
-        //         $accountid = new AccountIdentifier();
-        //         $accountid->setKey($key)
-        //                 ->setValue($value);
-        //         array_push($accountIdentifierArray, $accountId);
-        //     }
-        // }
+        //Validation
+        $validator = new AuthorisationCodeValidator($authorisationCode, $accountIdentifier);
 
         //Make API call
-        $response = RequestUtil::post(API::CREATE_AUTHORISATION_CODE, json_encode($authorisationCode))
-                        ->setUrlParams(['{accountId}' => $accountId])
+        $response = RequestUtil::post(API::AUTHORISATION_CODE, json_encode($authorisationCode))
+                        ->setUrlParams(['{accountId}' => CommonUtil::encodeSupportObjectToString($accountIdentifier)])
                         ->setClientCorrelationId(true)
                         ->httpHeader(Header::X_CALLBACK_URL, $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl())
                         ->call();

@@ -15,7 +15,7 @@ use mmpsdk\Common\Process\AccessToken;
 
 class AuthUtil
 {
-    public static $expiryBufferTime = 5;
+    public static $EXPIRY_BUFFER_TIME = 5;
 
     public static function buildHeader(RequestUtil $request, $content = null)
     {
@@ -56,7 +56,7 @@ class AuthUtil
         // We use a buffer time when checking for token expiry to account
         // for API call delays and any delay between the time the token is
         // retrieved and subsequently used
-        return ($delta - self::$expiryBufferTime) < $authToken->getExpiresIn() ? false : true;
+        return ($delta - self::$EXPIRY_BUFFER_TIME) < $authToken->getExpiresIn() ? false : true;
     }
 
     public static function updateAccessToken()

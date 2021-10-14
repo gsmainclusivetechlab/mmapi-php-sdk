@@ -14,13 +14,14 @@ class Validator
     protected $objToValidate;
     private $validationErrors = array();
     private $defaultErrorMsg;
+    private $supportObject;
 
     public const
         MANDATORY = 1,
         VALID_AMOUNT = 2,
         POSITIVE_NUMBER = 3;
 
-    public function __construct($obj)
+    public function __construct($obj, $supportObject = null)
     {
         $this->objToValidate = $obj;
         $this->defaultErrorMsg = array(
@@ -28,6 +29,7 @@ class Validator
             self::VALID_AMOUNT => "Wrong amount value.",
             self::POSITIVE_NUMBER => "Positive number is required",
         );
+        $this->supportObject = $supportObject;
         return $this->validate();
     }
 
