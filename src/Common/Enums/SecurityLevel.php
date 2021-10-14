@@ -1,28 +1,23 @@
 <?php
 
-    namespace mmpsdk\Common\Enums;
+namespace mmpsdk\Common\Enums;
+
+/**
+ * Class SecurityLevel
+ * @package mmpsdk\Common\Enums
+ */
+class SecurityLevel
+{
+    public const DEVELOPMENT = 'DevLevel',
+        STANDARD = 'StandardLevel',
+        ENHANCED = 'EnhancedLevel',
+        NONE = 'None';
 
     /**
-     * Class SecurityLevel
-     * @package mmpsdk\Common\Enums
+     * @return array
      */
-    class SecurityLevel
+    public static function getSecurityLevelOptions()
     {
-        public const
-            DEVELOPMENT = "DevLevel",
-            STANDARD = "StandardLevel",
-            ENHANCED = "EnhancedLevel",
-            NONE = "None";
-
-        /**
-         * @return array
-         */
-        public static function getSecurityLevelOptions()
-        {
-            return [
-                self::DEVELOPMENT,
-                self::STANDARD,
-                self::ENHANCED
-            ];
-        }
+        return [self::NONE, self::DEVELOPMENT, self::STANDARD, self::ENHANCED];
     }
+}

@@ -31,7 +31,11 @@ abstract class AuthorizationCache
             $cachedToken = file_get_contents($cachePath);
             if ($cachedToken) {
                 $tokens = json_decode($cachedToken, true);
-                if ($clientId && is_array($tokens) && array_key_exists($clientId, $tokens)) {
+                if (
+                    $clientId &&
+                    is_array($tokens) &&
+                    array_key_exists($clientId, $tokens)
+                ) {
                     // If client Id is found, just send in that data only
                     return new AuthToken($tokens[$clientId]);
                 } elseif ($clientId) {
@@ -63,24 +67,26 @@ abstract class AuthorizationCache
         $cachePath = self::cachePath();
         if (!is_dir(dirname($cachePath))) {
             if (mkdir(dirname($cachePath), 0755, true) == false) {
-                throw new \Exception("Failed to create directory at $cachePath");
+                throw new \Exception(
+                    "Failed to create directory at $cachePath"
+                );
             }
         }
 
         // Reads all the existing persisted data
         $tokens = self::pull($clientId);
-        $tokens = $tokens ? $tokens : array();
+        $tokens = $tokens ? $tokens : [];
         if (is_array($tokens)) {
-            $tokens[$clientId] = array(
+            $tokens[$clientId] = [
                 'clientId' => $clientId,
                 'authToken' => $authObj->getAuthToken(),
                 'createdAt' => $authObj->getCreatedAt(),
                 'expiresIn' => $authObj->getExpiresIn()
-            );
+            ];
         }
         if (!file_put_contents($cachePath, json_encode($tokens))) {
-            throw new \Exception("Failed to write cache");
-        };
+            throw new \Exception('Failed to write cache');
+        }
     }
 
     /**
@@ -103,7 +109,7 @@ abstract class AuthorizationCache
      */
     public static function cachePath()
     {
-        $cachePath =  MobileMoney::getCachePath();
+        $cachePath = MobileMoney::getCachePath();
         return empty($cachePath) ? __DIR__ . self::$CACHE_PATH : $cachePath;
     }
 }

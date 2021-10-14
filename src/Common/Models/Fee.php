@@ -91,15 +91,17 @@ class Fee extends BaseModel
         return $this->feeCurrency;
     }
 
-
     public function jsonSerialize()
     {
-        return array_filter([
-            "feeType" => $this->feeType,
-            "feeAmount" => $this->feeAmount,
-            "feeCurrency" => $this->feeCurrency
-        ], function ($val) {
-            return !is_null($val);
-        });
+        return array_filter(
+            [
+                'feeType' => $this->feeType,
+                'feeAmount' => $this->feeAmount,
+                'feeCurrency' => $this->feeCurrency
+            ],
+            function ($val) {
+                return !is_null($val);
+            }
+        );
     }
 }

@@ -10,7 +10,7 @@ use JsonSerializable;
  */
 class BaseModel implements JsonSerializable
 {
-    public function __construct($value = array())
+    public function __construct($value = [])
     {
         if (!empty($value)) {
             $this->hydrate($value);
@@ -20,8 +20,14 @@ class BaseModel implements JsonSerializable
     public function hydrate($data)
     {
         foreach ($data as $attribute => $value) {
-            $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $attribute)));
-            if (is_callable(array($this, $method))) {
+            $method =
+                'set' .
+                str_replace(
+                    ' ',
+                    '',
+                    ucwords(str_replace('_', ' ', $attribute))
+                );
+            if (is_callable([$this, $method])) {
                 $this->$method($value);
             }
         }
@@ -30,6 +36,6 @@ class BaseModel implements JsonSerializable
 
     public function jsonSerialize()
     {
-        return array();
+        return [];
     }
 }

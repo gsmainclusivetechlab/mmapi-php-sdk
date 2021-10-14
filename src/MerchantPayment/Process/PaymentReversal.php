@@ -28,8 +28,11 @@ class PaymentReversal
      * @param string $callBackUrl
      * @return RequestState|Exception
      */
-    public static function execute($transactionReference, Reversal $reversal = null, $callBackUrl = null)
-    {
+    public static function execute(
+        $transactionReference,
+        Reversal $reversal = null,
+        $callBackUrl = null
+    ) {
         if ($reversal == null) {
             $reversal = new Reversal();
         }
@@ -37,11 +40,17 @@ class PaymentReversal
         $validator = new ReversalValidator($reversal);
 
         //Make API call
-        $response = RequestUtil::post(API::CREATE_REVERSAL, json_encode($reversal))
-                        ->setUrlParams(['{transactionReference}' => $transactionReference])
-                        ->setClientCorrelationId(true)
-                        ->httpHeader(Header::X_CALLBACK_URL, $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl())
-                        ->call();
+        $response = RequestUtil::post(
+            API::CREATE_REVERSAL,
+            json_encode($reversal)
+        )
+            ->setUrlParams(['{transactionReference}' => $transactionReference])
+            ->setClientCorrelationId(true)
+            ->httpHeader(
+                Header::X_CALLBACK_URL,
+                $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl()
+            )
+            ->call();
 
         return ResponseUtil::parse($response, new RequestState());
     }

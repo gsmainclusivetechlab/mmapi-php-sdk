@@ -27,17 +27,27 @@ class PayeeInitiated
      * @param string $callBackUrl
      * @return RequestState|Exception
      */
-    public static function execute(MerchantTransaction $merchantTransaction, $callBackUrl = null)
-    {
+    public static function execute(
+        MerchantTransaction $merchantTransaction,
+        $callBackUrl = null
+    ) {
         //Validation
         $validator = new TransactionValidator($merchantTransaction);
 
         //Make API call
-        $response = RequestUtil::post(API::CREATE_TRANSACTION, json_encode($merchantTransaction))
-                        ->setUrlParams(['{transactionType}' => $merchantTransaction->getType()])
-                        ->setClientCorrelationId(true)
-                        ->httpHeader(Header::X_CALLBACK_URL, $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl())
-                        ->call();
+        $response = RequestUtil::post(
+            API::CREATE_TRANSACTION,
+            json_encode($merchantTransaction)
+        )
+            ->setUrlParams([
+                '{transactionType}' => $merchantTransaction->getType()
+            ])
+            ->setClientCorrelationId(true)
+            ->httpHeader(
+                Header::X_CALLBACK_URL,
+                $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl()
+            )
+            ->call();
 
         return ResponseUtil::parse($response, new RequestState());
     }

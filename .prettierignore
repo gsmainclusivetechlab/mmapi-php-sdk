@@ -2,4 +2,3 @@ vendor
 tools
 .php-cs-fixer.cache
 var
-test.php

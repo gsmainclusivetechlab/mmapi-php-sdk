@@ -30,19 +30,37 @@ class CreateAuthorisationCode
      * @param string $callBackUrl
      * @return RequestState|Exception
      */
-    public static function execute($accountIdentifier, AuthorisationCode $authorisationCode, $callBackUrl = null)
-    {
-        $accountIdentifier = CommonUtil::DeserializeToSupportObject($accountIdentifier);
+    public static function execute(
+        $accountIdentifier,
+        AuthorisationCode $authorisationCode,
+        $callBackUrl = null
+    ) {
+        $accountIdentifier = CommonUtil::DeserializeToSupportObject(
+            $accountIdentifier
+        );
 
         //Validation
-        $validator = new AuthorisationCodeValidator($authorisationCode, $accountIdentifier);
+        $validator = new AuthorisationCodeValidator(
+            $authorisationCode,
+            $accountIdentifier
+        );
 
         //Make API call
-        $response = RequestUtil::post(API::AUTHORISATION_CODE, json_encode($authorisationCode))
-                        ->setUrlParams(['{accountId}' => CommonUtil::encodeSupportObjectToString($accountIdentifier)])
-                        ->setClientCorrelationId(true)
-                        ->httpHeader(Header::X_CALLBACK_URL, $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl())
-                        ->call();
+        $response = RequestUtil::post(
+            API::AUTHORISATION_CODE,
+            json_encode($authorisationCode)
+        )
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $accountIdentifier
+                )
+            ])
+            ->setClientCorrelationId(true)
+            ->httpHeader(
+                Header::X_CALLBACK_URL,
+                $callBackUrl ? $callBackUrl : MobileMoney::getCallbackUrl()
+            )
+            ->call();
 
         return ResponseUtil::parse($response, new RequestState());
     }

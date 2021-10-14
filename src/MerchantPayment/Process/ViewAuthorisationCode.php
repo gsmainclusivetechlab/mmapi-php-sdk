@@ -29,12 +29,18 @@ class ViewAuthorisationCode
      */
     public static function execute($accountIdentifier)
     {
-        $accountIdentifier = CommonUtil::DeserializeToSupportObject($accountIdentifier);
+        $accountIdentifier = CommonUtil::DeserializeToSupportObject(
+            $accountIdentifier
+        );
 
         //Make API call
         $response = RequestUtil::get(API::AUTHORISATION_CODE)
-                        ->setUrlParams(['{accountId}' => CommonUtil::encodeSupportObjectToString($accountIdentifier)])
-                        ->call();
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $accountIdentifier
+                )
+            ])
+            ->call();
 
         return ResponseUtil::parse($response, new AuthorisationCode());
     }

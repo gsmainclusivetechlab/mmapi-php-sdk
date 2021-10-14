@@ -23,14 +23,12 @@ class RequestUtil
      */
     protected $_method = 'GET';
 
-
     /**
      * Currently accepted cURL request method types
      *
      * @var array
      */
-    protected $_methods = array('POST', 'GET', 'PATCH');
-
+    protected $_methods = ['POST', 'GET', 'PATCH'];
 
     /**
      * cURL URL
@@ -39,29 +37,26 @@ class RequestUtil
      */
     protected $_url = '';
 
-
     /**
      * cURL data params
      *
      * @var mixed
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * cURL url params
      *
      * @var mixed
      */
-    protected $_urlParams = array();
-
+    protected $_urlParams = [];
 
     /**
      * cURL options
      *
      * @var array
      */
-    protected $_options = array();
-
+    protected $_options = [];
 
     /**
      * cURL user agent
@@ -69,7 +64,6 @@ class RequestUtil
      * @var array
      */
     protected $_agent = 'ground(ctrl) engine';
-
 
     /**
      * Content Type
@@ -85,7 +79,6 @@ class RequestUtil
      */
     protected $_clientCorrelationId = null;
 
-
     /**
      * GET request
      *
@@ -94,11 +87,10 @@ class RequestUtil
      * @param   array   $options
      * @return  mixed
      */
-    public static function get($url = '', $params = array(), $options = array())
+    public static function get($url = '', $params = [], $options = [])
     {
         return self::make($url, $params, $options, 'GET');
     }
-
 
     /**
      * POST request
@@ -108,7 +100,7 @@ class RequestUtil
      * @param   array   $options
      * @return  mixed
      */
-    public static function post($url = '', $params = array(), $options = array())
+    public static function post($url = '', $params = [], $options = [])
     {
         return self::make($url, $params, $options, 'POST');
     }
@@ -121,11 +113,10 @@ class RequestUtil
      * @param   array   $options
      * @return  mixed
      */
-    public static function patch($url = '', $params = array(), $options = array())
+    public static function patch($url = '', $params = [], $options = [])
     {
         return self::make($url, $params, $options, 'PATCH');
     }
-
 
     /**
      * Make request
@@ -136,14 +127,21 @@ class RequestUtil
      * @param   string  $method
      * @return  Curl
      */
-    public static function make($url = '', $params = array(), $options = array(), $method = null)
-    {
+    public static function make(
+        $url = '',
+        $params = [],
+        $options = [],
+        $method = null
+    ) {
         return new self($url, $params, $options, $method);
     }
 
-
-    public function __construct($url = '', $params = array(), $options = array(), $method = null)
-    {
+    public function __construct(
+        $url = '',
+        $params = [],
+        $options = [],
+        $method = null
+    ) {
         // Set request method
         if ($method) {
             $this->_method = $method;
@@ -162,20 +160,18 @@ class RequestUtil
         $this->_options($options);
     }
 
-
     /**
      * Add multiple params
      *
      * @param   array   $keys
      * @return  Curl
      */
-    public function params($keys = array())
+    public function params($keys = [])
     {
         $this->_params = array_merge($this->_params, (array) $keys);
 
         return $this;
     }
-
 
     /**
      * Add a single param
@@ -186,15 +182,14 @@ class RequestUtil
      */
     public function param($key = '', $value = '')
     {
-        if (! empty($key) && is_string($key)) {
-            $key = array(
+        if (!empty($key) && is_string($key)) {
+            $key = [
                 $key => (string) $value
-            );
+            ];
         }
 
         return $this->params($key);
     }
-
 
     /**
      * Add multiple options
@@ -202,13 +197,12 @@ class RequestUtil
      * @param   array   $options
      * @return  Curl
      */
-    public function options($options = array())
+    public function options($options = [])
     {
         $this->_options($options);
 
         return $this;
     }
-
 
     /**
      * Add single option
@@ -224,7 +218,6 @@ class RequestUtil
         return $this;
     }
 
-
     /**
      * Request method
      *
@@ -237,7 +230,6 @@ class RequestUtil
 
         return $this;
     }
-
 
     /**
      * User agent
@@ -254,7 +246,6 @@ class RequestUtil
         return $this;
     }
 
-
     /**
      * Proxy helper
      *
@@ -264,12 +255,11 @@ class RequestUtil
      */
     public function proxy($url = '', $port = 80)
     {
-        return $this->options(array(
+        return $this->options([
             'CURLOPT_HTTPPROXYTUNNEL' => true,
-            'CURLOPT_PROXY' => $url.':'.$port
-        ));
+            'CURLOPT_PROXY' => $url . ':' . $port
+        ]);
     }
-
 
     /**
      * Custom header helper
@@ -284,11 +274,10 @@ class RequestUtil
             $this->_contentType = true;
         }
 
-        $header = ($content) ? $header.': '.$content : $header;
+        $header = $content ? $header . ': ' . $content : $header;
 
         return $this->option(CURLOPT_HTTPHEADER, $header);
     }
-
 
     /**
      * SSL helper
@@ -298,23 +287,25 @@ class RequestUtil
      * @param   string  $path_to_cert
      * @return  Curl
      */
-    public function ssl($verify_peer = true, $verify_host = 2, $path_to_cert = null)
-    {
+    public function ssl(
+        $verify_peer = true,
+        $verify_host = 2,
+        $path_to_cert = null
+    ) {
         if ($verify_peer) {
-            $options = array(
+            $options = [
                 'CURLOPT_SSL_VERIFYPEER' => true,
                 'CURLOPT_SSL_VERIFYHOST' => $verify_host,
                 'CURLOPT_CAINFO' => $path_to_cert
-            );
+            ];
         } else {
-            $options = array(
+            $options = [
                 'CURLOPT_SSL_VERIFYPEER' => false
-            );
+            ];
         }
 
         return $this->options($options);
     }
-
 
     /**
      * Execute request
@@ -325,16 +316,21 @@ class RequestUtil
     public function call()
     {
         // cURL is not enabled
-        if (! $this->_isEnabled()) {
-            throw new Exception(__CLASS__.': PHP was not built with cURL enabled. Rebuild PHP with --with-curl to use cURL.');
+        if (!$this->_isEnabled()) {
+            throw new Exception(
+                __CLASS__ .
+                    ': PHP was not built with cURL enabled. Rebuild PHP with --with-curl to use cURL.'
+            );
         }
 
         // Request method
-        $method = ($this->_method) ? strtoupper($this->_method) : 'GET';
+        $method = $this->_method ? strtoupper($this->_method) : 'GET';
 
         // Unrecognized request method?
-        if (! in_array($method, $this->_methods)) {
-            throw new Exception(__CLASS__.': Unrecognized request method of '.$this->_method);
+        if (!in_array($method, $this->_methods)) {
+            throw new Exception(
+                __CLASS__ . ': Unrecognized request method of ' . $this->_method
+            );
         }
 
         return $this->_execute($method);
@@ -368,7 +364,6 @@ class RequestUtil
         AuthUtil::buildHeader($this, $this->_params);
     }
 
-
     /**
      * Alias for call();
      *
@@ -378,7 +373,6 @@ class RequestUtil
     {
         return $this->call();
     }
-
 
     /**
      * Execute request
@@ -392,7 +386,9 @@ class RequestUtil
         switch ($method) {
             case 'GET':
                 // Append GET params to URL
-                $this->_url .= http_build_query($this->_params) ? '?' . http_build_query($this->_params) : '';
+                $this->_url .= http_build_query($this->_params)
+                    ? '?' . http_build_query($this->_params)
+                    : '';
 
                 // Set options
                 $this->option('CURLOPT_HTTPGET', 1);
@@ -401,33 +397,39 @@ class RequestUtil
 
             case 'POST':
                 // Set options
-                $this->options(array(
+                $this->options([
                     'CURLOPT_CUSTOMREQUEST' => 'POST',
                     'CURLOPT_POSTFIELDS' => $this->_params[0]
-                ));
+                ]);
                 if (!$this->_contentType) {
-                    $this->option('CURLOPT_HTTPHEADER', Header::CONTENT_TYPE . ': application/json');
+                    $this->option(
+                        'CURLOPT_HTTPHEADER',
+                        Header::CONTENT_TYPE . ': application/json'
+                    );
                 }
                 break;
 
             case 'PATCH':
                 // Set options
-                $this->options(array(
+                $this->options([
                     'CURLOPT_CUSTOMREQUEST' => 'PATCH',
                     'CURLOPT_POSTFIELDS' => $this->_params[0]
-                ));
+                ]);
                 if (!$this->_contentType) {
-                    $this->option('CURLOPT_HTTPHEADER', Header::CONTENT_TYPE . ': application/json');
+                    $this->option(
+                        'CURLOPT_HTTPHEADER',
+                        Header::CONTENT_TYPE . ': application/json'
+                    );
                 }
                 break;
 
             // Mostly for future use
             case 'PUT':
                 // Set options
-                $this->options(array(
+                $this->options([
                     'CURLOPT_PUT' => true,
                     'CURLOPT_POSTFIELDS' => $this->_params
-                ));
+                ]);
                 break;
 
             // Mostly for future use
@@ -443,7 +445,10 @@ class RequestUtil
         }
 
         if ($this->_clientCorrelationId) {
-            $this->option('CURLOPT_HTTPHEADER', Header::X_CORELLATION_ID . ': ' . $this->_clientCorrelationId);
+            $this->option(
+                'CURLOPT_HTTPHEADER',
+                Header::X_CORELLATION_ID . ': ' . $this->_clientCorrelationId
+            );
         }
 
         // Set timeout option if it isn't already set
@@ -467,7 +472,7 @@ class RequestUtil
         }
 
         // Only set follow location if not running securely
-        if (! ini_get('safe_mode') && ! ini_get('open_basedir')) {
+        if (!ini_get('safe_mode') && !ini_get('open_basedir')) {
             // Ok, follow location is not set already so lets set it to true
             if (!array_key_exists(CURLOPT_FOLLOWLOCATION, $this->_options)) {
                 $this->option('CURLOPT_FOLLOWLOCATION', true);
@@ -483,7 +488,7 @@ class RequestUtil
         }
 
         // Can't set the options in batch
-        if (! function_exists('curl_setopt_array')) {
+        if (!function_exists('curl_setopt_array')) {
             foreach ($this->_options as $key => $value) {
                 curl_setopt($ch, $key, $value);
             }
@@ -517,19 +522,17 @@ class RequestUtil
         return $response;
     }
 
-
     /**
      * Add multiple options
      *
      * @param   array   $options
      */
-    protected function _options($options = array())
+    protected function _options($options = [])
     {
         foreach ((array) $options as $key => $value) {
             $this->_option($key, $value);
         }
     }
-
 
     /**
      * Add single option
@@ -540,13 +543,15 @@ class RequestUtil
      */
     protected function _option($key = '', $value = '')
     {
-        if (is_string($key) && ! is_numeric($key)) {
+        if (is_string($key) && !is_numeric($key)) {
             $const = strtoupper($key);
 
             if (defined($const)) {
                 $key = constant(strtoupper($key));
             } else {
-                throw new Exception('Curl: Constant ['.$const.'] not defined.');
+                throw new Exception(
+                    'Curl: Constant [' . $const . '] not defined.'
+                );
             }
         }
 
@@ -561,7 +566,6 @@ class RequestUtil
         }
     }
 
-
     /**
      * Get query string from URL
      *
@@ -570,11 +574,11 @@ class RequestUtil
      */
     protected function _queryString($uri)
     {
-        $query_data = array();
+        $query_data = [];
 
         $query_array = html_entity_decode(parse_url($uri, PHP_URL_QUERY));
 
-        if (! empty($query_array)) {
+        if (!empty($query_array)) {
             $query_array = explode('&', $query_array);
 
             foreach ($query_array as $val) {
@@ -586,7 +590,6 @@ class RequestUtil
 
         return $query_data;
     }
-
 
     /**
      * Check if cURL is enabled

@@ -165,7 +165,6 @@ class Transaction extends BaseModel
      */
     protected $metadata;
 
-
     /**
      * Sets unique reference for the transaction.
      *
@@ -186,8 +185,9 @@ class Transaction extends BaseModel
      *
      * @param string $transactionReference
      */
-    public function setRequestingOrganisationTransactionReference($requestingOrganisationTransactionReference)
-    {
+    public function setRequestingOrganisationTransactionReference(
+        $requestingOrganisationTransactionReference
+    ) {
         $this->requestingOrganisationTransactionReference = $requestingOrganisationTransactionReference;
         return $this;
     }
@@ -201,8 +201,9 @@ class Transaction extends BaseModel
      *
      * @param string $transactionReference
      */
-    public function setOriginalTransactionReference($originalTransactionReference)
-    {
+    public function setOriginalTransactionReference(
+        $originalTransactionReference
+    ) {
         $this->originalTransactionReference = $originalTransactionReference;
         return $this;
     }

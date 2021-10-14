@@ -19,8 +19,8 @@ class PollRequest
     {
         //Make API call
         $response = RequestUtil::get(API::VIEW_TRANSACTION)
-                        ->setUrlParams(['{transactionReference}' => $transactionReference])
-                        ->call();
+            ->setUrlParams(['{transactionReference}' => $transactionReference])
+            ->call();
         return ResponseUtil::parse($response, new MerchantTransaction());
     }
 }

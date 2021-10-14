@@ -21,13 +21,19 @@ class AccessToken
         //Make API call
         $consumerKey = MobileMoney::getConsumerKey();
         $secretKey = MobileMoney::getConsumerSecret();
-        $response = RequestUtil::post(API::ACCESS_TOKEN, 'grant_type=client_credentials&=')
-                        ->httpHeader(
-                            Header::AUTHORIZATION,
-                            EncDecUtil::getBasicAuthHeader($consumerKey, $secretKey)
-                        )
-                        ->httpHeader(Header::CONTENT_TYPE, 'application/x-www-form-urlencoded')
-                        ->call();
+        $response = RequestUtil::post(
+            API::ACCESS_TOKEN,
+            'grant_type=client_credentials&='
+        )
+            ->httpHeader(
+                Header::AUTHORIZATION,
+                EncDecUtil::getBasicAuthHeader($consumerKey, $secretKey)
+            )
+            ->httpHeader(
+                Header::CONTENT_TYPE,
+                'application/x-www-form-urlencoded'
+            )
+            ->call();
         return ResponseUtil::parse($response);
     }
 }

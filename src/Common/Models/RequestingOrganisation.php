@@ -30,8 +30,9 @@ class RequestingOrganisation extends BaseModel
      * @param string $requestingOrganisationIdentifierType
      * @return context
      */
-    public function setRequestingOrganisationIdentifierType($requestingOrganisationIdentifierType)
-    {
+    public function setRequestingOrganisationIdentifierType(
+        $requestingOrganisationIdentifierType
+    ) {
         $this->requestingOrganisationIdentifierType = $requestingOrganisationIdentifierType;
         return $this;
     }
@@ -52,8 +53,9 @@ class RequestingOrganisation extends BaseModel
      * @param string $requestingOrganisationIdentifier
      * @return context
      */
-    public function setRequestingOrganisationIdentifier($requestingOrganisationIdentifier)
-    {
+    public function setRequestingOrganisationIdentifier(
+        $requestingOrganisationIdentifier
+    ) {
         $this->requestingOrganisationIdentifier = $requestingOrganisationIdentifier;
         return $this;
     }
@@ -68,14 +70,18 @@ class RequestingOrganisation extends BaseModel
         return $this->requestingOrganisationIdentifier;
     }
 
-
     public function jsonSerialize()
     {
-        return array_filter([
-            "requestingOrganisationIdentifierType" => $this->requestingOrganisationIdentifierType,
-            "requestingOrganisationIdentifier" => $this->requestingOrganisationIdentifier
-        ], function ($val) {
-            return !is_null($val);
-        });
+        return array_filter(
+            [
+                'requestingOrganisationIdentifierType' =>
+                    $this->requestingOrganisationIdentifierType,
+                'requestingOrganisationIdentifier' =>
+                    $this->requestingOrganisationIdentifier
+            ],
+            function ($val) {
+                return !is_null($val);
+            }
+        );
     }
 }

@@ -68,14 +68,16 @@ class AccountIdentifier extends BaseModel
         return $this->value;
     }
 
-
     public function jsonSerialize()
     {
-        return array_filter([
-            "key" => $this->key,
-            "value" => $this->value
-        ], function ($val) {
-            return !is_null($val);
-        });
+        return array_filter(
+            [
+                'key' => $this->key,
+                'value' => $this->value
+            ],
+            function ($val) {
+                return !is_null($val);
+            }
+        );
     }
 }

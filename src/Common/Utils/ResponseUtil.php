@@ -12,8 +12,7 @@ use mmpsdk\Common\Exceptions\SDKException;
  */
 class ResponseUtil
 {
-    private const
-        OK = 200,
+    private const OK = 200,
         CREATED = 201,
         ACCEPTED = 202,
         BAD_REQUEST = 400,
@@ -36,12 +35,16 @@ class ResponseUtil
             case self::CREATED:
                 $decodedResponse = json_decode($response->result);
                 if ($response->clientCorrelationId) {
-                    $decodedResponse->clientCorrelationId = $response->clientCorrelationId;
+                    $decodedResponse->clientCorrelationId =
+                        $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
-                    if(is_array($decodedResponse) && !empty($decodedResponse)){
-                        $objectArray = array();
-                        foreach($decodedResponse as $item){
+                    if (
+                        is_array($decodedResponse) &&
+                        !empty($decodedResponse)
+                    ) {
+                        $objectArray = [];
+                        foreach ($decodedResponse as $item) {
                             $object = clone $obj;
                             array_push($objectArray, $object->hydrate($item));
                         }
@@ -62,7 +65,10 @@ class ResponseUtil
             case self::UNAUTHORIZED:
                 $errorObject = json_decode($response->result);
                 if (isset($errorObject->errorCode)) {
-                    throw new SDKException(self::UNAUTHORIZED, new Error($errorObject));
+                    throw new SDKException(
+                        self::UNAUTHORIZED,
+                        new Error($errorObject)
+                    );
                 } else {
                     $authObj = AuthUtil::updateAccessToken();
                     self::parse($response->requestObj->call(), $obj);
@@ -72,10 +78,14 @@ class ResponseUtil
                 break;
             case self::NOT_FOUND:
                 $errorObject = json_decode($response->result);
-                if(isset($errorObject->errorCode))
-                    throw new SDKException(self::NOT_FOUND, new Error($errorObject));
-                else
+                if (isset($errorObject->errorCode)) {
+                    throw new SDKException(
+                        self::NOT_FOUND,
+                        new Error($errorObject)
+                    );
+                } else {
                     throw new SDKException('Resource Not Found');
+                }
                 break;
             case self::INTERNAL_SERVER_ERROR:
                 throw new SDKException('Internal Server Error');

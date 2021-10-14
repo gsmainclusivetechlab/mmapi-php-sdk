@@ -18,8 +18,8 @@ class PollRequest
     {
         //Make API call
         $response = RequestUtil::get(API::VIEW_REQUEST_STATE)
-                        ->setUrlParams(['{serverCorrelationId}' => $serverCorrelationId])
-                        ->call();
+            ->setUrlParams(['{serverCorrelationId}' => $serverCorrelationId])
+            ->call();
         return ResponseUtil::parse($response, new RequestState());
     }
 }

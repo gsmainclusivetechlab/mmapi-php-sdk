@@ -1,0 +1,7 @@
+{
+    "phpVersion": "5.4",
+    "tabWidth": 4,
+    "trailingCommaPHP": false,
+    "braceStyle": "psr-2",
+    "singleQuote": true
+}

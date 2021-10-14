@@ -20,9 +20,16 @@ class TransactionValidator extends Validator
         $this->validateField('currency', self::MANDATORY);
 
         if ($errors = $this->getValidationErrors()) {
-            throw new SDKException("Validation Error", SDKException::getnerateErrorObj('validation', 'formatError', 'Invalid JSON Field', $errors));
+            throw new SDKException(
+                'Validation Error',
+                SDKException::getnerateErrorObj(
+                    'validation',
+                    'formatError',
+                    'Invalid JSON Field',
+                    $errors
+                )
+            );
         }
-
 
         // custom validator
         // if ($merchantTransaction->amount <= 0) {

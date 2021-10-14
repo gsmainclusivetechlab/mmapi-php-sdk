@@ -20,24 +20,37 @@ class AuthUtil
     public static function buildHeader(RequestUtil $request, $content = null)
     {
         switch (MobileMoney::getSecurityLevel()) {
-
             case SecurityLevel::NONE:
                 return $request;
                 break;
 
             case SecurityLevel::DEVELOPMENT:
-                $request->httpHeader(Header::X_API_KEY, MobileMoney::getApiKey());
+                $request->httpHeader(
+                    Header::X_API_KEY,
+                    MobileMoney::getApiKey()
+                );
                 $request->httpHeader(
                     Header::AUTHORIZATION,
-                    'Basic ' . EncDecUtil::base64Encode(MobileMoney::getConsumerKey() . ':' . MobileMoney::getConsumerSecret())
+                    'Basic ' .
+                        EncDecUtil::base64Encode(
+                            MobileMoney::getConsumerKey() .
+                                ':' .
+                                MobileMoney::getConsumerSecret()
+                        )
                 );
                 return $request;
                 break;
 
             case SecurityLevel::STANDARD:
-                $request->httpHeader(Header::X_API_KEY, MobileMoney::getApiKey());
+                $request->httpHeader(
+                    Header::X_API_KEY,
+                    MobileMoney::getApiKey()
+                );
                 $accessToken = self::getAccessToken();
-                $request->httpHeader(Header::AUTHORIZATION, $accessToken->getAuthToken());
+                $request->httpHeader(
+                    Header::AUTHORIZATION,
+                    $accessToken->getAuthToken()
+                );
                 return $request;
                 break;
 
@@ -46,17 +59,22 @@ class AuthUtil
                 return $request;
                 break;
             default:
-                throw new Exception('Undefined security level:' . MobileMoney::getSecurityLevel());
+                throw new Exception(
+                    'Undefined security level:' .
+                        MobileMoney::getSecurityLevel()
+                );
         }
     }
 
     public static function checkExpiredToken($authToken)
     {
-        $delta =  time() - $authToken->getCreatedAt();
+        $delta = time() - $authToken->getCreatedAt();
         // We use a buffer time when checking for token expiry to account
         // for API call delays and any delay between the time the token is
         // retrieved and subsequently used
-        return ($delta - self::$EXPIRY_BUFFER_TIME) < $authToken->getExpiresIn() ? false : true;
+        return $delta - self::$EXPIRY_BUFFER_TIME < $authToken->getExpiresIn()
+            ? false
+            : true;
     }
 
     public static function updateAccessToken()
@@ -83,10 +101,7 @@ class AuthUtil
         $token = AuthorizationCache::pull(MobileMoney::getApiKey());
 
         // Check if Access Token is not null and has not expired.
-        if (
-            $token != null &&
-            self::checkExpiredToken($token)
-        ) {
+        if ($token != null && self::checkExpiredToken($token)) {
             $token = null;
         }
 

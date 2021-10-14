@@ -17,7 +17,15 @@ class AuthorisationCodeValidator extends Validator
         $this->validateField('amount', self::VALID_AMOUNT);
 
         if ($errors = $this->getValidationErrors()) {
-            throw new SDKException("Validation Error", SDKException::getnerateErrorObj('validation', 'formatError', 'Invalid JSON Field', $errors));
+            throw new SDKException(
+                'Validation Error',
+                SDKException::getnerateErrorObj(
+                    'validation',
+                    'formatError',
+                    'Invalid JSON Field',
+                    $errors
+                )
+            );
         }
     }
 }

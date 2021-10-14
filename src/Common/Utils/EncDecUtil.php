@@ -21,6 +21,7 @@ class EncDecUtil
 
     public static function getBasicAuthHeader($consumerKey, $secretKey)
     {
-        return 'Basic ' . EncDecUtil::base64Encode($consumerKey . ':' . $secretKey);
+        return 'Basic ' .
+            EncDecUtil::base64Encode($consumerKey . ':' . $secretKey);
     }
 }
