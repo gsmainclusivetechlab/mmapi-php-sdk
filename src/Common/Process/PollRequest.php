@@ -16,7 +16,6 @@ class PollRequest
      */
     public static function execute($serverCorrelationId)
     {
-        //Make API call
         $response = RequestUtil::get(API::VIEW_REQUEST_STATE)
             ->setUrlParams(['{serverCorrelationId}' => $serverCorrelationId])
             ->call();

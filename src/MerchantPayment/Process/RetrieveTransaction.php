@@ -4,20 +4,18 @@ namespace mmpsdk\MerchantPayment\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\ResponseUtil;
 use mmpsdk\MerchantPayment\Models\MerchantTransaction;
 
-class PollRequest
+class RetrieveTransaction
 {
     /**
-     * Retrieves the transaction object by reference id.
+     * Retrieves the final representation of the transaction using the transaction reference passed via the poll request method.
      * @param string $transactionReference
      * @return MerchantTransaction|Exception
      */
     public static function execute($transactionReference)
     {
-        //Make API call
         $response = RequestUtil::get(API::VIEW_TRANSACTION)
             ->setUrlParams(['{transactionReference}' => $transactionReference])
             ->call();

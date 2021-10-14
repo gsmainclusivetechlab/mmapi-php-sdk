@@ -14,10 +14,10 @@ use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 
 /**
- * Class PayeeInitiated
+ * Class InitiatePayment
  * @package mmpsdk\MerchantPayment\Process
  */
-class PayeeInitiated
+class InitiatePayment
 {
     /**
      * The merchant initiates the request and will be credited when the payer approves the request.

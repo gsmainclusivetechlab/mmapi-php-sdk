@@ -6,10 +6,12 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Cache\AuthorizationCache;
+use mmpsdk\Common\Process\ServiceAvailability;
 use mmpsdk\MerchantPayment\Models\AuthorisationCode;
 use mmpsdk\MerchantPayment\Process\AuthorisedPaymentCode;
 use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
 use mmpsdk\MerchantPayment\Process\ViewAuthorisationCode;
+use mmpsdk\Common\Process\RetrieveMissingResponse;
 
 require __DIR__ . '/vendor/autoload.php';
 
@@ -52,7 +54,13 @@ $accountIdentifier = [
 
 try {
     // $repsonse = CreateAuthorisationCode::execute($accountIdentifier, $authCodeObj);
-    $repsonse = ViewAuthorisationCode::execute($accountIdentifier);
+
+    // $repsonse = ViewAuthorisationCode::execute($accountIdentifier);
+    // $repsonse = ServiceAvailability::execute();
+    $repsonse = RetrieveMissingResponse::execute(
+        '5c075ae1-f518-4310-b534-6f14f153214b',
+        new AuthorisationCode()
+    );
     print_r($repsonse);
 } catch (SDKException $ex) {
     print_r($ex);
