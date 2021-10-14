@@ -1,0 +1,35 @@
+<?php
+
+namespace mmpsdk\Common\Models;
+
+use JsonSerializable;
+
+/**
+ * Class BaseModel
+ * @package mmpsdk\Common\Models
+ */
+class BaseModel implements JsonSerializable
+{
+    public function __construct($value = array())
+    {
+        if (!empty($value)) {
+            $this->hydrate($value);
+        }
+    }
+
+    public function hydrate($data)
+    {
+        foreach ($data as $attribute => $value) {
+            $method = 'set'.str_replace(' ', '', ucwords(str_replace('_', ' ', $attribute)));
+            if (is_callable(array($this, $method))) {
+                $this->$method($value);
+            }
+        }
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return array();
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "gsma/mmp",
+    "description": "The GSMA harmonised API initiative aims to increase adoption of the mobile money API through dedicated engagement with mobile money providers and support for ecosystem vendors.",
+    "type": "library",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "mmpsdk\\": "src/"
+        }
+    }
+}
