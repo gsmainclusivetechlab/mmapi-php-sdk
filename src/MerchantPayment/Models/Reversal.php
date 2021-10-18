@@ -3,6 +3,7 @@
 namespace mmpsdk\MerchantPayment\Models;
 
 use mmpsdk\Common\Models\Transaction;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\MerchantPayment\Enums\TransactionType;
 
 /**
@@ -26,8 +27,8 @@ class Reversal extends Transaction
                 'subType' => $this->subType,
                 'amount' => $this->amount,
                 'currency' => $this->currency,
-                'creditParty' => $this->creditParty,
-                'debitParty' => $this->debitParty,
+                'creditParty' => CommonUtil::DeserializeToSupportObject($this->creditParty),
+                'debitParty' => CommonUtil::DeserializeToSupportObject($this->debitParty),
                 'descriptionText' => $this->descriptionText,
                 'fees' => $this->fees,
                 'geoCode' => $this->geoCode,

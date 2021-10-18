@@ -215,7 +215,7 @@ class Transaction extends BaseModel
     /**
      * Sets unique reference for the transaction.
      *
-     * @param string $transactionReference
+     * @param array $creditParty
      */
     public function setCreditParty($creditParty)
     {
