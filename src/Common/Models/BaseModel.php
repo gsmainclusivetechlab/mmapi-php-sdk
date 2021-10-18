@@ -38,4 +38,11 @@ class BaseModel implements JsonSerializable
     {
         return [];
     }
+
+    protected function filterEmpty($array)
+    {
+        return array_filter($array, function ($val) {
+            return !is_null($val);
+        });
+    }
 }

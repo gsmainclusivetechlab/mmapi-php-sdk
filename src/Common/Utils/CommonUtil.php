@@ -12,6 +12,9 @@ class CommonUtil
 {
     public static function DeserializeToSupportObject($data)
     {
+        if ($data == null) {
+            return $data;
+        }
         $supportObjArray = [];
         foreach ($data as $key => $value) {
             $supportObj = new stdClass();

@@ -41,15 +41,10 @@ class AuthToken extends BaseModel
 
     public function jsonSerialize()
     {
-        return array_filter(
-            [
-                'authToken' => $this->authToken,
-                'expiresIn' => $this->expiresIn,
-                'createdAt' => $this->createdAt
-            ],
-            function ($val) {
-                return !is_null($val);
-            }
-        );
+        return $this->filterEmpty([
+            'authToken' => $this->authToken,
+            'expiresIn' => $this->expiresIn,
+            'createdAt' => $this->createdAt
+        ]);
     }
 }

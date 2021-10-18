@@ -32,7 +32,7 @@ $transaction = new MerchantTransaction();
 $transaction
     ->setAmount('200.00')
     ->setCurrency('RWF')
-    ->setCreditParty(['accountid'=> '2999'])
+    ->setCreditParty(['accountid' => '2999'])
     ->setDebitParty(['accountid' => '2999']);
 
 // $response1 = AccessToken::execute();

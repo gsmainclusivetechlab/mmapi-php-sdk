@@ -72,16 +72,11 @@ class RequestingOrganisation extends BaseModel
 
     public function jsonSerialize()
     {
-        return array_filter(
-            [
-                'requestingOrganisationIdentifierType' =>
-                    $this->requestingOrganisationIdentifierType,
-                'requestingOrganisationIdentifier' =>
-                    $this->requestingOrganisationIdentifier
-            ],
-            function ($val) {
-                return !is_null($val);
-            }
-        );
+        return $this->filterEmpty([
+            'requestingOrganisationIdentifierType' =>
+                $this->requestingOrganisationIdentifierType,
+            'requestingOrganisationIdentifier' =>
+                $this->requestingOrganisationIdentifier
+        ]);
     }
 }

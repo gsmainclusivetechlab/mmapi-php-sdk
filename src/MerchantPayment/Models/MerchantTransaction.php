@@ -19,30 +19,29 @@ class MerchantTransaction extends Transaction
 
     public function jsonSerialize()
     {
-        return array_filter(
-            [
-                'requestingOrganisationTransactionReference' =>
-                    $this->requestingOrganisationTransactionReference,
-                'originalTransactionReference' =>
-                    $this->originalTransactionReference,
-                'subType' => $this->subType,
-                'amount' => $this->amount,
-                'currency' => $this->currency,
-                'creditParty' => CommonUtil::DeserializeToSupportObject($this->creditParty),
-                'debitParty' => CommonUtil::DeserializeToSupportObject($this->debitParty),
-                'descriptionText' => $this->descriptionText,
-                'fees' => $this->fees,
-                'geoCode' => $this->geoCode,
-                'oneTimeCode' => $this->oneTimeCode,
-                'requestingOrganisation' => $this->requestingOrganisation,
-                'servicingIdentity' => $this->servicingIdentity,
-                'requestDate' => $this->requestDate,
-                'customData' => $this->customData,
-                'metadata' => $this->metadata
-            ],
-            function ($val) {
-                return !is_null($val);
-            }
-        );
+        return $this->filterEmpty([
+            'requestingOrganisationTransactionReference' =>
+                $this->requestingOrganisationTransactionReference,
+            'originalTransactionReference' =>
+                $this->originalTransactionReference,
+            'subType' => $this->subType,
+            'amount' => $this->amount,
+            'currency' => $this->currency,
+            'creditParty' => CommonUtil::DeserializeToSupportObject(
+                $this->creditParty
+            ),
+            'debitParty' => CommonUtil::DeserializeToSupportObject(
+                $this->debitParty
+            ),
+            'descriptionText' => $this->descriptionText,
+            'fees' => $this->fees,
+            'geoCode' => $this->geoCode,
+            'oneTimeCode' => $this->oneTimeCode,
+            'requestingOrganisation' => $this->requestingOrganisation,
+            'servicingIdentity' => $this->servicingIdentity,
+            'requestDate' => $this->requestDate,
+            'customData' => $this->customData,
+            'metadata' => $this->metadata
+        ]);
     }
 }

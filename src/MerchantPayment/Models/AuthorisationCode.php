@@ -175,26 +175,20 @@ class AuthorisationCode extends BaseModel
 
     public function jsonSerialize()
     {
-        return array_filter(
-            [
-                'amount' => $this->amount,
-                'currency' => $this->currency,
-                'amountType' => $this->amountType,
-                'codeLifetime' => $this->codeLifetime,
-                'holdFundsIndicator' => $this->holdFundsIndicator,
-                'redemptionAccountIdentifiers' =>
-                    $this->redemptionAccountIdentifiers,
-                'redemptionChannels' => $this->redemptionChannels,
-                'redemptionTransactionTypes' =>
-                    $this->redemptionTransactionTypes,
-                'requestingOrganisation' => $this->requestingOrganisation,
-                'requestDate' => $this->requestDate,
-                'customData' => $this->customData,
-                'metadata' => $this->metadata
-            ],
-            function ($val) {
-                return !is_null($val);
-            }
-        );
+        return $this->filterEmpty([
+            'amount' => $this->amount,
+            'currency' => $this->currency,
+            'amountType' => $this->amountType,
+            'codeLifetime' => $this->codeLifetime,
+            'holdFundsIndicator' => $this->holdFundsIndicator,
+            'redemptionAccountIdentifiers' =>
+                $this->redemptionAccountIdentifiers,
+            'redemptionChannels' => $this->redemptionChannels,
+            'redemptionTransactionTypes' => $this->redemptionTransactionTypes,
+            'requestingOrganisation' => $this->requestingOrganisation,
+            'requestDate' => $this->requestDate,
+            'customData' => $this->customData,
+            'metadata' => $this->metadata
+        ]);
     }
 }

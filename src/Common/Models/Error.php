@@ -64,17 +64,12 @@ class Error extends BaseModel
 
     public function jsonSerialize()
     {
-        return array_filter(
-            [
-                'errorCategory' => $this->errorCategory,
-                'errorCode' => $this->errorCode,
-                'errorDescription' => $this->errorDescription,
-                'errorDateTime' => $this->errorDateTime,
-                'errorParameters' => $this->errorParameters
-            ],
-            function ($val) {
-                return !is_null($val);
-            }
-        );
+        return $this->filterEmpty([
+            'errorCategory' => $this->errorCategory,
+            'errorCode' => $this->errorCode,
+            'errorDescription' => $this->errorDescription,
+            'errorDateTime' => $this->errorDateTime,
+            'errorParameters' => $this->errorParameters
+        ]);
     }
 }
