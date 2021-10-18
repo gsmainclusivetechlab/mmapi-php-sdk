@@ -8,7 +8,6 @@ use src\TestConfig;
 
 class AuthUtilTest extends TestCase
 {
-
     private $authToken;
 
     protected function setUp(): void

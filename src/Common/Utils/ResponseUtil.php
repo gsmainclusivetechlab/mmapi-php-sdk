@@ -5,6 +5,7 @@ namespace mmpsdk\Common\Utils;
 use Exception;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Constants\MobileMoney;
 
 /**
  * Class ResponseUtil
@@ -70,7 +71,12 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    $authObj = AuthUtil::updateAccessToken();
+                    print_r("Refreshing Token...");
+                    $authObj = AuthUtil::updateAccessToken(
+                        MobileMoney::getConsumerKey(),
+                        MobileMoney::getConsumerSecret(),
+                        MobileMoney::getApiKey()
+                    );
                     self::parse($response->requestObj->call(), $obj);
                 }
                 // throw new Exception('Authorisation Failed: ' . $response->result);
