@@ -14,5 +14,14 @@
     },
     "require-dev": {
         "phpunit/phpunit": "^9"
+    },
+    "scripts": {
+        "fix-cs": [
+            "prettier . --write",
+            "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src"
+        ],
+        "run-tests": [
+            "./vendor/bin/phpunit --testdox tests"
+        ]
     }
 }

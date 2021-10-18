@@ -35,6 +35,9 @@ class CommonUtilTest extends TestCase
         );
     }
 
+    /**
+     * @dataProvider generateObjectArray
+     */
     public function testEncodeSupportObjectToString()
     {
         $_mockArray = [
@@ -59,7 +62,7 @@ class CommonUtilTest extends TestCase
         $this->assertEquals('accountid@2999', $_singleAttrString);
     }
 
-    private function generateObjectArray($array)
+    public function generateObjectArray($array)
     {
         $_objArray = [];
         foreach ($array as $key => $value) {

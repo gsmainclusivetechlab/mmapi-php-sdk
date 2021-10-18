@@ -6,6 +6,7 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Cache\AuthorizationCache;
+use mmpsdk\Common\Models\AuthToken;
 use mmpsdk\Common\Process\ServiceAvailability;
 use mmpsdk\MerchantPayment\Models\AuthorisationCode;
 use mmpsdk\MerchantPayment\Process\AuthorisedPaymentCode;

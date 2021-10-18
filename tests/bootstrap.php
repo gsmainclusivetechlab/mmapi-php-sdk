@@ -7,4 +7,4 @@ if (!ini_get('date.timezone')) {
 }
 // Include the composer autoloader
 $loader = require dirname(__DIR__, 1) . '/vendor/autoload.php';
-$loader->add('src', __DIR__);
+$loader->add('src\\', __DIR__);
