@@ -15,7 +15,7 @@ use mmpsdk\Common\Process\AccessToken;
 
 class AuthUtil
 {
-    public static $EXPIRY_BUFFER_TIME = 5;
+    private const EXPIRY_BUFFER_TIME = 5;
 
     public static function buildHeader(RequestUtil $request, $content = null)
     {
@@ -46,7 +46,11 @@ class AuthUtil
                     Header::X_API_KEY,
                     MobileMoney::getApiKey()
                 );
-                $accessToken = self::getAccessToken();
+                $accessToken = self::getAccessToken(
+                    MobileMoney::getConsumerKey(),
+                    MobileMoney::getConsumerSecret(),
+                    MobileMoney::getApiKey()
+                );
                 $request->httpHeader(
                     Header::AUTHORIZATION,
                     $accessToken->getAuthToken()
@@ -72,33 +76,40 @@ class AuthUtil
         // We use a buffer time when checking for token expiry to account
         // for API call delays and any delay between the time the token is
         // retrieved and subsequently used
-        return $delta - self::$EXPIRY_BUFFER_TIME < $authToken->getExpiresIn()
+        return $delta + self::EXPIRY_BUFFER_TIME < $authToken->getExpiresIn()
             ? false
             : true;
     }
 
-    public static function updateAccessToken()
+    public static function updateAccessToken($consumerKey, $secretKey, $apiKey)
     {
-        $authResponse = AccessToken::execute();
-        $accessTokenObj = new AuthToken();
-        $accessTokenObj->setAuthToken($authResponse->access_token);
-        $accessTokenObj->setExpiresIn($authResponse->expires_in);
-        $accessTokenObj->setCreatedAt(time());
-        AuthorizationCache::push($accessTokenObj, MobileMoney::getApiKey());
+        $accessTokenObj = self::generateAccessToken($consumerKey, $secretKey);
+        AuthorizationCache::push($accessTokenObj, $apiKey);
         MobileMoney::setAccessToken($accessTokenObj);
         return $accessTokenObj;
     }
 
-    public static function getAccessToken()
+    public static function generateAccessToken($consumerKey, $secretKey)
     {
-        // Check if we already have accessToken in Cache
-        $token = MobileMoney::getAccessToken();
+        $authResponse = AccessToken::execute($consumerKey, $secretKey);
+        $accessTokenObj = new AuthToken();
+        $accessTokenObj
+            ->setAuthToken($authResponse->access_token)
+            ->setExpiresIn($authResponse->expires_in)
+            ->setCreatedAt(time());
+        return $accessTokenObj;
+    }
+
+    public static function getAccessToken($consumerKey, $secretKey, $apiKey)
+    {
+        // Check if we already have accessToken in memory
+        $token = self::getAccessTokenFromMemory();
         if ($token && self::checkExpiredToken($token)) {
             return $token;
         }
 
         // Check for persisted data first
-        $token = AuthorizationCache::pull(MobileMoney::getApiKey());
+        $token = AuthorizationCache::pull($apiKey);
 
         // Check if Access Token is not null and has not expired.
         if ($token != null && self::checkExpiredToken($token)) {
@@ -108,10 +119,15 @@ class AuthUtil
         // If accessToken is Null, obtain a new token
         if ($token == null) {
             // Get a new one by making calls to API
-            $token = self::updateAccessToken();
-            AuthorizationCache::push($token, MobileMoney::getApiKey());
+            $token = self::updateAccessToken($consumerKey, $secretKey, $apiKey);
+            AuthorizationCache::push($token, $apiKey);
         }
 
         return $token;
+    }
+
+    public static function getAccessTokenFromMemory()
+    {
+        return MobileMoney::getAccessToken();
     }
 }

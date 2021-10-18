@@ -16,11 +16,9 @@ class AccessToken
      * To generate the access token, a Consumer Key and a Consumer Secret is required
      *
      */
-    public static function execute()
+    public static function execute($consumerKey, $secretKey)
     {
         //Make API call
-        $consumerKey = MobileMoney::getConsumerKey();
-        $secretKey = MobileMoney::getConsumerSecret();
         $response = RequestUtil::post(
             API::ACCESS_TOKEN,
             'grant_type=client_credentials&='

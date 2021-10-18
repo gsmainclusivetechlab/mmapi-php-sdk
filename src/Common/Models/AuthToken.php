@@ -17,6 +17,7 @@ class AuthToken extends BaseModel
     public function setAuthToken($authToken)
     {
         $this->authToken = $authToken;
+        return $this;
     }
     public function getAuthToken()
     {
@@ -25,6 +26,7 @@ class AuthToken extends BaseModel
     public function setExpiresIn($expiresIn)
     {
         $this->expiresIn = $expiresIn;
+        return $this;
     }
     public function getExpiresIn()
     {
@@ -33,6 +35,7 @@ class AuthToken extends BaseModel
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+        return $this;
     }
     public function getCreatedAt()
     {
