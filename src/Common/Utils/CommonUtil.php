@@ -2,6 +2,7 @@
 
 namespace mmpsdk\Common\Utils;
 
+use Exception;
 use stdClass;
 
 /**
@@ -12,8 +13,8 @@ class CommonUtil
 {
     public static function DeserializeToSupportObject($data)
     {
-        if ($data == null) {
-            return $data;
+        if ($data == null || !is_array($data)) {
+            return null;
         }
         $supportObjArray = [];
         foreach ($data as $key => $value) {
@@ -27,6 +28,9 @@ class CommonUtil
 
     public static function encodeSupportObjectToString($data)
     {
+        if (!is_array($data)) {
+            throw new Exception('Provided value is not an array');
+        }
         $stringArray = [];
         foreach ($data as $item) {
             $stringArray[] =

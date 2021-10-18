@@ -1,5 +1,27 @@
+build
+.DS_Store
+phpunit.local.xml
+*.log
+
+# IDE
+.vscode
+.idea
+.project
+.settings
+.buildpath
+atlassian-ide-plugin.xml
+*.bak
+
+# Composer
 vendor
+composer.lock
+composer.phar
+
+# Project
+var
 tools
 .php-cs-fixer.cache
-var
 test.php
+
+# Groc
+node_modules
