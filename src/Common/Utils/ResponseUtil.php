@@ -71,12 +71,6 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    print_r('Refreshing Token...');
-                    $authObj = AuthUtil::updateAccessToken(
-                        MobileMoney::getConsumerKey(),
-                        MobileMoney::getConsumerSecret(),
-                        MobileMoney::getApiKey()
-                    );
                     self::parse($response->requestObj->call(), $obj);
                 }
                 // throw new Exception('Authorisation Failed: ' . $response->result);
