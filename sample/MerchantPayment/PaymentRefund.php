@@ -16,7 +16,6 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-
 $transaction = new MerchantTransaction();
 $transaction
     ->setAmount('200.00')

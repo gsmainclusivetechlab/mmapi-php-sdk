@@ -54,7 +54,9 @@ class PaymentRefund extends BaseProcess
             ->setClientCorrelationId($this->clientCorrelationId)
             ->httpHeader(
                 Header::X_CALLBACK_URL,
-                $this->callBackUrl ? $this->callBackUrl : MobileMoney::getCallbackUrl()
+                $this->callBackUrl
+                    ? $this->callBackUrl
+                    : MobileMoney::getCallbackUrl()
             )
             ->call();
 
