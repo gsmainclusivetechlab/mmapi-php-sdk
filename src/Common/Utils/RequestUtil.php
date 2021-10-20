@@ -6,7 +6,8 @@ use Exception;
 use stdClass;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\MobileMoney;
-
+use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Utils\AuthUtil;
 /**
  * Class RequestUtil
  * @package mmpsdk\Common\Utils
@@ -354,6 +355,11 @@ class RequestUtil
         return $baseUrl . $endpoint;
     }
 
+    private function buildAuthHeaders()
+    {
+        AuthUtil::buildHeader($this, $this->_params);
+    }
+
     /**
      * Alias for call();
      *
@@ -428,6 +434,10 @@ class RequestUtil
                 $this->option('CURLOPT_CUSTOMREQUEST', 'DELETE');
                 $this->option('CURLOPT_POSTFIELDS', $this->_params);
                 break;
+        }
+
+        if ($this->_url != API::ACCESS_TOKEN) {
+            $this->buildAuthHeaders();
         }
 
         if ($this->_clientCorrelationId) {

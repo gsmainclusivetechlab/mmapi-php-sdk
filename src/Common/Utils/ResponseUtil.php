@@ -71,11 +71,16 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
+                    print_r('Refreshing Token...');
+                    $authObj = AuthUtil::updateAccessToken(
+                        MobileMoney::getConsumerKey(),
+                        MobileMoney::getConsumerSecret(),
+                        MobileMoney::getApiKey()
+                    );
                     self::parse($response->requestObj->call(), $obj);
                 }
-                // throw new Exception('Authorisation Failed: ' . $response->result);
-
                 break;
+
             case self::NOT_FOUND:
                 $errorObject = json_decode($response->result);
                 if (isset($errorObject->errorCode)) {
