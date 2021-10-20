@@ -8,13 +8,8 @@ namespace mmpsdk\Common\Constants;
  */
 class API
 {
-    /**
-     * Base URLs
-     */
-    // SANDBOX_BASE_URL = 'https://sandbox.mobilemoneyapi.io/simulator/v1.2/passthrough/mm',
-    public const SANDBOX_BASE_URL = 'https://sandbox.mobilemoneyapi.io/2/oauth/simulator/v1.2/mm',
-        // SANDBOX_BASE_URL_WITH_AUTH = 'https://sandbox.mobilemoneyapi.io/2/oauth/simulator/v1.2/mm',
-        PRODUCTION_BASE_URL = 'PRODUCTION BASE URL HERE',
+    public const SANDBOX_BASE_URL = 'https://sandbox.mobilemoneyapi.io/simulator/v1.2/passthrough/mm',
+        PRODUCTION_BASE_URL = 'https://sandbox.mobilemoneyapi.io/2/oauth/simulator/v1.2/mm',
         /**
          * Authentication
          * To generate an Access Token.

@@ -7,13 +7,21 @@ use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\ResponseUtil;
 
-class ServiceAvailability
+class ServiceAvailability extends BaseProcess
 {
     /**
      * To determine the availability of the service from the API provider.
-     * @return RequestState|Exception
+     * @return Process
      */
-    public static function execute()
+    public static function build()
+    {
+        return new self(self::SYNCHRONOUS_PROCESS);
+    }
+
+    /**
+     * @return RequestState
+     */
+    public function execute()
     {
         $response = RequestUtil::get(API::HEARTBEAT)->call();
         return ResponseUtil::parse($response);
