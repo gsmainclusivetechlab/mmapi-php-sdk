@@ -55,7 +55,6 @@ class AccountBalance extends BaseProcess
                 )
             ])
             ->call();
-        print_r($response);
         return ResponseUtil::parse($response, new Balance());
     }
 }
