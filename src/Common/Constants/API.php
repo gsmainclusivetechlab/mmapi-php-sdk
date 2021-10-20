@@ -35,6 +35,21 @@ class API
         CREATE_QUOTATION = '/quotations',
         VIEW_QUOTATION = '/quotations/{quotationReference}',
         /**
+         * Accounts
+         * The Accounts APIs are used to support a range of operations on a financial account resource and associated resources.
+         */
+        GENERAL_ACCOUNT = '/accounts/{identityType}', //POST, GET, PATCH
+        GENERAL_ACCOUNT_IDENTIFIER = '/accounts/{identifierType}/{identifier}', //GET, PATCH
+        UPDATE_ACCOUNT_IDENDITY = '/accounts/{accountId}/identities/{identityId}',
+        UPDATE_ACCOUNT_IDENDITY_BY_ID = '/accounts/{identifierType}/{identifier}/identities/{identityId}',
+        VIEW_ACCOUNT_STATUS = '/accounts/{accountId}/status',
+        VIEW_ACCOUNT_NAME = '/accounts/{accountId}/accountname',
+        VIEW_ACCOUNT_BALANCE = '/accounts/{accountId}/balance',
+        VIEW_ACCOUNT_BALANCE_CLIENT = '/accounts/balance',
+        VIEW_ACCOUNT_TRANSACTIONS = '/accounts/{accountId}/transactions',
+        VIEW_ACCOUNT_STATEMENTS = '/accounts/{accountId}/statemententries',
+        VIEW_SPECIFIC_ACCOUNT_STATEMENT = '/statemententries/{transactionReference}',
+        /**
          * Supporting
          * Supporting APIs
          */
