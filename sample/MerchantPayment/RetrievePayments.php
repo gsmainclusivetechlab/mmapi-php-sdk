@@ -15,7 +15,6 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-
 $accountIdentifier = ['accountid' => '2000'];
 $filter = [
     'offset' => 0,

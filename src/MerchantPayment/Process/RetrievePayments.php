@@ -32,10 +32,8 @@ class RetrievePayments extends BaseProcess
      * @param array $filter
      * @return Process
      */
-    public static function build(
-        $accountIdentifier,
-        $filter = null
-    ) {
+    public static function build($accountIdentifier, $filter = null)
+    {
         $context = new self(self::SYNCHRONOUS_PROCESS);
         $context->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
