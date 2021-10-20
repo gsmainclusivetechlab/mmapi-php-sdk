@@ -48,7 +48,6 @@ abstract class BaseProcess
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();
-            var_dump(MobileMoney::getCallbackUrl());
             if ($callBackUrl == null && MobileMoney::getCallbackUrl() == null) {
                 throw new Exception('Callback URL is empty');
             }
