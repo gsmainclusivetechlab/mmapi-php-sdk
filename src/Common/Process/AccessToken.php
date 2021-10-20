@@ -35,7 +35,10 @@ class AccessToken extends BaseProcess
         )
             ->httpHeader(
                 Header::AUTHORIZATION,
-                EncDecUtil::getBasicAuthHeader($this->consumerKey, $this->secretKey)
+                EncDecUtil::getBasicAuthHeader(
+                    $this->consumerKey,
+                    $this->secretKey
+                )
             )
             ->httpHeader(
                 Header::CONTENT_TYPE,
