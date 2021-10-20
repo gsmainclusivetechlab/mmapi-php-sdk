@@ -1,12 +1,11 @@
 <?php
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
+use mmpsdk\MerchantPayment\Process\ViewAuthorisationCode;
 
 MobileMoney::initialize(
-    MobileMoney::SANDBOX,
+    MobileMoney::PRODUCTION,
     '59vthmq3f6i15v6jmcjskfkmh',
     'ef8tl4gihlpfd7r8jpc1t1nda33q5kcnn32cj375lq6mg2nv7rb',
     'oVN89kXyTx1cKT3ZohH7h6foEmQmjqQm3OK2U8Ue'
@@ -16,17 +15,17 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-$transaction = new MerchantTransaction();
-$transaction
-    ->setAmount('200.00')
-    ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
-
+$accountIdentifier = [
+    'accountid' => 2000
+];
+$filter = [
+    'limit' => 4
+];
 try {
-    $request = InitiatePayment::build($transaction);
-    print_r($request->getClientCorrelationId());
-    $repsonse = $request->execute();
+    $repsonse = ViewAuthorisationCode::build(
+        $accountIdentifier,
+        $filter
+    )->execute();
     print_r($repsonse);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());
