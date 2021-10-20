@@ -1,9 +1,9 @@
 <?php
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\MerchantPayment\Models\Reversal;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
+use mmpsdk\MerchantPayment\Process\PaymentReversal;
 
 MobileMoney::initialize(
     MobileMoney::SANDBOX,
@@ -16,15 +16,10 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-$transaction = new MerchantTransaction();
-$transaction
-    ->setAmount('200.00')
-    ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
+$reversalObj = new Reversal();
 
 try {
-    $request = InitiatePayment::build($transaction);
+    $request = PaymentReversal::build('7068', $reversalObj);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);
