@@ -1,9 +1,8 @@
 <?php
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
+use mmpsdk\MerchantPayment\Process\RetrievePayments;
 
 MobileMoney::initialize(
     MobileMoney::SANDBOX,
@@ -16,18 +15,15 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-$transaction = new MerchantTransaction();
-$transaction
-    ->setAmount('200.00')
-    ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
+$accountIdentifier = ['accountid' => '2000'];
+$filter = [
+    'offset' => 0,
+    'limit' => 10
+];
 
 try {
-    $request = InitiatePayment::build($transaction);
-    print_r($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    print_r($repsonse);
+    $response = RetrievePayments::build($accountIdentifier, $filter)->execute();
+    print_r($response);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());
 }
