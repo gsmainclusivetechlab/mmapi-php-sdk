@@ -29,12 +29,7 @@ MobileMoney::setCallbackUrl(
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
-$transaction = new MerchantTransaction();
-$transaction
-    ->setAmount('200.00')
-    ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
+
 
 // $response1 = AccessToken::execute();
 // $accessToken = $response1->access_token;
@@ -45,11 +40,11 @@ $authCodeObj
     ->setRequestDate(date('Y-m-d\TH:i:s\.40z'))
     ->setCurrency('GBP')
     ->setAmount('1001.00');
-// $accountIdentifier = [
-//     'organisationid' => 1234,
-//     'accountid' => 2000,
-//     'bankaccountno' => 12345
-// ];
+$accountIdentifier = [
+    'organisationid' => 1234,
+    'accountid' => 2000,
+    'bankaccountno' => 12345
+];
 
 // $accountIdentifier = [
 //     'accountid' => 2000
@@ -68,8 +63,18 @@ $authCodeObj
 // } catch (SDKException $ex) {
 //     print_r($ex);
 // }
+
+$transaction = new MerchantTransaction();
+$transaction
+    ->setAmount('200.00')
+    ->setCurrency('RWF')
+    ->setCreditParty(['accountid' => '2999', 'sdasd' => 'asd'])
+    ->setDebitParty(['accountid' => '2999']);
+
 try {
-    $repsonse = InitiatePayment::execute($transaction);
+    $request = InitiatePayment::build($transaction);
+    print_r($request->getClientCorrelationId());
+    $repsonse = $request->execute();
     print_r($repsonse);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());

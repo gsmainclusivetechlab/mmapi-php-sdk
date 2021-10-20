@@ -342,11 +342,9 @@ class RequestUtil
         return $this;
     }
 
-    public function setClientCorrelationId($bool)
+    public function setClientCorrelationId($clientCorrelationId)
     {
-        if ($bool) {
-            $this->_clientCorrelationId = GUID::create();
-        }
+        $this->_clientCorrelationId = $clientCorrelationId;
         return $this;
     }
 

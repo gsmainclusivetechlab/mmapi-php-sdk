@@ -71,7 +71,7 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    print_r("Refreshing Token...");
+                    print_r('Refreshing Token...');
                     $authObj = AuthUtil::updateAccessToken(
                         MobileMoney::getConsumerKey(),
                         MobileMoney::getConsumerSecret(),
