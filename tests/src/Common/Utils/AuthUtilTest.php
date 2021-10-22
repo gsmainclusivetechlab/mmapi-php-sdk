@@ -31,8 +31,8 @@ class AuthUtilTest extends TestCase
         $this->assertNotFalse($result, 'Should return true');
     }
 
-    public static function testGenerateAccessToken()
-    {
-        print_r(TestConfig::CONSUMER_KEY);
-    }
+    // public static function testGenerateAccessToken()
+    // {
+    //     print_r(TestConfig::CONSUMER_KEY);
+    // }
 }

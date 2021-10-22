@@ -35,9 +35,6 @@ class CommonUtilTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider generateObjectArray
-     */
     public function testEncodeSupportObjectToString()
     {
         $_mockArray = [

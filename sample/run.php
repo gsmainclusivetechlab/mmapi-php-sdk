@@ -1,16 +1,17 @@
 <?php
 $loader = require dirname(__DIR__, 1) . '/vendor/autoload.php';
+$ini = parse_ini_file(dirname(__DIR__, 1) . '/sdk-test-config.ini');
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 
 MobileMoney::initialize(
     MobileMoney::PRODUCTION,
-    '59vthmq3f6i15v6jmcjskfkmh',
-    'ef8tl4gihlpfd7r8jpc1t1nda33q5kcnn32cj375lq6mg2nv7rb',
-    'oVN89kXyTx1cKT3ZohH7h6foEmQmjqQm3OK2U8Ue'
+    $ini['consumer_key'],
+    $ini['consumer_secret'],
+    $ini['api_key']
 );
 MobileMoney::setCallbackUrl(
-    'https://1527dea3-111f-48de-ba27-1c840df261c1.mock.pstmn.io/callback'
+    $ini['callback_url']
 );
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 

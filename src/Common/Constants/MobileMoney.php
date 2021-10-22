@@ -57,7 +57,7 @@ class MobileMoney
      * callback url on which MMP will respond for api calls
      * @var string
      */
-    private static $callbackUrl = '';
+    private static $callbackUrl;
 
     /**
      * Cache file path

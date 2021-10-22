@@ -9,7 +9,8 @@
     },
     "autoload": {
         "psr-4": {
-            "mmpsdk\\": "src/"
+            "mmpsdk\\": "src/",
+            "mmpsdkTest\\": "tests/"
         }
     },
     "require-dev": {
@@ -22,7 +23,7 @@
             "prettier . --write",
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src"
         ],
-        "run-tests": [
+        "tests": [
             "./vendor/bin/phpunit --testdox tests"
         ]
     }

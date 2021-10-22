@@ -48,12 +48,11 @@ abstract class BaseProcess
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();
-            if ($callBackUrl == null && MobileMoney::getCallbackUrl() == null) {
-                throw new Exception('Callback URL is empty');
-            }
-            $this->callBackUrl = $callBackUrl
+            if (is_bool($callBackUrl) || is_string($callBackUrl)) {
+                $this->callBackUrl = $callBackUrl
                 ? $callBackUrl
                 : MobileMoney::getCallbackUrl();
+            }
         }
     }
 
@@ -65,6 +64,16 @@ abstract class BaseProcess
     public function getClientCorrelationId()
     {
         return $this->clientCorrelationId;
+    }
+
+    /**
+     * Retrieve the callback URL
+     *
+     * @return string
+     */
+    public function getCallBackUrl()
+    {
+        return $this->callBackUrl;
     }
 
     /**

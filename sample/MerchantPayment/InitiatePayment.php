@@ -11,7 +11,7 @@ $transaction
     ->setDebitParty(['accountid' => '2999']);
 
 try {
-    $request = InitiatePayment::build($transaction);
+    $request = InitiatePayment::build($transaction, null);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);

@@ -37,7 +37,7 @@ class InitiatePayment extends BaseProcess
      */
     public static function build(
         MerchantTransaction $merchantTransaction,
-        $callBackUrl = null
+        $callBackUrl = false
     ) {
         $validator = new TransactionValidator($merchantTransaction);
         $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
