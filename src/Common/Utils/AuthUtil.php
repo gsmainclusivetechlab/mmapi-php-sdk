@@ -31,12 +31,10 @@ class AuthUtil
                 );
                 $request->httpHeader(
                     Header::AUTHORIZATION,
-                    'Basic ' .
-                        EncDecUtil::base64Encode(
-                            MobileMoney::getConsumerKey() .
-                                ':' .
-                                MobileMoney::getConsumerSecret()
-                        )
+                    EncDecUtil::getBasicAuthHeader(
+                        MobileMoney::getConsumerKey(),
+                        MobileMoney::getConsumerSecret()
+                    )
                 );
                 return $request;
                 break;

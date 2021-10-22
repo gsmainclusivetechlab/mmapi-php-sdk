@@ -204,6 +204,16 @@ class RequestUtil
     }
 
     /**
+     * Get options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->_options;
+    }
+
+    /**
      * Add single option
      *
      * @param   string  $key
