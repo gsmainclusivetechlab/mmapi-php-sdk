@@ -35,7 +35,7 @@ class PaymentReversal extends BaseProcess
     public static function build(
         $transactionReference,
         Reversal $reversal = null,
-        $callBackUrl = null
+        $callBackUrl = false
     ) {
         $validator = new ReversalValidator($reversal);
         $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
@@ -58,12 +58,7 @@ class PaymentReversal extends BaseProcess
                 '{transactionReference}' => $this->transactionReference
             ])
             ->setClientCorrelationId(true)
-            ->httpHeader(
-                Header::X_CALLBACK_URL,
-                $this->callBackUrl
-                    ? $this->callBackUrl
-                    : MobileMoney::getCallbackUrl()
-            )
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->call();
 
         return ResponseUtil::parse($response, new RequestState());

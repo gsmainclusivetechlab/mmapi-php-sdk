@@ -33,7 +33,7 @@ class PaymentRefund extends BaseProcess
      */
     public static function build(
         MerchantTransaction $merchantTransaction,
-        $callBackUrl = null
+        $callBackUrl = false
     ) {
         $validator = new TransactionValidator($merchantTransaction);
         $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
@@ -52,12 +52,7 @@ class PaymentRefund extends BaseProcess
         )
             ->setUrlParams(['{transactionType}' => TransactionType::ADJUSTMENT])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(
-                Header::X_CALLBACK_URL,
-                $this->callBackUrl
-                    ? $this->callBackUrl
-                    : MobileMoney::getCallbackUrl()
-            )
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->call();
 
         return ResponseUtil::parse($response, new RequestState());

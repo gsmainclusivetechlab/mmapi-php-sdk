@@ -8,22 +8,37 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\ResponseUtil;
 
-class RetrieveMissingResponse
+class RetrieveMissingResponse extends BaseProcess
 {
+    private $objRef;
     /**
      *  Retrieves a representation of the resource assuming that it exists.
      * @param string $clientCorrelationId
      * @return RequestState|Exception
      */
-    public static function execute($clientCorrelationId, $obj = null)
+    public static function build($clientCorrelationId, $objRef = null)
+    {
+        $context = new self(self::SYNCHRONOUS_PROCESS);
+        $context->clientCorrelationId = $clientCorrelationId;
+        $context->objRef = $objRef;
+        return $context;
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function execute()
     {
         $response = RequestUtil::get(API::VIEW_RESPONSE)
-            ->setUrlParams(['{clientCorrelationId}' => $clientCorrelationId])
+            ->setUrlParams([
+                '{clientCorrelationId}' => $this->clientCorrelationId
+            ])
             ->call();
         $link = ResponseUtil::parse($response);
         $response = RequestUtil::get(
             MobileMoney::getBaseUrl() . $link->link
         )->call();
-        return ResponseUtil::parse($response, $obj);
+        return ResponseUtil::parse($response, $this->objRef);
     }
 }

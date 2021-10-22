@@ -36,7 +36,7 @@ class CreateAuthorisationCode extends BaseProcess
     public static function build(
         $accountIdentifier,
         AuthorisationCode $authorisationCode,
-        $callBackUrl = null
+        $callBackUrl = false
     ) {
         $validator = new AuthorisationCodeValidator($authorisationCode);
         $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
@@ -62,14 +62,10 @@ class CreateAuthorisationCode extends BaseProcess
                 )
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(
-                Header::X_CALLBACK_URL,
-                $this->callBackUrl
-                    ? $this->callBackUrl
-                    : MobileMoney::getCallbackUrl()
-            )
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->call();
 
+        print_r($response);
         return ResponseUtil::parse($response, new RequestState());
     }
 }

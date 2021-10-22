@@ -10,9 +10,7 @@ MobileMoney::initialize(
     $ini['consumer_secret'],
     $ini['api_key']
 );
-MobileMoney::setCallbackUrl(
-    $ini['callback_url']
-);
+MobileMoney::setCallbackUrl($ini['callback_url']);
 MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 
 if (sizeof($argv) == 3) {

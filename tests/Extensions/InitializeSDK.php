@@ -33,7 +33,9 @@ class InitializeSDK implements BeforeFirstTestHook, AfterLastTestHook
     {
         global $argv;
         $k = array_search("--$paramName", $argv);
-        if (!$k) return null;
+        if (!$k) {
+            return null;
+        }
         return $argv[$k + 1];
     }
 }

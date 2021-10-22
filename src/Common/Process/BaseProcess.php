@@ -50,8 +50,8 @@ abstract class BaseProcess
             $this->clientCorrelationId = GUID::create();
             if (is_bool($callBackUrl) || is_string($callBackUrl)) {
                 $this->callBackUrl = $callBackUrl
-                ? $callBackUrl
-                : MobileMoney::getCallbackUrl();
+                    ? $callBackUrl
+                    : MobileMoney::getCallbackUrl();
             }
         }
     }

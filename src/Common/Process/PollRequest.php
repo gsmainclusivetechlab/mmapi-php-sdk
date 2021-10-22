@@ -7,17 +7,30 @@ use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\ResponseUtil;
 
-class PollRequest
+class PollRequest extends BaseProcess
 {
+    protected $serverCorrelationId;
     /**
      * Retrieves the state of a request for a given Server Correlation Id.
      * @param string $serverCorrelationId
      * @return RequestState|Exception
      */
-    public static function execute($serverCorrelationId)
+    public static function build($serverCorrelationId)
+    {
+        $context = new self(self::SYNCHRONOUS_PROCESS);
+        $context->serverCorrelationId = $serverCorrelationId;
+    }
+
+    /**
+     *
+     * @return RequestState
+     */
+    public function execute()
     {
         $response = RequestUtil::get(API::VIEW_REQUEST_STATE)
-            ->setUrlParams(['{serverCorrelationId}' => $serverCorrelationId])
+            ->setUrlParams([
+                '{serverCorrelationId}' => $this->serverCorrelationId
+            ])
             ->call();
         return ResponseUtil::parse($response, new RequestState());
     }

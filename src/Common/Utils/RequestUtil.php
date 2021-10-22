@@ -212,7 +212,7 @@ class RequestUtil
      */
     public function option($key = '', $value = '')
     {
-        if(!is_null($value)){
+        if (!is_null($value)) {
             $this->_option($key, $value);
         }
 
