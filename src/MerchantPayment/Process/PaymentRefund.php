@@ -29,16 +29,16 @@ class PaymentRefund extends BaseProcess
      *
      * @param MerchantTransaction $merchantTransaction
      * @param string $callBackUrl
-     * @return Process
+     * @return this
      */
-    public static function build(
+    public function __construct(
         MerchantTransaction $merchantTransaction,
         $callBackUrl = false
     ) {
         $validator = new TransactionValidator($merchantTransaction);
-        $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $context->merchantTransaction = $merchantTransaction;
-        return $context;
+        $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
+        $this->merchantTransaction = $merchantTransaction;
+        return $this;
     }
 
     /**
@@ -46,15 +46,15 @@ class PaymentRefund extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::post(
+        $request = RequestUtil::post(
             API::CREATE_TRANSACTION,
             json_encode($this->merchantTransaction)
         )
             ->setUrlParams(['{transactionType}' => TransactionType::ADJUSTMENT])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
-            ->call();
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
 
-        return ResponseUtil::parse($response, new RequestState());
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new RequestState());
     }
 }

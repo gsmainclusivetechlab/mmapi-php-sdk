@@ -9,7 +9,7 @@ $filter = [
 ];
 
 try {
-    $response = RetrievePayments::build($accountIdentifier, $filter)->execute();
+    $response = (new RetrievePayments($accountIdentifier, $filter))->execute();
     print_r($response);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());

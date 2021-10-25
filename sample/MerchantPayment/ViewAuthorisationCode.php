@@ -9,10 +9,10 @@ $filter = [
     'limit' => 4
 ];
 try {
-    $repsonse = ViewAuthorisationCode::build(
+    $repsonse = (new ViewAuthorisationCode(
         $accountIdentifier,
         $filter
-    )->execute();
+    ))->execute();
     print_r($repsonse);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());

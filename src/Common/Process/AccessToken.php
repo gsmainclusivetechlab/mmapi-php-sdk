@@ -6,7 +6,6 @@ use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Utils\EncDecUtil;
-use mmpsdk\Common\Utils\ResponseUtil;
 
 class AccessToken extends BaseProcess
 {
@@ -19,17 +18,17 @@ class AccessToken extends BaseProcess
      * To generate the access token, a Consumer Key and a Consumer Secret is required
      *
      */
-    public static function build($consumerKey, $secretKey)
+    public function __construct($consumerKey, $secretKey)
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->consumerKey = $consumerKey;
-        $context->secretKey = $secretKey;
-        return $context;
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->consumerKey = $consumerKey;
+        $this->secretKey = $secretKey;
+        return $this;
     }
 
     public function execute()
     {
-        $response = RequestUtil::post(
+        $request = RequestUtil::post(
             API::ACCESS_TOKEN,
             'grant_type=client_credentials&='
         )
@@ -43,8 +42,8 @@ class AccessToken extends BaseProcess
             ->httpHeader(
                 Header::CONTENT_TYPE,
                 'application/x-www-form-urlencoded'
-            )
-            ->call();
-        return ResponseUtil::parse($response);
+            );
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response);
     }
 }

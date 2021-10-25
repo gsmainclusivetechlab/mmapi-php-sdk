@@ -11,7 +11,7 @@ $transaction
     ->setDebitParty(['accountid' => '2999']);
 
 try {
-    $request = PaymentRefund::build($transaction);
+    $request = new PaymentRefund($transaction);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);

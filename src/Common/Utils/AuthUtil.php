@@ -89,7 +89,8 @@ class AuthUtil
 
     public static function generateAccessToken($consumerKey, $secretKey)
     {
-        $authResponse = AccessToken::build($consumerKey, $secretKey)->execute();
+        $authRequest = new AccessToken($consumerKey, $secretKey);
+        $authResponse = $authRequest->execute();
         $accessTokenObj = new AuthToken();
         $accessTokenObj
             ->setAuthToken($authResponse->access_token)

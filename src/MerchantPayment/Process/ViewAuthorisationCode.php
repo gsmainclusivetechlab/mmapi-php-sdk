@@ -25,16 +25,16 @@ class ViewAuthorisationCode extends BaseProcess
      *
      * @param array $accountIdentifier
      * @param array $filters
-     * @return Process
+     * @return this
      */
-    public static function build($accountIdentifier, $filters = [])
+    public function __construct($accountIdentifier, $filters = [])
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->filters = $filters;
-        $context->accountIdentifier = CommonUtil::DeserializeToSupportObject(
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->filters = $filters;
+        $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        return $context;
+        return $this;
     }
 
     /**
@@ -43,13 +43,16 @@ class ViewAuthorisationCode extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(API::AUTHORISATION_CODE, $this->filters)
-            ->setUrlParams([
-                '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                    $this->accountIdentifier
-                )
-            ])
-            ->call();
-        return ResponseUtil::parse($response, new AuthorisationCode());
+        $request = RequestUtil::get(
+            API::AUTHORISATION_CODE,
+            $this->filters
+        )->setUrlParams([
+            '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                $this->accountIdentifier
+            )
+        ]);
+
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new AuthorisationCode());
     }
 }

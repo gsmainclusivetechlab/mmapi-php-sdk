@@ -11,11 +11,12 @@ class ServiceAvailability extends BaseProcess
 {
     /**
      * To determine the availability of the service from the API provider.
-     * @return Process
+     * @return this
      */
-    public static function build()
+    public function __construct()
     {
-        return new self(self::SYNCHRONOUS_PROCESS);
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        return $this;
     }
 
     /**
@@ -23,7 +24,8 @@ class ServiceAvailability extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(API::HEARTBEAT)->call();
-        return ResponseUtil::parse($response);
+        $request = RequestUtil::get(API::HEARTBEAT);
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response);
     }
 }

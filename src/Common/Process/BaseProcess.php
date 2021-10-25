@@ -5,6 +5,7 @@ namespace mmpsdk\Common\Process;
 use Exception;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Utils\GUID;
+use mmpsdk\Common\Utils\ResponseUtil;
 
 abstract class BaseProcess
 {
@@ -45,6 +46,11 @@ abstract class BaseProcess
 
     public function __construct($processType, $callBackUrl = null)
     {
+        $this->setUp($processType, $callBackUrl);
+    }
+
+    protected function setUp($processType, $callBackUrl = null)
+    {
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();
@@ -74,6 +80,38 @@ abstract class BaseProcess
     public function getCallBackUrl()
     {
         return $this->callBackUrl;
+    }
+
+    /**
+     * Retrieve the process type
+     *
+     * @return string
+     */
+    public function getProcessType()
+    {
+        return $this->processType;
+    }
+
+    /**
+     * Make the API request
+     *
+     * @param RequestUtil $request
+     * @return Curl
+     */
+    protected function makeRequest($request)
+    {
+        return $request->call();
+    }
+
+    /**
+     * Make the API request
+     *
+     * @param Curl $response
+     * @return mixed
+     */
+    protected function parseResponse($response, $obj = null)
+    {
+        return ResponseUtil::parse($response, $obj);
     }
 
     /**

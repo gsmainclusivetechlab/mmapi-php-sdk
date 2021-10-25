@@ -7,7 +7,8 @@ $accountIdentifier = [
 ];
 
 try {
-    $response = AccountBalance::build($accountIdentifier)->execute();
+    $request = new AccountBalance($accountIdentifier);
+    $response = $request->execute();
     print_r($response);
 } catch (SDKException $ex) {
     print_r($ex->getErrorObj());

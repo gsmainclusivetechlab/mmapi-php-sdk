@@ -31,20 +31,20 @@ class CreateAuthorisationCode extends BaseProcess
      * @param array $accountIdentifier
      * @param AuthorisationCode $authorisationCode
      * @param string $callBackUrl
-     * @return Process
+     * @return this
      */
-    public static function build(
+    public function __construct(
         $accountIdentifier,
         AuthorisationCode $authorisationCode,
         $callBackUrl = false
     ) {
         $validator = new AuthorisationCodeValidator($authorisationCode);
-        $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $context->accountIdentifier = CommonUtil::DeserializeToSupportObject(
+        $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
+        $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        $context->authorisationCode = $authorisationCode;
-        return $context;
+        $this->authorisationCode = $authorisationCode;
+        return $this;
     }
 
     /**
@@ -52,7 +52,7 @@ class CreateAuthorisationCode extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::post(
+        $request = RequestUtil::post(
             API::AUTHORISATION_CODE,
             json_encode($this->authorisationCode)
         )
@@ -62,10 +62,9 @@ class CreateAuthorisationCode extends BaseProcess
                 )
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
-            ->call();
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
 
-        print_r($response);
-        return ResponseUtil::parse($response, new RequestState());
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new RequestState());
     }
 }

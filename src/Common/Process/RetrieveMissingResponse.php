@@ -14,14 +14,14 @@ class RetrieveMissingResponse extends BaseProcess
     /**
      *  Retrieves a representation of the resource assuming that it exists.
      * @param string $clientCorrelationId
-     * @return context
+     * @return this
      */
-    public static function build($clientCorrelationId, $objRef = null)
+    public function __construct($clientCorrelationId, $objRef = null)
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->clientCorrelationId = $clientCorrelationId;
-        $context->objRef = $objRef;
-        return $context;
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->clientCorrelationId = $clientCorrelationId;
+        $this->objRef = $objRef;
+        return $this;
     }
 
     /**
@@ -30,15 +30,24 @@ class RetrieveMissingResponse extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(API::VIEW_RESPONSE)
-            ->setUrlParams([
-                '{clientCorrelationId}' => $this->clientCorrelationId
-            ])
-            ->call();
-        $link = ResponseUtil::parse($response);
-        $response = RequestUtil::get(
-            MobileMoney::getBaseUrl() . $link->link
-        )->call();
-        return ResponseUtil::parse($response, $this->objRef);
+        $request = RequestUtil::get(API::VIEW_RESPONSE)->setUrlParams([
+            '{clientCorrelationId}' => $this->clientCorrelationId
+        ]);
+        $response = $this->makeRequest($request);
+        $parsedResponse = $this->parseResponse($response);
+        return $this->getResource($parsedResponse);
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    private function getResource($response)
+    {
+        $request = RequestUtil::get(
+            MobileMoney::getBaseUrl() . $response->link
+        );
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, $this->objRef);
     }
 }

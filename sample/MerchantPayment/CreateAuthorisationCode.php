@@ -12,7 +12,7 @@ $accountIdentifier = [
     'accountid' => 2000
 ];
 try {
-    $request = CreateAuthorisationCode::build(
+    $request = new CreateAuthorisationCode(
         $accountIdentifier,
         $authorisationObj,
         null

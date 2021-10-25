@@ -99,7 +99,11 @@ class ResponseUtil
                 throw new SDKException('Service Unavailable');
                 break;
             default:
-                throw new SDKException('Unknown Response', $response);
+                throw new SDKException(
+                    'Unknown Response: ' .
+                        $response->httpCode .
+                        $response->result
+                );
         }
     }
 }

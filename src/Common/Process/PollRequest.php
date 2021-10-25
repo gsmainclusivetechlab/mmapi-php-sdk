@@ -13,13 +13,13 @@ class PollRequest extends BaseProcess
     /**
      * Retrieves the state of a request for a given Server Correlation Id.
      * @param string $serverCorrelationId
-     * @return context
+     * @return this
      */
-    public static function build($serverCorrelationId)
+    public function __construct($serverCorrelationId)
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->serverCorrelationId = $serverCorrelationId;
-        return $context;
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->serverCorrelationId = $serverCorrelationId;
+        return $this;
     }
 
     /**
@@ -28,11 +28,10 @@ class PollRequest extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(API::VIEW_REQUEST_STATE)
-            ->setUrlParams([
-                '{serverCorrelationId}' => $this->serverCorrelationId
-            ])
-            ->call();
-        return ResponseUtil::parse($response, new RequestState());
+        $request = RequestUtil::get(API::VIEW_REQUEST_STATE)->setUrlParams([
+            '{serverCorrelationId}' => $this->serverCorrelationId
+        ]);
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new RequestState());
     }
 }

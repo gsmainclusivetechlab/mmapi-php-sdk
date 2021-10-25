@@ -4,7 +4,6 @@ namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 
-use mmpsdk\Common\Utils\ResponseUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\Balance;
@@ -30,16 +29,16 @@ class AccountBalance extends BaseProcess
      *
      * @param array $accountIdentifier
      * @param array $filter
-     * @return Process
+     * @return this
      */
-    public static function build($accountIdentifier, $filter = null)
+    public function __construct($accountIdentifier, $filter = null)
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->accountIdentifier = CommonUtil::DeserializeToSupportObject(
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        $context->filter = $filter;
-        return $context;
+        $this->filter = $filter;
+        return $this;
     }
 
     /**
@@ -48,13 +47,15 @@ class AccountBalance extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(API::VIEW_ACCOUNT_BALANCE, $this->filter)
-            ->setUrlParams([
-                '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                    $this->accountIdentifier
-                )
-            ])
-            ->call();
-        return ResponseUtil::parse($response, new Balance());
+        $request = RequestUtil::get(
+            API::VIEW_ACCOUNT_BALANCE,
+            $this->filter
+        )->setUrlParams([
+            '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                $this->accountIdentifier
+            )
+        ]);
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new Balance());
     }
 }

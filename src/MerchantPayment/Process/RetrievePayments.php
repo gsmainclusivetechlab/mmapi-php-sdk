@@ -30,16 +30,16 @@ class RetrievePayments extends BaseProcess
      *
      * @param array $accountIdentifier
      * @param array $filter
-     * @return Process
+     * @return this
      */
-    public static function build($accountIdentifier, $filter = null)
+    public function __construct($accountIdentifier, $filter = null)
     {
-        $context = new self(self::SYNCHRONOUS_PROCESS);
-        $context->accountIdentifier = CommonUtil::DeserializeToSupportObject(
+        $this->setUp(self::SYNCHRONOUS_PROCESS);
+        $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        $context->filter = $filter;
-        return $context;
+        $this->filter = $filter;
+        return $this;
     }
 
     /**
@@ -48,17 +48,16 @@ class RetrievePayments extends BaseProcess
      */
     public function execute()
     {
-        $response = RequestUtil::get(
+        $request = RequestUtil::get(
             API::VIEW_ACCOUNT_TRANSACTIONS,
             $this->filter
-        )
-            ->setUrlParams([
-                '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                    $this->accountIdentifier
-                )
-            ])
-            ->call();
+        )->setUrlParams([
+            '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                $this->accountIdentifier
+            )
+        ]);
 
-        return ResponseUtil::parse($response, new MerchantTransaction());
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new MerchantTransaction());
     }
 }

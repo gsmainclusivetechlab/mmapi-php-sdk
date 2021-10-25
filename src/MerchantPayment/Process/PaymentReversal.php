@@ -32,35 +32,35 @@ class PaymentReversal extends BaseProcess
      * @param string $callBackUrl
      * @return Process
      */
-    public static function build(
+    public function __construct(
         $transactionReference,
         Reversal $reversal = null,
         $callBackUrl = false
     ) {
         $validator = new ReversalValidator($reversal);
-        $context = new self(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
+        $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         if ($reversal == null) {
-            $context->reversal = new Reversal();
+            $this->reversal = new Reversal();
         } else {
-            $context->reversal = $reversal;
+            $this->reversal = $reversal;
         }
-        $context->transactionReference = $transactionReference;
-        return $context;
+        $this->transactionReference = $transactionReference;
+        return $this;
     }
 
     public function execute()
     {
-        $response = RequestUtil::post(
+        $request = RequestUtil::post(
             API::CREATE_REVERSAL,
             json_encode($this->reversal)
         )
             ->setUrlParams([
                 '{transactionReference}' => $this->transactionReference
             ])
-            ->setClientCorrelationId(true)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
-            ->call();
+            ->setClientCorrelationId($this->clientCorrelationId)
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
 
-        return ResponseUtil::parse($response, new RequestState());
+        $response = $this->makeRequest($request);
+        return $this->parseResponse($response, new RequestState());
     }
 }
