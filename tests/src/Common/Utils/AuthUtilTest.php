@@ -56,7 +56,9 @@ class AuthUtilTest extends TestCase
             'Should have Headers'
         );
 
-        $httpHeadersArray = $this->parseHeaders($optionsArray[CURLOPT_HTTPHEADER]);
+        $httpHeadersArray = $this->parseHeaders(
+            $optionsArray[CURLOPT_HTTPHEADER]
+        );
         $this->assertArrayHasKey(
             Header::X_API_KEY,
             $httpHeadersArray,
@@ -76,7 +78,12 @@ class AuthUtilTest extends TestCase
         );
 
         $this->assertEquals(
-            'Basic ' . base64_encode(MobileMoney::getConsumerKey() . ':' . MobileMoney::getConsumerSecret()),
+            'Basic ' .
+                base64_encode(
+                    MobileMoney::getConsumerKey() .
+                        ':' .
+                        MobileMoney::getConsumerSecret()
+                ),
             $httpHeadersArray[Header::AUTHORIZATION],
             'The value of authorisation header should be encoded API Client
             credentials (client_id, client_secret)'
@@ -97,7 +104,9 @@ class AuthUtilTest extends TestCase
             'Should have Headers'
         );
 
-        $httpHeadersArray = $this->parseHeaders($optionsArray[CURLOPT_HTTPHEADER]);
+        $httpHeadersArray = $this->parseHeaders(
+            $optionsArray[CURLOPT_HTTPHEADER]
+        );
         $this->assertArrayHasKey(
             Header::X_API_KEY,
             $httpHeadersArray,
@@ -117,7 +126,8 @@ class AuthUtilTest extends TestCase
         );
 
         $this->assertTrue(
-            is_string($httpHeadersArray[Header::AUTHORIZATION]) && strlen($httpHeadersArray[Header::AUTHORIZATION]) > 10,
+            is_string($httpHeadersArray[Header::AUTHORIZATION]) &&
+                strlen($httpHeadersArray[Header::AUTHORIZATION]) > 10,
             'Should be a string.'
         );
     }
@@ -127,7 +137,7 @@ class AuthUtilTest extends TestCase
         $keys = [];
         foreach ($array as $string) {
             list($before, $after) = explode(':', $string, 2);
-            $keys+=[trim($before) => trim($after)];
+            $keys += [trim($before) => trim($after)];
         }
         return $keys;
     }
