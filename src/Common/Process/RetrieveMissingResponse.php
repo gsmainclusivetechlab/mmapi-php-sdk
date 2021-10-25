@@ -14,7 +14,7 @@ class RetrieveMissingResponse extends BaseProcess
     /**
      *  Retrieves a representation of the resource assuming that it exists.
      * @param string $clientCorrelationId
-     * @return RequestState|Exception
+     * @return context
      */
     public static function build($clientCorrelationId, $objRef = null)
     {

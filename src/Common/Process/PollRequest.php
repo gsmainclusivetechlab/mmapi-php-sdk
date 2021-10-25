@@ -13,12 +13,13 @@ class PollRequest extends BaseProcess
     /**
      * Retrieves the state of a request for a given Server Correlation Id.
      * @param string $serverCorrelationId
-     * @return RequestState|Exception
+     * @return context
      */
     public static function build($serverCorrelationId)
     {
         $context = new self(self::SYNCHRONOUS_PROCESS);
         $context->serverCorrelationId = $serverCorrelationId;
+        return $context;
     }
 
     /**

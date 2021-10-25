@@ -6,7 +6,8 @@ use mmpsdk\MerchantPayment\Process\PaymentReversal;
 $reversalObj = new Reversal();
 
 try {
-    $request = PaymentReversal::build('7068', $reversalObj);
+    $transactionReference = 'REF-1635141893677';
+    $request = PaymentReversal::build($transactionReference, $reversalObj);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);
