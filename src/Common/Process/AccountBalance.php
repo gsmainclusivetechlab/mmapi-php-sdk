@@ -47,14 +47,13 @@ class AccountBalance extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::VIEW_ACCOUNT_BALANCE,
-            $this->filter
-        )->setUrlParams([
-            '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                $this->accountIdentifier
-            )
-        ]);
+        $request = RequestUtil::get(API::VIEW_ACCOUNT_BALANCE, $this->filter)
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $this->accountIdentifier
+                )
+            ])
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new Balance());
     }

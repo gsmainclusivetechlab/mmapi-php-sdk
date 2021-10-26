@@ -43,14 +43,13 @@ class ViewAuthorisationCode extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::AUTHORISATION_CODE,
-            $this->filters
-        )->setUrlParams([
-            '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                $this->accountIdentifier
-            )
-        ]);
+        $request = RequestUtil::get(API::AUTHORISATION_CODE, $this->filters)
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $this->accountIdentifier
+                )
+            ])
+            ->build();
 
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new AuthorisationCode());

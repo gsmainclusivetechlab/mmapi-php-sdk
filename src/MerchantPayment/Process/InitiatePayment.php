@@ -55,7 +55,8 @@ class InitiatePayment extends BaseProcess
                 '{transactionType}' => $this->merchantTransaction->getType()
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
+            ->build();
 
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new RequestState());

@@ -28,9 +28,11 @@ class PollRequest extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(API::VIEW_REQUEST_STATE)->setUrlParams([
-            '{serverCorrelationId}' => $this->serverCorrelationId
-        ]);
+        $request = RequestUtil::get(API::VIEW_REQUEST_STATE)
+            ->setUrlParams([
+                '{serverCorrelationId}' => $this->serverCorrelationId
+            ])
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new RequestState());
     }

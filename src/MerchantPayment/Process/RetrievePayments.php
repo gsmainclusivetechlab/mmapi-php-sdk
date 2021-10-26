@@ -51,11 +51,13 @@ class RetrievePayments extends BaseProcess
         $request = RequestUtil::get(
             API::VIEW_ACCOUNT_TRANSACTIONS,
             $this->filter
-        )->setUrlParams([
-            '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                $this->accountIdentifier
-            )
-        ]);
+        )
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $this->accountIdentifier
+                )
+            ])
+            ->build();
 
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new MerchantTransaction());

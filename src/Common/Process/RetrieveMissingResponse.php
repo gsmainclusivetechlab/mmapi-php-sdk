@@ -30,9 +30,11 @@ class RetrieveMissingResponse extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(API::VIEW_RESPONSE)->setUrlParams([
-            '{clientCorrelationId}' => $this->clientCorrelationId
-        ]);
+        $request = RequestUtil::get(API::VIEW_RESPONSE)
+            ->setUrlParams([
+                '{clientCorrelationId}' => $this->clientCorrelationId
+            ])
+            ->build();
         $response = $this->makeRequest($request);
         $parsedResponse = $this->parseResponse($response);
         return $this->getResource($parsedResponse);
@@ -46,8 +48,10 @@ class RetrieveMissingResponse extends BaseProcess
     {
         $request = RequestUtil::get(
             MobileMoney::getBaseUrl() . $response->link
-        );
+        )->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, $this->objRef);
     }
 }
+
+https: //1527dea3-111f-48de-ba27-1c840df261c1.mock.pstmn.io/vishnu

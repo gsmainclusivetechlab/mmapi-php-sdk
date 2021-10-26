@@ -42,7 +42,8 @@ class AccessToken extends BaseProcess
             ->httpHeader(
                 Header::CONTENT_TYPE,
                 'application/x-www-form-urlencoded'
-            );
+            )
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response);
     }
