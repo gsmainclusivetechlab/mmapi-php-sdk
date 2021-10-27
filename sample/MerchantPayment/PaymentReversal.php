@@ -7,7 +7,7 @@ $reversalObj = new Reversal();
 
 try {
     $transactionReference = 'REF-1635251574104';
-    $request = new PaymentReversal($transactionReference, $reversalObj);
+    $request = new PaymentReversal($transactionReference);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);

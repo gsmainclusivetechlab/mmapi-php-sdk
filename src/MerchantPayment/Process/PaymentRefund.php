@@ -34,7 +34,10 @@ class PaymentRefund extends BaseProcess
         MerchantTransaction $merchantTransaction,
         $callBackUrl = false
     ) {
-        CommonUtil::validateArgument($merchantTransaction, 'merchantTransaction');
+        CommonUtil::validateArgument(
+            $merchantTransaction,
+            'merchantTransaction'
+        );
         $validator = new TransactionValidator($merchantTransaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->merchantTransaction = $merchantTransaction;

@@ -34,14 +34,17 @@ class PaymentReversal extends BaseProcess
         Reversal $reversal = null,
         $callBackUrl = false
     ) {
-        CommonUtil::validateArgument($transactionReference, 'transactionReference');
-        $validator = new ReversalValidator($reversal);
+        CommonUtil::validateArgument(
+            $transactionReference,
+            'transactionReference'
+        );
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         if ($reversal == null) {
             $this->reversal = new Reversal();
         } else {
             $this->reversal = $reversal;
         }
+        $validator = new ReversalValidator($this->reversal);
         $this->transactionReference = $transactionReference;
         return $this;
     }

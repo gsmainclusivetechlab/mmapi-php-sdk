@@ -126,7 +126,8 @@ abstract class Validator
         }
     }
 
-    public function throwValidationError($errors){
+    public function throwValidationError($errors)
+    {
         throw new SDKException(
             'Validation Error',
             SDKException::getnerateErrorObj(

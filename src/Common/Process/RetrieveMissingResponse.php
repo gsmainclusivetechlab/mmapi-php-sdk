@@ -17,7 +17,10 @@ class RetrieveMissingResponse extends BaseProcess
      */
     public function __construct($clientCorrelationId, $objRef = null)
     {
-        CommonUtil::validateArgument($clientCorrelationId, 'clientCorrelationId');
+        CommonUtil::validateArgument(
+            $clientCorrelationId,
+            'clientCorrelationId'
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->clientCorrelationId = $clientCorrelationId;
         $this->objRef = $objRef;
@@ -53,5 +56,3 @@ class RetrieveMissingResponse extends BaseProcess
         return $this->parseResponse($response, $this->objRef);
     }
 }
-
-https: //1527dea3-111f-48de-ba27-1c840df261c1.mock.pstmn.io/vishnu

@@ -17,7 +17,10 @@ class PollRequest extends BaseProcess
      */
     public function __construct($serverCorrelationId)
     {
-        CommonUtil::validateArgument($serverCorrelationId, 'serverCorrelationId');
+        CommonUtil::validateArgument(
+            $serverCorrelationId,
+            'serverCorrelationId'
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->serverCorrelationId = $serverCorrelationId;
         return $this;

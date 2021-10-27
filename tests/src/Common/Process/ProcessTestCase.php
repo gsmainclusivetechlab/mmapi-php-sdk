@@ -2,10 +2,13 @@
 namespace mmpsdkTest\src\Common\Process;
 use PHPUnit\Framework\TestCase;
 use mmpsdkTest\Extensions\PropertyAccessor;
+use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
 use ReflectionClass;
 
 abstract class ProcessTestCase extends TestCase
 {
+    use ArraySubsetAsserts;
+
     /**
      *
      * @var array
@@ -83,12 +86,12 @@ abstract class ProcessTestCase extends TestCase
                         'Method must be: ' . $this->requestMethod
                     );
                     $this->assertEquals(
-                        $this->requestMethod,
-                        $requestObj['method'],
+                        $this->requestUrl,
+                        $requestObj['url'],
                         'URL must be: ' . $this->requestUrl
                     );
                     if ($this->requestParams) {
-                        $this->assertEqualsCanonicalizing(
+                        $this->assertArraySubset(
                             $this->requestParams,
                             $requestObj['params'],
                             'Params must be: ' .
@@ -96,7 +99,7 @@ abstract class ProcessTestCase extends TestCase
                         );
                     }
                     if ($this->requestOptions) {
-                        $this->assertEquals(
+                        $this->assertArraySubset(
                             $this->requestOptions,
                             $requestObj['options'],
                             'Options must be: ' .
