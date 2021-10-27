@@ -3,8 +3,6 @@
 namespace mmpsdk\MerchantPayment\Validation;
 
 use mmpsdk\Common\Utils\Validator;
-use Exception;
-use mmpsdk\Common\Exceptions\SDKException;
 
 /**
  * Class TransactionValidator
@@ -20,15 +18,7 @@ class TransactionValidator extends Validator
         $this->validateField('currency', self::MANDATORY);
 
         if ($errors = $this->getValidationErrors()) {
-            throw new SDKException(
-                'Validation Error',
-                SDKException::getnerateErrorObj(
-                    'validation',
-                    'formatError',
-                    'Invalid JSON Field',
-                    $errors
-                )
-            );
+            $this->throwValidationError($errors);
         }
 
         // custom validator
