@@ -6,8 +6,6 @@ use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Disbursement\Enums\DisbursementTransactionType;
 
-// use mmpsdk\MerchantPayment\Enums\TransactionType;
-
 /**
  * Class DisbursementTransaction
  * @package mmpsdk\Disbursement\Models
