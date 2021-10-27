@@ -5,8 +5,7 @@ namespace mmpsdk\Common\Process;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\Common\Models\RequestState;
-use mmpsdk\Common\Utils\ResponseUtil;
+use mmpsdk\Common\Utils\CommonUtil;
 
 class RetrieveMissingResponse extends BaseProcess
 {
@@ -18,6 +17,7 @@ class RetrieveMissingResponse extends BaseProcess
      */
     public function __construct($clientCorrelationId, $objRef = null)
     {
+        CommonUtil::validateArgument($clientCorrelationId, 'clientCorrelationId');
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->clientCorrelationId = $clientCorrelationId;
         $this->objRef = $objRef;

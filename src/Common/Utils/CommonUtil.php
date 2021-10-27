@@ -38,4 +38,13 @@ class CommonUtil
         }
         return implode('$', $stringArray);
     }
+
+    public static function validateArgument($argument, $argumentName){
+        if ($argument === null) {
+            throw new \mmpsdk\Common\Exceptions\SDKException("$argumentName cannot be null");
+        } elseif (gettype($argument) == 'string' && trim($argument) == '') {
+            throw new \mmpsdk\Common\Exceptions\SDKException("$argumentName string cannot be empty");
+        }
+        return true;
+    }
 }

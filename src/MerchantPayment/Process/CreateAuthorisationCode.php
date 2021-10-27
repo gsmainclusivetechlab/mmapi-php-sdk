@@ -38,6 +38,8 @@ class CreateAuthorisationCode extends BaseProcess
         AuthorisationCode $authorisationCode,
         $callBackUrl = false
     ) {
+        CommonUtil::validateArgument($accountIdentifier, 'accountIdentifier');
+        CommonUtil::validateArgument($authorisationCode, 'authorisationCode');
         $validator = new AuthorisationCodeValidator($authorisationCode);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(

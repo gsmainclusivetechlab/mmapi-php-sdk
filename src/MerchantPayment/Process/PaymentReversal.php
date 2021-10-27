@@ -2,16 +2,13 @@
 
 namespace mmpsdk\MerchantPayment\Process;
 
-use Exception;
 use mmpsdk\MerchantPayment\Validation\ReversalValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
-use mmpsdk\Common\Utils\ResponseUtil;
-use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Enums\TransactionType;
 use mmpsdk\MerchantPayment\Models\Reversal;
 
 /**
@@ -37,6 +34,7 @@ class PaymentReversal extends BaseProcess
         Reversal $reversal = null,
         $callBackUrl = false
     ) {
+        CommonUtil::validateArgument($transactionReference, 'transactionReference');
         $validator = new ReversalValidator($reversal);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         if ($reversal == null) {

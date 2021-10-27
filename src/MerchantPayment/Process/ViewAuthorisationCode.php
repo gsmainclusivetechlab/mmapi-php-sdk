@@ -4,7 +4,6 @@ namespace mmpsdk\MerchantPayment\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 
-use mmpsdk\Common\Utils\ResponseUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Utils\CommonUtil;
@@ -29,6 +28,7 @@ class ViewAuthorisationCode extends BaseProcess
      */
     public function __construct($accountIdentifier, $filters = [])
     {
+        CommonUtil::validateArgument($accountIdentifier, 'accountIdentifier');
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->filters = $filters;
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(

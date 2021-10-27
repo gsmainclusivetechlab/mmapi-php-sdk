@@ -3,8 +3,6 @@
 namespace mmpsdk\MerchantPayment\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
-
-use mmpsdk\Common\Utils\ResponseUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
@@ -34,6 +32,7 @@ class RetrievePayments extends BaseProcess
      */
     public function __construct($accountIdentifier, $filter = null)
     {
+        CommonUtil::validateArgument($accountIdentifier, 'accountIdentifier');
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier

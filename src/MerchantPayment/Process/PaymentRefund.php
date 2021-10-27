@@ -8,8 +8,7 @@ use mmpsdk\MerchantPayment\Validation\TransactionValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 
-use mmpsdk\Common\Utils\ResponseUtil;
-use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
@@ -35,6 +34,7 @@ class PaymentRefund extends BaseProcess
         MerchantTransaction $merchantTransaction,
         $callBackUrl = false
     ) {
+        CommonUtil::validateArgument($merchantTransaction, 'merchantTransaction');
         $validator = new TransactionValidator($merchantTransaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->merchantTransaction = $merchantTransaction;
