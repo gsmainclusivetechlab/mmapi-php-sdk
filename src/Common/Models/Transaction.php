@@ -511,4 +511,13 @@ class Transaction extends BaseModel
     {
         return $this->metadata;
     }
+
+    public function hydratorStrategies()
+    {
+        $this->addHydratorStrategy(
+            'requestingOrganisation',
+            new RequestingOrganisation()
+        );
+        $this->addHydratorStrategy('fees', new Fee());
+    }
 }

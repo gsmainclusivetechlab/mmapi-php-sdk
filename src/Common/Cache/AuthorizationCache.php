@@ -37,7 +37,7 @@ abstract class AuthorizationCache
                     array_key_exists($clientId, $tokens)
                 ) {
                     // If client Id is found, just send in that data only
-                    return new AuthToken($tokens[$clientId]);
+                    return new AuthToken((object) $tokens[$clientId]);
                 } elseif ($clientId) {
                     // If client Id is provided, but no key in persisted data found matching it.
                     return null;

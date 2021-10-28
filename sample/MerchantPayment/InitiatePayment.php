@@ -5,13 +5,13 @@ use mmpsdk\MerchantPayment\Process\InitiatePayment;
 
 $transaction = new MerchantTransaction();
 $transaction
-    ->setAmount('200.00')
-    ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
+    ->setAmount('16.00')
+    ->setCurrency('USD')
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678']);
 
 try {
-    $request = new InitiatePayment($transaction, null);
+    $request = new InitiatePayment($transaction);
     print_r($request->getClientCorrelationId());
     $repsonse = $request->execute();
     print_r($repsonse);
