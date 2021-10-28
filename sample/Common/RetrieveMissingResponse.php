@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Process\RetrieveMissingResponse;
 use mmpsdk\MerchantPayment\Models\MerchantTransaction;
@@ -10,7 +11,7 @@ try {
         new MerchantTransaction()
     );
     $response = $request->execute();
-    print_r($response);
+    prettyPrint($response);
 } catch (SDKException $ex) {
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getErrorObj());
 }

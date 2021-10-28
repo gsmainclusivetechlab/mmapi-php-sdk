@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Process\AccountBalance;
 
@@ -9,7 +10,7 @@ $accountIdentifier = [
 try {
     $request = new AccountBalance($accountIdentifier);
     $response = $request->execute();
-    print_r($response);
+    prettyPrint($response);
 } catch (SDKException $ex) {
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getErrorObj());
 }

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\MerchantPayment\Models\MerchantTransaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
@@ -12,9 +13,10 @@ $transaction
 
 try {
     $request = new InitiatePayment($transaction);
-    print_r($request->getClientCorrelationId());
+    prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
-    print_r($repsonse);
+    prettyPrint($repsonse);
 } catch (SDKException $ex) {
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getMessage());
+    prettyPrint($ex->getErrorObj());
 }

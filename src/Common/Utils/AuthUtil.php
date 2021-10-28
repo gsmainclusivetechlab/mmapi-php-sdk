@@ -101,6 +101,9 @@ class AuthUtil
 
     public static function getAccessToken($consumerKey, $secretKey, $apiKey)
     {
+        CommonUtil::validateArgument($consumerKey, 'consumerKey');
+        CommonUtil::validateArgument($secretKey, 'consumerSecret');
+        CommonUtil::validateArgument($apiKey, 'apiKey');
         // Check if we already have accessToken in memory
         $token = self::getAccessTokenFromMemory();
         if ($token && self::checkExpiredToken($token)) {

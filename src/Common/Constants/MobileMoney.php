@@ -4,6 +4,7 @@ namespace mmpsdk\Common\Constants;
 
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Utils\CommonUtil;
 
 /**
  * This class is used to store all the mobile money api related Constants
@@ -97,6 +98,11 @@ class MobileMoney
             self::setConsumerKey($consumerKey);
             self::setConsumerSecret($consumerSecret);
             self::setApiKey($apiKey);
+        }
+        if(self::$environment == self::PRODUCTION){
+            CommonUtil::validateArgument(self::getConsumerKey(), 'consumerKey');
+            CommonUtil::validateArgument(self::getConsumerSecret(), 'consumerSecret');
+            CommonUtil::validateArgument(self::getApiKey(), 'apiKey');
         }
     }
 

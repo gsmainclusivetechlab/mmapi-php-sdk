@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\RetrievePayments;
 
@@ -7,8 +8,8 @@ $filter = ['limit' => 5];
 
 try {
     $response = (new RetrievePayments($accountIdentifier, $filter))->execute();
-    print_r($response);
+    prettyPrint($response);
 } catch (SDKException $ex) {
-    print_r($ex->getMessage());
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getMessage());
+    prettyPrint($ex->getErrorObj());
 }
