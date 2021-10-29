@@ -69,5 +69,4 @@ class CommonUtil
         }
         return true;
     }
-
 }

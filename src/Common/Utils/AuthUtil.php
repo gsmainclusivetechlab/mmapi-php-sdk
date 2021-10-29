@@ -132,16 +132,29 @@ class AuthUtil
         return MobileMoney::getAccessToken();
     }
 
-    public static function validateCredentials(){
+    public static function validateCredentials()
+    {
         switch (MobileMoney::getSecurityLevel()) {
             case SecurityLevel::NONE:
                 return true;
                 break;
             case SecurityLevel::DEVELOPMENT:
             case SecurityLevel::STANDARD:
-                CommonUtil::validateArgument(MobileMoney::getConsumerKey(), 'consumerKey', 'string');
-                CommonUtil::validateArgument(MobileMoney::getConsumerSecret(), 'consumerSecret', 'string');
-                CommonUtil::validateArgument(MobileMoney::getApiKey(), 'apiKey', 'string');
+                CommonUtil::validateArgument(
+                    MobileMoney::getConsumerKey(),
+                    'consumerKey',
+                    'string'
+                );
+                CommonUtil::validateArgument(
+                    MobileMoney::getConsumerSecret(),
+                    'consumerSecret',
+                    'string'
+                );
+                CommonUtil::validateArgument(
+                    MobileMoney::getApiKey(),
+                    'apiKey',
+                    'string'
+                );
                 return true;
                 break;
 

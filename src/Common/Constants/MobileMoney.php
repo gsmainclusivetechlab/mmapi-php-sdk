@@ -107,7 +107,11 @@ class MobileMoney
                 SecurityLevel::STANDARD
             ])
         ) {
-            CommonUtil::validateArgument(self::getConsumerKey(), 'consumerKey', 'string');
+            CommonUtil::validateArgument(
+                self::getConsumerKey(),
+                'consumerKey',
+                'string'
+            );
             CommonUtil::validateArgument(
                 self::getConsumerSecret(),
                 'consumerSecret',

@@ -26,22 +26,28 @@ try {
     prettyPrint($pollResponse);
 
     //Retrieve Payment Info
-    if($pollResponse->getStatus() == 'completed'){
-        $transactionResponse = retrieveMerchantTransaction($pollResponse->getObjectReference());
+    if ($pollResponse->getStatus() == 'completed') {
+        $transactionResponse = retrieveMerchantTransaction(
+            $pollResponse->getObjectReference()
+        );
         prettyPrint($transactionResponse);
     }
-
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
 
-function pollRequest($serverCorrelationId){
+function pollRequest($serverCorrelationId)
+{
     $request = new PollRequest($serverCorrelationId);
     return $request->execute();
 }
 
-function retrieveMerchantTransaction($transactionReference){
-    $request = new RetrieveTransaction($transactionReference, new MerchantTransaction());
+function retrieveMerchantTransaction($transactionReference)
+{
+    $request = new RetrieveTransaction(
+        $transactionReference,
+        new MerchantTransaction()
+    );
     return $request->execute();
 }

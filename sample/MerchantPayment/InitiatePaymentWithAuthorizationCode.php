@@ -4,7 +4,6 @@ use mmpsdk\MerchantPayment\Models\MerchantTransaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
 
-
 $transaction = new MerchantTransaction();
 $transaction
     ->setAmount('26.00')
@@ -15,7 +14,7 @@ $transaction
 try {
     //Initiate Transaction
     $request = new InitiatePayment($transaction);
-    $response =  $request->execute();
+    $response = $request->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());
