@@ -32,7 +32,14 @@ class RetrievePayments extends BaseProcess
      */
     public function __construct($accountIdentifier, $filter = null)
     {
-        CommonUtil::validateArgument($accountIdentifier, 'accountIdentifier');
+        CommonUtil::validateArgument(
+            $accountIdentifier,
+            'accountIdentifier',
+            'array'
+        );
+        if ($filter) {
+            CommonUtil::validateArgument($filter, 'filter', 'array');
+        }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier

@@ -6,16 +6,16 @@ use mmpsdk\MerchantPayment\Process\InitiatePayment;
 
 $transaction = new MerchantTransaction();
 $transaction
-    ->setAmount('16.00')
+    ->setAmount('26.00')
     ->setCurrency('USD')
     ->setCreditParty(['walletid' => '1'])
-    ->setDebitParty(['msisdn' => '+44012345678']);
-
+    ->setDebitParty(['msisdn' => '+44012345678'])
+    ->setOneTimeCode('09206469-1ab4-4941-8c2c-12a0084571e3');
 try {
+    //Initiate Transaction
     $request = new InitiatePayment($transaction);
-    prettyPrint($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
