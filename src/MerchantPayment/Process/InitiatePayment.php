@@ -41,7 +41,7 @@ class InitiatePayment extends BaseProcess
             $merchantTransaction,
             'merchantTransaction'
         );
-        $validator = new TransactionValidator($merchantTransaction);
+        // $validator = new TransactionValidator($merchantTransaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->merchantTransaction = $merchantTransaction;
         return $this;
