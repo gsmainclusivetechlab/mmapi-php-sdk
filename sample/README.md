@@ -29,7 +29,7 @@ e.g.
 
 **NOTE : callback_url in config.ini is optional. Callback urls can also be passed as a parameter when calling the methods.**
 
--   Run the individual test code by name. For example:
+-   Run the individual test code by file. For example:
 
 ```
 php sample/MerchantPayment/InitiatePayment.php
