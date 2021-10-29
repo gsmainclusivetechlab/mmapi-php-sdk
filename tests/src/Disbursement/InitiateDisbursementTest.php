@@ -16,7 +16,10 @@ class InitiateDisbursementTest extends ProcessTestCase
             ->setCurrency('RWF')
             ->setCreditParty(['accountid' => '2999'])
             ->setDebitParty(['accountid' => '2999']);
-        $this->constructorArgs = [$disbursementTransaction, 'http://example.com/'];
+        $this->constructorArgs = [
+            $disbursementTransaction,
+            'http://example.com/'
+        ];
         $this->requestMethod = 'POST';
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/transactions/type/disbursement';
