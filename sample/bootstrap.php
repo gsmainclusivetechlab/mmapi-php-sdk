@@ -1,8 +1,8 @@
 <?php
-//Load the AutoLoader
+//Load the Autoloader
 include dirname(__DIR__, 1) . '/AutoLoader.php';
 
-//Load the Packages
+//Load the sdk packages
 $loader = new AutoLoader\AutoLoader();
 $loader->load(dirname(__DIR__, 1));
 
