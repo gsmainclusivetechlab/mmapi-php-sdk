@@ -15,8 +15,7 @@ $accountIdentifier = [
 try {
     $request = new CreateAuthorisationCode(
         $accountIdentifier,
-        $authorisationObj,
-        null
+        $authorisationObj
     );
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
