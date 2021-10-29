@@ -5,14 +5,14 @@ The sample test codes are all completely independent and self-contained. You can
 -   Clone this repository:
 
 ```
-    $ git clone https://github.com/gsmainclusivetechlab/mmapi-php-sdk
-    $ cd mmapi-php-sdk
+git clone https://github.com/gsmainclusivetechlab/mmapi-php-sdk
+cd mmapi-php-sdk
 ```
 
 -   Create config.ini file for API credentials:
 
 ```
-    $ cp sample/config-sample.ini sample/config.ini
+cp sample/config-sample.ini sample/config.ini
 ```
 
 -   Set the API credentials in the config.ini file:
@@ -32,5 +32,5 @@ e.g.
 -   Run the individual test code by name. For example:
 
 ```
-    $ php sample/MerchantPayment/InitiatePayment.php
+php sample/MerchantPayment/InitiatePayment.php
 ```
