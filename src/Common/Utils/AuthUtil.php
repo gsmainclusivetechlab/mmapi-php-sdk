@@ -8,7 +8,7 @@ use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Constants\Header;
-use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Models\AuthToken;
 use mmpsdk\Common\Utils\EncDecUtil;
 use mmpsdk\Common\Process\AccessToken;
@@ -25,6 +25,7 @@ class AuthUtil
                 break;
 
             case SecurityLevel::DEVELOPMENT:
+                self::validateCredentials();
                 $request->httpHeader(
                     Header::X_API_KEY,
                     MobileMoney::getApiKey()
@@ -40,13 +41,14 @@ class AuthUtil
                 break;
 
             case SecurityLevel::STANDARD:
-                $request->httpHeader(
-                    Header::X_API_KEY,
-                    MobileMoney::getApiKey()
-                );
+                self::validateCredentials();
                 $accessToken = self::getAccessToken(
                     MobileMoney::getConsumerKey(),
                     MobileMoney::getConsumerSecret(),
+                    MobileMoney::getApiKey()
+                );
+                $request->httpHeader(
+                    Header::X_API_KEY,
                     MobileMoney::getApiKey()
                 );
                 $request->httpHeader(
@@ -101,9 +103,6 @@ class AuthUtil
 
     public static function getAccessToken($consumerKey, $secretKey, $apiKey)
     {
-        CommonUtil::validateArgument($consumerKey, 'consumerKey');
-        CommonUtil::validateArgument($secretKey, 'consumerSecret');
-        CommonUtil::validateArgument($apiKey, 'apiKey');
         // Check if we already have accessToken in memory
         $token = self::getAccessTokenFromMemory();
         if ($token && self::checkExpiredToken($token)) {
@@ -131,5 +130,30 @@ class AuthUtil
     public static function getAccessTokenFromMemory()
     {
         return MobileMoney::getAccessToken();
+    }
+
+    public static function validateCredentials(){
+        switch (MobileMoney::getSecurityLevel()) {
+            case SecurityLevel::NONE:
+                return true;
+                break;
+            case SecurityLevel::DEVELOPMENT:
+            case SecurityLevel::STANDARD:
+                CommonUtil::validateArgument(MobileMoney::getConsumerKey(), 'consumerKey', 'string');
+                CommonUtil::validateArgument(MobileMoney::getConsumerSecret(), 'consumerSecret', 'string');
+                CommonUtil::validateArgument(MobileMoney::getApiKey(), 'apiKey', 'string');
+                return true;
+                break;
+
+            case SecurityLevel::ENHANCED:
+                //TBD
+                return true;
+                break;
+            default:
+                throw new Exception(
+                    'Undefined security level:' .
+                        MobileMoney::getSecurityLevel()
+                );
+        }
     }
 }

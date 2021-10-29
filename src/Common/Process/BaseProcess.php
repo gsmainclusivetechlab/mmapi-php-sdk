@@ -2,8 +2,8 @@
 
 namespace mmpsdk\Common\Process;
 
-use Exception;
 use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Utils\AuthUtil;
 use mmpsdk\Common\Utils\GUID;
 use mmpsdk\Common\Utils\ResponseUtil;
 
@@ -51,6 +51,7 @@ abstract class BaseProcess
 
     protected function setUp($processType, $callBackUrl = null)
     {
+        AuthUtil::validateCredentials();
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();

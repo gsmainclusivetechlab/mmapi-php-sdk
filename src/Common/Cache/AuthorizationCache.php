@@ -44,7 +44,7 @@ abstract class AuthorizationCache
                 }
             }
         }
-        return new AuthToken($tokens);
+        return $tokens;
     }
 
     /**

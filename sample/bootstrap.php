@@ -14,7 +14,7 @@ use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdk\Common\Exceptions\SDKException;
 
 //Initialize SDK
-try{
+try {
     MobileMoney::initialize(
         MobileMoney::PRODUCTION,
         $ini['consumer_key'],
@@ -23,10 +23,11 @@ try{
     );
     MobileMoney::setCallbackUrl($ini['callback_url']);
     MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
-} catch (SDKException $exception){
-    print_r($exception->getMessage());
+} catch (SDKException $exception) {
+    prettyPrint($exception->getMessage());
 }
 
-function prettyPrint($data){
-    echo PHP_EOL.print_r($data, true).PHP_EOL;
+function prettyPrint($data)
+{
+    echo PHP_EOL . print_r($data, true) . PHP_EOL;
 }

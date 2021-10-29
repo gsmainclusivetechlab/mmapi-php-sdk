@@ -37,17 +37,17 @@ class MobileMoney
     /**
      * @var string
      */
-    private static $consumerKey;
+    private static $consumerKey = null;
 
     /**
      * @var string
      */
-    private static $consumerSecret;
+    private static $consumerSecret = null;
 
     /**
      * @var string
      */
-    private static $apiKey;
+    private static $apiKey = null;
 
     /**
      * @var string
@@ -79,11 +79,12 @@ class MobileMoney
     private static $baseUrl = 'https://sandbox.mobilemoneyapi.io/simulator/v1.2/passthrough/mm';
 
     /**
-     * @param string $environment
-     * @param string $consumerKey
-     * @param string $consumerSecret
-     * @param string $callbackUrl
-     * @param string (SecurityLevel) $securityLevel
+     * Initialize SDK
+     *
+     * @param string $environment SANDBOX or PRODUCTION
+     * @param string $consumerKey  pre-shared client's consumer key
+     * @param string $consumerSecret pre-shared client's secret key
+     * @param string $apiKey pre-shared client's api key
      * @throws Exception
      */
     public static function initialize(
@@ -99,10 +100,20 @@ class MobileMoney
             self::setConsumerSecret($consumerSecret);
             self::setApiKey($apiKey);
         }
-        if(self::$environment == self::PRODUCTION){
-            CommonUtil::validateArgument(self::getConsumerKey(), 'consumerKey');
-            CommonUtil::validateArgument(self::getConsumerSecret(), 'consumerSecret');
-            CommonUtil::validateArgument(self::getApiKey(), 'apiKey');
+        if (
+            self::$environment == self::PRODUCTION &&
+            in_array(self::getSecurityLevel(), [
+                SecurityLevel::DEVELOPMENT,
+                SecurityLevel::STANDARD
+            ])
+        ) {
+            CommonUtil::validateArgument(self::getConsumerKey(), 'consumerKey', 'string');
+            CommonUtil::validateArgument(
+                self::getConsumerSecret(),
+                'consumerSecret',
+                'string'
+            );
+            CommonUtil::validateArgument(self::getApiKey(), 'apiKey', 'string');
         }
     }
 
@@ -211,6 +222,8 @@ class MobileMoney
     }
 
     /**
+     * Set pre-shared client's API key
+     *
      * @param string $apiKey
      */
     public static function setApiKey($apiKey)
@@ -227,6 +240,8 @@ class MobileMoney
     }
 
     /**
+     * Set the URL which should receive the Callback for asynchronous requests.
+     *
      * @param string $callbackUrl
      */
     public static function setCallbackUrl($callbackUrl)
