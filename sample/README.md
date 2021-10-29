@@ -5,7 +5,7 @@ The sample test codes are all completely independent and self-contained. You can
 -   Clone this repository:
 
 ```
-git clone https://github.com/gsmainclusivetechlab/mmapi-php-sdk
+git clone https://github.com/gsmainclusivetechlab/mmapi-php-sdk.git
 cd mmapi-php-sdk
 ```
 
