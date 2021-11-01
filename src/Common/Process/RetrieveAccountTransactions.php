@@ -1,18 +1,18 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 
 /**
- * Class RetrievePayments
- * @package mmpsdk\MerchantPayment\Process
+ * Class RetrieveAccountTransactions
+ * @package mmpsdk\Common\Process
  */
-class RetrievePayments extends BaseProcess
+class RetrieveAccountTransactions extends BaseProcess
 {
     /**
      * Account Identifier Attributes
@@ -66,6 +66,6 @@ class RetrievePayments extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
-        return $this->parseResponse($response, new MerchantTransaction());
+        return $this->parseResponse($response, new Transaction());
     }
 }

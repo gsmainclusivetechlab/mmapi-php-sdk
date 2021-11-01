@@ -3,7 +3,6 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-use mmpsdk\MerchantPayment\Process\RetrievePayments;
 use mmpsdk\MerchantPayment\Process\ViewAuthorisationCode;
 
 class ViewAuthorisationCodeTest extends ProcessTestCase
