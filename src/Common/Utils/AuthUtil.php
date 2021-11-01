@@ -121,7 +121,6 @@ class AuthUtil
         if ($token == null) {
             // Get a new one by making calls to API
             $token = self::updateAccessToken($consumerKey, $secretKey, $apiKey);
-            AuthorizationCache::push($token, $apiKey);
         }
 
         return $token;
