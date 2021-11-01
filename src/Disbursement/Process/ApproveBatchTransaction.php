@@ -31,7 +31,7 @@ class ApproveBatchTransaction extends BaseProcess
     private $batchId;
 
     /**
-     * Make a disbursement to a mobile money customer.
+     * Approve a batch trandsaction.
      * Asynchronous payment flow is used with a final callback.
      *
      * @param BatchTransaction $batchTransaction

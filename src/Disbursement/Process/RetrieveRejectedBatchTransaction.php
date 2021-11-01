@@ -30,7 +30,7 @@ class RetrieveRejectedBatchTransaction extends BaseProcess
     private $filter;
 
     /**
-     * Gets all completed transactions for a given batch.
+     * Gets all rejected transactions for a given batch.
      *
      * @param string $batchId
      * @param array $filter

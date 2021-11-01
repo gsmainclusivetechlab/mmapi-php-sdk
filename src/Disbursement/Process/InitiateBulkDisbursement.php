@@ -27,7 +27,7 @@ class InitiateBulkDisbursement extends BaseProcess
     private $batchTransaction;
 
     /**
-     * Make a disbursement to a mobile money customer.
+     * Make a bulk disbursement.
      * Asynchronous payment flow is used with a final callback.
      *
      * @param BatchTransaction $batchTransaction
