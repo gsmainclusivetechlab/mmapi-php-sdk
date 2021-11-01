@@ -21,7 +21,6 @@ class AccountBalanceTest extends ProcessTestCase
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
             '/accounts/accountid@2000/balance?limit=2';
-        $this->requestParams = $this->filter;
         $this->className = AccountBalance::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,
