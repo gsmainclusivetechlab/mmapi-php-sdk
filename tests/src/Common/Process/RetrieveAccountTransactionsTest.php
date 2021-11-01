@@ -3,9 +3,9 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-use mmpsdk\MerchantPayment\Process\RetrievePayments;
+use mmpsdk\Common\Process\RetrieveAccountTransactions;
 
-class RetrievePaymentsTest extends ProcessTestCase
+class RetrieveAccountTransactionsTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
@@ -20,7 +20,7 @@ class RetrievePaymentsTest extends ProcessTestCase
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
             '/accounts/accountid@2000/transactions?offset=0&limit=10';
-        $this->className = RetrievePayments::class;
+        $this->className = RetrieveAccountTransactions::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,
             $this->constructorArgs
