@@ -1,20 +1,19 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Models;
+namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Utils\CommonUtil;
-use mmpsdk\MerchantPayment\Enums\TransactionType;
 
 /**
  * Class Reversal
- * @package mmpsdk\MerchantPayment\Models
+ * @package mmpsdk\Common\Models
  */
 class Reversal extends Transaction
 {
     public function __construct()
     {
-        $this->type = TransactionType::REVERSAL;
+        $this->type = 'reversal';
     }
 
     public function jsonSerialize()
