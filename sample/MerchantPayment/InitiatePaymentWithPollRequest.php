@@ -5,7 +5,6 @@ use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
 use mmpsdk\Common\Process\PollRequest;
 use mmpsdk\Common\Process\RetrieveTransaction;
-use mmpsdk\MerchantPayment\Process\RetrievePayments;
 
 $transaction = new MerchantTransaction();
 $transaction
