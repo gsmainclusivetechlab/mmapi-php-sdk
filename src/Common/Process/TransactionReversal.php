@@ -1,21 +1,20 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
-use mmpsdk\MerchantPayment\Validation\ReversalValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Models\Reversal;
+use mmpsdk\Common\Models\Reversal;
 
 /**
- * Class PaymentReversal
- * @package mmpsdk\MerchantPayment\Process
+ * Class TransactionReversal
+ * @package mmpsdk\Common\Process
  */
-class PaymentReversal extends BaseProcess
+class TransactionReversal extends BaseProcess
 {
     private $transactionReference;
 
