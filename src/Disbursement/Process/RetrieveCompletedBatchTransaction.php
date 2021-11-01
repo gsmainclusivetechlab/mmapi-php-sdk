@@ -23,28 +23,42 @@ class RetrieveCompletedBatchTransaction extends BaseProcess
     private $batchId;
 
     /**
+     * Filters
+     *
+     * @var array
+     */
+    private $filter;
+
+    /**
      * Gets all completed transactions for a given batch.
      *
      * @param string $batchId
+     * @param array $filter
      * @return this
      */
     public function __construct(
-        $batchId
+        $batchId,
+        $filter = null
     ) {
         CommonUtil::validateArgument(
             $batchId,
             'batchId',
             'string'
         );
+        if ($filter) {
+            CommonUtil::validateArgument($filter, 'filter', 'array');
+        }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->batchId = $batchId;
+        $this->filter = $filter;
         return $this;
     }
 
     public function execute()
     {
         $request = RequestUtil::get(
-            API::VIEW_BATCH_COMPLETEIONS
+            API::VIEW_BATCH_COMPLETEIONS,
+            $this->filter
         )
             ->setUrlParams([
                 '{batchId}' => $this->batchId
