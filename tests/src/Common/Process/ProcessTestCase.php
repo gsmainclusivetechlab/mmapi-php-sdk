@@ -91,9 +91,9 @@ abstract class ProcessTestCase extends TestCase
                         'URL must be: ' . $this->requestUrl
                     );
                     if ($this->requestParams) {
-                        $this->assertArraySubset(
-                            $this->requestParams,
-                            $requestObj['params'],
+                        $this->assertEqualsCanonicalizing(
+                            $this->requestParams[0],
+                            $requestObj['params'][0],
                             'Params must be: ' .
                                 implode(',', $this->requestParams)
                         );
