@@ -36,6 +36,7 @@ class DisbursementTransaction extends Transaction
             'descriptionText' => $this->descriptionText,
             'fees' => $this->fees,
             'geoCode' => $this->geoCode,
+            'type' => $this->type,
             'oneTimeCode' => $this->oneTimeCode,
             'requestingOrganisation' => $this->requestingOrganisation,
             'servicingIdentity' => $this->servicingIdentity,
