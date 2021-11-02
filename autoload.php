@@ -4,16 +4,15 @@ namespace AutoLoader;
 
 class AutoLoader
 {
-    public $dir;
+    public $dir = __DIR__;
 
     public function getComposerFile()
     {
         return json_decode(file_get_contents($this->dir . '/composer.json'), 1);
     }
 
-    public function load($dir)
+    public function load()
     {
-        $this->dir = $dir;
         $composer = $this->getComposerFile();
         if (isset($composer['autoload']['psr-4'])) {
             $this->loadPSR4($composer['autoload']['psr-4']);
@@ -82,3 +81,6 @@ class AutoLoader
         }
     }
 }
+
+$loader = new AutoLoader();
+$loader->load();

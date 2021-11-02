@@ -1,10 +1,6 @@
 <?php
-//Load the Autoloader
-include dirname(__DIR__, 1) . '/AutoLoader.php';
-
-//Load the sdk packages
-$loader = new AutoLoader\AutoLoader();
-$loader->load(dirname(__DIR__, 1));
+//require the autoload file
+require dirname(__DIR__, 1) . '/autoload.php';
 
 //Parse the config file
 $ini = parse_ini_file(__DIR__ . '/config.ini');
