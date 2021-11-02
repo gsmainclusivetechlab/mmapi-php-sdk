@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Models\Fee;
 use mmpsdk\Common\Models\RequestingOrganisation;
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 use PHPUnit\Framework\TestCase;
 
 class MerchantTransactionModelTest extends TestCase
@@ -11,7 +11,7 @@ class MerchantTransactionModelTest extends TestCase
 
     public function testCheckObjectHydration()
     {
-        $merchantTransaction = new MerchantTransaction();
+        $merchantTransaction = new Transaction();
         $hydratedObj = $merchantTransaction->hydrate(
             json_decode($this->jsonData)
         );
