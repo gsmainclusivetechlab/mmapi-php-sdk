@@ -40,7 +40,7 @@ require 'vendor/autoload.php';
 
 ## Using the Test Scripts
 
-You can find details on how to run the sample code [here](sample/README.md)
+You can find details on how to run the sample code [here](sample/)
 
 ## Building & Testing the SDK
 
