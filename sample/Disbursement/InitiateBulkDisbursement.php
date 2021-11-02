@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\Disbursement\Models\DisbursementTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Process\InitiateBulkDisbursement;
 
 $batchTransaction = new BatchTransaction();
@@ -12,8 +12,8 @@ $batchTransaction = new BatchTransaction();
             ->setScheduledStartDate('2019-12-11T15:08:03.158Z');
 
         $transactionsArray = [];
-        $transactionItem1 = new DisbursementTransaction();
-        $transactionItem2 = new DisbursementTransaction();
+        $transactionItem1 = new Transaction();
+        $transactionItem2 = new Transaction();
         $transactionItem1
             ->setCreditParty(['accountid' => '2000'])
             ->setDebitParty(['accountid' => '2999'])

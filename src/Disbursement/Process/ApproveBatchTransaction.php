@@ -7,6 +7,7 @@ use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Models\GenericPatchRequest;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 
@@ -40,13 +41,15 @@ class ApproveBatchTransaction extends BaseProcess
      */
     public function __construct(
         $batchId,
-        BatchTransaction $batchTransaction,
         $callBackUrl = false
     ) {
-        CommonUtil::validateArgument($batchTransaction, 'batchTransaction');
         CommonUtil::validateArgument($batchId, 'batchId', 'string');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $this->batchTransaction = $batchTransaction;
+        $patchRequest = new GenericPatchRequest();
+        $patchRequest->setOp(GenericPatchRequest::REPLACE)
+            ->setPath('/status')
+            ->setValue('approved');
+        $this->batchTransaction = array($patchRequest);
         $this->batchId = $batchId;
         return $this;
     }

@@ -5,11 +5,8 @@ use mmpsdk\Disbursement\Enums\BatchStatus;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Disbursement\Process\ApproveBatchTransaction;
 
-$batchTransaction = new BatchTransaction();
-$batchTransaction->setBatchStatus(BatchStatus::APPROVED);
-
 try {
-    $request = new ApproveBatchTransaction('REF-1635759965384', $batchTransaction);
+    $request = new ApproveBatchTransaction('REF-1635759965384');
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

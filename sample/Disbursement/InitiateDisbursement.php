@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\Disbursement\Models\DisbursementTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Process\InitiateDisbursement;
 
-$transaction = new DisbursementTransaction();
+$transaction = new Transaction();
 $transaction
     ->setAmount('36.00')
     ->setCurrency('USD')

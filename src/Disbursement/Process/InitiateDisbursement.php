@@ -2,64 +2,14 @@
 
 namespace mmpsdk\Disbursement\Process;
 
-use mmpsdk\Common\Models\RequestState;
-use mmpsdk\Common\Utils\RequestUtil;
-
-use mmpsdk\Common\Utils\CommonUtil;
-use mmpsdk\Common\Constants\Header;
-use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\Disbursement\Models\DisbursementTransaction;
+use mmpsdk\Common\Process\InitiateTransaction;
+use mmpsdk\Disbursement\Enums\DisbursementTransactionType;
 
 /**
  * Class InitiateDisbursement
- * @package mmpsdk\MerchantPayment\Process
+ * @package mmpsdk\Disbursement\Process
  */
-class InitiateDisbursement extends BaseProcess
+class InitiateDisbursement extends InitiateTransaction
 {
-    /**
-     * Merchant Transaction object
-     *
-     * @var DisbursementTransaction
-     */
-    private $disbursementTransaction;
-
-    /**
-     * Make a disbursement to a mobile money customer.
-     * Asynchronous payment flow is used with a final callback.
-     *
-     * @param DisbursementTransaction $disbursementTransaction
-     * @param string $callBackUrl
-     * @return this
-     */
-    public function __construct(
-        DisbursementTransaction $disbursementTransaction,
-        $callBackUrl = false
-    ) {
-        CommonUtil::validateArgument(
-            $disbursementTransaction,
-            'disbursementTransaction'
-        );
-        // $validator = new TransactionValidator($merchantTransaction);
-        $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $this->disbursementTransaction = $disbursementTransaction;
-        return $this;
-    }
-
-    public function execute()
-    {
-        $request = RequestUtil::post(
-            API::CREATE_TRANSACTION,
-            json_encode($this->disbursementTransaction)
-        )
-            ->setUrlParams([
-                '{transactionType}' => $this->disbursementTransaction->getType()
-            ])
-            ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
-            ->build();
-
-        $response = $this->makeRequest($request);
-        return $this->parseResponse($response, new RequestState());
-    }
+   protected $transactionType = DisbursementTransactionType::DISBURSEMENT;
 }

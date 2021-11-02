@@ -10,7 +10,7 @@ use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\Disbursement\Models\DisbursementTransaction;
+use mmpsdk\Common\Models\Transaction;
 
 /**
  * Class RetrieveBatchTransaction

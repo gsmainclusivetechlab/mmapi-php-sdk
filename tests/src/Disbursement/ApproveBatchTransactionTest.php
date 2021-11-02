@@ -11,16 +11,14 @@ class ApproveBatchTransactionTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
-        $batchTransaction = new BatchTransaction();
-        $batchTransaction->setBatchStatus(BatchStatus::APPROVED);
 
         $batchId = 'ABC123';
 
-        $this->constructorArgs = [$batchId, $batchTransaction, 'http://example.com/'];
+        $this->constructorArgs = [$batchId, 'http://example.com/'];
         $this->requestMethod = 'PATCH';
         $this->requestUrl = MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId;
         $this->requestParams = [
-            '{"batchStatus": "approved"}'
+            '[{"op":"replace","value":"approved","path":"/status"}]'
         ];
         $this->className = ApproveBatchTransaction::class;
         $this->requestOptions = ['X-Callback-URL: http://example.com/'];

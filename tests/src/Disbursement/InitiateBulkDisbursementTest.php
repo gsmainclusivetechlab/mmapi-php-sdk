@@ -3,7 +3,7 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\Disbursement\Models\DisbursementTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Process\InitiateBulkDisbursement;
 use mmpsdk\Disbursement\Process\InitiateDisbursement;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
@@ -19,8 +19,8 @@ class InitiateBulkDisbursementTest extends ProcessTestCase
             ->setScheduledStartDate('2019-12-11T15:08:03.158Z');
 
         $transactionsArray = [];
-        $transactionItem1 = new DisbursementTransaction();
-        $transactionItem2 = new DisbursementTransaction();
+        $transactionItem1 = new Transaction();
+        $transactionItem2 = new Transaction();
         $transactionItem1
             ->setCreditParty(['accountid' => '2000'])
             ->setDebitParty(['accountid' => '2999'])
