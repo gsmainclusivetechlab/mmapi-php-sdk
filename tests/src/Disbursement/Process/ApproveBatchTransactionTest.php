@@ -18,7 +18,7 @@ class ApproveBatchTransactionTest extends ProcessTestCase
         $this->requestMethod = 'PATCH';
         $this->requestUrl = MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId;
         $this->requestParams = [
-            '[{"op":"replace","value":"approved","path":"/status"}]'
+            '[{"op":"replace","value":"approved","path":"/batchStatus"}]'
         ];
         $this->className = ApproveBatchTransaction::class;
         $this->requestOptions = ['X-Callback-URL: http://example.com/'];
