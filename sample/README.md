@@ -27,7 +27,7 @@ e.g.
     callback_url = <your_callback_url_here>
 ```
 
--   Run the individual test code by file. For example:
+-   Run each sample directly from the command line. For example:
 
 ```
 php sample/MerchantPayment/InitiatePayment.php
