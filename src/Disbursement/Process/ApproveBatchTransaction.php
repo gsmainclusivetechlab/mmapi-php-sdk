@@ -47,7 +47,7 @@ class ApproveBatchTransaction extends BaseProcess
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $patchRequest = new GenericPatchRequest();
         $patchRequest->setOp(GenericPatchRequest::REPLACE)
-            ->setPath('/status')
+            ->setPath('/batchStatus')
             ->setValue('approved');
         $this->batchTransaction = array($patchRequest);
         $this->batchId = $batchId;
@@ -68,6 +68,7 @@ class ApproveBatchTransaction extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
+        print_r($response);
         return $this->parseResponse($response, new RequestState());
     }
 }
