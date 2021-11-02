@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
 
-$transaction = new MerchantTransaction();
+$transaction = new Transaction();
 $transaction
     ->setAmount('16.00')
     ->setCurrency('USD')

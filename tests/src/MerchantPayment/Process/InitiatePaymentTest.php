@@ -6,14 +6,14 @@ use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
 
 class InitiatePaymentTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
-        $transaction = new MerchantTransaction();
+        $transaction = new Transaction();
         $transaction
             ->setAmount('200.00')
             ->setCurrency('RWF')

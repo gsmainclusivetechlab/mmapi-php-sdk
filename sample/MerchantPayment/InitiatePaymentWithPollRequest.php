@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
 use mmpsdk\Common\Process\PollRequest;
 use mmpsdk\Common\Process\RetrieveTransaction;
 
-$transaction = new MerchantTransaction();
+$transaction = new Transaction();
 $transaction
     ->setAmount('36.00')
     ->setCurrency('USD')
@@ -46,7 +46,7 @@ function retrieveMerchantTransaction($transactionReference)
 {
     $request = new RetrieveTransaction(
         $transactionReference,
-        new MerchantTransaction()
+        new Transaction()
     );
     return $request->execute();
 }
