@@ -59,5 +59,7 @@ class Header
         /**
          * Contains an authentication credential of the end user (e.g. PIN, Password). Can be used when a second credential is required.
          */
-        X_USER_CREDENTIAL_2 = 'X-User-Credential-2';
+        X_USER_CREDENTIAL_2 = 'X-User-Credential-2',
+        X_Records_Available_Count = 'X-Records-Available-Count',
+        X_Records_Returned_Count = 'X-Records-Returned-Count';
 }
