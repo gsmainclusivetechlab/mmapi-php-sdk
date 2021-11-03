@@ -24,7 +24,7 @@ class ServiceAvailability extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(API::HEARTBEAT);
+        $request = RequestUtil::get(API::HEARTBEAT)->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response);
     }

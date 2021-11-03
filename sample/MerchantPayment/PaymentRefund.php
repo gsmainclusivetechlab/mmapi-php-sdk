@@ -1,9 +1,10 @@
 <?php
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+require_once __DIR__ . './../bootstrap.php';
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\PaymentRefund;
 
-$transaction = new MerchantTransaction();
+$transaction = new Transaction();
 $transaction
     ->setAmount('200.00')
     ->setCurrency('RWF')
@@ -12,9 +13,9 @@ $transaction
 
 try {
     $request = new PaymentRefund($transaction);
-    print_r($request->getClientCorrelationId());
+    prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
-    print_r($repsonse);
+    prettyPrint($repsonse);
 } catch (SDKException $ex) {
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getErrorObj());
 }

@@ -1,20 +1,18 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
-
-use mmpsdk\Common\Utils\ResponseUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
+use mmpsdk\Common\Models\Transaction;
 
 /**
- * Class RetrievePayments
- * @package mmpsdk\MerchantPayment\Process
+ * Class RetrieveAccountTransactions
+ * @package mmpsdk\Common\Process
  */
-class RetrievePayments extends BaseProcess
+class RetrieveAccountTransactions extends BaseProcess
 {
     /**
      * Account Identifier Attributes
@@ -34,6 +32,14 @@ class RetrievePayments extends BaseProcess
      */
     public function __construct($accountIdentifier, $filter = null)
     {
+        CommonUtil::validateArgument(
+            $accountIdentifier,
+            'accountIdentifier',
+            'array'
+        );
+        if ($filter) {
+            CommonUtil::validateArgument($filter, 'filter', 'array');
+        }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
@@ -51,13 +57,15 @@ class RetrievePayments extends BaseProcess
         $request = RequestUtil::get(
             API::VIEW_ACCOUNT_TRANSACTIONS,
             $this->filter
-        )->setUrlParams([
-            '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                $this->accountIdentifier
-            )
-        ]);
+        )
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $this->accountIdentifier
+                )
+            ])
+            ->build();
 
         $response = $this->makeRequest($request);
-        return $this->parseResponse($response, new MerchantTransaction());
+        return $this->parseResponse($response, new Transaction());
     }
 }

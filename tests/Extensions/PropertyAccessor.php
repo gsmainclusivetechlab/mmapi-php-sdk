@@ -3,6 +3,7 @@
 namespace mmpsdkTest\Extensions;
 
 use ReflectionClass;
+use mmpsdk\Common\Utils\RequestUtil;
 
 class PropertyAccessor
 {
@@ -20,5 +21,22 @@ class PropertyAccessor
         $property->setAccessible(true);
 
         return $property;
+    }
+
+    public static function getRequestProperties($request)
+    {
+        $method = self::getProperty(RequestUtil::class, '_method');
+        $url = self::getProperty(RequestUtil::class, '_url');
+        $params = self::getProperty(RequestUtil::class, '_params');
+        $options = self::getProperty(RequestUtil::class, '_options');
+        $curlHandle = self::getProperty(RequestUtil::class, '_curlHandle');
+        return [
+            'method' => $method->getValue($request),
+            'url' => curl_getinfo($curlHandle->getValue($request))['url'],
+            'params' => $params->getValue($request),
+            'options' => isset($options->getValue($request)[CURLOPT_HTTPHEADER])
+                ? $options->getValue($request)[CURLOPT_HTTPHEADER]
+                : $options->getValue($request)
+        ];
     }
 }

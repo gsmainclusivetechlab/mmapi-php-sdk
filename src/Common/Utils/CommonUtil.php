@@ -2,7 +2,6 @@
 
 namespace mmpsdk\Common\Utils;
 
-use Exception;
 use stdClass;
 
 /**
@@ -29,7 +28,9 @@ class CommonUtil
     public static function encodeSupportObjectToString($data)
     {
         if (!is_array($data)) {
-            throw new Exception('Provided value is not an array');
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                'Array required ' . gettype($data) . ' given.'
+            );
         }
         $stringArray = [];
         foreach ($data as $item) {
@@ -37,5 +38,35 @@ class CommonUtil
                 urlencode($item->key) . '@' . urlencode($item->value);
         }
         return implode('$', $stringArray);
+    }
+
+    public static function validateArgument(
+        $argument,
+        $argumentName,
+        $requiredType = null
+    ) {
+        if ($requiredType && $requiredType !== gettype($argument)) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                "$argumentName: $requiredType required " .
+                    gettype($argument) .
+                    ' given.'
+            );
+        } elseif ($argument === null) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                "$argumentName cannot be null"
+            );
+        } elseif (gettype($argument) == 'string' && trim($argument) == '') {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                "$argumentName string cannot be empty"
+            );
+        } elseif (
+            gettype($argument) == 'array' &&
+            (in_array(null, $argument, true) || in_array('', $argument, true))
+        ) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                "$argumentName cannot contain null or empty string"
+            );
+        }
+        return true;
     }
 }

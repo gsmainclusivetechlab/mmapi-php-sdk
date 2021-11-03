@@ -38,7 +38,13 @@ class CreateAuthorisationCode extends BaseProcess
         AuthorisationCode $authorisationCode,
         $callBackUrl = false
     ) {
-        $validator = new AuthorisationCodeValidator($authorisationCode);
+        CommonUtil::validateArgument(
+            $accountIdentifier,
+            'accountIdentifier',
+            'array'
+        );
+        CommonUtil::validateArgument($authorisationCode, 'authorisationCode');
+        // $validator = new AuthorisationCodeValidator($authorisationCode);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
@@ -62,7 +68,8 @@ class CreateAuthorisationCode extends BaseProcess
                 )
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
+            ->build();
 
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new RequestState());

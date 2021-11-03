@@ -35,22 +35,12 @@ class ResponseUtil
             case self::ACCEPTED:
             case self::CREATED:
                 $decodedResponse = json_decode($response->result);
+                //Add client correlation id along with response
                 if ($response->clientCorrelationId) {
                     $decodedResponse->clientCorrelationId =
                         $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
-                    if (
-                        is_array($decodedResponse) &&
-                        !empty($decodedResponse)
-                    ) {
-                        $objectArray = [];
-                        foreach ($decodedResponse as $item) {
-                            $object = clone $obj;
-                            array_push($objectArray, $object->hydrate($item));
-                        }
-                        return $objectArray;
-                    }
                     return $obj->hydrate($decodedResponse);
                 } else {
                     return $decodedResponse;

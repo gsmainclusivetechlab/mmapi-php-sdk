@@ -33,6 +33,14 @@ class AccountBalance extends BaseProcess
      */
     public function __construct($accountIdentifier, $filter = null)
     {
+        CommonUtil::validateArgument(
+            $accountIdentifier,
+            'accountIdentifier',
+            'array'
+        );
+        if ($filter) {
+            CommonUtil::validateArgument($filter, 'filter', 'array');
+        }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
@@ -47,14 +55,13 @@ class AccountBalance extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::VIEW_ACCOUNT_BALANCE,
-            $this->filter
-        )->setUrlParams([
-            '{accountId}' => CommonUtil::encodeSupportObjectToString(
-                $this->accountIdentifier
-            )
-        ]);
+        $request = RequestUtil::get(API::VIEW_ACCOUNT_BALANCE, $this->filter)
+            ->setUrlParams([
+                '{accountId}' => CommonUtil::encodeSupportObjectToString(
+                    $this->accountIdentifier
+                )
+            ])
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new Balance());
     }

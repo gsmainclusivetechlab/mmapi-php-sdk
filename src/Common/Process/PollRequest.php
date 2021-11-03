@@ -5,7 +5,7 @@ namespace mmpsdk\Common\Process;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\RequestState;
-use mmpsdk\Common\Utils\ResponseUtil;
+use mmpsdk\Common\Utils\CommonUtil;
 
 class PollRequest extends BaseProcess
 {
@@ -17,6 +17,10 @@ class PollRequest extends BaseProcess
      */
     public function __construct($serverCorrelationId)
     {
+        CommonUtil::validateArgument(
+            $serverCorrelationId,
+            'serverCorrelationId'
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->serverCorrelationId = $serverCorrelationId;
         return $this;
@@ -28,9 +32,11 @@ class PollRequest extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(API::VIEW_REQUEST_STATE)->setUrlParams([
-            '{serverCorrelationId}' => $this->serverCorrelationId
-        ]);
+        $request = RequestUtil::get(API::VIEW_REQUEST_STATE)
+            ->setUrlParams([
+                '{serverCorrelationId}' => $this->serverCorrelationId
+            ])
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new RequestState());
     }

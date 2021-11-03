@@ -5,6 +5,7 @@ namespace mmpsdk\Common\Process;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Utils\EncDecUtil;
 
 class AccessToken extends BaseProcess
@@ -20,6 +21,8 @@ class AccessToken extends BaseProcess
      */
     public function __construct($consumerKey, $secretKey)
     {
+        CommonUtil::validateArgument($consumerKey, 'consumerKey');
+        CommonUtil::validateArgument($secretKey, 'secretKey');
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->consumerKey = $consumerKey;
         $this->secretKey = $secretKey;
@@ -42,7 +45,8 @@ class AccessToken extends BaseProcess
             ->httpHeader(
                 Header::CONTENT_TYPE,
                 'application/x-www-form-urlencoded'
-            );
+            )
+            ->build();
         $response = $this->makeRequest($request);
         return $this->parseResponse($response);
     }

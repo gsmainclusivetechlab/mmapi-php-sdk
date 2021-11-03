@@ -1,24 +1,20 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
-use Exception;
-use mmpsdk\MerchantPayment\Validation\ReversalValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
-use mmpsdk\Common\Utils\ResponseUtil;
-use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Enums\TransactionType;
-use mmpsdk\MerchantPayment\Models\Reversal;
+use mmpsdk\Common\Models\Reversal;
 
 /**
- * Class PaymentReversal
- * @package mmpsdk\MerchantPayment\Process
+ * Class TransactionReversal
+ * @package mmpsdk\Common\Process
  */
-class PaymentReversal extends BaseProcess
+class TransactionReversal extends BaseProcess
 {
     private $transactionReference;
 
@@ -37,13 +33,17 @@ class PaymentReversal extends BaseProcess
         Reversal $reversal = null,
         $callBackUrl = false
     ) {
-        $validator = new ReversalValidator($reversal);
+        CommonUtil::validateArgument(
+            $transactionReference,
+            'transactionReference'
+        );
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         if ($reversal == null) {
             $this->reversal = new Reversal();
         } else {
             $this->reversal = $reversal;
         }
+        // $validator = new ReversalValidator($this->reversal);
         $this->transactionReference = $transactionReference;
         return $this;
     }
@@ -58,7 +58,8 @@ class PaymentReversal extends BaseProcess
                 '{transactionReference}' => $this->transactionReference
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
-            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl);
+            ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
+            ->build();
 
         $response = $this->makeRequest($request);
         return $this->parseResponse($response, new RequestState());

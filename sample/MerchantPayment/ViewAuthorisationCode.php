@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\ViewAuthorisationCode;
 
@@ -13,7 +14,7 @@ try {
         $accountIdentifier,
         $filter
     ))->execute();
-    print_r($repsonse);
+    prettyPrint($repsonse);
 } catch (SDKException $ex) {
-    print_r($ex->getErrorObj());
+    prettyPrint($ex->getErrorObj());
 }

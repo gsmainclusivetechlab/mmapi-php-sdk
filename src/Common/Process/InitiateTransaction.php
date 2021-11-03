@@ -1,6 +1,6 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Models\RequestState;
@@ -10,48 +10,57 @@ use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Enums\TransactionType;
 
 /**
- * Class PaymentRefund
- * @package mmpsdk\MerchantPayment\Process
+ * Class InitiateTransaction
+ * @package mmpsdk\Common\Process
  */
-class PaymentRefund extends BaseProcess
+class InitiateTransaction extends BaseProcess
 {
-    private $merchantTransaction;
+    /**
+     * Transaction object
+     *
+     * @var Transaction
+     */
+    private $transaction;
 
     /**
-     * The merchant initiates the request for refund.
+     * Transaction type
+     *
+     * @var Transaction
+     */
+    protected $transactionType;
+
+    /**
+     * Initiates a Transaction Request.
      * Asynchronous payment flow is used with a final callback.
      *
-     * @param Transaction $merchantTransaction
+     * @param Transaction $transaction
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(
-        Transaction $merchantTransaction,
-        $callBackUrl = false
-    ) {
-        CommonUtil::validateArgument(
-            $merchantTransaction,
-            'merchantTransaction'
-        );
-        // $validator = new TransactionValidator($merchantTransaction);
+    public function __construct(Transaction $transaction, $callBackUrl = false)
+    {
+        CommonUtil::validateArgument($transaction, 'transaction');
+        // $validator = new TransactionValidator($transaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $this->merchantTransaction = $merchantTransaction;
+        $this->transaction = $transaction;
         return $this;
     }
 
     /**
-     * @return RequestState
+     *
+     * @return Transaction
      */
     public function execute()
     {
         $request = RequestUtil::post(
             API::CREATE_TRANSACTION,
-            json_encode($this->merchantTransaction)
+            json_encode($this->transaction)
         )
-            ->setUrlParams(['{transactionType}' => TransactionType::ADJUSTMENT])
+            ->setUrlParams([
+                '{transactionType}' => $this->transactionType
+            ])
             ->setClientCorrelationId($this->clientCorrelationId)
             ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->build();

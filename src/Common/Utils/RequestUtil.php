@@ -79,6 +79,13 @@ class RequestUtil
     protected $_clientCorrelationId = null;
 
     /**
+     * Curl Handle
+     *
+     * @var mixed
+     */
+    protected $_curlHandle = null;
+
+    /**
      * GET request
      *
      * @param   string  $url
@@ -324,7 +331,7 @@ class RequestUtil
      * @return  Curl
      * @throws  Exception
      */
-    public function call()
+    public function build()
     {
         // cURL is not enabled
         if (!$this->_isEnabled()) {
@@ -380,7 +387,7 @@ class RequestUtil
      */
     public function execute()
     {
-        return $this->call();
+        return $this->build();
     }
 
     /**
@@ -508,15 +515,16 @@ class RequestUtil
             curl_setopt_array($ch, $this->_options);
         }
 
+        $this->_curlHandle = $ch;
         // Execute
-        $response = new stdClass();
-        $response->result = curl_exec($ch);
-        $response->info = curl_getinfo($ch);
-        $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response->error = curl_error($ch);
-        $response->error_code = curl_errno($ch);
-        $response->clientCorrelationId = $this->_clientCorrelationId;
-        $response->requestObj = $this;
+        // $response = new stdClass();
+        // $response->result = curl_exec($ch);
+        // $response->info = curl_getinfo($ch);
+        // $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        // $response->error = curl_error($ch);
+        // $response->error_code = curl_errno($ch);
+        // $response->clientCorrelationId = $this->_clientCorrelationId;
+        // $response->requestObj = $this;
 
         // Reset the options
 
@@ -526,8 +534,23 @@ class RequestUtil
         // $this->_contentType = false;
 
         // Close cURL request
-        curl_close($ch);
+        // curl_close($ch);
 
+        return $this;
+    }
+
+    public function call()
+    {
+        $ch = $this->_curlHandle;
+        $response = new stdClass();
+        $response->result = curl_exec($ch);
+        $response->info = curl_getinfo($ch);
+        $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $response->error = curl_error($ch);
+        $response->error_code = curl_errno($ch);
+        $response->clientCorrelationId = $this->_clientCorrelationId;
+        $response->requestObj = $this;
+        curl_close($ch);
         return $response;
     }
 

@@ -4,12 +4,13 @@ namespace mmpsdk\Common\Utils;
 
 use Exception;
 use stdClass;
+use mmpsdk\Common\Exceptions\SDKException;
 
 /**
  * Class Validator
  * @package mmpsdk\Common\Utils
  */
-class Validator
+abstract class Validator
 {
     protected $objToValidate;
     private $validationErrors = [];
@@ -85,9 +86,7 @@ class Validator
         }
     }
 
-    public function validate()
-    {
-    }
+    abstract public function validate();
 
     /**
      * Add error to this object (to $this->validationErrors).
@@ -125,5 +124,18 @@ class Validator
             }
             return $formattedArray;
         }
+    }
+
+    public function throwValidationError($errors)
+    {
+        throw new SDKException(
+            'Validation Error',
+            SDKException::getnerateErrorObj(
+                'validation',
+                'formatError',
+                'Invalid JSON Field',
+                $errors
+            )
+        );
     }
 }

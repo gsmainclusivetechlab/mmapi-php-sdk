@@ -25,6 +25,7 @@ tools
 test.php
 bck
 sdk-test-config.ini
+sample/config.ini
 
 # Groc
 node_modules

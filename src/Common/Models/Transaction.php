@@ -4,6 +4,7 @@ namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\BaseModel;
 use mmpsdk\Common\Models\Fee;
+use mmpsdk\Common\Utils\CommonUtil;
 
 /**
  * Class Transaction
@@ -510,5 +511,42 @@ class Transaction extends BaseModel
     public function getMetadata()
     {
         return $this->metadata;
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->filterEmpty([
+            'requestingOrganisationTransactionReference' =>
+                $this->requestingOrganisationTransactionReference,
+            'originalTransactionReference' =>
+                $this->originalTransactionReference,
+            'subType' => $this->subType,
+            'amount' => $this->amount,
+            'currency' => $this->currency,
+            'creditParty' => CommonUtil::DeserializeToSupportObject(
+                $this->creditParty
+            ),
+            'debitParty' => CommonUtil::DeserializeToSupportObject(
+                $this->debitParty
+            ),
+            'descriptionText' => $this->descriptionText,
+            'fees' => $this->fees,
+            'geoCode' => $this->geoCode,
+            'oneTimeCode' => $this->oneTimeCode,
+            'requestingOrganisation' => $this->requestingOrganisation,
+            'servicingIdentity' => $this->servicingIdentity,
+            'requestDate' => $this->requestDate,
+            'customData' => $this->customData,
+            'metadata' => $this->metadata
+        ]);
+    }
+
+    public function hydratorStrategies()
+    {
+        $this->addHydratorStrategy(
+            'requestingOrganisation',
+            new RequestingOrganisation()
+        );
+        $this->addHydratorStrategy('fees', new Fee());
     }
 }
