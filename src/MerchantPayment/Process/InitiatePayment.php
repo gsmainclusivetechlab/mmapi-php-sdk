@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\MerchantPayment\Process;
+
 use mmpsdk\Common\Process\InitiateTransaction;
 use mmpsdk\MerchantPayment\Enums\TransactionType;
 

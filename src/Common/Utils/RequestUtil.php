@@ -487,6 +487,11 @@ class RequestUtil
             $this->option('CURLOPT_USERAGENT', $this->_agent);
         }
 
+        //enable headers
+        if (!array_key_exists(CURLOPT_HEADER, $this->_options)) {
+            $this->option('CURLOPT_HEADER', 1);
+        }
+
         // Only set follow location if not running securely
         if (!ini_get('safe_mode') && !ini_get('open_basedir')) {
             // Ok, follow location is not set already so lets set it to true
@@ -542,13 +547,16 @@ class RequestUtil
     public function call()
     {
         $ch = $this->_curlHandle;
+        $output = curl_exec($ch);
+        $outputData = $this->getResponseHeaders($output);
         $response = new stdClass();
-        $response->result = curl_exec($ch);
+        $response->result = $outputData['Data'];
         $response->info = curl_getinfo($ch);
         $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response->error = curl_error($ch);
         $response->error_code = curl_errno($ch);
         $response->clientCorrelationId = $this->_clientCorrelationId;
+        $response->headers = $outputData['Headers'];
         $response->requestObj = $this;
         curl_close($ch);
         return $response;
@@ -564,6 +572,34 @@ class RequestUtil
         foreach ((array) $options as $key => $value) {
             $this->_option($key, $value);
         }
+    }
+
+    protected function getResponseHeaders($response)
+    {
+        $lines = explode("\n", $response);
+        $out = [];
+        $headers = true;
+
+        foreach ($lines as $l) {
+            $l = trim($l);
+
+            if ($headers && !empty($l)) {
+                if (strpos($l, 'HTTP') !== false) {
+                    $p = explode(' ', $l);
+                    $out['Headers']['Status'] = trim($p[1]);
+                } else {
+                    $p = explode(':', $l);
+                    $out['Headers'][$p[0]] = trim($p[1]);
+                }
+            } elseif (!empty($l)) {
+                $out['Data'] = $l;
+            }
+
+            if (empty($l)) {
+                $headers = false;
+            }
+        }
+        return $out;
     }
 
     /**

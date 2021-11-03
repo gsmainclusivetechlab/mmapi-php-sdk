@@ -7,7 +7,10 @@ $accountIdentifier = ['accountid' => '2000'];
 $filter = ['limit' => 5];
 
 try {
-    $response = (new RetrieveAccountTransactions($accountIdentifier, $filter))->execute();
+    $response = (new RetrieveAccountTransactions(
+        $accountIdentifier,
+        $filter
+    ))->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());

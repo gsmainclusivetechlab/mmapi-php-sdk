@@ -2,7 +2,7 @@
 
 namespace mmpsdk\Common\Utils;
 
-use Exception;
+use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Constants\MobileMoney;
@@ -39,15 +39,26 @@ class ResponseUtil
                     return $decodedResponse;
                 }
                 //Add client correlation id along with response
+                $data = $decodedResponse;
                 if ($response->clientCorrelationId) {
-                    $decodedResponse->clientCorrelationId =
+                    $data->clientCorrelationId =
                         $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
-                    return $obj->hydrate($decodedResponse);
-                } else {
-                    return $decodedResponse;
+                    $count = 0;
+                    if (
+                        isset($response->headers) &&
+                        array_key_exists(
+                            Header::X_Records_Available_Count,
+                            $response->headers
+                        )
+                    ) {
+                        $count = $response->headers[Header::X_Records_Available_Count];
+
+                    }
+                    $data = $obj->hydrate($decodedResponse, null, $count);
                 }
+                return $data;
                 break;
 
             //Failed Responses

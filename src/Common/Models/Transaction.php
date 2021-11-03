@@ -3,7 +3,6 @@
 namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\BaseModel;
-use mmpsdk\Common\Models\Fee;
 use mmpsdk\Common\Utils\CommonUtil;
 
 /**
@@ -546,8 +545,8 @@ class Transaction extends BaseModel
     {
         $this->addHydratorStrategy(
             'requestingOrganisation',
-            new RequestingOrganisation()
+            new \mmpsdk\Common\Models\RequestingOrganisation()
         );
-        $this->addHydratorStrategy('fees', new Fee());
+        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fee());
     }
 }
