@@ -3,7 +3,7 @@
 namespace mmpsdk\Common\Constants;
 
 /**
- * Class Header
+ * Class API
  * @package mmpsdk\Common\Constants
  */
 class API

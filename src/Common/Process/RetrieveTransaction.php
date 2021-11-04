@@ -6,7 +6,6 @@ use mmpsdk\Common\Utils\RequestUtil;
 
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Models\Balance;
 use mmpsdk\Common\Process\BaseProcess;
 
 /**
