@@ -166,6 +166,21 @@ class Transaction extends BaseModel
     protected $metadata;
 
     /**
+     * @var KYCInformation
+     */
+    protected $senderKyc;
+
+    /**
+     * @var KYCInformation
+     */
+    protected $recipientKyc;
+
+    /**
+     * @var InternationalTransferInformation
+     */
+    protected $internationalTransferInformation;
+
+    /**
      * Sets unique reference for the transaction.
      *
      * @param string $transactionReference
@@ -512,6 +527,67 @@ class Transaction extends BaseModel
         return $this->metadata;
     }
 
+    /**
+     * @return KYCInformation|null
+     */
+    public function getSenderKyc()
+    {
+        return $this->senderKyc;
+    }
+
+    /**
+     * @param KYCInformation|null $senderKyc
+     *
+     * @return Transaction
+     */
+    public function setSenderKyc($senderKyc)
+    {
+        $this->senderKyc = $senderKyc;
+
+        return $this;
+    }
+
+    /**
+     * @return KYCInformation|null
+     */
+    public function getRecipientKyc()
+    {
+        return $this->recipientKyc;
+    }
+
+    /**
+     * @param KYCInformation|null $recipientKyc
+     *
+     * @return Transaction
+     */
+    public function setRecipientKyc($recipientKyc)
+    {
+        $this->recipientKyc = $recipientKyc;
+
+        return $this;
+    }
+
+    /**
+     * @return InternationalTransferInformation|null
+     */
+    public function getInternationalTransferInformation()
+    {
+        return $this->internationalTransferInformation;
+    }
+
+    /**
+     * @param InternationalTransferInformation|null $internationalTransferInformation
+     *
+     * @return Transaction
+     */
+    public function setInternationalTransferInformation(
+        $internationalTransferInformation
+    ) {
+        $this->internationalTransferInformation = $internationalTransferInformation;
+
+        return $this;
+    }
+
     public function jsonSerialize()
     {
         return $this->filterEmpty([
@@ -531,7 +607,11 @@ class Transaction extends BaseModel
             'descriptionText' => $this->descriptionText,
             'fees' => $this->fees,
             'geoCode' => $this->geoCode,
+            'internationalTransferInformation' =>
+                $this->internationalTransferInformation,
             'oneTimeCode' => $this->oneTimeCode,
+            'recipientKyc' => $this->recipientKyc,
+            'senderKyc' => $this->senderKyc,
             'requestingOrganisation' => $this->requestingOrganisation,
             'servicingIdentity' => $this->servicingIdentity,
             'requestDate' => $this->requestDate,
@@ -547,5 +627,23 @@ class Transaction extends BaseModel
             new \mmpsdk\Common\Models\RequestingOrganisation()
         );
         $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fee());
+        $this->addHydratorStrategy(
+            'senderKyc',
+            new \mmpsdk\Common\Models\KYCInformation()
+        );
+        $this->addHydratorStrategy(
+            'recipientKyc',
+            new \mmpsdk\Common\Models\KYCInformation()
+        );
+        if (
+            class_exists(
+                'mmpsdk\\InternationalTransfer\\Models\\InternationalTransferInformation'
+            )
+        ) {
+            $this->addHydratorStrategy(
+                'internationalTransferInformation',
+                new \mmpsdk\InternationalTransfer\Models\InternationalTransferInformation()
+            );
+        }
     }
 }

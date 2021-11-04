@@ -38,8 +38,7 @@ class ResponseUtil
                 //Add client correlation id along with response
                 $data = $decodedResponse;
                 if ($response->clientCorrelationId) {
-                    $data->clientCorrelationId =
-                        $response->clientCorrelationId;
+                    $data->clientCorrelationId = $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
                     $count = 0;
@@ -50,8 +49,10 @@ class ResponseUtil
                             $response->headers
                         )
                     ) {
-                        $count = $response->headers[Header::X_Records_Available_Count];
-
+                        $count =
+                            $response->headers[
+                                Header::X_Records_Available_Count
+                            ];
                     }
                     $data = $obj->hydrate($decodedResponse, null, $count);
                 }
@@ -72,7 +73,7 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    if(!isset($request->isAuthTokenRequest)){
+                    if (!isset($request->isAuthTokenRequest)) {
                         print_r('Refreshing Token...');
                         $authObj = AuthUtil::updateAccessToken(
                             MobileMoney::getConsumerKey(),
@@ -81,10 +82,12 @@ class ResponseUtil
                         );
                     }
                     $request->retryCount += 1;
-                    if($request->retryCount <= $request->retryLimit){
+                    if ($request->retryCount <= $request->retryLimit) {
                         return $request->execute();
                     } else {
-                        throw new SDKException(SDKException::MAX_RETRIES_EXCEEDED);
+                        throw new SDKException(
+                            SDKException::MAX_RETRIES_EXCEEDED
+                        );
                     }
                 }
                 break;
