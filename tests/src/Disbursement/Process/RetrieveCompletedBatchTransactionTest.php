@@ -10,12 +10,13 @@ class RetrieveCompletedBatchTransactionTest extends ProcessTestCase
     protected function setUp(): void
     {
         $batchId = 'ABC123';
-        $this->constructorArgs = [
-            $batchId
-        ];
+        $this->constructorArgs = [$batchId];
         $this->requestMethod = 'GET';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId . '/completions';
+            MobileMoney::getBaseUrl() .
+            '/batchtransactions/' .
+            $batchId .
+            '/completions';
         $this->className = RetrieveCompletedBatchTransaction::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

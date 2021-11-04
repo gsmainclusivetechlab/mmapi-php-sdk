@@ -2,15 +2,12 @@
 
 namespace mmpsdk\Disbursement\Process;
 
-use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 
 use mmpsdk\Common\Utils\CommonUtil;
-use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\Common\Models\Transaction;
 
 /**
  * Class RetrieveBatchTransaction
@@ -31,14 +28,9 @@ class RetrieveBatchTransaction extends BaseProcess
      * @param string $batchId
      * @return this
      */
-    public function __construct(
-        $batchId
-    ) {
-        CommonUtil::validateArgument(
-            $batchId,
-            'batchId',
-            'string'
-        );
+    public function __construct($batchId)
+    {
+        CommonUtil::validateArgument($batchId, 'batchId', 'string');
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->batchId = $batchId;
         return $this;
@@ -46,9 +38,7 @@ class RetrieveBatchTransaction extends BaseProcess
 
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::VIEW_BATCH_TRANSACTION
-        )
+        $request = RequestUtil::get(API::VIEW_BATCH_TRANSACTION)
             ->setUrlParams([
                 '{batchId}' => $this->batchId
             ])

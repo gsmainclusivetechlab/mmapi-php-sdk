@@ -11,5 +11,5 @@ use mmpsdk\Disbursement\Enums\DisbursementTransactionType;
  */
 class InitiateDisbursement extends InitiateTransaction
 {
-   protected $transactionType = DisbursementTransactionType::DISBURSEMENT;
+    protected $transactionType = DisbursementTransactionType::DISBURSEMENT;
 }

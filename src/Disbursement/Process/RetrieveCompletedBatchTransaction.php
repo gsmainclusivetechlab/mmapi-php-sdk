@@ -36,15 +36,9 @@ class RetrieveCompletedBatchTransaction extends BaseProcess
      * @param array $filter
      * @return this
      */
-    public function __construct(
-        $batchId,
-        $filter = null
-    ) {
-        CommonUtil::validateArgument(
-            $batchId,
-            'batchId',
-            'string'
-        );
+    public function __construct($batchId, $filter = null)
+    {
+        CommonUtil::validateArgument($batchId, 'batchId', 'string');
         if ($filter) {
             CommonUtil::validateArgument($filter, 'filter', 'array');
         }
@@ -56,10 +50,7 @@ class RetrieveCompletedBatchTransaction extends BaseProcess
 
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::VIEW_BATCH_COMPLETEIONS,
-            $this->filter
-        )
+        $request = RequestUtil::get(API::VIEW_BATCH_COMPLETEIONS, $this->filter)
             ->setUrlParams([
                 '{batchId}' => $this->batchId
             ])

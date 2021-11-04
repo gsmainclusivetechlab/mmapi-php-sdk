@@ -2,8 +2,6 @@
 
 namespace mmpsdk\Disbursement\Process;
 
-use mmpsdk\MerchantPayment\Models\MerchantTransaction;
-use mmpsdk\MerchantPayment\Validation\TransactionValidator;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 

@@ -4,6 +4,10 @@ namespace mmpsdk\Disbursement\Models;
 
 use mmpsdk\Common\Models\BaseModel;
 
+/**
+ * Class BatchTransaction
+ * @package mmpsdk\Disbursement\Models
+ */
 class BatchTransaction extends BaseModel
 {
     /**

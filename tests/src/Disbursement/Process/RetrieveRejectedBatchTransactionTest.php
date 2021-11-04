@@ -10,12 +10,13 @@ class RetrieveRejectedBatchTransactionTest extends ProcessTestCase
     protected function setUp(): void
     {
         $batchId = 'ABC123';
-        $this->constructorArgs = [
-            $batchId
-        ];
+        $this->constructorArgs = [$batchId];
         $this->requestMethod = 'GET';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId . '/rejections';
+            MobileMoney::getBaseUrl() .
+            '/batchtransactions/' .
+            $batchId .
+            '/rejections';
         $this->className = RetrieveRejectedBatchTransaction::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

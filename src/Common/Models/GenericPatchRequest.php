@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\Common\Models;
+
 use mmpsdk\Common\Models\BaseModel;
 
 class GenericPatchRequest extends BaseModel
@@ -21,7 +22,6 @@ class GenericPatchRequest extends BaseModel
      * @var string
      */
     private $value;
-
 
     /**
      * @return string|null

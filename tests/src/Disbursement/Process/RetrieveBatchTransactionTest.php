@@ -10,9 +10,7 @@ class RetrieveBatchTransactionTest extends ProcessTestCase
     protected function setUp(): void
     {
         $batchId = 'ABC123';
-        $this->constructorArgs = [
-            $batchId
-        ];
+        $this->constructorArgs = [$batchId];
         $this->requestMethod = 'GET';
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId;

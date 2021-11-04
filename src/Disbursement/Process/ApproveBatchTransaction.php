@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\Disbursement\Process;
+
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 
@@ -39,17 +40,16 @@ class ApproveBatchTransaction extends BaseProcess
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(
-        $batchId,
-        $callBackUrl = false
-    ) {
+    public function __construct($batchId, $callBackUrl = false)
+    {
         CommonUtil::validateArgument($batchId, 'batchId', 'string');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $patchRequest = new GenericPatchRequest();
-        $patchRequest->setOp(GenericPatchRequest::REPLACE)
+        $patchRequest
+            ->setOp(GenericPatchRequest::REPLACE)
             ->setPath('/batchStatus')
             ->setValue('approved');
-        $this->batchTransaction = array($patchRequest);
+        $this->batchTransaction = [$patchRequest];
         $this->batchId = $batchId;
         return $this;
     }
