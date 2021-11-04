@@ -116,7 +116,6 @@ class AuthUtil
         if ($token != null && self::checkExpiredToken($token)) {
             $token = null;
         }
-
         // If accessToken is Null, obtain a new token
         if ($token == null) {
             // Get a new one by making calls to API

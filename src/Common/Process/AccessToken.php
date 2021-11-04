@@ -14,6 +14,8 @@ class AccessToken extends BaseProcess
 
     private $secretKey;
 
+    public $isAuthTokenRequest = true;
+
     /**
      * Use this API call to generate an Access Token. You can then use the token to authenticate on subsequent API requests until the token expires.
      * To generate the access token, a Consumer Key and a Consumer Secret is required
@@ -48,6 +50,7 @@ class AccessToken extends BaseProcess
             )
             ->build();
         $response = $this->makeRequest($request);
+        // var_dump($response);
         return $this->parseResponse($response);
     }
 }

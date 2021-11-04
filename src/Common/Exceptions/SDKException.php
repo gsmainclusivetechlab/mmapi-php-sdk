@@ -21,7 +21,8 @@ class SDKException extends RuntimeException
         /** Result message when String to object conversion failed */
         JSONSTRING_TO_OBJECT_CONVERSION_FAILED = 'JsonString to object conversion failure',
         /** Result message when object of expected type is not passed in parameter*/
-        UNEXPECTED_OBJECT_PASSED_AS_PARAM = 'Object of unexpected type is passed as parameter';
+        UNEXPECTED_OBJECT_PASSED_AS_PARAM = 'Object of unexpected type is passed as parameter',
+        MAX_RETRIES_EXCEEDED = 'Max retries exceeded';
 
     /**
      * @var string

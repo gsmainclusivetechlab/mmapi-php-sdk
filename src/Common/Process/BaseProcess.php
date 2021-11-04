@@ -38,6 +38,20 @@ abstract class BaseProcess
     protected $callBackUrl;
 
     /**
+     * Retry limit
+     *
+     * @var int
+     */
+    public $retryLimit = 2;
+
+    /**
+     * Retry count
+     *
+     * @var int
+     */
+    public $retryCount = 0;
+
+    /**
      * Standardised flow pattern type followed by the APIs.
      *
      * @var int
@@ -112,7 +126,7 @@ abstract class BaseProcess
      */
     protected function parseResponse($response, $obj = null)
     {
-        return ResponseUtil::parse($response, $obj);
+        return ResponseUtil::parse($response, $obj, $this);
     }
 
     /**
