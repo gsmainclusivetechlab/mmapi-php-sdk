@@ -7,6 +7,10 @@ use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\CommonUtil;
 
+/**
+ * Class PollRequest
+ * @package mmpsdk\Common\Process
+ */
 class PollRequest extends BaseProcess
 {
     protected $serverCorrelationId;

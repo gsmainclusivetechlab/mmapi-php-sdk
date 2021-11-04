@@ -7,6 +7,10 @@ use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Utils\CommonUtil;
 
+/**
+ * Class RetrieveMissingResponse
+ * @package mmpsdk\Common\Process
+ */
 class RetrieveMissingResponse extends BaseProcess
 {
     private $objRef;
