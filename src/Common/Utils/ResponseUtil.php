@@ -27,7 +27,7 @@ class ResponseUtil
      * @param mixed $response
      * @return mixed|null $obj
      */
-    public static function parse($response, $obj = null)
+    public static function parse($response, $obj = null, $request)
     {
         switch ($response->httpCode) {
             //Success Responses
@@ -72,13 +72,20 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    print_r('Refreshing Token...');
-                    $authObj = AuthUtil::updateAccessToken(
-                        MobileMoney::getConsumerKey(),
-                        MobileMoney::getConsumerSecret(),
-                        MobileMoney::getApiKey()
-                    );
-                    self::parse($response->requestObj->call(), $obj);
+                    if(!isset($request->isAuthTokenRequest)){
+                        print_r('Refreshing Token...');
+                        $authObj = AuthUtil::updateAccessToken(
+                            MobileMoney::getConsumerKey(),
+                            MobileMoney::getConsumerSecret(),
+                            MobileMoney::getApiKey()
+                        );
+                    }
+                    $request->retryCount += 1;
+                    if($request->retryCount <= $request->retryLimit){
+                        return $request->execute();
+                    } else {
+                        throw new SDKException(SDKException::MAX_RETRIES_EXCEEDED);
+                    }
                 }
                 break;
 
