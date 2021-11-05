@@ -292,6 +292,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 
 ## Modules
 
+-   [Common](/docs/common.md)
 -   [Merchant Payments](/docs/merchant_payments.md)
 -   [Disbursements](/docs/disbursements.md)
 -   [International Transfers](/docs/international_transfers.md)
