@@ -70,7 +70,7 @@ Other functions available for `MobileMoney`:
     ```php
     use mmpsdk\MerchantPayment\Process\InitiatePayment;
     $request = new InitiatePayment($transaction, 'http://example.com/');
-    $clientCorrelationId = $request->getClientCorrelationId()
+    $clientCorrelationId = $request->getClientCorrelationId();
     ```
 
 -   Finally, to make the request, invoke the `execute()`
@@ -150,15 +150,23 @@ Other functions available for `MobileMoney`:
     $accountIdentifier = [
         'accountid' => 2000
     ];
-    $request = new CreateAuthorisationCode($authorisationObj, $accountIdentifier, 'http://example.com/');
+    $request = new CreateAuthorisationCode(
+        $authorisationObj,
+        $accountIdentifier,
+        'http://example.com/'
+    );
     ```
 
 -   After initialising, invoke the method `getClientCorrelationId()` to get the client correlation id.
 
     ```php
     use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
-    $request = new CreateAuthorisationCode($authorisationObj, $accountIdentifier, 'http://example.com/');
-    $clientCorrelationId = $request->getClientCorrelationId()
+    $request = new CreateAuthorisationCode(
+        $authorisationObj,
+        $accountIdentifier,
+        'http://example.com/'
+    );
+    $clientCorrelationId = $request->getClientCorrelationId();
     ```
 
 -   Finally, to make the request, invoke the `execute()`

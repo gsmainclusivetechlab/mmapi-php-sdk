@@ -4,9 +4,7 @@ use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Process\RetrieveTransaction;
 
 try {
-    $response = (new RetrieveTransaction(
-        'REF-1636106992007'
-    ))->execute();
+    $response = (new RetrieveTransaction('REF-1636106992007'))->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());

@@ -53,7 +53,10 @@ class BaseModel implements JsonSerializable
         if (is_array($data) && !empty($data)) {
             $objectArray = [];
             foreach ($data as $item) {
-                array_push($objectArray, $this->hydrate($item, new $this(), $availableItemCount));
+                array_push(
+                    $objectArray,
+                    $this->hydrate($item, new $this(), $availableItemCount)
+                );
             }
             return $objectArray;
         } elseif ($data) {
