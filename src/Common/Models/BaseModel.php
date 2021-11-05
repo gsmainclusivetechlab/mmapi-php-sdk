@@ -21,7 +21,7 @@ class BaseModel implements JsonSerializable
         }
     }
 
-    public function getAvailableCount()
+    public function getTotalCount()
     {
         return $this->availableCount;
     }

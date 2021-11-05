@@ -6,6 +6,7 @@ use mmpsdk\Common\Utils\RequestUtil;
 
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Process\BaseProcess;
 
 /**
@@ -21,8 +22,6 @@ class RetrieveTransaction extends BaseProcess
      */
     private $transactionReference;
 
-    private $ObjRef;
-
     /**
      * Using the Object Reference passed via the /requeststates API,
      * the final representation of the transaction can be returned.
@@ -31,18 +30,14 @@ class RetrieveTransaction extends BaseProcess
      * @param object $ObjRef
      * @return this
      */
-    public function __construct($transactionReference, $ObjRef = null)
+    public function __construct($transactionReference)
     {
         CommonUtil::validateArgument(
             $transactionReference,
             'transactionReference'
         );
-        if ($ObjRef) {
-            CommonUtil::validateArgument($ObjRef, 'ObjRef', 'object');
-        }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->transactionReference = $transactionReference;
-        $this->ObjRef = $ObjRef;
         return $this;
     }
 
@@ -58,6 +53,6 @@ class RetrieveTransaction extends BaseProcess
             ])
             ->build();
         $response = $this->makeRequest($request);
-        return $this->parseResponse($response, $this->ObjRef);
+        return $this->parseResponse($response, new Transaction());
     }
 }

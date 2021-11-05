@@ -24,7 +24,7 @@ class AccountBalance extends BaseProcess
     private $filter;
 
     /**
-     * Returns a set of transactions for a given account.
+     * Returns the balances for the specified account.
      *
      * @param array $accountIdentifier
      * @param array $filter
