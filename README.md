@@ -1,6 +1,12 @@
 # mmapi-php-sdk
 
-Use the MMAPI PHP SDK to get started quickly with the [GSMA Mobile Money API](https://developer.mobilemoneyapi.io/1.2).
+This SDK provides for an easy way to connect to [GSMA Mobile Money API](https://developer.mobilemoneyapi.io/1.2).
+
+Please refer to the following documentation for installation instructions and usage information.
+
+-   [API Documentation](https://developer.mobilemoneyapi.io/1.2)
+-   [PHP SDK Documentation](docs/)
+-   [How to use the test scripts](sample/)
 
 ## Requirements
 
@@ -30,6 +36,8 @@ require 'vendor/autoload.php';
 ```
 
 ### Manual Installation
+
+If you prefer not to use Composer, you can manually install the SDK.
 
 -   Download the latest stable release of php-sdk
 -   Extract php-sdk into your projects vendor folder

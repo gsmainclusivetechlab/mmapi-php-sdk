@@ -12,7 +12,7 @@ $transaction
     ->setDebitParty(['accountid' => '2999']);
 
 try {
-    $request = new PaymentRefund($transaction);
+    $request = new PaymentRefund($transaction, null);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
