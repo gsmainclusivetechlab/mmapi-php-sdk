@@ -2,12 +2,12 @@
 
 ## Ref
 
-| Class                                    | Parameters                                                                  | Description                                                                                    |
-| ---------------------------------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| AccountBalance                           | Transaction $transaction, $callBackUrl = false                              | Initiate a merchant payment using the mobile money API.                                        |
-| PollRequest                              | $accountIdentifier, AuthorisationCode $authorisationCode                    | Generate an authorisation code which can in turn be used at a merchant to authorise a payment. |
-| PaymentRefundRetrieveAccountTransactions | Transaction $transaction, $callBackUrl = false                              | Initiates the request for refund.                                                              |
-| RetrieveMissingResponse                  | string $clientCorrelationId, $objRef                                        | Retrieves a representation of the resource assuming that it exists.                            |
-| RetrieveTransaction                      | $transactionReference                                                       | Get transaction object using reference id.                                                     |
-| ServiceAvailability                      |                                                                             | To determine the availability of the service from the API provider.                            |
-| TransactionReversal                      | string $transactionReference, Reversal $reversal = null, $callBackUrl=false | To reverse a merchant transaction in failure scenarios.                                        |
+|            Class            |                                 Parameters                                  |                             Description                             |
+| :-------------------------: | :-------------------------------------------------------------------------: | :-----------------------------------------------------------------: |
+|       AccountBalance        |            Transaction $transaction, string $callBackUrl = false            |           Returns the balances for the specified account.           |
+|         PollRequest         |                         string $serverCorrelationId                         | Retrieves the state of a request for a given Server Correlation Id. |
+| RetrieveAccountTransactions |                   array $accountIdentifier, array $filter                   |         Returns a set of transactions for a given account.          |
+|   RetrieveMissingResponse   |                 string $clientCorrelationId, Object $objRef                 | Retrieves a representation of the resource assuming that it exists. |
+|     RetrieveTransaction     |                        string $transactionReference                         |             Get transaction object using reference id.              |
+|     ServiceAvailability     |                                     NA                                      | To determine the availability of the service from the API provider. |
+|     TransactionReversal     | string $transactionReference, Reversal $reversal, string $callBackUrl=false |       To reverse a merchant transaction in failure scenarios.       |
