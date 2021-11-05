@@ -2,8 +2,8 @@
 
 ## Ref
 
-| Class                   | Parameters                                               | Description                                                                                    |
-| ----------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| InitiatePayment         | Transaction $transaction, $callBackUrl = false           | Initiate a merchant payment using the mobile money API.                                        |
-| CreateAuthorisationCode | $accountIdentifier, AuthorisationCode $authorisationCode | Generate an authorisation code which can in turn be used at a merchant to authorise a payment. |
-| PaymentRefund           | Transaction $transaction, $callBackUrl = false           | Initiates the request for refund.                                                              |
+|          Class          |                           Parameters                           |    Return    |                                          Description                                           |
+| :---------------------: | :------------------------------------------------------------: | :----------: | :--------------------------------------------------------------------------------------------: |
+|     InitiatePayment     |     Transaction $transaction, string $callBackUrl = false      | Transaction  |                    Initiate a merchant payment using the mobile money API.                     |
+| CreateAuthorisationCode | array $accountIdentifier, AuthorisationCode $authorisationCode | RequestState | Generate an authorisation code which can in turn be used at a merchant to authorise a payment. |
+|      PaymentRefund      |     Transaction $transaction, string $callBackUrl = false      | RequestState |                               Initiates the request for refund.                                |
