@@ -8,7 +8,7 @@ $reversalObj = new Reversal();
 
 try {
     $transactionReference = 'REF-1635251574104';
-    $request = new TransactionReversal($transactionReference);
+    $request = new TransactionReversal($transactionReference, null, null);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
