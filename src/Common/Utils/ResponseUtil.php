@@ -61,7 +61,7 @@ class ResponseUtil
             //Failed Responses
             case self::BAD_REQUEST:
                 $errorObject = new Error(json_decode($response->result));
-                throw new SDKException(self::BAD_REQUEST, $errorObject);
+                throw new SDKException(self::BAD_REQUEST . ': ' . $errorObject->getErrorDescription(), $errorObject);
                 // return $errorObject;
                 break;
             case self::UNAUTHORIZED:
@@ -92,9 +92,10 @@ class ResponseUtil
             case self::NOT_FOUND:
                 $errorObject = json_decode($response->result);
                 if (isset($errorObject->errorCode)) {
+                    $errObj = new Error($errorObject);
                     throw new SDKException(
-                        self::NOT_FOUND,
-                        new Error($errorObject)
+                        self::NOT_FOUND . ': ' . $errObj->getErrorDescription(),
+                        $errObj
                     );
                 } else {
                     throw new SDKException('Resource Not Found');

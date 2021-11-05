@@ -128,9 +128,6 @@ Other functions available for `MobileMoney`:
                         )
 
                 )
-
-            [hydratorStrategies:protected] =>
-            [availableCount:protected] =>
         )
 
     ```
@@ -181,7 +178,119 @@ Other functions available for `MobileMoney`:
     }
     ```
 
-### Modules
+## Retrieve Account Transactions
+
+Retrieves a set of transactions for a given account. The offset and limit filters are used by the caller to retrieve the transactions in sets.
+
+-   Create an instance of `RetrieveAccountTransactions` by passing the account identifiers and and the filters (optional) as constructor parameters
+
+    ```php
+    use mmpsdk\Common\Process\RetrieveAccountTransactions;
+    $accountIdentifier = [
+        'accountid' => 2000
+    ];
+    $filter = ['limit' => 5, 'offset' => 0];
+    $request = new RetrieveAccountTransactions($accountIdentifier, $filter);
+    ```
+
+-   To make the request, invoke the `execute()`
+
+    ```php
+    use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
+    use mmpsdk\Common\Exceptions\SDKException;
+    try {
+        $response = (new RetrieveAccountTransactions(
+            $accountIdentifier,
+            $filter
+        ))->execute();
+        print_r($response);
+    } catch (SDKException $ex) {
+        print_r($ex->getMessage());
+        print_r($ex->getErrorObj());
+    }
+    ```
+
+    Sample Response:
+
+    ```
+    Array
+    (
+        [0] => mmpsdk\Common\Models\Transaction Object
+            (
+                [transactionReference:protected] => REF-1619946469290
+                [requestingOrganisationTransactionReference:protected] =>
+                [originalTransactionReference:protected] =>
+                [creditParty:protected] => Array
+                    (
+                        [0] => stdClass Object
+                            (
+                                [key] => accountid
+                                [value] => 2000
+                            )
+
+                        [1] => stdClass Object
+                            (
+                                [key] => linkref
+                                [value] => REF-1621839627337
+                            )
+
+                        [2] => stdClass Object
+                            (
+                                [key] => linkref
+                                [value] => REF-1635445811066
+                            )
+
+                    )
+
+                [debitParty:protected] => Array
+                    (
+                        [0] => stdClass Object
+                            (
+                                [key] => accountid
+                                [value] => 2999
+                            )
+
+                    )
+
+                [type:protected] => inttransfer
+                [subType:protected] =>
+                [transactionStatus:protected] => pending
+                [amount:protected] => 100.00
+                [currency:protected] => GBP
+                [descriptionText:protected] =>
+                [fees:protected] =>
+                [geoCode:protected] =>
+                [oneTimeCode:protected] =>
+                [requestingOrganisation:protected] => mmpsdk\Common\Models\RequestingOrganisation Object
+                    (
+                        [requestingOrganisationIdentifierType:mmpsdk\Common\Models\RequestingOrganisation:private] => organisationid
+                        [requestingOrganisationIdentifier:mmpsdk\Common\Models\RequestingOrganisation:private] => testorganisation
+                        [hydratorStrategies:protected] =>
+                        [availableCount:protected] =>
+                    )
+
+                [servicingIdentity:protected] =>
+                [transactionReceipt:protected] =>
+                [creationDate:protected] => 2021-05-02T10:07:49
+                [modificationDate:protected] => 2021-05-02T10:07:49
+                [requestDate:protected] => 2021-05-02T10:07:49
+                [customData:protected] =>
+                [metadata:protected] =>
+                [hydratorStrategies:protected] =>
+                [availableCount:protected] => 202
+            )
+        .
+        .
+        .
+    )
+    ```
+
+-   The total number of records available that match the filters is returned in the response. To obtain the count, use the function `getTotalCount()` on any of the array items.
+    ```php
+    $totalCount = $response[0]->getTotalCount();
+    ```
+
+## Modules
 
 -   [Merchant Payments](/docs/merchant_payments.md)
 -   [Disbursements](/docs/disbursements.md)
