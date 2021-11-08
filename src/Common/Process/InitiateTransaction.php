@@ -39,7 +39,7 @@ class InitiateTransaction extends BaseProcess
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(Transaction $transaction, $callBackUrl = false)
+    public function __construct(Transaction $transaction, $callBackUrl = null)
     {
         CommonUtil::validateArgument($transaction, 'transaction');
         // $validator = new TransactionValidator($transaction);
@@ -50,7 +50,7 @@ class InitiateTransaction extends BaseProcess
 
     /**
      *
-     * @return Transaction
+     * @return RequestState
      */
     public function execute()
     {

@@ -8,7 +8,7 @@ namespace mmpsdk\MerchantPayment\Enums;
  */
 class TransactionType
 {
-    public const MERCHANT_PAY = 'merchantpay',
+    const MERCHANT_PAY = 'merchantpay',
         ADJUSTMENT = 'adjustment',
         REVERSAL = 'reversal';
 

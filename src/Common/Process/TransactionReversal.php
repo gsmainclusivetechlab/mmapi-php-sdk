@@ -31,7 +31,7 @@ class TransactionReversal extends BaseProcess
     public function __construct(
         $transactionReference,
         Reversal $reversal = null,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
             $transactionReference,

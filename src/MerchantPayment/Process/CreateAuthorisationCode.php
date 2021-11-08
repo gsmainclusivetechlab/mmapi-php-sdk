@@ -32,7 +32,7 @@ class CreateAuthorisationCode extends BaseProcess
     public function __construct(
         $accountIdentifier,
         AuthorisationCode $authorisationCode,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
             $accountIdentifier,

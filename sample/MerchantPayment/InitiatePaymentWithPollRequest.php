@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
+
+use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\Process\InitiatePayment;
@@ -15,7 +17,11 @@ $transaction
 
 try {
     //Initiate Payment
-    $request = new InitiatePayment($transaction, null);
+    $request = new InitiatePayment($transaction);
+
+    //Set notification method for polling
+    $request->setNotificationMethod(NotificationMethod::CALLBACK);
+
     prettyPrint($request->getClientCorrelationId());
     $response = $request->execute();
     $serverCorrelationId = $response->getServerCorrelationId();

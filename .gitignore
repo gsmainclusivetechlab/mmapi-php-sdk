@@ -17,10 +17,11 @@ atlassian-ide-plugin.xml
 vendor
 composer.lock
 composer.phar
+tools/vendor
+tools/composer.lock
 
 # Project
 var
-tools
 .php-cs-fixer.cache
 test.php
 bck
