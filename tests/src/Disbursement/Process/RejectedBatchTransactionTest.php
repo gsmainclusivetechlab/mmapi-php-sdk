@@ -2,10 +2,10 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\Disbursement\Process\RetrieveCompletedBatchTransaction;
+use mmpsdk\Disbursement\Process\RejectedBatchTransaction;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
-class RetrieveCompletedBatchTransactionTest extends ProcessTestCase
+class RejectedBatchTransactionTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
@@ -16,8 +16,8 @@ class RetrieveCompletedBatchTransactionTest extends ProcessTestCase
             MobileMoney::getBaseUrl() .
             '/batchtransactions/' .
             $batchId .
-            '/completions';
-        $this->className = RetrieveCompletedBatchTransaction::class;
+            '/rejections';
+        $this->className = RejectedBatchTransaction::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,
             $this->constructorArgs

@@ -42,6 +42,10 @@ class InitiateBulkDisbursement extends BaseProcess
         return $this;
     }
 
+    /**
+     *
+     * @return RequestState
+     */
     public function execute()
     {
         $request = RequestUtil::post(

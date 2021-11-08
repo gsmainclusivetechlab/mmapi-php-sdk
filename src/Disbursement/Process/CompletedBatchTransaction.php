@@ -10,10 +10,10 @@ use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchCompletion;
 
 /**
- * Class RetrieveCompletedBatchTransaction
+ * Class CompletedBatchTransaction
  * @package mmpsdk\Disbursement\Process
  */
-class RetrieveCompletedBatchTransaction extends BaseProcess
+class CompletedBatchTransaction extends BaseProcess
 {
     /**
      * Batch id
@@ -48,6 +48,10 @@ class RetrieveCompletedBatchTransaction extends BaseProcess
         return $this;
     }
 
+    /**
+     *
+     * @return BatchCompletion
+     */
     public function execute()
     {
         $request = RequestUtil::get(API::VIEW_BATCH_COMPLETEIONS, $this->filter)

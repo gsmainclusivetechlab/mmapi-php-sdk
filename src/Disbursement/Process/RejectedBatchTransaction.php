@@ -10,10 +10,10 @@ use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchRejection;
 
 /**
- * Class RetrieveRejectedBatchTransaction
+ * Class RejectedBatchTransaction
  * @package mmpsdk\Disbursement\Process
  */
-class RetrieveRejectedBatchTransaction extends BaseProcess
+class RejectedBatchTransaction extends BaseProcess
 {
     /**
      * Batch id
@@ -48,6 +48,10 @@ class RetrieveRejectedBatchTransaction extends BaseProcess
         return $this;
     }
 
+    /**
+     *
+     * @return BatchRejection
+     */
     public function execute()
     {
         $request = RequestUtil::get(API::VIEW_BATCH_REJECTIONS, $this->filter)

@@ -54,6 +54,10 @@ class ApproveBatchTransaction extends BaseProcess
         return $this;
     }
 
+    /**
+     *
+     * @return RequestState
+     */
     public function execute()
     {
         $request = RequestUtil::patch(
@@ -68,7 +72,6 @@ class ApproveBatchTransaction extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
-        print_r($response);
         return $this->parseResponse($response, new RequestState());
     }
 }

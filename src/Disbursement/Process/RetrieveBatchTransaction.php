@@ -36,6 +36,10 @@ class RetrieveBatchTransaction extends BaseProcess
         return $this;
     }
 
+    /**
+     *
+     * @return BatchTransaction
+     */
     public function execute()
     {
         $request = RequestUtil::get(API::VIEW_BATCH_TRANSACTION)
