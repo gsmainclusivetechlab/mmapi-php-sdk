@@ -13,13 +13,13 @@ abstract class BaseProcess
      * The final resource is always provided in response to an API request.
      * There is no interim response.
      */
-    public const SYNCHRONOUS_PROCESS = 1;
+    const SYNCHRONOUS_PROCESS = 1;
 
     /**
      * Interim response is always provided in response to an API request in the form of a Request State object.
      * The final response is provided via a callback or alternatively can be accessed via polling on Request State.
      */
-    public const ASYNCHRONOUS_PROCESS = 2;
+    const ASYNCHRONOUS_PROCESS = 2;
 
     /**
      * UUID that enables the client to correlate the API request

@@ -17,7 +17,7 @@ abstract class Validator
     private $defaultErrorMsg;
     private $supportObject;
 
-    public const MANDATORY = 1,
+    const MANDATORY = 1,
         VALID_AMOUNT = 2,
         POSITIVE_NUMBER = 3;
 

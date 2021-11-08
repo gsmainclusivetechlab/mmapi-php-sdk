@@ -11,7 +11,7 @@ class Header
     /**
      * Authorization Header
      */
-    public const AUTHORIZATION = 'Authorization',
+    const AUTHORIZATION = 'Authorization',
         /**
          * Length of request content in 8-bit bytes
          */

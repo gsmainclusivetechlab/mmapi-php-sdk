@@ -17,7 +17,8 @@
         "phpunit/phpunit": "^9",
         "phpstan/phpstan": "^0.12.99",
         "squizlabs/php_codesniffer": "^3.6",
-        "dms/phpunit-arraysubset-asserts": "^0.3.1"
+        "dms/phpunit-arraysubset-asserts": "^0.3.1",
+        "phpcompatibility/php-compatibility": "*"
     },
     "scripts": {
         "fix-cs": [
@@ -26,6 +27,8 @@
         ],
         "tests": [
             "./vendor/bin/phpunit --testdox tests"
-        ]
+        ],
+        "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+        "post-update-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility"
     }
 }

@@ -15,7 +15,7 @@ use mmpsdk\Common\Models\Error;
 class SDKException extends RuntimeException
 {
     /** Result message when any required parameter is missing in api calling */
-    public const MISSING_MANDATORY_PARAMETERS = 'Missing Mandatory Parameters',
+    const MISSING_MANDATORY_PARAMETERS = 'Missing Mandatory Parameters',
         /** Result message when Merchant Property are not initialized */
         MISSING_PROPERTY = 'Missing property',
         /** Result message when String to object conversion failed */
