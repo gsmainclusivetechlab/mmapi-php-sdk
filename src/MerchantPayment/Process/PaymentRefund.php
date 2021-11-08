@@ -29,7 +29,7 @@ class PaymentRefund extends BaseProcess
      */
     public function __construct(
         Transaction $merchantTransaction,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
             $merchantTransaction,

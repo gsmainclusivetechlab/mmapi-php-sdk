@@ -3,6 +3,7 @@
 namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Utils\AuthUtil;
 use mmpsdk\Common\Utils\GUID;
 use mmpsdk\Common\Utils\ResponseUtil;
@@ -28,6 +29,13 @@ abstract class BaseProcess
      * @var string
      */
     protected $clientCorrelationId;
+
+    /**
+     * Indicates whether a callback will be issued or whether the client will need to poll.
+     *
+     * @var string
+     */
+    protected $notificationMethod = NotificationMethod::CALLBACK;
 
     /**
      * String containing the URL which should receive the Callback.
@@ -63,17 +71,36 @@ abstract class BaseProcess
         $this->setUp($processType, $callBackUrl);
     }
 
+    public function setNotificationMethod($notificationMethod){
+        if(in_array($notificationMethod, NotificationMethod::getNotificationMethodOptions())){
+            $this->notificationMethod = $notificationMethod;
+            switch ($notificationMethod) {
+                case NotificationMethod::POLLING:
+                    $this->callBackUrl = null;
+                    break;
+                case NotificationMethod::CALLBACK:
+                    if(empty($this->callBackUrl)){
+                        throw new \mmpsdk\Common\Exceptions\SDKException("Callback URL is empty");
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        } else if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
+            throw new \mmpsdk\Common\Exceptions\SDKException("Unknown notification method: " . $notificationMethod);
+        }
+    }
+
     protected function setUp($processType, $callBackUrl = null)
     {
         AuthUtil::validateCredentials();
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();
-            if (is_bool($callBackUrl) || is_string($callBackUrl)) {
-                $this->callBackUrl = $callBackUrl
-                    ? $callBackUrl
-                    : MobileMoney::getCallbackUrl();
-            }
+            $this->callBackUrl = $callBackUrl
+                ? $callBackUrl
+                : MobileMoney::getCallbackUrl();
         }
     }
 

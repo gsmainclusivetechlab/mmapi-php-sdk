@@ -63,7 +63,14 @@ Other functions available for `MobileMoney`:
     use mmpsdk\MerchantPayment\Process\InitiatePayment;
     $request = new InitiatePayment($transaction, 'http://example.com/');
     ```
--   If callback url is not supplied to the constructor, the callback url defined during the SDK's initialization will be used. If you set the callback url as null, you'll have to rely on the polling API to determine the status of the request.
+-   If callback url is not supplied to the constructor, the callback url defined during the SDK's initialization will be used. You'll have to rely on the polling API to detect the status of the request if you don't pass the callback URL and haven't configured a callback URL during SDK Initialization.
+
+-   You can also use the method `setNotificationMethod()` to specifically mention the notification mechanism.
+
+    ```php
+    use mmpsdk\Common\Enums\NotificationMethod;
+    $request->setNotificationMethod(NotificationMethod::POLLING);
+    ```
 
 -   After initialising, invoke the method `getClientCorrelationId()` to get the client correlation id.
 
