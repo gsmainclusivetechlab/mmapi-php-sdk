@@ -34,7 +34,7 @@ class InitiateBulkDisbursement extends BaseProcess
      */
     public function __construct(
         BatchTransaction $batchTransaction,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument($batchTransaction, 'batchTransaction');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
