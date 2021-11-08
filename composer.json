@@ -28,8 +28,14 @@
         ],
         "tests": "./vendor/bin/phpunit --testdox tests",
         "check-compat": "./vendor/bin/phpcs -p src/ --standard=PHPCompatibility --runtime-set testVersion 5.4-8.0",
-        "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
-        "post-update-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility"
+        "post-install-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+            "./vendor/bin/cghooks add --ignore-lock"
+        ],
+        "post-update-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+            "./vendor/bin/cghooks update"
+        ]
     },
     "extra": {
         "hooks": {
