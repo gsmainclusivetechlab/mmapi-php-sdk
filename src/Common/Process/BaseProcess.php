@@ -71,24 +71,34 @@ abstract class BaseProcess
         $this->setUp($processType, $callBackUrl);
     }
 
-    public function setNotificationMethod($notificationMethod){
-        if(in_array($notificationMethod, NotificationMethod::getNotificationMethodOptions())){
+    public function setNotificationMethod($notificationMethod)
+    {
+        if (
+            in_array(
+                $notificationMethod,
+                NotificationMethod::getNotificationMethodOptions()
+            )
+        ) {
             $this->notificationMethod = $notificationMethod;
             switch ($notificationMethod) {
                 case NotificationMethod::POLLING:
                     $this->callBackUrl = null;
                     break;
                 case NotificationMethod::CALLBACK:
-                    if(empty($this->callBackUrl)){
-                        throw new \mmpsdk\Common\Exceptions\SDKException("Callback URL is empty");
+                    if (empty($this->callBackUrl)) {
+                        throw new \mmpsdk\Common\Exceptions\SDKException(
+                            'Callback URL is empty'
+                        );
                     }
                     break;
 
                 default:
                     break;
             }
-        } else if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
-            throw new \mmpsdk\Common\Exceptions\SDKException("Unknown notification method: " . $notificationMethod);
+        } elseif ($this->processType == self::ASYNCHRONOUS_PROCESS) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                'Unknown notification method: ' . $notificationMethod
+            );
         }
     }
 
