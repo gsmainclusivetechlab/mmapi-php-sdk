@@ -8,7 +8,7 @@ namespace mmpsdk\Common\Enums;
  */
 class SecurityLevel
 {
-    public const DEVELOPMENT = 'DevLevel',
+    const DEVELOPMENT = 'DevLevel',
         STANDARD = 'StandardLevel',
         ENHANCED = 'EnhancedLevel',
         NONE = 'None';

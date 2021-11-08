@@ -4,15 +4,11 @@ namespace mmpsdk\MerchantPayment\Process;
 
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
-
-use mmpsdk\Common\Utils\ResponseUtil;
-use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\MerchantPayment\Models\AuthorisationCode;
-use mmpsdk\MerchantPayment\Validation\AuthorisationCodeValidator;
 
 /**
  * Class CreateAuthorisationCode
@@ -36,7 +32,7 @@ class CreateAuthorisationCode extends BaseProcess
     public function __construct(
         $accountIdentifier,
         AuthorisationCode $authorisationCode,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
             $accountIdentifier,
@@ -44,7 +40,6 @@ class CreateAuthorisationCode extends BaseProcess
             'array'
         );
         CommonUtil::validateArgument($authorisationCode, 'authorisationCode');
-        // $validator = new AuthorisationCodeValidator($authorisationCode);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier

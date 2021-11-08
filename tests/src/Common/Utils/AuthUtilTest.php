@@ -141,9 +141,4 @@ class AuthUtilTest extends TestCase
         }
         return $keys;
     }
-
-    // public static function testGenerateAccessToken()
-    // {
-    //     print_r(TestConfig::CONSUMER_KEY);
-    // }
 }

@@ -15,7 +15,7 @@ use mmpsdk\Common\Process\AccessToken;
 
 class AuthUtil
 {
-    private const EXPIRY_BUFFER_TIME = 5;
+    const EXPIRY_BUFFER_TIME = 5;
 
     public static function buildHeader(RequestUtil $request, $content = null)
     {
@@ -116,7 +116,6 @@ class AuthUtil
         if ($token != null && self::checkExpiredToken($token)) {
             $token = null;
         }
-
         // If accessToken is Null, obtain a new token
         if ($token == null) {
             // Get a new one by making calls to API

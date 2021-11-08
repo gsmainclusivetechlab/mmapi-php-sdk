@@ -2,7 +2,7 @@
 
 namespace mmpsdk\Common\Utils;
 
-use Exception;
+use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Constants\MobileMoney;
@@ -13,7 +13,7 @@ use mmpsdk\Common\Constants\MobileMoney;
  */
 class ResponseUtil
 {
-    private const OK = 200,
+    const OK = 200,
         CREATED = 201,
         ACCEPTED = 202,
         BAD_REQUEST = 400,
@@ -27,7 +27,7 @@ class ResponseUtil
      * @param mixed $response
      * @return mixed|null $obj
      */
-    public static function parse($response, $obj = null)
+    public static function parse($response, $obj = null, $request)
     {
         switch ($response->httpCode) {
             //Success Responses
@@ -36,22 +36,38 @@ class ResponseUtil
             case self::CREATED:
                 $decodedResponse = json_decode($response->result);
                 //Add client correlation id along with response
+                $data = $decodedResponse;
                 if ($response->clientCorrelationId) {
-                    $decodedResponse->clientCorrelationId =
-                        $response->clientCorrelationId;
+                    $data->clientCorrelationId = $response->clientCorrelationId;
                 }
                 if ($obj !== null) {
-                    return $obj->hydrate($decodedResponse);
-                } else {
-                    return $decodedResponse;
+                    $count = 0;
+                    if (
+                        isset($response->headers) &&
+                        array_key_exists(
+                            Header::X_Records_Available_Count,
+                            $response->headers
+                        )
+                    ) {
+                        $count =
+                            $response->headers[
+                                Header::X_Records_Available_Count
+                            ];
+                    }
+                    $data = $obj->hydrate($decodedResponse, null, $count);
                 }
+                return $data;
                 break;
 
             //Failed Responses
             case self::BAD_REQUEST:
                 $errorObject = new Error(json_decode($response->result));
-                throw new SDKException(self::BAD_REQUEST, $errorObject);
-                // return $errorObject;
+                throw new SDKException(
+                    self::BAD_REQUEST .
+                        ': ' .
+                        $errorObject->getErrorDescription(),
+                    $errorObject
+                );
                 break;
             case self::UNAUTHORIZED:
                 $errorObject = json_decode($response->result);
@@ -61,22 +77,32 @@ class ResponseUtil
                         new Error($errorObject)
                     );
                 } else {
-                    print_r('Refreshing Token...');
-                    $authObj = AuthUtil::updateAccessToken(
-                        MobileMoney::getConsumerKey(),
-                        MobileMoney::getConsumerSecret(),
-                        MobileMoney::getApiKey()
-                    );
-                    self::parse($response->requestObj->call(), $obj);
+                    if (!isset($request->isAuthTokenRequest)) {
+                        print_r('Refreshing Token...');
+                        $authObj = AuthUtil::updateAccessToken(
+                            MobileMoney::getConsumerKey(),
+                            MobileMoney::getConsumerSecret(),
+                            MobileMoney::getApiKey()
+                        );
+                    }
+                    $request->retryCount += 1;
+                    if ($request->retryCount <= $request->retryLimit) {
+                        return $request->execute();
+                    } else {
+                        throw new SDKException(
+                            SDKException::MAX_RETRIES_EXCEEDED
+                        );
+                    }
                 }
                 break;
 
             case self::NOT_FOUND:
                 $errorObject = json_decode($response->result);
                 if (isset($errorObject->errorCode)) {
+                    $errObj = new Error($errorObject);
                     throw new SDKException(
-                        self::NOT_FOUND,
-                        new Error($errorObject)
+                        self::NOT_FOUND . ': ' . $errObj->getErrorDescription(),
+                        $errObj
                     );
                 } else {
                     throw new SDKException('Resource Not Found');

@@ -15,8 +15,8 @@ use mmpsdk\Common\Utils\CommonUtil;
  */
 class MobileMoney
 {
-    public const SANDBOX = 'SANDBOX';
-    public const PRODUCTION = 'PRODUCTION';
+    const SANDBOX = 'SANDBOX';
+    const PRODUCTION = 'PRODUCTION';
     /**
      * @var bool
      */
@@ -64,7 +64,7 @@ class MobileMoney
      * Cache file path
      * @var string
      */
-    private static $cachePath = __DIR__ . '/../../../var/auth.cache';
+    private static $cachePath;
 
     /**
      * Access Token Object
@@ -99,6 +99,7 @@ class MobileMoney
             self::setConsumerKey($consumerKey);
             self::setConsumerSecret($consumerSecret);
             self::setApiKey($apiKey);
+            self::$cachePath = __DIR__ . '/../../../var/auth.cache';
         }
         if (
             self::$environment == self::PRODUCTION &&

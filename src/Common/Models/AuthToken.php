@@ -5,7 +5,7 @@ namespace mmpsdk\Common\Models;
 use mmpsdk\Common\Models\BaseModel;
 
 /**
- * Class Error
+ * Class AuthToken
  * @package mmpsdk\Common\Models
  */
 class AuthToken extends BaseModel

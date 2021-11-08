@@ -5,7 +5,6 @@ namespace mmpsdk\MerchantPayment\Process;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
-
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
@@ -30,13 +29,12 @@ class PaymentRefund extends BaseProcess
      */
     public function __construct(
         Transaction $merchantTransaction,
-        $callBackUrl = false
+        $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
             $merchantTransaction,
             'merchantTransaction'
         );
-        // $validator = new TransactionValidator($merchantTransaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->merchantTransaction = $merchantTransaction;
         return $this;

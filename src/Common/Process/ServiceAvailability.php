@@ -5,8 +5,11 @@ namespace mmpsdk\Common\Process;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\RequestState;
-use mmpsdk\Common\Utils\ResponseUtil;
 
+/**
+ * Class ServiceAvailability
+ * @package mmpsdk\Common\Process
+ */
 class ServiceAvailability extends BaseProcess
 {
     /**

@@ -12,11 +12,18 @@ class BaseModel implements JsonSerializable
 {
     protected $hydratorStrategies;
 
+    protected $availableCount;
+
     public function __construct($value = [])
     {
         if (!empty($value)) {
             $this->hydrate($value);
         }
+    }
+
+    public function getTotalCount()
+    {
+        return $this->availableCount;
     }
 
     private function hydrateAttribute($attribute, $value)
@@ -38,22 +45,28 @@ class BaseModel implements JsonSerializable
      *
      * @param object $data
      * @param $context
+     * @param $availableItemCount
      * @return self
      */
-    public function hydrate($data, $context = null)
+    public function hydrate($data, $context = null, $availableItemCount = null)
     {
         if (is_array($data) && !empty($data)) {
             $objectArray = [];
             foreach ($data as $item) {
-                array_push($objectArray, $this->hydrate($item, new $this()));
+                array_push(
+                    $objectArray,
+                    $this->hydrate($item, new $this(), $availableItemCount)
+                );
             }
             return $objectArray;
         } elseif ($data) {
-            $this->hydratorStrategies();
             $context = $context ? $context : $this;
+            $context->hydratorStrategies();
+            $context->availableCount = $availableItemCount;
             foreach ($data as $attribute => $value) {
                 $context->hydrateAttribute($attribute, $value);
             }
+            $context->hydratorStrategies = null;
             return $context;
         }
         return $this;
@@ -64,7 +77,7 @@ class BaseModel implements JsonSerializable
         return [];
     }
 
-    public function addHydratorStrategy(string $name, $obj)
+    public function addHydratorStrategy($name, $obj)
     {
         $this->hydratorStrategies[$name] = $obj;
         return $this;

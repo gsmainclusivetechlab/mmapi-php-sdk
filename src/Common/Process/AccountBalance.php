@@ -3,7 +3,6 @@
 namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
-
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Models\Balance;
@@ -25,7 +24,7 @@ class AccountBalance extends BaseProcess
     private $filter;
 
     /**
-     * Returns a set of transactions for a given account.
+     * Returns the balances for the specified account.
      *
      * @param array $accountIdentifier
      * @param array $filter
