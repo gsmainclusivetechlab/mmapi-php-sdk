@@ -15,7 +15,7 @@ use mmpsdk\Common\Process\AccessToken;
 
 class AuthUtil
 {
-    private const EXPIRY_BUFFER_TIME = 5;
+    const EXPIRY_BUFFER_TIME = 5;
 
     public static function buildHeader(RequestUtil $request, $content = null)
     {

@@ -3,6 +3,7 @@
 namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Utils\AuthUtil;
 use mmpsdk\Common\Utils\GUID;
 use mmpsdk\Common\Utils\ResponseUtil;
@@ -13,13 +14,13 @@ abstract class BaseProcess
      * The final resource is always provided in response to an API request.
      * There is no interim response.
      */
-    public const SYNCHRONOUS_PROCESS = 1;
+    const SYNCHRONOUS_PROCESS = 1;
 
     /**
      * Interim response is always provided in response to an API request in the form of a Request State object.
      * The final response is provided via a callback or alternatively can be accessed via polling on Request State.
      */
-    public const ASYNCHRONOUS_PROCESS = 2;
+    const ASYNCHRONOUS_PROCESS = 2;
 
     /**
      * UUID that enables the client to correlate the API request
@@ -28,6 +29,13 @@ abstract class BaseProcess
      * @var string
      */
     protected $clientCorrelationId;
+
+    /**
+     * Indicates whether a callback will be issued or whether the client will need to poll.
+     *
+     * @var string
+     */
+    protected $notificationMethod = NotificationMethod::CALLBACK;
 
     /**
      * String containing the URL which should receive the Callback.
@@ -63,17 +71,46 @@ abstract class BaseProcess
         $this->setUp($processType, $callBackUrl);
     }
 
+    public function setNotificationMethod($notificationMethod)
+    {
+        if (
+            in_array(
+                $notificationMethod,
+                NotificationMethod::getNotificationMethodOptions()
+            )
+        ) {
+            $this->notificationMethod = $notificationMethod;
+            switch ($notificationMethod) {
+                case NotificationMethod::POLLING:
+                    $this->callBackUrl = null;
+                    break;
+                case NotificationMethod::CALLBACK:
+                    if (empty($this->callBackUrl)) {
+                        throw new \mmpsdk\Common\Exceptions\SDKException(
+                            'Callback URL is empty'
+                        );
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        } elseif ($this->processType == self::ASYNCHRONOUS_PROCESS) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                'Unknown notification method: ' . $notificationMethod
+            );
+        }
+    }
+
     protected function setUp($processType, $callBackUrl = null)
     {
         AuthUtil::validateCredentials();
         $this->processType = $processType;
         if ($this->processType == self::ASYNCHRONOUS_PROCESS) {
             $this->clientCorrelationId = GUID::create();
-            if (is_bool($callBackUrl) || is_string($callBackUrl)) {
-                $this->callBackUrl = $callBackUrl
-                    ? $callBackUrl
-                    : MobileMoney::getCallbackUrl();
-            }
+            $this->callBackUrl = $callBackUrl
+                ? $callBackUrl
+                : MobileMoney::getCallbackUrl();
         }
     }
 

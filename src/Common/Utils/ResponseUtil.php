@@ -13,7 +13,7 @@ use mmpsdk\Common\Constants\MobileMoney;
  */
 class ResponseUtil
 {
-    private const OK = 200,
+    const OK = 200,
         CREATED = 201,
         ACCEPTED = 202,
         BAD_REQUEST = 400,

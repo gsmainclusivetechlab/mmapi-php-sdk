@@ -77,7 +77,7 @@ class BaseModel implements JsonSerializable
         return [];
     }
 
-    public function addHydratorStrategy(string $name, $obj)
+    public function addHydratorStrategy($name, $obj)
     {
         $this->hydratorStrategies[$name] = $obj;
         return $this;
