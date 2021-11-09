@@ -30,7 +30,11 @@ class RetrieveBatchTransaction extends BaseProcess
      */
     public function __construct($batchId)
     {
-        CommonUtil::validateArgument($batchId, 'batchId', CommonUtil::TYPE_STRING);
+        CommonUtil::validateArgument(
+            $batchId,
+            'batchId',
+            CommonUtil::TYPE_STRING
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->batchId = $batchId;
         return $this;

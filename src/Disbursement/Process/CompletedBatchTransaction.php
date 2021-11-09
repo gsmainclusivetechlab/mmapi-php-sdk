@@ -38,9 +38,17 @@ class CompletedBatchTransaction extends BaseProcess
      */
     public function __construct($batchId, $filter = null)
     {
-        CommonUtil::validateArgument($batchId, 'batchId', CommonUtil::TYPE_STRING);
+        CommonUtil::validateArgument(
+            $batchId,
+            'batchId',
+            CommonUtil::TYPE_STRING
+        );
         if ($filter) {
-            CommonUtil::validateArgument($filter, 'filter', CommonUtil::TYPE_ARRAY);
+            CommonUtil::validateArgument(
+                $filter,
+                'filter',
+                CommonUtil::TYPE_ARRAY
+            );
         }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->batchId = $batchId;
