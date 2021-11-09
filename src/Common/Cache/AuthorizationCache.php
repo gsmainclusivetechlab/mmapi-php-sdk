@@ -55,7 +55,10 @@ abstract class AuthorizationCache
     public static function push(AuthToken $authObj, $clientId)
     {
         $cachePath = self::cachePath();
-        if (!is_dir(dirname($cachePath)) && !mkdir(dirname($cachePath), 0755, true)) {
+        if (
+            !is_dir(dirname($cachePath)) &&
+            !mkdir(dirname($cachePath), 0755, true)
+        ) {
             throw new \mmpsdk\Common\Exceptions\SDKException(
                 "Failed to create directory at: $cachePath"
             );
@@ -73,7 +76,9 @@ abstract class AuthorizationCache
             ];
         }
         if (!file_put_contents($cachePath, json_encode($tokens))) {
-            throw new \mmpsdk\Common\Exceptions\SDKException('Failed to write cache');
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                'Failed to write cache'
+            );
         }
     }
 

@@ -437,7 +437,9 @@ class RequestUtil
                 }
                 break;
             default:
-                throw new \mmpsdk\Common\Exceptions\SDKException("Unknown Request Method: $method");
+                throw new \mmpsdk\Common\Exceptions\SDKException(
+                    "Unknown Request Method: $method"
+                );
                 break;
         }
 

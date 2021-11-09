@@ -118,7 +118,11 @@ class MobileMoney
                 'consumerSecret',
                 CommonUtil::TYPE_STRING
             );
-            CommonUtil::validateArgument(self::getApiKey(), 'apiKey', CommonUtil::TYPE_STRING);
+            CommonUtil::validateArgument(
+                self::getApiKey(),
+                'apiKey',
+                CommonUtil::TYPE_STRING
+            );
         }
     }
 
