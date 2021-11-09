@@ -10,7 +10,7 @@ use mmpsdk\Common\Constants\MobileMoney;
  */
 class EncDecUtil
 {
-    public static function generateHash($body)
+    public static function generateHash()
     {
     }
 
