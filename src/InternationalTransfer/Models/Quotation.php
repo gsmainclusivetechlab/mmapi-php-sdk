@@ -3,6 +3,7 @@
 namespace mmpsdk\InternationalTransfer\Models;
 
 use mmpsdk\Common\Models\BaseModel;
+use mmpsdk\Common\Utils\CommonUtil;
 
 /**
  * Class Quotation
@@ -614,8 +615,12 @@ class Quotation extends BaseModel
     public function jsonSerialize()
     {
         return $this->filterEmpty([
-            'creditParty' => $this->creditParty,
-            'debitParty' => $this->debitParty,
+            'creditParty' => CommonUtil::DeserializeToSupportObject(
+                $this->creditParty
+            ),
+            'debitParty' =>CommonUtil::DeserializeToSupportObject(
+                $this->debitParty
+            ),
             'type' => $this->type,
             'subtype' => $this->subtype,
             'requestAmount' => $this->requestAmount,
@@ -629,7 +634,9 @@ class Quotation extends BaseModel
             'sendingServiceProviderCountry' =>
                 $this->sendingServiceProviderCountry,
             'requestDate' => $this->requestDate,
-            'customData' => $this->customData,
+            'customData' => CommonUtil::DeserializeToSupportObject(
+                $this->customData
+            ),
             'metadata' => $this->metadata
         ]);
     }
