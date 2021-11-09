@@ -42,7 +42,7 @@ class ApproveBatchTransaction extends BaseProcess
      */
     public function __construct($batchId, $callBackUrl = null)
     {
-        CommonUtil::validateArgument($batchId, 'batchId', 'string');
+        CommonUtil::validateArgument($batchId, 'batchId', CommonUtil::TYPE_STRING);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $patchRequest = new GenericPatchRequest();
         $patchRequest
