@@ -19,11 +19,6 @@ abstract class AuthorizationCache
      */
     public static function pull($clientId)
     {
-        // Return if not enabled
-        // if (!self::isEnabled($config)) {
-        //     return null;
-        // }
-
         $tokens = null;
         $cachePath = self::cachePath();
         if (file_exists($cachePath)) {
@@ -59,18 +54,11 @@ abstract class AuthorizationCache
      */
     public static function push(AuthToken $authObj, $clientId)
     {
-        // Return if not enabled
-        // if (!self::isEnabled($config)) {
-        //     return;
-        // }
-
         $cachePath = self::cachePath();
-        if (!is_dir(dirname($cachePath))) {
-            if (mkdir(dirname($cachePath), 0755, true) == false) {
-                throw new \Exception(
-                    "Failed to create directory at $cachePath"
-                );
-            }
+        if (!is_dir(dirname($cachePath)) && !mkdir(dirname($cachePath), 0755, true)) {
+            throw new \mmpsdk\Common\Exceptions\SDKException(
+                "Failed to create directory at: $cachePath"
+            );
         }
 
         // Reads all the existing persisted data
@@ -85,21 +73,9 @@ abstract class AuthorizationCache
             ];
         }
         if (!file_put_contents($cachePath, json_encode($tokens))) {
-            throw new \Exception('Failed to write cache');
+            throw new \mmpsdk\Common\Exceptions\SDKException('Failed to write cache');
         }
     }
-
-    /**
-     * Determines from the Configuration if caching is currently enabled/disabled
-     *
-     * @param $config
-     * @return bool
-     */
-    // public static function isEnabled($config)
-    // {
-    //     $value = self::getConfigValue('cache.enabled', $config);
-    //     return empty($value) ? false : ((trim($value) == true || trim($value) == 'true'));
-    // }
 
     /**
      * Returns the cache file path

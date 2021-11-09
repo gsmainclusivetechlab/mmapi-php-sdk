@@ -10,6 +10,10 @@ use stdClass;
  */
 class CommonUtil
 {
+    const TYPE_STRING = 'string',
+        TYPE_OBJECT = 'object',
+        TYPE_ARRAY = 'array';
+
     public static function DeserializeToSupportObject($data)
     {
         if ($data == null || !is_array($data)) {

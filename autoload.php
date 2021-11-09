@@ -14,14 +14,15 @@ class AutoLoader
     public function load()
     {
         $composer = $this->getComposerFile();
-        if (isset($composer['autoload']['psr-4'])) {
-            $this->loadPSR4($composer['autoload']['psr-4']);
+        $autoload = 'autoload';
+        if (isset($composer[$autoload]['psr-4'])) {
+            $this->loadPSR4($composer[$autoload]['psr-4']);
         }
-        if (isset($composer['autoload']['psr-0'])) {
-            $this->loadPSR0($composer['autoload']['psr-0']);
+        if (isset($composer[$autoload]['psr-0'])) {
+            $this->loadPSR0($composer[$autoload]['psr-0']);
         }
-        if (isset($composer['autoload']['files'])) {
-            $this->loadFiles($composer['autoload']['files']);
+        if (isset($composer[$autoload]['files'])) {
+            $this->loadFiles($composer[$autoload]['files']);
         }
     }
 
@@ -47,7 +48,6 @@ class AutoLoader
 
     public function loadPSR($namespaces, $psr4)
     {
-        $dir = $this->dir;
         // Foreach namespace specified in the composer, load the given classes
         foreach ($namespaces as $namespace => $classpaths) {
             if (!is_array($classpaths)) {
@@ -56,7 +56,6 @@ class AutoLoader
             spl_autoload_register(function ($classname) use (
                 $namespace,
                 $classpaths,
-                $dir,
                 $psr4
             ) {
                 // Check if the namespace matches the class we are looking for

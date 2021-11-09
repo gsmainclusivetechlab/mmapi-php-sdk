@@ -37,7 +37,7 @@ class CreateAuthorisationCode extends BaseProcess
         CommonUtil::validateArgument(
             $accountIdentifier,
             'accountIdentifier',
-            'array'
+            CommonUtil::TYPE_ARRAY
         );
         CommonUtil::validateArgument($authorisationCode, 'authorisationCode');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);

@@ -30,10 +30,10 @@ class ViewAuthorisationCode extends BaseProcess
         CommonUtil::validateArgument(
             $accountIdentifier,
             'accountIdentifier',
-            'array'
+            CommonUtil::TYPE_ARRAY
         );
         if ($filter) {
-            CommonUtil::validateArgument($filter, 'filter', 'array');
+            CommonUtil::validateArgument($filter, 'filter', CommonUtil::TYPE_ARRAY);
         }
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->filter = $filter;

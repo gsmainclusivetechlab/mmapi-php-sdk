@@ -50,7 +50,6 @@ class AccessToken extends BaseProcess
             )
             ->build();
         $response = $this->makeRequest($request);
-        // var_dump($response);
         return $this->parseResponse($response);
     }
 }
