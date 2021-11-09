@@ -11,7 +11,6 @@ use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
 use mmpsdk\InternationalTransfer\Models\Quotation;
 use mmpsdk\InternationalTransfer\Process\TransferQuotation;
-use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
 
 $quotation = new Quotation();
 $quotation
