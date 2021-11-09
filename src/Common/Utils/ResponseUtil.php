@@ -45,13 +45,13 @@ class ResponseUtil
                     if (
                         isset($response->headers) &&
                         array_key_exists(
-                            Header::X_Records_Available_Count,
+                            Header::X_RECORDS_AVAILABLE_COUNT,
                             $response->headers
                         )
                     ) {
                         $count =
                             $response->headers[
-                                Header::X_Records_Available_Count
+                                Header::X_RECORDS_AVAILABLE_COUNT
                             ];
                     }
                     $data = $obj->hydrate($decodedResponse, null, $count);

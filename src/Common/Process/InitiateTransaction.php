@@ -42,7 +42,6 @@ class InitiateTransaction extends BaseProcess
     public function __construct(Transaction $transaction, $callBackUrl = null)
     {
         CommonUtil::validateArgument($transaction, 'transaction');
-        // $validator = new TransactionValidator($transaction);
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->transaction = $transaction;
         return $this;
