@@ -618,7 +618,7 @@ class Quotation extends BaseModel
             'creditParty' => CommonUtil::DeserializeToSupportObject(
                 $this->creditParty
             ),
-            'debitParty' =>CommonUtil::DeserializeToSupportObject(
+            'debitParty' => CommonUtil::DeserializeToSupportObject(
                 $this->debitParty
             ),
             'type' => $this->type,

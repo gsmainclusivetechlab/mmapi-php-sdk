@@ -26,10 +26,8 @@ class TransferQuotation extends BaseProcess
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(
-        Quotation $quotation,
-        $callBackUrl = null
-    ) {
+    public function __construct(Quotation $quotation, $callBackUrl = null)
+    {
         CommonUtil::validateArgument($quotation, 'quotation');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->quotation = $quotation;
