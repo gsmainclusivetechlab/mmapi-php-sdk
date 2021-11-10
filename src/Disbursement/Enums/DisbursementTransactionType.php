@@ -8,7 +8,7 @@ namespace mmpsdk\Disbursement\Enums;
  */
 class DisbursementTransactionType
 {
-    public const DISBURSEMENT = 'disbursement',
+    const DISBURSEMENT = 'disbursement',
         REVERSAL = 'reversal';
 
     /**
