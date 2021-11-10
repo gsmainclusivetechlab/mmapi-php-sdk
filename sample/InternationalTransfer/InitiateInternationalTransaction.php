@@ -16,8 +16,8 @@ use mmpsdk\InternationalTransfer\Process\InitiateInternationalTransaction;
 
 $transaction = new Transaction();
 $transaction
-    ->setCreditParty(['accountid' => '2000'])
-    ->setDebitParty(['accountid' => '2999'])
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678'])
     ->setAmount('100.00')
     ->setCurrency('GBP');
 $postalAddress = new Address();
@@ -66,8 +66,7 @@ $requestingOrganisation
 $internationalTransferInformation = new InternationalTransferInformation();
 $internationalTransferInformation
     ->setOriginCountry('GB')
-    ->setQuotationReference('REF-1636455454212')
-    ->setQuoteId('123')
+    ->setQuotationReference('REF-1636533068206')
     ->setReceivingCountry('RW')
     ->setRemittancePurpose('personal')
     ->setRelationshipSender('none')

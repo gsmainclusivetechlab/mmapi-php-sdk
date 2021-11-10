@@ -14,9 +14,9 @@ use mmpsdk\InternationalTransfer\Process\TransferQuotation;
 
 $quotation = new Quotation();
 $quotation
-    ->setCreditParty(['accountid' => '2000'])
-    ->setDebitParty(['accountid' => '2999'])
-    ->setRequestAmount('75.30')
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678'])
+    ->setRequestAmount('77.30')
     ->setRequestCurrency('RWF')
     ->setRequestDate('2018-07-03T11:43:27.405Z')
     ->setType(InternationalTransactionType::INTERNATIONAL)
