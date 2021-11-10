@@ -5,7 +5,6 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Process\InitiateBulkDisbursement;
-use mmpsdk\Disbursement\Process\InitiateDisbursement;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class InitiateBulkDisbursementTest extends ProcessTestCase
