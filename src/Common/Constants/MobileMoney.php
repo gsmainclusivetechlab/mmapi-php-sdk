@@ -111,14 +111,18 @@ class MobileMoney
             CommonUtil::validateArgument(
                 self::getConsumerKey(),
                 'consumerKey',
-                'string'
+                CommonUtil::TYPE_STRING
             );
             CommonUtil::validateArgument(
                 self::getConsumerSecret(),
                 'consumerSecret',
-                'string'
+                CommonUtil::TYPE_STRING
             );
-            CommonUtil::validateArgument(self::getApiKey(), 'apiKey', 'string');
+            CommonUtil::validateArgument(
+                self::getApiKey(),
+                'apiKey',
+                CommonUtil::TYPE_STRING
+            );
         }
     }
 

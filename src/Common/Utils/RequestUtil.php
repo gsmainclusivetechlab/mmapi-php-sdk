@@ -2,7 +2,6 @@
 
 namespace mmpsdk\Common\Utils;
 
-use Exception;
 use stdClass;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\MobileMoney;
@@ -329,13 +328,13 @@ class RequestUtil
      * Execute request
      *
      * @return  Curl
-     * @throws  Exception
+     * @throws  SDKException
      */
     public function build()
     {
         // cURL is not enabled
         if (!$this->_isEnabled()) {
-            throw new Exception(
+            throw new \mmpsdk\Common\Exceptions\SDKException(
                 __CLASS__ .
                     ': PHP was not built with cURL enabled. Rebuild PHP with --with-curl to use cURL.'
             );
@@ -346,7 +345,7 @@ class RequestUtil
 
         // Unrecognized request method?
         if (!in_array($method, $this->_methods)) {
-            throw new Exception(
+            throw new \mmpsdk\Common\Exceptions\SDKException(
                 __CLASS__ . ': Unrecognized request method of ' . $this->_method
             );
         }
@@ -408,7 +407,6 @@ class RequestUtil
 
                 // Set options
                 $this->option('CURLOPT_HTTPGET', 1);
-                // $this->option('CURLOPT_HTTPHEADER', Header::CONTENT_TYPE . ': application/json');
                 break;
 
             case 'POST':
@@ -438,21 +436,10 @@ class RequestUtil
                     );
                 }
                 break;
-
-            // Mostly for future use
-            case 'PUT':
-                // Set options
-                $this->options([
-                    'CURLOPT_PUT' => true,
-                    'CURLOPT_POSTFIELDS' => $this->_params
-                ]);
-                break;
-
-            // Mostly for future use
-            case 'DELETE':
-                // Set options
-                $this->option('CURLOPT_CUSTOMREQUEST', 'DELETE');
-                $this->option('CURLOPT_POSTFIELDS', $this->_params);
+            default:
+                throw new \mmpsdk\Common\Exceptions\SDKException(
+                    "Unknown Request Method: $method"
+                );
                 break;
         }
 
@@ -477,17 +464,12 @@ class RequestUtil
             $this->option('CURLOPT_RETURNTRANSFER', true);
         }
 
-        // Set failonerror option if it isn't already set
-        // if (!array_key_exists(CURLOPT_FAILONERROR, $this->_options)) {
-        //     $this->option('CURLOPT_FAILONERROR', true);
-        // }
-
         // Set user agent option if it isn't already set
         if (!array_key_exists(CURLOPT_USERAGENT, $this->_options)) {
             $this->option('CURLOPT_USERAGENT', $this->_agent);
         }
 
-        //enable headers
+        // Enable Response Header
         if (!array_key_exists(CURLOPT_HEADER, $this->_options)) {
             $this->option('CURLOPT_HEADER', 1);
         }
@@ -521,25 +503,6 @@ class RequestUtil
         }
 
         $this->_curlHandle = $ch;
-        // Execute
-        // $response = new stdClass();
-        // $response->result = curl_exec($ch);
-        // $response->info = curl_getinfo($ch);
-        // $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        // $response->error = curl_error($ch);
-        // $response->error_code = curl_errno($ch);
-        // $response->clientCorrelationId = $this->_clientCorrelationId;
-        // $response->requestObj = $this;
-
-        // Reset the options
-
-        // $this->_url = '';
-        // $this->_params = '';
-        // $this->_options = array();
-        // $this->_contentType = false;
-
-        // Close cURL request
-        // curl_close($ch);
 
         return $this;
     }
@@ -607,7 +570,7 @@ class RequestUtil
      *
      * @param   string  $key
      * @param   string  $value
-     * @throws  Exception
+     * @throws  SDKException
      */
     protected function _option($key = '', $value = '')
     {
@@ -617,7 +580,7 @@ class RequestUtil
             if (defined($const)) {
                 $key = constant(strtoupper($key));
             } else {
-                throw new Exception(
+                throw new \mmpsdk\Common\Exceptions\SDKException(
                     'Curl: Constant [' . $const . '] not defined.'
                 );
             }

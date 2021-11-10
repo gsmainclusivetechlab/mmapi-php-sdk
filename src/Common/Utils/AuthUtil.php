@@ -17,7 +17,7 @@ class AuthUtil
 {
     const EXPIRY_BUFFER_TIME = 5;
 
-    public static function buildHeader(RequestUtil $request, $content = null)
+    public static function buildHeader(RequestUtil $request)
     {
         switch (MobileMoney::getSecurityLevel()) {
             case SecurityLevel::NONE:
@@ -63,7 +63,7 @@ class AuthUtil
                 return $request;
                 break;
             default:
-                throw new Exception(
+                throw new \mmpsdk\Common\Exceptions\SDKException(
                     'Undefined security level:' .
                         MobileMoney::getSecurityLevel()
                 );
@@ -141,17 +141,17 @@ class AuthUtil
                 CommonUtil::validateArgument(
                     MobileMoney::getConsumerKey(),
                     'consumerKey',
-                    'string'
+                    CommonUtil::TYPE_STRING
                 );
                 CommonUtil::validateArgument(
                     MobileMoney::getConsumerSecret(),
                     'consumerSecret',
-                    'string'
+                    CommonUtil::TYPE_STRING
                 );
                 CommonUtil::validateArgument(
                     MobileMoney::getApiKey(),
                     'apiKey',
-                    'string'
+                    CommonUtil::TYPE_STRING
                 );
                 return true;
                 break;
@@ -161,7 +161,7 @@ class AuthUtil
                 return true;
                 break;
             default:
-                throw new Exception(
+                throw new \mmpsdk\Common\Exceptions\SDKException(
                     'Undefined security level:' .
                         MobileMoney::getSecurityLevel()
                 );

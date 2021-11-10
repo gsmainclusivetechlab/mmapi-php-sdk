@@ -43,7 +43,6 @@ class TransactionReversal extends BaseProcess
         } else {
             $this->reversal = $reversal;
         }
-        // $validator = new ReversalValidator($this->reversal);
         $this->transactionReference = $transactionReference;
         return $this;
     }

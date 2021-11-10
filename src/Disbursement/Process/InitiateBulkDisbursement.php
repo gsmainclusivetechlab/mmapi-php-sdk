@@ -1,8 +1,7 @@
 <?php
 
-namespace mmpsdk\Common\Process;
+namespace mmpsdk\Disbursement\Process;
 
-use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Utils\RequestUtil;
 
@@ -10,40 +9,36 @@ use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
+use mmpsdk\Disbursement\Models\BatchTransaction;
 
 /**
- * Class InitiateTransaction
- * @package mmpsdk\Common\Process
+ * Class InitiateBulkDisbursement
+ * @package mmpsdk\Disbursement\Process
  */
-class InitiateTransaction extends BaseProcess
+class InitiateBulkDisbursement extends BaseProcess
 {
     /**
-     * Transaction object
+     * Merchant Transaction object
      *
-     * @var Transaction
+     * @var BatchTransaction
      */
-    private $transaction;
+    private $batchTransaction;
 
     /**
-     * Transaction type
-     *
-     * @var Transaction
-     */
-    protected $transactionType;
-
-    /**
-     * Initiates a Transaction Request.
+     * Make a bulk disbursement.
      * Asynchronous payment flow is used with a final callback.
      *
-     * @param Transaction $transaction
+     * @param BatchTransaction $batchTransaction
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(Transaction $transaction, $callBackUrl = null)
-    {
-        CommonUtil::validateArgument($transaction, 'transaction');
+    public function __construct(
+        BatchTransaction $batchTransaction,
+        $callBackUrl = null
+    ) {
+        CommonUtil::validateArgument($batchTransaction, 'batchTransaction');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $this->transaction = $transaction;
+        $this->batchTransaction = $batchTransaction;
         return $this;
     }
 
@@ -54,12 +49,9 @@ class InitiateTransaction extends BaseProcess
     public function execute()
     {
         $request = RequestUtil::post(
-            API::CREATE_TRANSACTION,
-            json_encode($this->transaction)
+            API::CREATE_BATCH_TRANSACTION,
+            json_encode($this->batchTransaction)
         )
-            ->setUrlParams([
-                '{transactionType}' => $this->transactionType
-            ])
             ->setClientCorrelationId($this->clientCorrelationId)
             ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->build();
