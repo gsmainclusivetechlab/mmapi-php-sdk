@@ -67,7 +67,7 @@ $internationalTransferInformation = new InternationalTransferInformation();
 $internationalTransferInformation
     ->setOriginCountry('GB')
     ->setQuotationReference('REF-1636455454212')
-    // ->setQuoteId("123}")
+    ->setQuoteId("123")
     ->setReceivingCountry('RW')
     ->setRemittancePurpose('personal')
     ->setRelationshipSender('none')
