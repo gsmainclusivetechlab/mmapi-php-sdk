@@ -2,8 +2,6 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\Disbursement\Enums\BatchStatus;
-use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Disbursement\Process\ApproveBatchTransaction;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
