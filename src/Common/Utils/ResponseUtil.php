@@ -35,6 +35,9 @@ class ResponseUtil
             case self::ACCEPTED:
             case self::CREATED:
                 $decodedResponse = json_decode($response->result);
+                if (is_array($decodedResponse) && empty($decodedResponse)) {
+                    return $decodedResponse;
+                }
                 //Add client correlation id along with response
                 $data = $decodedResponse;
                 if ($response->clientCorrelationId) {

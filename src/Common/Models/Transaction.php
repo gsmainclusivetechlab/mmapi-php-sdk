@@ -606,6 +606,7 @@ class Transaction extends BaseModel
             ),
             'descriptionText' => $this->descriptionText,
             'fees' => $this->fees,
+            'type' => $this->type,
             'geoCode' => $this->geoCode,
             'internationalTransferInformation' =>
                 $this->internationalTransferInformation,
