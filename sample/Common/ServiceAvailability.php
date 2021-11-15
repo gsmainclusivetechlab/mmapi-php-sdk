@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\Common\Process\ServiceAvailability;
+use mmpsdk\Common\Common;
 
 try {
-    $response = (new ServiceAvailability())->execute();
+    $response = Common::viewServiceAvailability()->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());
