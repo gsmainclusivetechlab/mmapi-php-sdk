@@ -71,9 +71,9 @@ class CommonTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveTransaction::class
         );
 
-        $reversalTransaction = Common::createReversalTransaction('ABC123');
+        $reversalTransaction = Common::createReversal('ABC123');
         $this->checkStaticFunctionParamCount(
-            'createReversalTransaction',
+            'createReversal',
             mmpsdk\Common\Process\TransactionReversal::class
         );
         $this->checkFunctionReturnInstance(

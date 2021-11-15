@@ -58,10 +58,10 @@ Other functions available for `MobileMoney`:
         ->setCreditParty(['walletid' => '1'])
         ->setDebitParty(['msisdn' => '+44012345678']);
     ```
--   Create an instance of `InitiatePayment` by passing the `Transaction` object and the callback url (optional) as constructor parameters
+-   Call `createMerchantTransaction()` by passing the `Transaction` object and the callback url (optional) as parameters
     ```php
-    use mmpsdk\MerchantPayment\Process\InitiatePayment;
-    $request = new InitiatePayment($transaction, 'http://example.com/');
+    use mmpsdk\MerchantPayment\MerchantPayment;
+    $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
     ```
 -   If callback url is not supplied to the constructor, the callback url defined during the SDK's initialization will be used. You'll have to rely on the polling API to detect the status of the request if you don't pass the callback URL and haven't configured a callback URL during SDK Initialization.
 
@@ -75,18 +75,18 @@ Other functions available for `MobileMoney`:
 -   After initialising, invoke the method `getClientCorrelationId()` to get the client correlation id.
 
     ```php
-    use mmpsdk\MerchantPayment\Process\InitiatePayment;
-    $request = new InitiatePayment($transaction, 'http://example.com/');
+    use mmpsdk\MerchantPayment\MerchantPayment;
+    $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
     $clientCorrelationId = $request->getClientCorrelationId();
     ```
 
 -   Finally, to make the request, invoke the `execute()`
 
     ```php
-    use mmpsdk\MerchantPayment\Process\InitiatePayment;
+    use mmpsdk\MerchantPayment\MerchantPayment;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $request = new InitiatePayment($transaction);
+        $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
         $clientCorrelationId = $request->getClientCorrelationId();
         print_r('client correlation id: ', $clientCorrelationId);
         $repsonse = $request->execute();
@@ -150,14 +150,14 @@ Other functions available for `MobileMoney`:
         ->setCurrency('GBP')
         ->setAmount('1001.00');
     ```
--   Create an instance of `CreateAuthorisationCode` by passing the `AuthorisationCode` object, account identifiers and the callback url (optional) as constructor parameters
+-   Call `createAuthorisationCode()` by passing the `AuthorisationCode` object, account identifiers and the callback url (optional) as parameters
 
     ```php
-    use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
+    use mmpsdk\MerchantPayment\MerchantPayment;
     $accountIdentifier = [
         'accountid' => 2000
     ];
-    $request = new CreateAuthorisationCode(
+    $request = MerchantPayment::createAuthorisationCode(
         $authorisationObj,
         $accountIdentifier,
         'http://example.com/'
@@ -167,8 +167,8 @@ Other functions available for `MobileMoney`:
 -   After initialising, invoke the method `getClientCorrelationId()` to get the client correlation id.
 
     ```php
-    use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
-    $request = new CreateAuthorisationCode(
+    use mmpsdk\MerchantPayment\MerchantPayment;
+    $request = MerchantPayment::createAuthorisationCode(
         $authorisationObj,
         $accountIdentifier,
         'http://example.com/'
@@ -179,10 +179,14 @@ Other functions available for `MobileMoney`:
 -   Finally, to make the request, invoke the `execute()`
 
     ```php
-    use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
+    use mmpsdk\MerchantPayment\MerchantPayment;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $request = new CreateAuthorisationCode($authorisationObj, $accountIdentifier, 'http://example.com/');
+        $request = MerchantPayment::createAuthorisationCode(
+            $authorisationObj,
+            $accountIdentifier,
+            'http://example.com/'
+        );
         $clientCorrelationId = $request->getClientCorrelationId()
         print_r('client correlation id: ', $clientCorrelationId);
         $repsonse = $request->execute();
@@ -197,15 +201,15 @@ Other functions available for `MobileMoney`:
 
 Retrieves a set of transactions for a given account. The offset and limit filters are used by the caller to retrieve the transactions in sets.
 
--   Create an instance of `RetrieveAccountTransactions` by passing the account identifiers and and the filters (optional) as constructor parameters
+-   Call `viewAccountTransaction()` by passing the account identifiers and and the filters (optional) as parameters
 
     ```php
-    use mmpsdk\Common\Process\RetrieveAccountTransactions;
+    use mmpsdk\Common\Common;
     $accountIdentifier = [
         'accountid' => 2000
     ];
     $filter = ['limit' => 5, 'offset' => 0];
-    $request = new RetrieveAccountTransactions($accountIdentifier, $filter);
+    $request = Common::viewAccountTransaction($accountIdentifier, $filter);
     ```
 
 -   To make the request, invoke the `execute()`
@@ -214,10 +218,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
     use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $response = (new RetrieveAccountTransactions(
-            $accountIdentifier,
-            $filter
-        ))->execute();
+        $response = Common::viewAccountTransaction($accountIdentifier, $filter)->execute();
         print_r($response);
     } catch (SDKException $ex) {
         print_r($ex->getMessage());

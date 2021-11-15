@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\PaymentRefund;
+use mmpsdk\MerchantPayment\MerchantPayment;
 
 $transaction = new Transaction();
 $transaction
@@ -12,7 +12,7 @@ $transaction
     ->setDebitParty(['accountid' => '2999']);
 
 try {
-    $request = new PaymentRefund($transaction, null);
+    $request = MerchantPayment::createRefundTransaction($transaction);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

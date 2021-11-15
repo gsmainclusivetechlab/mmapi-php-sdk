@@ -87,7 +87,7 @@ class Common
      * @param string $callBackUrl
      * @return TransactionReversal
      */
-    public static function createReversalTransaction(
+    public static function createReversal(
         $transactionReference,
         \mmpsdk\Common\Models\Reversal $reversal = null,
         $callBackUrl = null

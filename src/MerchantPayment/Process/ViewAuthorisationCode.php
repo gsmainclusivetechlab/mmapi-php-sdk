@@ -16,31 +16,30 @@ class ViewAuthorisationCode extends BaseProcess
 {
     private $accountIdentifier;
 
-    private $filter = null;
+    private $authorisationCode;
 
     /**
      * Allows a mobile money payer or payee to view authorisation codes for a given account.
      *
      * @param array $accountIdentifier
-     * @param array $filter
+     * @param string $authorisationCode
      * @return this
      */
-    public function __construct($accountIdentifier, $filter = null)
+    public function __construct($accountIdentifier, $authorisationCode)
     {
         CommonUtil::validateArgument(
             $accountIdentifier,
             'accountIdentifier',
             CommonUtil::TYPE_ARRAY
         );
-        if ($filter) {
-            CommonUtil::validateArgument(
-                $filter,
-                'filter',
-                CommonUtil::TYPE_ARRAY
-            );
-        }
+
+        CommonUtil::validateArgument(
+            $authorisationCode,
+            'authorisationCode',
+            CommonUtil::TYPE_STRING
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
-        $this->filter = $filter;
+        $this->authorisationCode = $authorisationCode;
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
@@ -53,11 +52,12 @@ class ViewAuthorisationCode extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(API::AUTHORISATION_CODE, $this->filter)
+        $request = RequestUtil::get(API::VIEW_AUTHORISATION_CODE)
             ->setUrlParams([
                 '{accountId}' => CommonUtil::encodeSupportObjectToString(
                     $this->accountIdentifier
-                )
+                ),
+                '{authorisationCode}' => $this->authorisationCode
             ])
             ->build();
 
