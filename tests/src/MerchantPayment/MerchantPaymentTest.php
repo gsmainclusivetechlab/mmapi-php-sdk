@@ -11,7 +11,10 @@ class MerchantPaymentTest extends WrapperTestCase
     {
         $this->wrapperClass = MerchantPayment::class;
 
-        $authorisationCode = MerchantPayment::createAuthorisationCode(['accountid' => 2000], new AuthorisationCode());
+        $authorisationCode = MerchantPayment::createAuthorisationCode(
+            ['accountid' => 2000],
+            new AuthorisationCode()
+        );
         $this->checkStaticFunctionParamCount(
             'createAuthorisationCode',
             mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
@@ -21,7 +24,9 @@ class MerchantPaymentTest extends WrapperTestCase
             mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
         );
 
-        $merchantTransaction = MerchantPayment::createMerchantTransaction(new Transaction());
+        $merchantTransaction = MerchantPayment::createMerchantTransaction(
+            new Transaction()
+        );
         $this->checkStaticFunctionParamCount(
             'createMerchantTransaction',
             mmpsdk\MerchantPayment\Process\InitiatePayment::class
@@ -31,7 +36,9 @@ class MerchantPaymentTest extends WrapperTestCase
             mmpsdk\MerchantPayment\Process\InitiatePayment::class
         );
 
-        $refundTransaction = MerchantPayment::createRefundTransaction(new Transaction());
+        $refundTransaction = MerchantPayment::createRefundTransaction(
+            new Transaction()
+        );
         $this->checkStaticFunctionParamCount(
             'createRefundTransaction',
             mmpsdk\MerchantPayment\Process\PaymentRefund::class
@@ -41,7 +48,10 @@ class MerchantPaymentTest extends WrapperTestCase
             mmpsdk\MerchantPayment\Process\PaymentRefund::class
         );
 
-        $authorisationCodeObj = MerchantPayment::viewAuthorisationCode(['accountId' => '1234'], 'REF123');
+        $authorisationCodeObj = MerchantPayment::viewAuthorisationCode(
+            ['accountId' => '1234'],
+            'REF123'
+        );
         $this->checkStaticFunctionParamCount(
             'viewAuthorisationCode',
             mmpsdk\MerchantPayment\Process\ViewAuthorisationCode::class

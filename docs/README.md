@@ -61,7 +61,10 @@ Other functions available for `MobileMoney`:
 -   Call `createMerchantTransaction()` by passing the `Transaction` object and the callback url (optional) as parameters
     ```php
     use mmpsdk\MerchantPayment\MerchantPayment;
-    $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
+    $request = MerchantPayment::createMerchantTransaction(
+        $transaction,
+        'http://example.com/'
+    );
     ```
 -   If callback url is not supplied to the constructor, the callback url defined during the SDK's initialization will be used. You'll have to rely on the polling API to detect the status of the request if you don't pass the callback URL and haven't configured a callback URL during SDK Initialization.
 
@@ -76,7 +79,10 @@ Other functions available for `MobileMoney`:
 
     ```php
     use mmpsdk\MerchantPayment\MerchantPayment;
-    $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
+    $request = MerchantPayment::createMerchantTransaction(
+        $transaction,
+        'http://example.com/'
+    );
     $clientCorrelationId = $request->getClientCorrelationId();
     ```
 
@@ -86,7 +92,10 @@ Other functions available for `MobileMoney`:
     use mmpsdk\MerchantPayment\MerchantPayment;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $request = MerchantPayment::createMerchantTransaction($transaction, 'http://example.com/');
+        $request = MerchantPayment::createMerchantTransaction(
+            $transaction,
+            'http://example.com/'
+        );
         $clientCorrelationId = $request->getClientCorrelationId();
         print_r('client correlation id: ', $clientCorrelationId);
         $repsonse = $request->execute();
@@ -218,7 +227,10 @@ Retrieves a set of transactions for a given account. The offset and limit filter
     use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $response = Common::viewAccountTransaction($accountIdentifier, $filter)->execute();
+        $response = Common::viewAccountTransaction(
+            $accountIdentifier,
+            $filter
+        )->execute();
         print_r($response);
     } catch (SDKException $ex) {
         print_r($ex->getMessage());
