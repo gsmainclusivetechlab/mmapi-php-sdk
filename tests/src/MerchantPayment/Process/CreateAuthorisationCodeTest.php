@@ -26,7 +26,7 @@ class CreateAuthorisationCodeTest extends ProcessTestCase
         $this->requestMethod = 'POST';
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
-            '/accounts/accountid@2000/authorisationcodes';
+            '/accounts/accountid/2000/authorisationcodes';
         $this->requestParams = [
             '{"amount":"1001.00","currency":"GBP","requestDate":"2021-10-27T08:56:26.40299"}'
         ];

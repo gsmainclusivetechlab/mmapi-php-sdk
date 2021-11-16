@@ -19,7 +19,7 @@ class RetrieveAccountTransactionsTest extends ProcessTestCase
         $this->requestMethod = 'GET';
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
-            '/accounts/accountid@2000/transactions?offset=0&limit=10';
+            '/accounts/accountid/2000/transactions?offset=0&limit=10';
         $this->className = RetrieveAccountTransactions::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

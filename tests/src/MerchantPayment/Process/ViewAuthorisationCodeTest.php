@@ -9,16 +9,11 @@ class ViewAuthorisationCodeTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
-        $this->constructorArgs = [
-            ['accountid' => '2000'],
-            [
-                'limit' => 10
-            ]
-        ];
+        $this->constructorArgs = [['accountid' => '2000'], 'REF123'];
         $this->requestMethod = 'GET';
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
-            '/accounts/accountid@2000/authorisationcodes?limit=10';
+            '/accounts/accountid/2000/authorisationcodes/REF123';
         $this->className = ViewAuthorisationCode::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

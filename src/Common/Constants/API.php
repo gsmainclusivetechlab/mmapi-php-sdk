@@ -61,7 +61,7 @@ class API
          * Allows a payer to generate a payment code which when presented to the payee, can be redeemed for an amount associated with the code.
          */
         AUTHORISATION_CODE = '/accounts/{accountId}/authorisationcodes',
-        VIEW_AUTHORISATION_CODE = '/accounts/{accountId}/authorisationcodes',
+        VIEW_AUTHORISATION_CODE = '/accounts/{accountId}/authorisationcodes/{authorisationCode}',
         CREATE_AUTHORISATION_CODE_VIA_IDENTIFIER = '/accounts/{identifierType}/{identifier}/authorisationcodes';
 
     /**
