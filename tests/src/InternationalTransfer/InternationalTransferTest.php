@@ -35,9 +35,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\InternationalTransfer\Process\TransferQuotation::class
         );
 
-        $quotation = InternationalTransfer::viewQuotation(
-            'REF123'
-        );
+        $quotation = InternationalTransfer::viewQuotation('REF123');
         $this->checkStaticFunctionParamCount(
             'viewQuotation',
             mmpsdk\InternationalTransfer\Process\ViewQuotation::class

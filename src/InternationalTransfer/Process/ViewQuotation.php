@@ -24,7 +24,11 @@ class ViewQuotation extends BaseProcess
      */
     public function __construct($quotationReference)
     {
-        CommonUtil::validateArgument($quotationReference, 'quotationReference', CommonUtil::TYPE_STRING);
+        CommonUtil::validateArgument(
+            $quotationReference,
+            'quotationReference',
+            CommonUtil::TYPE_STRING
+        );
         $this->setUp(self::SYNCHRONOUS_PROCESS);
         $this->quotationReference = $quotationReference;
         return $this;
@@ -35,9 +39,7 @@ class ViewQuotation extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::get(
-            API::VIEW_QUOTATION
-        )
+        $request = RequestUtil::get(API::VIEW_QUOTATION)
             ->setUrlParams([
                 '{quotationReference}' => $this->quotationReference
             ])

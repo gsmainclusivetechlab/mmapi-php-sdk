@@ -77,7 +77,9 @@ $transaction
     ->setRequestingOrganisation($requestingOrganisation)
     ->setInternationalTransferInformation($internationalTransferInformation);
 try {
-    $request = InternationalTransfer::createInternationalTransaction($transaction);
+    $request = InternationalTransfer::createInternationalTransaction(
+        $transaction
+    );
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();

@@ -13,9 +13,7 @@ class ViewQuotationTest extends ProcessTestCase
         $this->constructorArgs = [$quotationReference];
         $this->requestMethod = 'GET';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() .
-            '/quotations/' .
-            $quotationReference;
+            MobileMoney::getBaseUrl() . '/quotations/' . $quotationReference;
         $this->className = ViewQuotation::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

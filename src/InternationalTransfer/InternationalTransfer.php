@@ -35,7 +35,8 @@ class InternationalTransfer
      * @return TransferQuotation
      */
     public static function createQuotation(
-        \mmpsdk\InternationalTransfer\Models\Quotation $quotation, $callBackUrl = null
+        \mmpsdk\InternationalTransfer\Models\Quotation $quotation,
+        $callBackUrl = null
     ) {
         return new \mmpsdk\InternationalTransfer\Process\TransferQuotation(
             $quotation,
@@ -49,9 +50,8 @@ class InternationalTransfer
      * @param string $quotationReference
      * @return ViewQuotation
      */
-    public static function viewQuotation(
-        $quotationReference
-    ) {
+    public static function viewQuotation($quotationReference)
+    {
         return new \mmpsdk\InternationalTransfer\Process\ViewQuotation(
             $quotationReference
         );
