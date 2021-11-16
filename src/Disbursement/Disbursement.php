@@ -35,7 +35,7 @@ class Disbursement
      * @return this
      */
     public static function createBatchTransaction(
-       \mmpsdk\Disbursement\Models\BatchTransaction $batchTransaction,
+        \mmpsdk\Disbursement\Models\BatchTransaction $batchTransaction,
         $callBackUrl = null
     ) {
         return new \mmpsdk\Disbursement\Process\InitiateBulkDisbursement(
@@ -51,11 +51,11 @@ class Disbursement
      * @param array $filter
      * @return CompletedBatchTransaction
      */
-    public static function viewBatchCompletions(
-        $batchId, $filter = null
-    ) {
+    public static function viewBatchCompletions($batchId, $filter = null)
+    {
         return new \mmpsdk\Disbursement\Process\CompletedBatchTransaction(
-            $batchId, $filter
+            $batchId,
+            $filter
         );
     }
 
@@ -66,11 +66,11 @@ class Disbursement
      * @param array $filter
      * @return RejectedBatchTransaction
      */
-    public static function viewBatchRejections(
-        $batchId, $filter = null
-    ) {
+    public static function viewBatchRejections($batchId, $filter = null)
+    {
         return new \mmpsdk\Disbursement\Process\RejectedBatchTransaction(
-            $batchId, $filter
+            $batchId,
+            $filter
         );
     }
 
@@ -80,9 +80,8 @@ class Disbursement
      * @param string $batchId
      * @return RetrieveBatchTransaction
      */
-    public static function viewBatchTransaction(
-        $batchId
-    ) {
+    public static function viewBatchTransaction($batchId)
+    {
         return new \mmpsdk\Disbursement\Process\RetrieveBatchTransaction(
             $batchId
         );
@@ -96,11 +95,11 @@ class Disbursement
      * @param string $callBackUrl
      * @return this
      */
-    public static function updateBatchTransaction(
-        $batchId, $callBackUrl = null
-    ) {
+    public static function updateBatchTransaction($batchId, $callBackUrl = null)
+    {
         return new \mmpsdk\Disbursement\Process\ApproveBatchTransaction(
-            $batchId, $callBackUrl
+            $batchId,
+            $callBackUrl
         );
     }
 }

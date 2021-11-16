@@ -37,9 +37,7 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\InitiateBulkDisbursement::class
         );
 
-        $batchCompletion = Disbursement::viewBatchCompletions(
-            'REF123'
-        );
+        $batchCompletion = Disbursement::viewBatchCompletions('REF123');
         $this->checkStaticFunctionParamCount(
             'viewBatchCompletions',
             mmpsdk\Disbursement\Process\CompletedBatchTransaction::class
@@ -49,9 +47,7 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\CompletedBatchTransaction::class
         );
 
-        $batchRejection = Disbursement::viewBatchRejections(
-            'REF123'
-        );
+        $batchRejection = Disbursement::viewBatchRejections('REF123');
         $this->checkStaticFunctionParamCount(
             'viewBatchRejections',
             mmpsdk\Disbursement\Process\RejectedBatchTransaction::class
@@ -61,9 +57,7 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\RejectedBatchTransaction::class
         );
 
-        $batchRejection = Disbursement::viewBatchTransaction(
-            'REF123'
-        );
+        $batchRejection = Disbursement::viewBatchTransaction('REF123');
         $this->checkStaticFunctionParamCount(
             'viewBatchTransaction',
             mmpsdk\Disbursement\Process\RetrieveBatchTransaction::class
@@ -73,9 +67,7 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\RetrieveBatchTransaction::class
         );
 
-        $batchUpdate = Disbursement::updateBatchTransaction(
-            'REF123'
-        );
+        $batchUpdate = Disbursement::updateBatchTransaction('REF123');
         $this->checkStaticFunctionParamCount(
             'updateBatchTransaction',
             mmpsdk\Disbursement\Process\ApproveBatchTransaction::class
