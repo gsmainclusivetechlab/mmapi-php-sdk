@@ -29,11 +29,11 @@ class CommonTest extends WrapperTestCase
             mmpsdk\Common\Process\PollRequest::class
         );
 
-        $accountTransactions = Common::viewAccountTransaction([
+        $accountTransactions = Common::viewAccountTransactions([
             'accountid' => 2000
         ]);
         $this->checkStaticFunctionParamCount(
-            'viewAccountTransaction',
+            'viewAccountTransactions',
             mmpsdk\Common\Process\RetrieveAccountTransactions::class
         );
         $this->checkFunctionReturnInstance(

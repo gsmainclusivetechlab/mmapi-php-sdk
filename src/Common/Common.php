@@ -43,7 +43,7 @@ class Common
      * @param array $filter
      * @return RetrieveAccountTransactions
      */
-    public static function viewAccountTransaction(
+    public static function viewAccountTransactions(
         $accountIdentifier,
         $filter = null
     ) {

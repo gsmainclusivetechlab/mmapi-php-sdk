@@ -210,7 +210,7 @@ Other functions available for `MobileMoney`:
 
 Retrieves a set of transactions for a given account. The offset and limit filters are used by the caller to retrieve the transactions in sets.
 
--   Call `viewAccountTransaction()` by passing the account identifiers and and the filters (optional) as parameters
+-   Call `viewAccountTransactions()` by passing the account identifiers and and the filters (optional) as parameters
 
     ```php
     use mmpsdk\Common\Common;
@@ -218,7 +218,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
         'accountid' => 2000
     ];
     $filter = ['limit' => 5, 'offset' => 0];
-    $request = Common::viewAccountTransaction($accountIdentifier, $filter);
+    $request = Common::viewAccountTransactions($accountIdentifier, $filter);
     ```
 
 -   To make the request, invoke the `execute()`
@@ -227,7 +227,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
     use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $response = Common::viewAccountTransaction(
+        $response = Common::viewAccountTransactions(
             $accountIdentifier,
             $filter
         )->execute();

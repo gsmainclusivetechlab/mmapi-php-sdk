@@ -37,9 +37,10 @@ class CommonUtil
             );
         }
         $stringArray = [];
+        $seperator = count($data) == 1 ? '/' : '@';
         foreach ($data as $item) {
             $stringArray[] =
-                urlencode($item->key) . '@' . urlencode($item->value);
+                urlencode($item->key) . $seperator . urlencode($item->value);
         }
         return implode('$', $stringArray);
     }

@@ -13,7 +13,7 @@ class ViewAuthorisationCodeTest extends ProcessTestCase
         $this->requestMethod = 'GET';
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
-            '/accounts/accountid@2000/authorisationcodes/REF123';
+            '/accounts/accountid/2000/authorisationcodes/REF123';
         $this->className = ViewAuthorisationCode::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

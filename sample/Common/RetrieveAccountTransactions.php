@@ -8,7 +8,7 @@ $accountIdentifier = ['accountid' => '2000'];
 $filter = ['limit' => 5];
 
 try {
-    $response = Common::viewAccountTransaction(
+    $response = Common::viewAccountTransactions(
         $accountIdentifier,
         $filter
     )->execute();
