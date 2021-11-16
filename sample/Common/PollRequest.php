@@ -5,7 +5,7 @@ use mmpsdk\Common\Common;
 use mmpsdk\Common\Exceptions\SDKException;
 
 try {
-    $serverCorrelationId = 'a5f56e4b-91e2-4470-a6cd-f73405551639';
+    $serverCorrelationId = 'ea495e98-b5d2-4b03-ba43-4dfbce39cc60';
     $response = Common::viewRequestState($serverCorrelationId)->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {

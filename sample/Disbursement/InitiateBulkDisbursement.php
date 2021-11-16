@@ -3,7 +3,7 @@ require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\Disbursement\Process\InitiateBulkDisbursement;
+use mmpsdk\Disbursement\Disbursement;
 
 $batchTransaction = new BatchTransaction();
 $batchTransaction
@@ -31,7 +31,7 @@ array_push($transactionsArray, $transactionItem2);
 $batchTransaction->setTransactions($transactionsArray);
 
 try {
-    $request = new InitiateBulkDisbursement($batchTransaction);
+    $request = Disbursement::createBatchTransaction($batchTransaction);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
