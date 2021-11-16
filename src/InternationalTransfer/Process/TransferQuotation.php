@@ -19,7 +19,7 @@ class TransferQuotation extends BaseProcess
     private $quotation;
 
     /**
-     * Generate an authorisation code which can in turn be used at a merchant to authorise a payment.
+     * Request an international quotation.
      * Asynchronous flow is used with a final callback.
      *
      * @param Quotation $quotation

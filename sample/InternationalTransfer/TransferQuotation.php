@@ -9,8 +9,8 @@ use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
+use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdk\InternationalTransfer\Models\Quotation;
-use mmpsdk\InternationalTransfer\Process\TransferQuotation;
 
 $quotation = new Quotation();
 $quotation
@@ -67,7 +67,7 @@ $senderKyc
     ->setSubjectName($subjectName);
 $quotation->setSenderKyc($senderKyc);
 try {
-    $request = new TransferQuotation($quotation);
+    $request = InternationalTransfer::createQuotation($quotation);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();

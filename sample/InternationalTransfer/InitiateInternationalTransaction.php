@@ -11,8 +11,8 @@ use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 use mmpsdk\Common\Models\RequestingOrganisation;
 use mmpsdk\Common\Models\Transaction;
+use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdk\InternationalTransfer\Models\InternationalTransferInformation;
-use mmpsdk\InternationalTransfer\Process\InitiateInternationalTransaction;
 
 $transaction = new Transaction();
 $transaction
@@ -77,7 +77,7 @@ $transaction
     ->setRequestingOrganisation($requestingOrganisation)
     ->setInternationalTransferInformation($internationalTransferInformation);
 try {
-    $request = new InitiateInternationalTransaction($transaction);
+    $request = InternationalTransfer::createInternationalTransaction($transaction);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
