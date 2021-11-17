@@ -1,6 +1,6 @@
 {
     "name": "gsma/mmp",
-    "description": "The GSMA harmonised API initiative aims to increase adoption of the mobile money API through dedicated engagement with mobile money providers and support for ecosystem vendors.",
+    "description": "GSMA Mobile Money API SDK",
     "type": "library",
     "require": {
         "php": ">=5.4.0",
@@ -18,7 +18,8 @@
         "phpstan/phpstan": "^0.12.99",
         "squizlabs/php_codesniffer": "^3.6",
         "dms/phpunit-arraysubset-asserts": "^0.3.1",
-        "phpcompatibility/php-compatibility": "*"
+        "phpcompatibility/php-compatibility": "*",
+        "brainmaestro/composer-git-hooks": "^2.8"
     },
     "scripts": {
         "fix-cs": [
@@ -27,7 +28,22 @@
         ],
         "tests": "./vendor/bin/phpunit --testdox tests",
         "check-compat": "./vendor/bin/phpcs -p src/ --standard=PHPCompatibility --runtime-set testVersion 5.4-8.0",
-        "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
-        "post-update-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility"
+        "post-install-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+            "./vendor/bin/cghooks add --ignore-lock"
+        ],
+        "post-update-cmd": [
+            "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
+            "./vendor/bin/cghooks update"
+        ]
+    },
+    "extra": {
+        "hooks": {
+            "pre-commit": [
+                "echo committing as $(git config user.name)",
+                "composer fix-cs"
+            ],
+            "post-merge": "composer install"
+        }
     }
 }
