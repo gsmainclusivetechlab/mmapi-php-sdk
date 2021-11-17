@@ -32,7 +32,7 @@ class Disbursement
      *
      * @param BatchTransaction $batchTransaction
      * @param string $callBackUrl
-     * @return this
+     * @return InitiateBulkDisbursement
      */
     public static function createBatchTransaction(
         \mmpsdk\Disbursement\Models\BatchTransaction $batchTransaction,
@@ -93,7 +93,7 @@ class Disbursement
      *
      * @param BatchTransaction $batchTransaction
      * @param string $callBackUrl
-     * @return this
+     * @return ApproveBatchTransaction
      */
     public static function updateBatchTransaction($batchId, $callBackUrl = null)
     {
