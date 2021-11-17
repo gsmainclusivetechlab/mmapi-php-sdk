@@ -1,13 +1,13 @@
 <?php
 
-namespace mmpsdk\InternationalTransfer\Models;
+namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\BaseModel;
 use mmpsdk\Common\Utils\CommonUtil;
 
 /**
  * Class Quotation
- * @package mmpsdk\InternationalTransfer\Models
+ * @package mmpsdk\Common\Models
  */
 class Quotation extends BaseModel
 {
