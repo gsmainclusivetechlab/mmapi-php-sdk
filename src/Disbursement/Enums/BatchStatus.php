@@ -8,7 +8,7 @@ namespace mmpsdk\Disbursement\Enums;
  */
 class BatchStatus
 {
-    public const CREATED = 'created',
+    const CREATED = 'created',
         APPROVED = 'approved',
         COMPLETED = 'completed';
 

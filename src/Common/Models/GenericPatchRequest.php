@@ -6,8 +6,8 @@ use mmpsdk\Common\Models\BaseModel;
 
 class GenericPatchRequest extends BaseModel
 {
-    public const REPLACE = 'replace';
-    public const ADD = 'add';
+    const REPLACE = 'replace',
+        ADD = 'add';
     /**
      * @var string
      */

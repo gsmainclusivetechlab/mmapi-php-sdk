@@ -20,7 +20,7 @@ class AccountBalanceTest extends ProcessTestCase
         $this->requestMethod = 'GET';
         $this->requestUrl =
             MobileMoney::getBaseUrl() .
-            '/accounts/accountid@2000/balance?limit=2';
+            '/accounts/accountid/2000/balance?limit=2';
         $this->className = AccountBalance::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

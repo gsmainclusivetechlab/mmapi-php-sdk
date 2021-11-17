@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
+use mmpsdk\MerchantPayment\MerchantPayment;
 
 $transaction = new Transaction();
 $transaction
@@ -13,7 +13,7 @@ $transaction
     ->setOneTimeCode('09206469-1ab4-4941-8c2c-12a0084571e3');
 try {
     //Initiate Transaction
-    $request = new InitiatePayment($transaction);
+    $request = MerchantPayment::createMerchantTransaction($transaction);
     $response = $request->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {

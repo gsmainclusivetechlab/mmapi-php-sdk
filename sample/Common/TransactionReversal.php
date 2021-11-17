@@ -1,14 +1,12 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\Common\Models\Reversal;
-use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\Common\Process\TransactionReversal;
 
-$reversalObj = new Reversal();
+use mmpsdk\Common\Common;
+use mmpsdk\Common\Exceptions\SDKException;
 
 try {
     $transactionReference = 'REF-1635251574104';
-    $request = new TransactionReversal($transactionReference, null, null);
+    $request = Common::createReversal($transactionReference);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

@@ -1,12 +1,11 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
+use mmpsdk\Common\Common;
 use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
-use mmpsdk\Common\Process\PollRequest;
-use mmpsdk\Common\Process\RetrieveTransaction;
+use mmpsdk\MerchantPayment\MerchantPayment;
 
 $transaction = new Transaction();
 $transaction
@@ -17,7 +16,7 @@ $transaction
 
 try {
     //Initiate Payment
-    $request = new InitiatePayment($transaction);
+    $request = MerchantPayment::createMerchantTransaction($transaction);
 
     //Set notification method for polling
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
@@ -44,13 +43,13 @@ try {
 
 function pollRequest($serverCorrelationId)
 {
-    $request = new PollRequest($serverCorrelationId);
+    $request = Common::viewRequestState($serverCorrelationId);
     return $request->execute();
 }
 
 function retrieveMerchantTransaction($transactionReference)
 {
-    $request = new RetrieveTransaction(
+    $request = Common::viewTransaction(
         $transactionReference,
         new Transaction()
     );

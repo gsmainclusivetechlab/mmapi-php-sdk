@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\Disbursement\Process\InitiateDisbursement;
+use mmpsdk\Disbursement\Disbursement;
 
 $transaction = new Transaction();
 $transaction
@@ -12,7 +12,7 @@ $transaction
     ->setDebitParty(['msisdn' => '+44012345678']);
 
 try {
-    $request = new InitiateDisbursement($transaction);
+    $request = Disbursement::createDisbursementTransaction($transaction);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

@@ -5,7 +5,7 @@ namespace mmpsdk\MerchantPayment\Models;
 use mmpsdk\Common\Models\BaseModel;
 
 /**
- * Class MerchantTransaction
+ * Class AuthorisationCode
  * @package mmpsdk\MerchantPayment\Models
  */
 class AuthorisationCode extends BaseModel

@@ -56,7 +56,7 @@ class CommonUtilTest extends TestCase
             'accountid@2999$organisationid@3ab4',
             $_multiAttrString
         );
-        $this->assertEquals('accountid@2999', $_singleAttrString);
+        $this->assertEquals('accountid/2999', $_singleAttrString);
     }
 
     public function generateObjectArray($array)
