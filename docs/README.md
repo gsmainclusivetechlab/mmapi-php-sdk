@@ -2,7 +2,7 @@ This page will document the API classes and ways to properly use the API.
 
 ## Initialization
 
-Example basic initialization with required arguments:
+Example basic initialization with required values:
 
 ```php
 <?php
