@@ -14,6 +14,11 @@ class AccountHolder extends BaseModel
     private $name;
 
     /**
+     * @var string
+     */
+    private $lei;
+
+    /**
      * @return Name|null
      */
     public function getName()
@@ -29,6 +34,26 @@ class AccountHolder extends BaseModel
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getLei()
+    {
+        return $this->lei;
+    }
+
+    /**
+     * @param string|null $lei
+     *
+     * @return sd
+     */
+    public function setLei($lei)
+    {
+        $this->lei = $lei;
 
         return $this;
     }
