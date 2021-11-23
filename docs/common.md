@@ -12,4 +12,4 @@
 |  viewServiceAvailability  |                                       NA                                        |       stdObj       | To determine the availability of the service from the API provider. |
 |      createReversal       | string $transactionReference, Reversal $reversal=null, string $callBackUrl=null |    RequestState    |       To reverse a merchant transaction in failure scenarios.       |
 | createTransferTransaction |              Transaction $transaction, string $callBackUrl = null               |    RequestState    |                    To make transfer transaction.                    |
-|      viewAccountName      |                            array $accountIdentifier                             |   AccountHolder    |     retrieve the name of the intended recipient of a transfer.      |
+|      viewAccountName      |                            array $accountIdentifier                             |   AccountHolder    |     Retrieve the name of the intended recipient of a transfer.      |
