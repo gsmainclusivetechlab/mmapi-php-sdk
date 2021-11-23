@@ -10,7 +10,6 @@ use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdk\Common\Models\Quotation;
 
 $quotation = new Quotation();
