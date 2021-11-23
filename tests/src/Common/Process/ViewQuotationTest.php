@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\InternationalTransfer\Process\ViewQuotation;
+use mmpsdk\Common\Process\ViewQuotation;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class ViewQuotationTest extends ProcessTestCase

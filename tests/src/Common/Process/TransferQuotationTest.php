@@ -8,11 +8,9 @@ use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
-use mmpsdk\InternationalTransfer\Models\Quotation;
-use mmpsdk\InternationalTransfer\Process\TransferQuotation;
+use mmpsdk\Common\Models\Quotation;
+use mmpsdk\Common\Process\TransferQuotation;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
-use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
 
 class TransferQuotationTest extends ProcessTestCase
 {
