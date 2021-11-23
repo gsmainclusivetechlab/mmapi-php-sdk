@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
+use mmpsdk\Common\Common;
 use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Models\Address;
@@ -9,8 +10,7 @@ use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
-use mmpsdk\InternationalTransfer\Models\Quotation;
+use mmpsdk\Common\Models\Quotation;
 
 $quotation = new Quotation();
 $quotation
@@ -67,7 +67,7 @@ $senderKyc
     ->setSubjectName($subjectName);
 $quotation->setSenderKyc($senderKyc);
 try {
-    $request = InternationalTransfer::createQuotation($quotation);
+    $request = Common::createQuotation($quotation);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();

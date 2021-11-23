@@ -1,8 +1,8 @@
 <?php
 
-namespace mmpsdk\InternationalTransfer\Process;
+namespace mmpsdk\Common\Process;
 
-use mmpsdk\InternationalTransfer\Models\Quotation;
+use mmpsdk\Common\Models\Quotation;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
@@ -10,7 +10,7 @@ use mmpsdk\Common\Utils\CommonUtil;
 
 /**
  * Class ViewQuotation
- * @package mmpsdk\InternationalTransfer\Process
+ * @package mmpsdk\Common\Process
  */
 class ViewQuotation extends BaseProcess
 {

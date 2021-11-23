@@ -2,7 +2,7 @@ This page will document the API classes and ways to properly use the API.
 
 ## Initialization
 
-Example basic initialization with required arguments:
+Example basic initialization with required values:
 
 ```php
 <?php
@@ -313,7 +313,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 -   [Merchant Payments](/docs/merchant_payments.md)
 -   [Disbursements](/docs/disbursements.md)
 -   [International Transfers](/docs/international_transfers.md)
--   P2P Transfers
+-   P2P Transfers (APIs included in the [Common](/docs/common.md) module)
 -   Recurring Payments
 -   Account Linking
 -   Bill Payments

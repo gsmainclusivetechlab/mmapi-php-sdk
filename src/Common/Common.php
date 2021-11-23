@@ -112,4 +112,64 @@ class Common
             $transactionReference
         );
     }
+
+    /**
+     * Request an international quotation.
+     * Asynchronous flow is used with a final callback.
+     *
+     * @param Quotation $quotation
+     * @param string $callBackUrl
+     * @return TransferQuotation
+     */
+    public static function createQuotation(
+        \mmpsdk\Common\Models\Quotation $quotation,
+        $callBackUrl = null
+    ) {
+        return new \mmpsdk\Common\Process\TransferQuotation(
+            $quotation,
+            $callBackUrl
+        );
+    }
+
+    /**
+     * Returns a specific quotation
+     *
+     * @param string $quotationReference
+     * @return ViewQuotation
+     */
+    public static function viewQuotation($quotationReference)
+    {
+        return new \mmpsdk\Common\Process\ViewQuotation($quotationReference);
+    }
+
+    /**
+     * Retrieves the status of a given account.
+     *
+     * @param array $accountIdentifier
+     * @return this
+     */
+    public static function viewAccountName($accountIdentifier)
+    {
+        return new \mmpsdk\Common\Process\RetrieveAccountName(
+            $accountIdentifier
+        );
+    }
+
+    /**
+     * Make a Transfer transaction using the mobile money API.
+     * Asynchronous flow is used with a final callback.
+     *
+     * @param Transaction $transaction
+     * @param string $callBackUrl
+     * @return InitiateTransferTransaction
+     */
+    public static function createTransferTransaction(
+        \mmpsdk\Common\Models\Transaction $transaction,
+        $callBackUrl = null
+    ) {
+        return new \mmpsdk\Common\Process\InitiateTransferTransaction(
+            $transaction,
+            $callBackUrl
+        );
+    }
 }
