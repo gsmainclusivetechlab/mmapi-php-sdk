@@ -316,7 +316,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 -   [Merchant Payments](/docs/merchant_payments.md)
 -   [Disbursements](/docs/disbursements.md)
 -   [International Transfers](/docs/international_transfers.md)
--   P2P Transfers (APIs included in the [Common](/docs/common.md) module)
+-   [P2P Transfers](/docs/p2p_transfers.md)
 -   Recurring Payments
 -   Account Linking
 -   Bill Payments
