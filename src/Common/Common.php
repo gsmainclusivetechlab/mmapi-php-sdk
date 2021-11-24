@@ -12,8 +12,8 @@ use mmpsdk\Common\Traits\CommonTrait;
  */
 class Common
 {
-   use CommonAccountTrait;
-   use CommonTrait;
-   use AccountNameTrait;
-   use AccountNameTrait;
+    use CommonAccountTrait;
+    use CommonTrait;
+    use AccountNameTrait;
+    use AccountNameTrait;
 }

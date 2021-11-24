@@ -207,7 +207,10 @@ Retrieves a set of transactions for a given account. The offset and limit filter
         'accountid' => 2000
     ];
     $filter = ['limit' => 5, 'offset' => 0];
-    $request = MerchantPayment::viewAccountTransactions($accountIdentifier, $filter);
+    $request = MerchantPayment::viewAccountTransactions(
+        $accountIdentifier,
+        $filter
+    );
     ```
 
 -   To make the request, invoke the `execute()`
