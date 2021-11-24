@@ -1,29 +1,17 @@
 <?php
 
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
+use mmpsdk\P2PTransfer\P2PTransfer;
 use mmpsdk\Common\Models\Quotation;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
-class InternationalTransferTest extends WrapperTestCase
+class P2PTransferTest extends WrapperTestCase
 {
     public function testStaticFunctions()
     {
-        $this->wrapperClass = InternationalTransfer::class;
+        $this->wrapperClass = P2PTransfer::class;
 
-        $internationalTransaction = InternationalTransfer::createInternationalTransaction(
-            new Transaction()
-        );
-        $this->checkStaticFunctionParamCount(
-            'createInternationalTransaction',
-            mmpsdk\InternationalTransfer\Process\InitiateInternationalTransaction::class
-        );
-        $this->checkFunctionReturnInstance(
-            $internationalTransaction,
-            mmpsdk\InternationalTransfer\Process\InitiateInternationalTransaction::class
-        );
-
-        $requestState = InternationalTransfer::viewRequestState('ABC123');
+        $requestState = P2PTransfer::viewRequestState('ABC123');
         $this->checkStaticFunctionParamCount(
             'viewRequestState',
             mmpsdk\Common\Process\PollRequest::class
@@ -33,7 +21,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\PollRequest::class
         );
 
-        $response = InternationalTransfer::viewResponse('ABC123');
+        $response = P2PTransfer::viewResponse('ABC123');
         $this->checkStaticFunctionParamCount(
             'viewResponse',
             mmpsdk\Common\Process\RetrieveMissingResponse::class
@@ -43,7 +31,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveMissingResponse::class
         );
 
-        $serviceAvailability = InternationalTransfer::viewServiceAvailability('ABC123');
+        $serviceAvailability = P2PTransfer::viewServiceAvailability('ABC123');
         $this->checkStaticFunctionParamCount(
             'viewServiceAvailability',
             mmpsdk\Common\Process\ServiceAvailability::class
@@ -53,7 +41,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\ServiceAvailability::class
         );
 
-        $accountBalance = InternationalTransfer::viewAccountBalance(['accountid' => 2000]);
+        $accountBalance = P2PTransfer::viewAccountBalance(['accountid' => 2000]);
         $this->checkStaticFunctionParamCount(
             'viewAccountBalance',
             mmpsdk\Common\Process\AccountBalance::class
@@ -63,7 +51,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\AccountBalance::class
         );
 
-        $accountTransactions = InternationalTransfer::viewAccountTransactions([
+        $accountTransactions = P2PTransfer::viewAccountTransactions([
             'accountid' => 2000
         ]);
         $this->checkStaticFunctionParamCount(
@@ -75,7 +63,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveAccountTransactions::class
         );
 
-        $retrieveTransaction = InternationalTransfer::viewTransaction('ABC123');
+        $retrieveTransaction = P2PTransfer::viewTransaction('ABC123');
         $this->checkStaticFunctionParamCount(
             'viewTransaction',
             mmpsdk\Common\Process\RetrieveTransaction::class
@@ -85,7 +73,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveTransaction::class
         );
 
-        $reversalTransaction = InternationalTransfer::createReversal('ABC123');
+        $reversalTransaction = P2PTransfer::createReversal('ABC123');
         $this->checkStaticFunctionParamCount(
             'createReversal',
             mmpsdk\Common\Process\TransactionReversal::class
@@ -95,7 +83,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\TransactionReversal::class
         );
 
-        $createdQuotation = InternationalTransfer::createQuotation(new Quotation());
+        $createdQuotation = P2PTransfer::createQuotation(new Quotation());
         $this->checkStaticFunctionParamCount(
             'createQuotation',
             mmpsdk\Common\Process\TransferQuotation::class
@@ -105,7 +93,7 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\TransferQuotation::class
         );
 
-        $quotation = InternationalTransfer::viewQuotation('REF123');
+        $quotation = P2PTransfer::viewQuotation('REF123');
         $this->checkStaticFunctionParamCount(
             'viewQuotation',
             mmpsdk\Common\Process\ViewQuotation::class
@@ -113,6 +101,28 @@ class InternationalTransferTest extends WrapperTestCase
         $this->checkFunctionReturnInstance(
             $quotation,
             mmpsdk\Common\Process\ViewQuotation::class
+        );
+
+        $accountName = P2PTransfer::viewAccountName(['accountid' => 2000]);
+        $this->checkStaticFunctionParamCount(
+            'viewAccountName',
+            mmpsdk\Common\Process\RetrieveAccountName::class
+        );
+        $this->checkFunctionReturnInstance(
+            $accountName,
+            mmpsdk\Common\Process\RetrieveAccountName::class
+        );
+
+        $transferTransaction = P2PTransfer::createTransferTransaction(
+            new Transaction()
+        );
+        $this->checkStaticFunctionParamCount(
+            'createTransferTransaction',
+            mmpsdk\Common\Process\InitiateTransferTransaction::class
+        );
+        $this->checkFunctionReturnInstance(
+            $transferTransaction,
+            mmpsdk\Common\Process\InitiateTransferTransaction::class
         );
     }
 }
