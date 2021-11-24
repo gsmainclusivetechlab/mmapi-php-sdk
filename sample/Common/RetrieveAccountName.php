@@ -5,7 +5,7 @@ use mmpsdk\Common\Common;
 use mmpsdk\Common\Exceptions\SDKException;
 
 $accountIdentifier = [
-    'accountId' => 1
+    'walletId' => 1
 ];
 
 try {
