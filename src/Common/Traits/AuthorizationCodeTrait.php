@@ -15,10 +15,10 @@ trait AuthorizationCodeTrait
      */
     public static function createAuthorisationCode(
         $accountIdentifier,
-        \mmpsdk\MerchantPayment\Models\AuthorisationCode $authorisationCode,
+        \mmpsdk\Common\Models\AuthorisationCode $authorisationCode,
         $callBackUrl = null
     ) {
-        return new \mmpsdk\MerchantPayment\Process\CreateAuthorisationCode(
+        return new \mmpsdk\Common\Process\CreateAuthorisationCode(
             $accountIdentifier,
             $authorisationCode,
             $callBackUrl
@@ -36,7 +36,7 @@ trait AuthorizationCodeTrait
         $accountIdentifier,
         $authorisationCode
     ) {
-        return new \mmpsdk\MerchantPayment\Process\ViewAuthorisationCode(
+        return new \mmpsdk\Common\Process\ViewAuthorisationCode(
             $accountIdentifier,
             $authorisationCode
         );

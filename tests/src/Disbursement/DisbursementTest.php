@@ -3,8 +3,6 @@
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Disbursement;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\MerchantPayment\MerchantPayment;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class DisbursementTest extends WrapperTestCase

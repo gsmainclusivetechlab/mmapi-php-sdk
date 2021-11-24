@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\MerchantPayment\MerchantPayment;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
+use mmpsdk\Common\Models\AuthorisationCode;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class MerchantPaymentTest extends WrapperTestCase
@@ -17,11 +17,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createAuthorisationCode',
-            mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
+            mmpsdk\Common\Process\CreateAuthorisationCode::class
         );
         $this->checkFunctionReturnInstance(
             $authorisationCode,
-            mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
+            mmpsdk\Common\Process\CreateAuthorisationCode::class
         );
 
         $merchantTransaction = MerchantPayment::createMerchantTransaction(
@@ -29,11 +29,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createMerchantTransaction',
-            mmpsdk\MerchantPayment\Process\InitiatePayment::class
+            mmpsdk\Common\Process\InitiateMerchantTransaction::class
         );
         $this->checkFunctionReturnInstance(
             $merchantTransaction,
-            mmpsdk\MerchantPayment\Process\InitiatePayment::class
+            mmpsdk\Common\Process\InitiateMerchantTransaction::class
         );
 
         $refundTransaction = MerchantPayment::createRefundTransaction(
@@ -41,11 +41,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createRefundTransaction',
-            mmpsdk\MerchantPayment\Process\PaymentRefund::class
+            mmpsdk\Common\Process\PaymentRefund::class
         );
         $this->checkFunctionReturnInstance(
             $refundTransaction,
-            mmpsdk\MerchantPayment\Process\PaymentRefund::class
+            mmpsdk\Common\Process\PaymentRefund::class
         );
 
         $authorisationCodeObj = MerchantPayment::viewAuthorisationCode(
@@ -54,11 +54,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'viewAuthorisationCode',
-            mmpsdk\MerchantPayment\Process\ViewAuthorisationCode::class
+            mmpsdk\Common\Process\ViewAuthorisationCode::class
         );
         $this->checkFunctionReturnInstance(
             $authorisationCodeObj,
-            mmpsdk\MerchantPayment\Process\ViewAuthorisationCode::class
+            mmpsdk\Common\Process\ViewAuthorisationCode::class
         );
     }
 }

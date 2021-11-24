@@ -1,16 +1,16 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Utils\CommonUtil;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
+use mmpsdk\Common\Models\AuthorisationCode;
 
 /**
  * Class ViewAuthorisationCode
- * @package mmpsdk\MerchantPayment\Process
+ * @package mmpsdk\Common\Process
  */
 class ViewAuthorisationCode extends BaseProcess
 {

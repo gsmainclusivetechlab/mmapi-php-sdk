@@ -10,13 +10,13 @@ trait MerchantTransactionTrait
      *
      * @param Transaction $transaction
      * @param string $callBackUrl
-     * @return InitiatePayment
+     * @return InitiateMerchantTransaction
      */
     public static function createMerchantTransaction(
         \mmpsdk\Common\Models\Transaction $transaction,
         $callBackUrl = null
     ) {
-        return new \mmpsdk\MerchantPayment\Process\InitiatePayment(
+        return new \mmpsdk\Common\Process\InitiateMerchantTransaction(
             $transaction,
             $callBackUrl
         );
@@ -34,7 +34,7 @@ trait MerchantTransactionTrait
         \mmpsdk\Common\Models\Transaction $transaction,
         $callBackUrl = null
     ) {
-        return new \mmpsdk\MerchantPayment\Process\PaymentRefund(
+        return new \mmpsdk\Common\Process\PaymentRefund(
             $transaction,
             $callBackUrl
         );

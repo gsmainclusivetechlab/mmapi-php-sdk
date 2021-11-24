@@ -3,8 +3,8 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
-use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
+use mmpsdk\Common\Models\AuthorisationCode;
+use mmpsdk\Common\Process\CreateAuthorisationCode;
 
 class CreateAuthorisationCodeTest extends ProcessTestCase
 {
