@@ -82,37 +82,5 @@ class CommonTest extends WrapperTestCase
             $reversalTransaction,
             mmpsdk\Common\Process\TransactionReversal::class
         );
-
-        $createdQuotation = Common::createQuotation(new Quotation());
-        $this->checkStaticFunctionParamCount(
-            'createQuotation',
-            mmpsdk\Common\Process\TransferQuotation::class
-        );
-        $this->checkFunctionReturnInstance(
-            $createdQuotation,
-            mmpsdk\Common\Process\TransferQuotation::class
-        );
-
-        $quotation = Common::viewQuotation('REF123');
-        $this->checkStaticFunctionParamCount(
-            'viewQuotation',
-            mmpsdk\Common\Process\ViewQuotation::class
-        );
-        $this->checkFunctionReturnInstance(
-            $quotation,
-            mmpsdk\Common\Process\ViewQuotation::class
-        );
-
-        $transferTransaction = Common::createTransferTransaction(
-            new Transaction()
-        );
-        $this->checkStaticFunctionParamCount(
-            'createTransferTransaction',
-            mmpsdk\Common\Process\InitiateTransferTransaction::class
-        );
-        $this->checkFunctionReturnInstance(
-            $transferTransaction,
-            mmpsdk\Common\Process\InitiateTransferTransaction::class
-        );
     }
 }
