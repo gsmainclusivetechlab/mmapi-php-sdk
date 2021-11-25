@@ -2,12 +2,18 @@
 
 namespace mmpsdk\Disbursement;
 
+use mmpsdk\Common\Traits\CommonTrait;
+use mmpsdk\Common\Traits\CommonAccountTrait;
+
 /**
  * Class Disbursement
  * @package mmpsdk\Disbursement
  */
 class Disbursement
 {
+    use CommonTrait;
+    use CommonAccountTrait;
+
     /**
      * Initiates a Disbursement Transaction Request.
      * Asynchronous payment flow is used with a final callback.

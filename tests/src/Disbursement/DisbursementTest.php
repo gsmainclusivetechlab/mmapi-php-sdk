@@ -3,8 +3,6 @@
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Disbursement;
 use mmpsdk\Disbursement\Models\BatchTransaction;
-use mmpsdk\MerchantPayment\MerchantPayment;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class DisbursementTest extends WrapperTestCase
@@ -75,6 +73,80 @@ class DisbursementTest extends WrapperTestCase
         $this->checkFunctionReturnInstance(
             $batchUpdate,
             mmpsdk\Disbursement\Process\ApproveBatchTransaction::class
+        );
+
+        $requestState = Disbursement::viewRequestState('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewRequestState',
+            mmpsdk\Common\Process\PollRequest::class
+        );
+        $this->checkFunctionReturnInstance(
+            $requestState,
+            mmpsdk\Common\Process\PollRequest::class
+        );
+
+        $response = Disbursement::viewResponse('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewResponse',
+            mmpsdk\Common\Process\RetrieveMissingResponse::class
+        );
+        $this->checkFunctionReturnInstance(
+            $response,
+            mmpsdk\Common\Process\RetrieveMissingResponse::class
+        );
+
+        $serviceAvailability = Disbursement::viewServiceAvailability('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewServiceAvailability',
+            mmpsdk\Common\Process\ServiceAvailability::class
+        );
+        $this->checkFunctionReturnInstance(
+            $serviceAvailability,
+            mmpsdk\Common\Process\ServiceAvailability::class
+        );
+
+        $accountBalance = Disbursement::viewAccountBalance([
+            'accountid' => 2000
+        ]);
+        $this->checkStaticFunctionParamCount(
+            'viewAccountBalance',
+            mmpsdk\Common\Process\AccountBalance::class
+        );
+        $this->checkFunctionReturnInstance(
+            $accountBalance,
+            mmpsdk\Common\Process\AccountBalance::class
+        );
+
+        $accountTransactions = Disbursement::viewAccountTransactions([
+            'accountid' => 2000
+        ]);
+        $this->checkStaticFunctionParamCount(
+            'viewAccountTransactions',
+            mmpsdk\Common\Process\RetrieveAccountTransactions::class
+        );
+        $this->checkFunctionReturnInstance(
+            $accountTransactions,
+            mmpsdk\Common\Process\RetrieveAccountTransactions::class
+        );
+
+        $retrieveTransaction = Disbursement::viewTransaction('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewTransaction',
+            mmpsdk\Common\Process\RetrieveTransaction::class
+        );
+        $this->checkFunctionReturnInstance(
+            $retrieveTransaction,
+            mmpsdk\Common\Process\RetrieveTransaction::class
+        );
+
+        $reversalTransaction = Disbursement::createReversal('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'createReversal',
+            mmpsdk\Common\Process\TransactionReversal::class
+        );
+        $this->checkFunctionReturnInstance(
+            $reversalTransaction,
+            mmpsdk\Common\Process\TransactionReversal::class
         );
     }
 }

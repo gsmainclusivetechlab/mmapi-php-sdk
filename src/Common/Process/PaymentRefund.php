@@ -1,6 +1,6 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Process;
+namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Models\RequestState;
@@ -9,11 +9,10 @@ use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\MerchantPayment\Enums\TransactionType;
 
 /**
  * Class PaymentRefund
- * @package mmpsdk\MerchantPayment\Process
+ * @package mmpsdk\Common\Process
  */
 class PaymentRefund extends BaseProcess
 {
@@ -49,7 +48,7 @@ class PaymentRefund extends BaseProcess
             API::CREATE_TRANSACTION,
             json_encode($this->merchantTransaction)
         )
-            ->setUrlParams(['{transactionType}' => TransactionType::ADJUSTMENT])
+            ->setUrlParams(['{transactionType}' => 'adjustment'])
             ->setClientCorrelationId($this->clientCorrelationId)
             ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)
             ->build();

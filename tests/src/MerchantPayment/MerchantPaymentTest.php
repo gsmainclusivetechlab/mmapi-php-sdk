@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\MerchantPayment\MerchantPayment;
-use mmpsdk\MerchantPayment\Models\AuthorisationCode;
+use mmpsdk\Common\Models\AuthorisationCode;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class MerchantPaymentTest extends WrapperTestCase
@@ -17,11 +17,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createAuthorisationCode',
-            mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
+            mmpsdk\Common\Process\CreateAuthorisationCode::class
         );
         $this->checkFunctionReturnInstance(
             $authorisationCode,
-            mmpsdk\MerchantPayment\Process\CreateAuthorisationCode::class
+            mmpsdk\Common\Process\CreateAuthorisationCode::class
         );
 
         $merchantTransaction = MerchantPayment::createMerchantTransaction(
@@ -29,11 +29,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createMerchantTransaction',
-            mmpsdk\MerchantPayment\Process\InitiatePayment::class
+            mmpsdk\Common\Process\InitiateMerchantTransaction::class
         );
         $this->checkFunctionReturnInstance(
             $merchantTransaction,
-            mmpsdk\MerchantPayment\Process\InitiatePayment::class
+            mmpsdk\Common\Process\InitiateMerchantTransaction::class
         );
 
         $refundTransaction = MerchantPayment::createRefundTransaction(
@@ -41,11 +41,11 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'createRefundTransaction',
-            mmpsdk\MerchantPayment\Process\PaymentRefund::class
+            mmpsdk\Common\Process\PaymentRefund::class
         );
         $this->checkFunctionReturnInstance(
             $refundTransaction,
-            mmpsdk\MerchantPayment\Process\PaymentRefund::class
+            mmpsdk\Common\Process\PaymentRefund::class
         );
 
         $authorisationCodeObj = MerchantPayment::viewAuthorisationCode(
@@ -54,11 +54,87 @@ class MerchantPaymentTest extends WrapperTestCase
         );
         $this->checkStaticFunctionParamCount(
             'viewAuthorisationCode',
-            mmpsdk\MerchantPayment\Process\ViewAuthorisationCode::class
+            mmpsdk\Common\Process\ViewAuthorisationCode::class
         );
         $this->checkFunctionReturnInstance(
             $authorisationCodeObj,
-            mmpsdk\MerchantPayment\Process\ViewAuthorisationCode::class
+            mmpsdk\Common\Process\ViewAuthorisationCode::class
+        );
+
+        $requestState = MerchantPayment::viewRequestState('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewRequestState',
+            mmpsdk\Common\Process\PollRequest::class
+        );
+        $this->checkFunctionReturnInstance(
+            $requestState,
+            mmpsdk\Common\Process\PollRequest::class
+        );
+
+        $response = MerchantPayment::viewResponse('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewResponse',
+            mmpsdk\Common\Process\RetrieveMissingResponse::class
+        );
+        $this->checkFunctionReturnInstance(
+            $response,
+            mmpsdk\Common\Process\RetrieveMissingResponse::class
+        );
+
+        $serviceAvailability = MerchantPayment::viewServiceAvailability(
+            'ABC123'
+        );
+        $this->checkStaticFunctionParamCount(
+            'viewServiceAvailability',
+            mmpsdk\Common\Process\ServiceAvailability::class
+        );
+        $this->checkFunctionReturnInstance(
+            $serviceAvailability,
+            mmpsdk\Common\Process\ServiceAvailability::class
+        );
+
+        $accountBalance = MerchantPayment::viewAccountBalance([
+            'accountid' => 2000
+        ]);
+        $this->checkStaticFunctionParamCount(
+            'viewAccountBalance',
+            mmpsdk\Common\Process\AccountBalance::class
+        );
+        $this->checkFunctionReturnInstance(
+            $accountBalance,
+            mmpsdk\Common\Process\AccountBalance::class
+        );
+
+        $accountTransactions = MerchantPayment::viewAccountTransactions([
+            'accountid' => 2000
+        ]);
+        $this->checkStaticFunctionParamCount(
+            'viewAccountTransactions',
+            mmpsdk\Common\Process\RetrieveAccountTransactions::class
+        );
+        $this->checkFunctionReturnInstance(
+            $accountTransactions,
+            mmpsdk\Common\Process\RetrieveAccountTransactions::class
+        );
+
+        $retrieveTransaction = MerchantPayment::viewTransaction('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'viewTransaction',
+            mmpsdk\Common\Process\RetrieveTransaction::class
+        );
+        $this->checkFunctionReturnInstance(
+            $retrieveTransaction,
+            mmpsdk\Common\Process\RetrieveTransaction::class
+        );
+
+        $reversalTransaction = MerchantPayment::createReversal('ABC123');
+        $this->checkStaticFunctionParamCount(
+            'createReversal',
+            mmpsdk\Common\Process\TransactionReversal::class
+        );
+        $this->checkFunctionReturnInstance(
+            $reversalTransaction,
+            mmpsdk\Common\Process\TransactionReversal::class
         );
     }
 }

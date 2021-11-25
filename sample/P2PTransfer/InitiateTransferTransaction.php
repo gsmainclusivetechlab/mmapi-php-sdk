@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
-use mmpsdk\Common\Common;
+use mmpsdk\P2PTransfer\P2PTransfer;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 
@@ -13,7 +13,7 @@ $transaction
     ->setDebitParty(['msisdn' => '+44012345678']);
 
 try {
-    $request = Common::createTransferTransaction($transaction);
+    $request = P2PTransfer::createTransferTransaction($transaction);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

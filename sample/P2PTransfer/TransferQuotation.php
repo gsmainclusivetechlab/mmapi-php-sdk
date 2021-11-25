@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
-use mmpsdk\Common\Common;
+use mmpsdk\P2PTransfer\P2PTransfer;
 use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Models\Address;
@@ -67,7 +67,7 @@ $senderKyc
     ->setSubjectName($subjectName);
 $quotation->setSenderKyc($senderKyc);
 try {
-    $request = Common::createQuotation($quotation);
+    $request = P2PTransfer::createQuotation($quotation);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();

@@ -1,15 +1,12 @@
 <?php
 
-use mmpsdk\Common\Process\AccessToken;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\Common\Enums\SecurityLevel;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\MerchantPayment\Process\InitiatePayment;
+use mmpsdk\Common\Process\PaymentRefund;
 
-class InitiatePaymentTest extends ProcessTestCase
+class PaymentRefundTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
@@ -22,11 +19,11 @@ class InitiatePaymentTest extends ProcessTestCase
         $this->constructorArgs = [$transaction, 'http://example.com/'];
         $this->requestMethod = 'POST';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() . '/transactions/type/merchantpay';
+            MobileMoney::getBaseUrl() . '/transactions/type/adjustment';
         $this->requestParams = [
             '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2999"}],"debitParty":[{"key":"accountid","value":"2999"}]}'
         ];
-        $this->className = InitiatePayment::class;
+        $this->className = PaymentRefund::class;
         $this->requestOptions = ['X-Callback-URL: http://example.com/'];
         $this->reqObj = $this->instantiateClass(
             $this->className,

@@ -1,12 +1,12 @@
 <?php
 
-namespace mmpsdk\MerchantPayment\Models;
+namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\BaseModel;
 
 /**
  * Class AuthorisationCode
- * @package mmpsdk\MerchantPayment\Models
+ * @package mmpsdk\Common\Models
  */
 class AuthorisationCode extends BaseModel
 {
