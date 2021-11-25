@@ -1,6 +1,8 @@
 <?php
 
 use mmpsdk\Common\Common;
+use mmpsdk\Common\Models\Quotation;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class CommonTest extends WrapperTestCase

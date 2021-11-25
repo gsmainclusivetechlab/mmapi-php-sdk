@@ -202,21 +202,24 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 -   Call `viewAccountTransactions()` by passing the account identifiers and and the filters (optional) as parameters
 
     ```php
-    use mmpsdk\Common\Common;
+    use mmpsdk\MerchantPayment\MerchantPayment;
     $accountIdentifier = [
         'accountid' => 2000
     ];
     $filter = ['limit' => 5, 'offset' => 0];
-    $request = Common::viewAccountTransactions($accountIdentifier, $filter);
+    $request = MerchantPayment::viewAccountTransactions(
+        $accountIdentifier,
+        $filter
+    );
     ```
 
 -   To make the request, invoke the `execute()`
 
     ```php
-    use mmpsdk\MerchantPayment\Process\CreateAuthorisationCode;
+    use mmpsdk\MerchantPayment\MerchantPayment;
     use mmpsdk\Common\Exceptions\SDKException;
     try {
-        $response = Common::viewAccountTransactions(
+        $response = MerchantPayment::viewAccountTransactions(
             $accountIdentifier,
             $filter
         )->execute();
@@ -313,7 +316,7 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 -   [Merchant Payments](/docs/merchant_payments.md)
 -   [Disbursements](/docs/disbursements.md)
 -   [International Transfers](/docs/international_transfers.md)
--   P2P Transfers
+-   [P2P Transfers](/docs/p2p_transfers.md)
 -   Recurring Payments
 -   Account Linking
 -   Bill Payments
