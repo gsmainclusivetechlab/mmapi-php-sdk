@@ -41,7 +41,9 @@ class P2PTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\ServiceAvailability::class
         );
 
-        $accountBalance = P2PTransfer::viewAccountBalance(['accountid' => 2000]);
+        $accountBalance = P2PTransfer::viewAccountBalance([
+            'accountid' => 2000
+        ]);
         $this->checkStaticFunctionParamCount(
             'viewAccountBalance',
             mmpsdk\Common\Process\AccountBalance::class

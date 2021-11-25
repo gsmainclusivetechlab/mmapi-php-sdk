@@ -81,7 +81,9 @@ class MerchantPaymentTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveMissingResponse::class
         );
 
-        $serviceAvailability = MerchantPayment::viewServiceAvailability('ABC123');
+        $serviceAvailability = MerchantPayment::viewServiceAvailability(
+            'ABC123'
+        );
         $this->checkStaticFunctionParamCount(
             'viewServiceAvailability',
             mmpsdk\Common\Process\ServiceAvailability::class
@@ -91,7 +93,9 @@ class MerchantPaymentTest extends WrapperTestCase
             mmpsdk\Common\Process\ServiceAvailability::class
         );
 
-        $accountBalance = MerchantPayment::viewAccountBalance(['accountid' => 2000]);
+        $accountBalance = MerchantPayment::viewAccountBalance([
+            'accountid' => 2000
+        ]);
         $this->checkStaticFunctionParamCount(
             'viewAccountBalance',
             mmpsdk\Common\Process\AccountBalance::class

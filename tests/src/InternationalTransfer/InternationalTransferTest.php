@@ -43,7 +43,9 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveMissingResponse::class
         );
 
-        $serviceAvailability = InternationalTransfer::viewServiceAvailability('ABC123');
+        $serviceAvailability = InternationalTransfer::viewServiceAvailability(
+            'ABC123'
+        );
         $this->checkStaticFunctionParamCount(
             'viewServiceAvailability',
             mmpsdk\Common\Process\ServiceAvailability::class
@@ -53,7 +55,9 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\ServiceAvailability::class
         );
 
-        $accountBalance = InternationalTransfer::viewAccountBalance(['accountid' => 2000]);
+        $accountBalance = InternationalTransfer::viewAccountBalance([
+            'accountid' => 2000
+        ]);
         $this->checkStaticFunctionParamCount(
             'viewAccountBalance',
             mmpsdk\Common\Process\AccountBalance::class
@@ -95,7 +99,9 @@ class InternationalTransferTest extends WrapperTestCase
             mmpsdk\Common\Process\TransactionReversal::class
         );
 
-        $createdQuotation = InternationalTransfer::createQuotation(new Quotation());
+        $createdQuotation = InternationalTransfer::createQuotation(
+            new Quotation()
+        );
         $this->checkStaticFunctionParamCount(
             'createQuotation',
             mmpsdk\Common\Process\TransferQuotation::class

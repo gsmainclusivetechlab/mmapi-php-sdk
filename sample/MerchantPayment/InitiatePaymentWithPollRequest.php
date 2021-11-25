@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
-use mmpsdk\Common\Common;
 use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
@@ -43,13 +42,13 @@ try {
 
 function pollRequest($serverCorrelationId)
 {
-    $request = Common::viewRequestState($serverCorrelationId);
+    $request = MerchantPayment::viewRequestState($serverCorrelationId);
     return $request->execute();
 }
 
 function retrieveMerchantTransaction($transactionReference)
 {
-    $request = Common::viewTransaction(
+    $request = MerchantPayment::viewTransaction(
         $transactionReference,
         new Transaction()
     );

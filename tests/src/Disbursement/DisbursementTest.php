@@ -105,7 +105,9 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Common\Process\ServiceAvailability::class
         );
 
-        $accountBalance = Disbursement::viewAccountBalance(['accountid' => 2000]);
+        $accountBalance = Disbursement::viewAccountBalance([
+            'accountid' => 2000
+        ]);
         $this->checkStaticFunctionParamCount(
             'viewAccountBalance',
             mmpsdk\Common\Process\AccountBalance::class
