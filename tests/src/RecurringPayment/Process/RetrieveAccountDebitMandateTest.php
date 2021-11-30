@@ -13,7 +13,8 @@ class RetrieveAccountDebitMandateTest extends ProcessTestCase
         $this->constructorArgs = [['accountid' => '2000'], $mandateReference];
         $this->requestMethod = 'GET';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() . '/accounts/accountid/2000/debitmandates/ABC123';
+            MobileMoney::getBaseUrl() .
+            '/accounts/accountid/2000/debitmandates/ABC123';
         $this->className = RetrieveAccountDebitMandate::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,
