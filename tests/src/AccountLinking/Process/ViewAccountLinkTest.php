@@ -13,8 +13,7 @@ class ViewAccountLinkTest extends ProcessTestCase
         $this->constructorArgs = [['accountid' => '2000'], 'REF123'];
         $this->requestMethod = 'GET';
         $this->requestUrl =
-            MobileMoney::getBaseUrl() .
-            '/accounts/accountid/2000/links/REF123';
+            MobileMoney::getBaseUrl() . '/accounts/accountid/2000/links/REF123';
         $this->className = ViewAccountLink::class;
         $this->reqObj = $this->instantiateClass(
             $this->className,

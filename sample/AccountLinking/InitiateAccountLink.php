@@ -24,7 +24,10 @@ $accountIdentifier = [
 ];
 
 try {
-    $request = AccountLinking::createAccountLink($accountIdentifier, $accountLink);
+    $request = AccountLinking::createAccountLink(
+        $accountIdentifier,
+        $accountLink
+    );
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
