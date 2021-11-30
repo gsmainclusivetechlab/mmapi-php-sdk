@@ -5,7 +5,7 @@
 |          Methods          |                                   Parameters                                    |       Return       |                             Description                             |
 | :-----------------------: | :-----------------------------------------------------------------------------: | :----------------: | :-----------------------------------------------------------------: |
 |     createAccountLink     |     array $accountIdentifier, AccountLink $accountLink, $callBackUrl = null     |    RequestState    |                Establish an Account to Account Link.                |
-|      ViewAccountLink      |              array $accountIdentifier, string $quotationReference               |    AccountLink     |              Read a specific link for a given account.              |
+|      ViewAccountLink      |              array $accountIdentifier, string $linkReference               |    AccountLink     |              Read a specific link for a given account.              |
 | createTransferTransaction |              Transaction $transaction, string $callBackUrl = null               |    RequestState    |                    To make transfer transaction.                    |
 |     viewRequestState      |                           string $serverCorrelationId                           |    RequestState    | Retrieves the state of a request for a given Server Correlation Id. |
 |       viewResponse        |                string $clientCorrelationId, Object $objRef=null                 |  Object or stdObj  | Retrieves a representation of the resource assuming that it exists. |
