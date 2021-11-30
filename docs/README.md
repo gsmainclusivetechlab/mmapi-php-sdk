@@ -318,6 +318,6 @@ Retrieves a set of transactions for a given account. The offset and limit filter
 -   [International Transfers](/docs/international_transfers.md)
 -   [P2P Transfers](/docs/p2p_transfers.md)
 -   Recurring Payments
--   Account Linking
+-   [Account Linking](/docs/account_linking.md)
 -   Bill Payments
 -   Agent Services
