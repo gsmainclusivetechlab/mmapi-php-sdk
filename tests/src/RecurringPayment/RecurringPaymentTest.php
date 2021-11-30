@@ -30,7 +30,9 @@ class RecurringPaymentTest extends WrapperTestCase
             mmpsdk\Common\Process\RetrieveMissingResponse::class
         );
 
-        $serviceAvailability = RecurringPayment::viewServiceAvailability('ABC123');
+        $serviceAvailability = RecurringPayment::viewServiceAvailability(
+            'ABC123'
+        );
         $this->checkStaticFunctionParamCount(
             'viewServiceAvailability',
             mmpsdk\Common\Process\ServiceAvailability::class
