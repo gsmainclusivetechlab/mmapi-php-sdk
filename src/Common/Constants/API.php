@@ -49,6 +49,8 @@ class API
         VIEW_ACCOUNT_TRANSACTIONS = '/accounts/{accountId}/transactions',
         VIEW_ACCOUNT_STATEMENTS = '/accounts/{accountId}/statemententries',
         VIEW_SPECIFIC_ACCOUNT_STATEMENT = '/statemententries/{transactionReference}',
+        CREATE_ACCOUNT_DEBIT_MANDATE = '/accounts/{accountId}/debitmandates',
+        VIEW_ACCOUNT_DEBIT_MANDATE = '/accounts/{accountId}/debitmandates/{debitMandateReference}',
         /**
          * Supporting
          * Supporting APIs

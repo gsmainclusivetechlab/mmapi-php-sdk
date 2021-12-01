@@ -32,7 +32,7 @@ class AccountLinking
     ) {
         return new \mmpsdk\AccountLinking\Process\InitiateAccountLink(
             $accountIdentifier,
-            $accountLinking,
+            $accountLink,
             $callBackUrl
         );
     }
