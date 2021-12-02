@@ -5,7 +5,7 @@ use mmpsdk\AccountLinking\AccountLinking;
 use mmpsdk\Common\Exceptions\SDKException;
 
 $accountIdentifier = [
-    'accountid' => 2000
+    'walletid' => '1'
 ];
 
 try {
