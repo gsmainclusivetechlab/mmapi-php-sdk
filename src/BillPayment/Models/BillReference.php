@@ -20,7 +20,6 @@ class BillReference extends BaseModel
      */
     private $paymentReferenceValue;
 
-
     /**
      * @return string|null
      */
@@ -69,4 +68,3 @@ class BillReference extends BaseModel
         ]);
     }
 }
-

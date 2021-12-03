@@ -65,7 +65,6 @@ class Bill extends BaseModel
      */
     private $metadata;
 
-
     /**
      * @return string|null
      */
@@ -293,4 +292,3 @@ class Bill extends BaseModel
         ]);
     }
 }
-

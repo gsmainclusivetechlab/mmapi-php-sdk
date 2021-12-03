@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\BillPayment\Models;
+
 use mmpsdk\Common\Models\BaseModel;
 
 /**
@@ -89,7 +90,6 @@ class BillPayment extends BaseModel
      */
     private $metadata;
 
-
     /**
      * @return string|null
      */
@@ -103,8 +103,9 @@ class BillPayment extends BaseModel
      *
      * @return BillPayment
      */
-    public function setServiceProviderPaymentReference($serviceProviderPaymentReference)
-    {
+    public function setServiceProviderPaymentReference(
+        $serviceProviderPaymentReference
+    ) {
         $this->serviceProviderPaymentReference = $serviceProviderPaymentReference;
 
         return $this;
@@ -123,8 +124,9 @@ class BillPayment extends BaseModel
      *
      * @return BillPayment
      */
-    public function setRequestingOrganisationTransactionReference($requestingOrganisationTransactionReference)
-    {
+    public function setRequestingOrganisationTransactionReference(
+        $requestingOrganisationTransactionReference
+    ) {
         $this->requestingOrganisationTransactionReference = $requestingOrganisationTransactionReference;
 
         return $this;
@@ -263,8 +265,9 @@ class BillPayment extends BaseModel
      *
      * @return BillPayment
      */
-    public function setSupplementaryBillReferenceDetails($supplementaryBillReferenceDetails)
-    {
+    public function setSupplementaryBillReferenceDetails(
+        $supplementaryBillReferenceDetails
+    ) {
         $this->supplementaryBillReferenceDetails = $supplementaryBillReferenceDetails;
 
         return $this;
@@ -413,14 +416,17 @@ class BillPayment extends BaseModel
     public function jsonSerialize()
     {
         return $this->filterEmpty([
-            'serviceProviderPaymentReference' => $this->serviceProviderPaymentReference,
-            'requestingOrganisationTransactionReference' => $this->requestingOrganisationTransactionReference,
+            'serviceProviderPaymentReference' =>
+                $this->serviceProviderPaymentReference,
+            'requestingOrganisationTransactionReference' =>
+                $this->requestingOrganisationTransactionReference,
             'paymentType' => $this->paymentType,
             'amountPaid' => $this->amountPaid,
             'currency' => $this->currency,
             'customerReference' => $this->customerReference,
             'requestingOrganisation' => $this->requestingOrganisation,
-            'supplementaryBillReferenceDetails' => $this->supplementaryBillReferenceDetails,
+            'supplementaryBillReferenceDetails' =>
+                $this->supplementaryBillReferenceDetails,
             'requestDate' => $this->requestDate,
             'customData' => $this->customData,
             'metadata' => $this->metadata
@@ -435,4 +441,3 @@ class BillPayment extends BaseModel
         );
     }
 }
-
