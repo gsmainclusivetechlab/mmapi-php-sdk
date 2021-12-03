@@ -22,22 +22,22 @@ class InitiateAccountLink extends BaseProcess
     /**
      * Account Linking object
      *
-     * @var accountLinking
+     * @var accountLink
      */
-    private $accountLinking;
+    private $accountLink;
 
     /**
      * Set up an account link .
      * Asynchronous flow is used with a final callback.
      *
      * @param array $accountIdentifier
-     * @param AccountLink $accountLinking
+     * @param AccountLink $accountLink
      * @param string $callBackUrl
      * @return this
      */
     public function __construct(
         $accountIdentifier,
-        $accountLinking,
+        AccountLink $accountLink,
         $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
@@ -46,12 +46,12 @@ class InitiateAccountLink extends BaseProcess
             CommonUtil::TYPE_ARRAY
         );
 
-        CommonUtil::validateArgument($accountLinking, 'accountLinking');
+        CommonUtil::validateArgument($accountLink, 'accountLink');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        $this->accountLinking = $accountLinking;
+        $this->accountLink = $accountLink;
         return $this;
     }
 
@@ -63,7 +63,7 @@ class InitiateAccountLink extends BaseProcess
     {
         $request = RequestUtil::post(
             API::CREATE_LINK,
-            json_encode($this->accountLinking)
+            json_encode($this->accountLink)
         )
             ->setUrlParams([
                 '{accountId}' => CommonUtil::encodeSupportObjectToString(

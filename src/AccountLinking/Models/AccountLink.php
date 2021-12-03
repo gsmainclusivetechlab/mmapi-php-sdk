@@ -253,10 +253,5 @@ class AccountLink extends BaseModel
             'requestingOrganisation',
             new \mmpsdk\Common\Models\RequestingOrganisation()
         );
-
-        $this->addHydratorStrategy(
-            'SourceAccountIdentifiers',
-            new \mmpsdk\AccountLinking\Models\SourceAccountIdentifiers()
-        );
     }
 }
