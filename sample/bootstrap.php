@@ -3,7 +3,7 @@
 require dirname(__DIR__, 1) . '/autoload.php';
 
 //Parse the config file
-$env = parse_ini_file(__DIR__ . '/config.env');
+$env = parse_ini_file(__DIR__ . '../../config.env');
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
