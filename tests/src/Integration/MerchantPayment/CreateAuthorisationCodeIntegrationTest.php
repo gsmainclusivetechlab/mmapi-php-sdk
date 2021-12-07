@@ -7,20 +7,23 @@ use mmpsdk\Common\Process\CreateAuthorisationCode;
 use mmpsdk\MerchantPayment\MerchantPayment;
 use mmpsdkTest\src\Integration\IntegrationTestCase;
 
-class CreateAuthorisationCodeIntegrationTest extends IntegrationTestCase {
-
+class CreateAuthorisationCodeIntegrationTest extends IntegrationTestCase
+{
     private static $authorizationCode;
     private static $accountIdentifier;
 
-    protected function getProcessInstanceType(){
+    protected function getProcessInstanceType()
+    {
         return CreateAuthorisationCode::class;
     }
 
-    protected function getResponseInstanceType(){
+    protected function getResponseInstanceType()
+    {
         return RequestState::class;
     }
 
-    protected function getRequestType(){
+    protected function getRequestType()
+    {
         return BaseProcess::ASYNCHRONOUS_PROCESS;
     }
 
@@ -36,8 +39,9 @@ class CreateAuthorisationCodeIntegrationTest extends IntegrationTestCase {
 
     protected function setUp(): void
     {
-        $this->request = MerchantPayment::createAuthorisationCode(self::$accountIdentifier, self::$authorizationCode);
+        $this->request = MerchantPayment::createAuthorisationCode(
+            self::$accountIdentifier,
+            self::$authorizationCode
+        );
     }
-
-
 }

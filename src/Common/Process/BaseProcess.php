@@ -151,9 +151,11 @@ abstract class BaseProcess
      *
      * @return mixed
      */
-    public function getRawResponse(){
+    public function getRawResponse()
+    {
         return $this->rawResponse;
     }
+
     /**
      * Make the API request
      *
