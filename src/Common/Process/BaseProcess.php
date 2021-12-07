@@ -59,6 +59,8 @@ abstract class BaseProcess
      */
     public $retryCount = 0;
 
+    public $rawResponse;
+
     /**
      * Standardised flow pattern type followed by the APIs.
      *
@@ -145,6 +147,14 @@ abstract class BaseProcess
     }
 
     /**
+     * Get raw response
+     *
+     * @return mixed
+     */
+    public function getRawResponse(){
+        return $this->rawResponse;
+    }
+    /**
      * Make the API request
      *
      * @param RequestUtil $request
@@ -163,6 +173,7 @@ abstract class BaseProcess
      */
     protected function parseResponse($response, $obj = null)
     {
+        $this->rawResponse = $response;
         return ResponseUtil::parse($response, $obj, $this);
     }
 
