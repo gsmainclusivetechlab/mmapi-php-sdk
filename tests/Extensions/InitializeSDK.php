@@ -12,7 +12,7 @@ class InitializeSDK implements BeforeFirstTestHook, AfterLastTestHook
 {
     public function executeBeforeFirstTest(): void
     {
-        $dotenv = Dotenv::createImmutable(__DIR__, '../../sdk-test-config.env');
+        $dotenv = Dotenv::createImmutable(__DIR__, '../../config.env');
         $dotenv->load();
         MobileMoney::initialize(
             MobileMoney::SANDBOX,

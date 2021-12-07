@@ -12,7 +12,7 @@ cd mmapi-php-sdk
 -   Create config.env file for API credentials:
 
 ```
-cp sample/config.env.sample sample/config.env
+cp config.env.sample config.env
 ```
 
 -   Set the API credentials in the config.env file:
