@@ -27,6 +27,7 @@ test.php
 bck
 sdk-test-config.ini
 sample/config.ini
+config.env
 sample/config.env
 
 # Groc
