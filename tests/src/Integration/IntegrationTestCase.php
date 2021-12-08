@@ -2,6 +2,8 @@
 
 namespace mmpsdkTest\src\Integration;
 
+use mmpsdk\Common\Common;
+use mmpsdk\Common\Enums\NotificationMethod;
 use mmpsdk\Common\Process\BaseProcess;
 use PHPUnit\Framework\TestCase;
 
@@ -13,6 +15,10 @@ abstract class IntegrationTestCase extends TestCase
     abstract protected function getProcessInstanceType();
     abstract protected function getResponseInstanceType();
     abstract protected function getRequestType();
+
+    protected function pollingRequest($serverCorrelationId){
+        return Common::viewRequestState($serverCorrelationId);
+    }
 
     public function testProcessInstanceType()
     {
@@ -38,19 +44,59 @@ abstract class IntegrationTestCase extends TestCase
         // Test Response is not null
         $this->assertNotNull($this->response);
 
+        //Test Response Code
+        if($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            $this->assertEquals(202, $this->request->getRawResponse()->httpCode);
+        } else {
+            $this->assertEquals(200, $this->request->getRawResponse()->httpCode);
+        }
+
         // Test response type
         $this->assertInstanceOf(
             $this->getResponseInstanceType(),
             $this->response
         );
 
-        // Test response has required values
-        $this->assertNotNull($this->response->getResponseCode());
+        if($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            $this->asynchronusProcessAssertions(NotificationMethod::CALLBACK);
+        }
+        $this->responseAssertions($this->response);
     }
 
-    public function testPollingWorkFlow()
+    public function testPollingSequence()
     {
         if ($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            $this->request->setNotificationMethod(NotificationMethod::POLLING);
+            $this->response = $this->request->execute();
+            $this->asynchronusProcessAssertions(NotificationMethod::POLLING);
+        } else {
+            $this->markTestSkipped('This test is only for asynchronous process');
         }
     }
+
+    private function asynchronusProcessAssertions($notificationMethod)
+    {
+        $this->assertEquals(202, $this->request->getRawResponse()->httpCode);
+            $this->assertInstanceOf(
+                $this->getResponseInstanceType(),
+                $this->response
+            );
+            $requestStateObject = $this->response;
+            $this->assertEquals(
+                $notificationMethod,
+                $requestStateObject->getNotificationMethod()
+            );
+            $this->assertNotNull(
+                $requestStateObject->getServerCorrelationId(),
+                "Server Correlation ID is null"
+            );
+            $this->assertMatchesRegularExpression(
+                '/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/',
+                $requestStateObject->getServerCorrelationId(),
+                "Invalid Server Correlation ID Returned in response: " . $requestStateObject->getServerCorrelationId()
+            );
+            $this->assertEquals('pending', $requestStateObject->getStatus());
+    }
+
+    protected function responseAssertions($response){}
 }

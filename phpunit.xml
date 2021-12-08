@@ -18,6 +18,9 @@
             <directory>tests</directory>
             <exclude>tests/src/Integration</exclude>
         </testsuite>
+        <testsuite name="IntegrationTest">
+            <directory>tests/src/Integration</directory>
+        </testsuite>
     </testsuites>
 
 </phpunit>
