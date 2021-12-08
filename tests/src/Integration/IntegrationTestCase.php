@@ -67,7 +67,7 @@ abstract class IntegrationTestCase extends TestCase
         if ($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
             $this->asynchronusProcessAssertions(NotificationMethod::CALLBACK);
         }
-        $this->responseAssertions($this->response);
+        $this->responseAssertions($this->request, $this->response);
     }
 
     public function testPollingSequence()
@@ -108,7 +108,61 @@ abstract class IntegrationTestCase extends TestCase
         $this->assertEquals('pending', $requestStateObject->getStatus());
     }
 
-    protected function responseAssertions($response)
+    protected function responseAssertions($request, $response)
     {
+        $rawResponse = $request->getRawResponse();
+        $jsonData = json_decode($rawResponse->result, true);
+        $this->validateResponse($response, $jsonData);
+        switch ($this->getResponseInstanceType()) {
+            case \mmpsdk\Common\Models\AuthorisationCode::class:
+                $this->validateFields(
+                    ['authorisationCode', 'codeState'],
+                    $response,
+                    $jsonData
+                );
+                break;
+            default:
+                break;
+        }
+    }
+
+    private function getterMethod($attribute)
+    {
+        return 'get' .
+            str_replace(' ', '', ucwords(str_replace('_', ' ', $attribute)));
+    }
+
+    private function validateFields($fields, $response, $jsonData)
+    {
+        foreach ($fields as $field) {
+            $getterMethod = $this->getterMethod($field);
+            $this->assertTrue(
+                method_exists(get_class($response), $getterMethod),
+                'Class ' .
+                    get_class($response) .
+                    ' does not have method ' .
+                    $getterMethod
+            );
+            $this->assertArrayHasKey(
+                $field,
+                $jsonData,
+                'Field ' . $field . ' not found in response'
+            );
+            $this->assertNotNull(
+                $response->$getterMethod(),
+                'Field ' . $field . ' has no value.'
+            );
+            if(!in_array(gettype($response->$getterMethod()), ['object', 'array'])){
+                $this->assertEquals(
+                    $jsonData[$field],
+                    $response->$getterMethod(),
+                    'Field ' . $field . ' has invalid value.'
+                );
+            }
+        }
+    }
+
+    private function validateResponse($response, $jsonData){
+        return $this->validateFields(array_keys($jsonData), $response, $jsonData);
     }
 }
