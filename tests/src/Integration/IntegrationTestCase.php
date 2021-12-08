@@ -76,6 +76,25 @@ abstract class IntegrationTestCase extends TestCase
             $this->request->setNotificationMethod(NotificationMethod::POLLING);
             $this->response = $this->request->execute();
             $this->asynchronusProcessAssertions(NotificationMethod::POLLING);
+
+            // Poll Request
+            $serverCorreleationId = $this->response->getServerCorrelationId();
+            $pollRequest = Common::viewRequestState($serverCorreleationId)->execute();
+            $this->assertNotNull($pollRequest);
+        } else {
+            $this->markTestSkipped(
+                'This test is only for asynchronous process'
+            );
+        }
+    }
+
+    public function testMissingResponse(){
+        if ($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            // Missing Response
+            $this->response = $this->request->execute();
+            $clientCorreleationId = $this->response->getClientCorrelationId();
+            $missingResponse = Common::viewResponse($clientCorreleationId)->execute();
+            $this->assertNotNull($missingResponse, "Missing Response API returned null");
         } else {
             $this->markTestSkipped(
                 'This test is only for asynchronous process'
@@ -105,7 +124,7 @@ abstract class IntegrationTestCase extends TestCase
             'Invalid Server Correlation ID Returned in response: ' .
                 $requestStateObject->getServerCorrelationId()
         );
-        $this->assertEquals('pending', $requestStateObject->getStatus());
+        $this->assertMatchesRegularExpression('/^(pending|completed|failed)$/', $requestStateObject->getStatus());
     }
 
     protected function responseAssertions($request, $response)
