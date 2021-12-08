@@ -152,7 +152,12 @@ abstract class IntegrationTestCase extends TestCase
                 $response->$getterMethod(),
                 'Field ' . $field . ' has no value.'
             );
-            if(!in_array(gettype($response->$getterMethod()), ['object', 'array'])){
+            if (
+                !in_array(gettype($response->$getterMethod()), [
+                    'object',
+                    'array'
+                ])
+            ) {
                 $this->assertEquals(
                     $jsonData[$field],
                     $response->$getterMethod(),
@@ -162,7 +167,12 @@ abstract class IntegrationTestCase extends TestCase
         }
     }
 
-    private function validateResponse($response, $jsonData){
-        return $this->validateFields(array_keys($jsonData), $response, $jsonData);
+    private function validateResponse($response, $jsonData)
+    {
+        return $this->validateFields(
+            array_keys($jsonData),
+            $response,
+            $jsonData
+        );
     }
 }
