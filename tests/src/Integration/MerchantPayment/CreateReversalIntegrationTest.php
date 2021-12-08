@@ -36,9 +36,13 @@ class CreateReversalIntegrationTest extends IntegrationTestCase
             ->setCreditParty(['msisdn' => '+44012345678'])
             ->setDebitParty(['walletid' => '1']);
         $response = MerchantPayment::createMerchantTransaction(
-                $transaction
-            )->execute();
-        self::$transactionReference = Common::viewRequestState($response->getServerCorrelationId())->execute()->getObjectReference();
+            $transaction
+        )->execute();
+        self::$transactionReference = Common::viewRequestState(
+            $response->getServerCorrelationId()
+        )
+            ->execute()
+            ->getObjectReference();
     }
 
     protected function setUp(): void
