@@ -57,7 +57,7 @@ abstract class IntegrationTestCase extends TestCase
         }
 
         // Test response type
-        if(!is_array($this->response)) {
+        if (!is_array($this->response)) {
             $this->assertInstanceOf(
                 $this->getResponseInstanceType(),
                 $this->response
@@ -168,24 +168,40 @@ abstract class IntegrationTestCase extends TestCase
                 break;
             case \mmpsdk\Disbursement\Models\BatchTransaction::class:
                 $this->validateFields(
-                    ['batchId', 'batchStatus', 'approvalDate', 'completionDate'],
+                    [
+                        'batchId',
+                        'batchStatus',
+                        'approvalDate',
+                        'completionDate'
+                    ],
                     $response,
                     $jsonData
                 );
                 break;
             case \mmpsdk\Disbursement\Models\BatchCompletion::class:
-                if(!empty($jsonData)){
+                if (!empty($jsonData)) {
                     $this->validateFields(
-                        ['creditParty', 'debitParty', 'link', 'completionDate', 'transactionReference'],
+                        [
+                            'creditParty',
+                            'debitParty',
+                            'link',
+                            'completionDate',
+                            'transactionReference'
+                        ],
                         $response,
                         $jsonData
                     );
                 }
                 break;
             case \mmpsdk\Disbursement\Models\BatchRejection::class:
-                if(!empty($jsonData)){
+                if (!empty($jsonData)) {
                     $this->validateFields(
-                        ['creditParty', 'debitParty', 'rejectionReason', 'rejectionDate'],
+                        [
+                            'creditParty',
+                            'debitParty',
+                            'rejectionReason',
+                            'rejectionDate'
+                        ],
                         $response,
                         $jsonData
                     );
