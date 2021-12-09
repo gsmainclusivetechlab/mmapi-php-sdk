@@ -164,6 +164,13 @@ abstract class IntegrationTestCase extends TestCase
                     $jsonData
                 );
                 break;
+            case \mmpsdk\Common\Models\AccountHolder::class:
+                $this->validateFields(
+                    ['name'],
+                    $response,
+                    $jsonData
+                );
+                break;
             default:
                 break;
         }
