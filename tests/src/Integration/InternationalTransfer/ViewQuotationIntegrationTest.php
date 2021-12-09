@@ -5,6 +5,8 @@ use mmpsdk\Common\Process\ViewQuotation;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdkTest\src\Integration\IntegrationTestCase;
+use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
+use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
 
 class ViewQuotationIntegrationTest extends IntegrationTestCase
 {
@@ -27,7 +29,7 @@ class ViewQuotationIntegrationTest extends IntegrationTestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$quotationReference = 'REF-1637057900018';
+        self::$quotationReference = 'REF-1639039494460';
     }
 
     protected function setUp(): void
