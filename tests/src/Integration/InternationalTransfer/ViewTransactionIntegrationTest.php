@@ -27,7 +27,20 @@ class ViewTransactionIntegrationTest extends IntegrationTestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$transactionReference = 'REF-1636106992007';
+        $transaction = new Transaction();
+        $transaction
+            ->setAmount('160.00')
+            ->setCurrency('USD')
+            ->setCreditParty(['msisdn' => '+44012345678'])
+            ->setDebitParty(['walletid' => '1']);
+        $response = InternationalTransfer::createInternationalTransaction(
+            $transaction
+        )->execute();
+        self::$transactionReference = InternationalTransfer::viewRequestState(
+            $response->getServerCorrelationId()
+        )
+            ->execute()
+            ->getObjectReference();
     }
 
     protected function setUp(): void
