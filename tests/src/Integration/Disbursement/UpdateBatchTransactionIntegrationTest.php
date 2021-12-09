@@ -53,9 +53,14 @@ class UpdateBatchTransactionIntegrationTest extends IntegrationTestCase
         array_push($transactionsArray, $transactionItem1);
         array_push($transactionsArray, $transactionItem2);
         $batchTransaction->setTransactions($transactionsArray);
-        $response = Disbursement::createBatchTransaction($batchTransaction)->execute();
-        self::$batchTransactionRef = Common::viewRequestState($response->getServerCorrelationId())->execute()->getObjectReference();
-
+        $response = Disbursement::createBatchTransaction(
+            $batchTransaction
+        )->execute();
+        self::$batchTransactionRef = Common::viewRequestState(
+            $response->getServerCorrelationId()
+        )
+            ->execute()
+            ->getObjectReference();
     }
 
     protected function setUp(): void
