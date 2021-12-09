@@ -1,5 +1,6 @@
 <?php
 
+use mmpsdk\Common\Common;
 use mmpsdk\Common\Models\AuthorisationCode;
 use mmpsdk\Common\Models\Balance;
 use mmpsdk\Common\Process\AccountBalance;
@@ -33,7 +34,21 @@ class ViewAuthorisationCodeIntegrationTest extends IntegrationTestCase
         self::$accountIdentifier = [
             'accountid' => 2000
         ];
-        self::$authorisationCode = '2b68c2a7-e0ef-4fa8-b180-ec092993016c';
+        $authorizationCode = new AuthorisationCode();
+        $authorizationCode
+            ->setRequestDate(date('Y-m-d\TH:i:s\.40z'))
+            ->setCurrency('GBP')
+            ->setAmount('1001.00');
+        $response = MerchantPayment::createAuthorisationCode(
+            self::$accountIdentifier,
+            $authorizationCode
+        )->execute();
+
+        self::$authorisationCode = Common::viewRequestState(
+            $response->getServerCorrelationId()
+        )
+            ->execute()
+            ->getObjectReference();
     }
 
     protected function setUp(): void

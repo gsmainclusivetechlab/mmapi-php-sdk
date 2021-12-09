@@ -57,10 +57,12 @@ abstract class IntegrationTestCase extends TestCase
         }
 
         // Test response type
-        $this->assertInstanceOf(
-            $this->getResponseInstanceType(),
-            $this->response
-        );
+        if (!is_array($this->response)) {
+            $this->assertInstanceOf(
+                $this->getResponseInstanceType(),
+                $this->response
+            );
+        }
 
         if ($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
             $this->asynchronusProcessAssertions(NotificationMethod::CALLBACK);
@@ -164,12 +166,49 @@ abstract class IntegrationTestCase extends TestCase
                     $jsonData
                 );
                 break;
-            case \mmpsdk\Common\Models\AccountHolder::class:
+            case \mmpsdk\Disbursement\Models\BatchTransaction::class:
                 $this->validateFields(
-                    ['name'],
+                    [
+                        'batchId',
+                        'batchStatus',
+                        'approvalDate',
+                        'completionDate'
+                    ],
                     $response,
                     $jsonData
                 );
+                break;
+            case \mmpsdk\Disbursement\Models\BatchCompletion::class:
+                if (!empty($jsonData)) {
+                    $this->validateFields(
+                        [
+                            'creditParty',
+                            'debitParty',
+                            'link',
+                            'completionDate',
+                            'transactionReference'
+                        ],
+                        $response,
+                        $jsonData
+                    );
+                }
+                break;
+            case \mmpsdk\Disbursement\Models\BatchRejection::class:
+                if (!empty($jsonData)) {
+                    $this->validateFields(
+                        [
+                            'creditParty',
+                            'debitParty',
+                            'rejectionReason',
+                            'rejectionDate'
+                        ],
+                        $response,
+                        $jsonData
+                    );
+                }
+                break;
+            case \mmpsdk\Common\Models\AccountHolder::class:
+                $this->validateFields(['name'], $response, $jsonData);
                 break;
             default:
                 break;
@@ -201,7 +240,7 @@ abstract class IntegrationTestCase extends TestCase
                 $this->assertArrayHasKey(
                     $field,
                     $jsonData,
-                    'Field ' . $field . ' not found in response'
+                    'Mandatory Field ' . $field . ' not found in response'
                 );
                 $this->assertNotNull(
                     $response->$getterMethod(),

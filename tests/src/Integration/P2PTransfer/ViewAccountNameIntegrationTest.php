@@ -34,8 +34,6 @@ class ViewAccountNameIntegrationTest extends IntegrationTestCase
 
     protected function setUp(): void
     {
-        $this->request = P2PTransfer::viewAccountName(
-            self::$accountIdentifier
-        );
+        $this->request = P2PTransfer::viewAccountName(self::$accountIdentifier);
     }
 }
