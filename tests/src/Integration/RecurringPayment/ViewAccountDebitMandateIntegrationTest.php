@@ -53,8 +53,11 @@ class ViewAccountDebitMandateIntegrationTest extends IntegrationTestCase
             self::$accountIdentifier,
             $debitMandate
         )->execute();
-        self::$debitMandateRef = Common::viewRequestState($response->getServerCorrelationId())->execute()->getObjectReference();
-
+        self::$debitMandateRef = Common::viewRequestState(
+            $response->getServerCorrelationId()
+        )
+            ->execute()
+            ->getObjectReference();
     }
 
     protected function setUp(): void
