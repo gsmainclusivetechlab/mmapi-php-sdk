@@ -41,7 +41,6 @@ abstract class IntegrationTestCase extends TestCase
     public function testResponse()
     {
         $this->response = $this->request->execute();
-
         // Test Response is not null
         $this->assertNotNull($this->response);
 
@@ -150,6 +149,20 @@ abstract class IntegrationTestCase extends TestCase
                     $response,
                     $jsonData
                 );
+                break;
+            case \mmpsdk\Common\Models\Quotation::class:
+                $this->validateFields(
+                    ['quotationReference', 'requestAmount'],
+                    $response,
+                    $jsonData
+                );
+                break;
+            case \mmpsdk\Common\Models\Transaction::class:
+                $this->validateFields(
+                    ['transactionReference', 'transactionStatus'],
+                    $response,
+                    $jsonData
+                ); 
                 break;
             default:
                 break;
