@@ -132,7 +132,7 @@ abstract class IntegrationTestCase extends TestCase
                     ['transactionReference', 'transactionStatus'],
                     $response,
                     $jsonData
-                ); 
+                );
                 break;
             default:
                 break;
