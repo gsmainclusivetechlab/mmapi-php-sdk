@@ -331,7 +331,7 @@ class BatchTransaction extends BaseModel
     /**
      * @return bool|null
      */
-    public function isProcessingFlag()
+    public function getProcessingFlag()
     {
         return $this->processingFlag;
     }
