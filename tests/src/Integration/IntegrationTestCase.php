@@ -140,7 +140,7 @@ abstract class IntegrationTestCase extends TestCase
     {
         $rawResponse = $request->getRawResponse();
         $jsonData = json_decode($rawResponse->result, true);
-        $this->assertNotNull($jsonData, "Invalid JSON Response from API");
+        $this->assertNotNull($jsonData, 'Invalid JSON Response from API');
         $this->validateResponse($response, $jsonData);
         switch ($this->getResponseInstanceType()) {
             case \mmpsdk\Common\Models\AuthorisationCode::class:
@@ -177,7 +177,7 @@ abstract class IntegrationTestCase extends TestCase
 
     private function validateFields($fields, $response, $jsonData)
     {
-        if(is_array($response)) {
+        if (is_array($response)) {
             foreach ($response as $key => $value) {
                 $this->validateFields($fields, $value, $jsonData[$key]);
             }
@@ -218,13 +218,11 @@ abstract class IntegrationTestCase extends TestCase
 
     private function validateResponse($response, $jsonData)
     {
-        if(is_array($response)) {
+        if (is_array($response)) {
             foreach ($response as $key => $value) {
-                $this->validateFields(
-                    array_keys($jsonData[$key]),
-                    $value,
-                    [$key]
-                );
+                $this->validateFields(array_keys($jsonData[$key]), $value, [
+                    $key
+                ]);
             }
         } else {
             return $this->validateFields(
