@@ -13,7 +13,7 @@ class BatchTransaction extends BaseModel
     /**
      * @var string
      */
-    private $batchID;
+    private $batchId;
 
     /**
      * @var string
@@ -103,19 +103,19 @@ class BatchTransaction extends BaseModel
     /**
      * @return string|null
      */
-    public function getBatchID()
+    public function getBatchId()
     {
-        return $this->batchID;
+        return $this->batchId;
     }
 
     /**
-     * @param string|null $batchID
+     * @param string|null $batchId
      *
      * @return BatchTransaction
      */
-    public function setBatchID($batchID)
+    public function setBatchID($batchId)
     {
-        $this->batchID = $batchID;
+        $this->batchId = $batchId;
         return $this;
     }
 
@@ -331,7 +331,7 @@ class BatchTransaction extends BaseModel
     /**
      * @return bool|null
      */
-    public function isProcessingFlag()
+    public function getProcessingFlag()
     {
         return $this->processingFlag;
     }

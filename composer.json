@@ -28,6 +28,8 @@
             "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix"
         ],
         "tests": "./vendor/bin/phpunit --testdox tests",
+        "tests-integration": "./vendor/bin/phpunit --testdox --testsuite IntegrationTest",
+        "tests-unit": "./vendor/bin/phpunit --testdox --testsuite UnitTest",
         "check-compat": "./vendor/bin/phpcs -p src/ --standard=PHPCompatibility --runtime-set testVersion 5.4-8.0",
         "post-install-cmd": [
             "\"vendor/bin/phpcs\" --config-set installed_paths vendor/phpcompatibility/php-compatibility",
