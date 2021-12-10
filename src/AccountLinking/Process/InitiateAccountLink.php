@@ -9,7 +9,7 @@ use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 
 /**
  * Class InitiateAccountLink
@@ -20,24 +20,24 @@ class InitiateAccountLink extends BaseProcess
     private $accountIdentifier;
 
     /**
-     * Account Linking object
+     * Link object
      *
-     * @var accountLink
+     * @var Link
      */
-    private $accountLink;
+    private $link;
 
     /**
      * Set up an account link .
      * Asynchronous flow is used with a final callback.
      *
      * @param array $accountIdentifier
-     * @param AccountLink $accountLink
+     * @param Link $link
      * @param string $callBackUrl
      * @return this
      */
     public function __construct(
         $accountIdentifier,
-        AccountLink $accountLink,
+        Link $link,
         $callBackUrl = null
     ) {
         CommonUtil::validateArgument(
@@ -46,12 +46,12 @@ class InitiateAccountLink extends BaseProcess
             CommonUtil::TYPE_ARRAY
         );
 
-        CommonUtil::validateArgument($accountLink, 'accountLink');
+        CommonUtil::validateArgument($link, 'link');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->accountIdentifier = CommonUtil::DeserializeToSupportObject(
             $accountIdentifier
         );
-        $this->accountLink = $accountLink;
+        $this->link = $link;
         return $this;
     }
 
@@ -61,10 +61,7 @@ class InitiateAccountLink extends BaseProcess
      */
     public function execute()
     {
-        $request = RequestUtil::post(
-            API::CREATE_LINK,
-            json_encode($this->accountLink)
-        )
+        $request = RequestUtil::post(API::CREATE_LINK, json_encode($this->link))
             ->setUrlParams([
                 '{accountId}' => CommonUtil::encodeSupportObjectToString(
                     $this->accountIdentifier

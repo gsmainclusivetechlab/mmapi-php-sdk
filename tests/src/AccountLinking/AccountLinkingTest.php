@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\AccountLinking\AccountLinking;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
 
 class AccountLinkingTest extends WrapperTestCase
@@ -13,7 +13,7 @@ class AccountLinkingTest extends WrapperTestCase
 
         $initiateAccountLink = AccountLinking::createAccountLink(
             ['accountid' => 2000],
-            new AccountLink()
+            new Link()
         );
         $this->checkStaticFunctionParamCount(
             'createAccountLink',

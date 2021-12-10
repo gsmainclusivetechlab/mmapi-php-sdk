@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 use mmpsdk\Common\Models\RequestingOrganisation;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 use mmpsdk\AccountLinking\Process\InitiateAccountLink;
@@ -15,8 +15,8 @@ class InitiateAccountLinkTest extends ProcessTestCase
             'accountId' => 2000
         ];
 
-        $accountLink = new AccountLink();
-        $accountLink
+        $link = new Link();
+        $link
             ->setSourceAccountIdentifiers(['accountid' => '2999'])
             ->setStatus('active')
             ->setMode('both')
@@ -25,10 +25,10 @@ class InitiateAccountLinkTest extends ProcessTestCase
         $requestingOrganisation
             ->setRequestingOrganisationIdentifierType('organisationid')
             ->setRequestingOrganisationIdentifier('12345');
-        $accountLink->setRequestingOrganisation($requestingOrganisation);
+        $link->setRequestingOrganisation($requestingOrganisation);
         $this->constructorArgs = [
             $accountIdentifier,
-            $accountLink,
+            $link,
             'http://example.com/'
         ];
         $this->requestMethod = 'POST';

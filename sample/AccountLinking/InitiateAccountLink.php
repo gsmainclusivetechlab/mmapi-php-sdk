@@ -2,13 +2,13 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Models\RequestingOrganisation;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 use mmpsdk\AccountLinking\AccountLinking;
 use mmpsdk\AccountLinking\Enums\LinkStatus;
 use mmpsdk\AccountLinking\Enums\OperationMode;
 
-$accountLink = new AccountLink();
-$accountLink
+$link = new Link();
+$link
     ->setSourceAccountIdentifiers(['accountid' => '2999'])
     ->setStatus(LinkStatus::ACTIVE)
     ->setMode(OperationMode::BOTH)
@@ -17,17 +17,14 @@ $requestingOrganisation = new RequestingOrganisation();
 $requestingOrganisation
     ->setRequestingOrganisationIdentifierType('organisationid')
     ->setRequestingOrganisationIdentifier('12345');
-$accountLink->setRequestingOrganisation($requestingOrganisation);
+$link->setRequestingOrganisation($requestingOrganisation);
 
 $accountIdentifier = [
     'accountid' => 2000
 ];
 
 try {
-    $request = AccountLinking::createAccountLink(
-        $accountIdentifier,
-        $accountLink
-    );
+    $request = AccountLinking::createAccountLink($accountIdentifier, $link);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

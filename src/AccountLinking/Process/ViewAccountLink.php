@@ -6,7 +6,7 @@ use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Utils\CommonUtil;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 
 /**
  * Class ViewAccountLink
@@ -48,7 +48,7 @@ class ViewAccountLink extends BaseProcess
 
     /**
      *
-     * @return AccountLink
+     * @return Link
      */
     public function execute()
     {
@@ -62,6 +62,6 @@ class ViewAccountLink extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
-        return $this->parseResponse($response, new AccountLink());
+        return $this->parseResponse($response, new Link());
     }
 }

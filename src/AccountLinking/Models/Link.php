@@ -5,7 +5,7 @@ namespace mmpsdk\AccountLinking\Models;
 use mmpsdk\Common\Models\BaseModel;
 use mmpsdk\Common\Utils\CommonUtil;
 
-class AccountLink extends BaseModel
+class Link extends BaseModel
 {
     /**
      * @var string
@@ -63,7 +63,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $linkReference
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setLinkReference($linkReference)
     {
@@ -83,7 +83,7 @@ class AccountLink extends BaseModel
     /**
      * @param array|null $sourceAccountIdentifiers
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setSourceAccountIdentifiers($sourceAccountIdentifiers)
     {
@@ -103,7 +103,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $mode
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setMode($mode)
     {
@@ -123,7 +123,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $status
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setStatus($status)
     {
@@ -143,7 +143,7 @@ class AccountLink extends BaseModel
     /**
      * @param RequestingOrganisation|null $requestingOrganisation
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setRequestingOrganisation($requestingOrganisation)
     {
@@ -163,7 +163,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $creationDate
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setCreationDate($creationDate)
     {
@@ -183,7 +183,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $modificationDate
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setModificationDate($modificationDate)
     {
@@ -203,7 +203,7 @@ class AccountLink extends BaseModel
     /**
      * @param string|null $requestDate
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setRequestDate($requestDate)
     {
@@ -223,7 +223,7 @@ class AccountLink extends BaseModel
     /**
      * @param array|null $customData
      *
-     * @return AccountLinking
+     * @return Link
      */
     public function setCustomData($customData)
     {
@@ -241,6 +241,7 @@ class AccountLink extends BaseModel
             'status' => $this->status,
             'mode' => $this->mode,
             'requestingOrganisation' => $this->requestingOrganisation,
+            'requestDate' => $this->requestDate,
             'customData' => CommonUtil::DeserializeToSupportObject(
                 $this->customData
             )

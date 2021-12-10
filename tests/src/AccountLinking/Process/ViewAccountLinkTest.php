@@ -2,7 +2,7 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\AccountLinking\Models\AccountLink;
+use mmpsdk\AccountLinking\Models\Link;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 use mmpsdk\AccountLinking\Process\ViewAccountLink;
 

@@ -21,18 +21,18 @@ class AccountLinking
      * Asynchronous flow is used with a final callback.
      *
      * @param array $accountIdentifier
-     * @param AccountLink $accountLink
+     * @param Link $link
      * @param string $callBackUrl
      * @return InitiateAccountLink
      */
     public static function createAccountLink(
         $accountIdentifier,
-        \mmpsdk\AccountLinking\Models\AccountLink $accountLink,
+        \mmpsdk\AccountLinking\Models\Link $link,
         $callBackUrl = null
     ) {
         return new \mmpsdk\AccountLinking\Process\InitiateAccountLink(
             $accountIdentifier,
-            $accountLink,
+            $link,
             $callBackUrl
         );
     }
