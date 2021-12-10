@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\Common\Models;
+
 use mmpsdk\Common\Models\BaseModel;
 
 class ChannelType extends BaseModel
@@ -9,7 +10,6 @@ class ChannelType extends BaseModel
      * @var string
      */
     private $channelType;
-
 
     /**
      * @return string|null
@@ -38,4 +38,3 @@ class ChannelType extends BaseModel
         ]);
     }
 }
-

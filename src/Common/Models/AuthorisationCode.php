@@ -198,7 +198,10 @@ class AuthorisationCode extends BaseModel
             'redemptionChannels',
             new \mmpsdk\Common\Models\ChannelType()
         );
-        $this->addHydratorStrategy('redemptionTransactionTypes', new \mmpsdk\Common\Models\TransactionType());
+        $this->addHydratorStrategy(
+            'redemptionTransactionTypes',
+            new \mmpsdk\Common\Models\TransactionType()
+        );
         $this->addHydratorStrategy(
             'requestingOrganisation',
             new \mmpsdk\Common\Models\RequestingOrganisation()
