@@ -1,8 +1,8 @@
 <?php
 
 namespace mmpsdk\Common\Models;
-
-class TransactionType
+use mmpsdk\Common\Models\BaseModel;
+class TransactionType extends BaseModel
 {
     /**
      * @var string
@@ -31,7 +31,7 @@ class TransactionType
     public function setTransactionType($transactionType)
     {
         $this->transactionType = $transactionType;
-        
+
         return $this;
     }
 
@@ -51,7 +51,7 @@ class TransactionType
     public function setTransactionSubtype($transactionSubtype)
     {
         $this->transactionSubtype = $transactionSubtype;
-        
+
         return $this;
     }
 

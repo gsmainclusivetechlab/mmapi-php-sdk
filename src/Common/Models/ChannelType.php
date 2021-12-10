@@ -1,8 +1,9 @@
 <?php
 
 namespace mmpsdk\Common\Models;
+use mmpsdk\Common\Models\BaseModel;
 
-class ChannelType
+class ChannelType extends BaseModel
 {
     /**
      * @var string
@@ -26,7 +27,7 @@ class ChannelType
     public function setChannelType($channelType)
     {
         $this->channelType = $channelType;
-        
+
         return $this;
     }
 

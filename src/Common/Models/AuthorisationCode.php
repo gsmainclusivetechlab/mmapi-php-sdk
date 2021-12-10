@@ -191,4 +191,17 @@ class AuthorisationCode extends BaseModel
             'metadata' => $this->metadata
         ]);
     }
+
+    public function hydratorStrategies()
+    {
+        $this->addHydratorStrategy(
+            'redemptionChannels',
+            new \mmpsdk\Common\Models\ChannelType()
+        );
+        $this->addHydratorStrategy('redemptionTransactionTypes', new \mmpsdk\Common\Models\TransactionType());
+        $this->addHydratorStrategy(
+            'requestingOrganisation',
+            new \mmpsdk\Common\Models\RequestingOrganisation()
+        );
+    }
 }
