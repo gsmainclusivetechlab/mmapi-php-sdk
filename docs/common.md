@@ -11,4 +11,4 @@
 |     viewTransaction     |                          string $transactionReference                           |    Transaction     |             Get transaction object using reference id.              |
 | viewServiceAvailability |                                       NA                                        |       stdObj       | To determine the availability of the service from the API provider. |
 |     createReversal      | string $transactionReference, Reversal $reversal=null, string $callBackUrl=null |    RequestState    |       To reverse a merchant transaction in failure scenarios.       |
-|     viewAccountName     |                            array $accountIdentifier                             |   AccountHolder    |     Retrieve the name of the intended recipient of a transfer.      |
+|     viewAccountName     |                            array $accountIdentifier                             | AccountHolderName  |     Retrieve the name of the intended recipient of a transfer.      |

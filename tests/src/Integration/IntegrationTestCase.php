@@ -207,7 +207,7 @@ abstract class IntegrationTestCase extends TestCase
                     );
                 }
                 break;
-            case \mmpsdk\Common\Models\AccountHolder::class:
+            case \mmpsdk\Common\Models\AccountHolderName::class:
                 $this->validateFields(['name'], $response, $jsonData);
                 break;
             default:

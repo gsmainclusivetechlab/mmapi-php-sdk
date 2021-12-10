@@ -4,7 +4,7 @@
 
 |          Methods          |                                   Parameters                                    |       Return       |                                   Description                                   |
 | :-----------------------: | :-----------------------------------------------------------------------------: | :----------------: | :-----------------------------------------------------------------------------: |
-|      viewAccountName      |                            array $accountIdentifier                             |   AccountHolder    |           Retrieve the name of the intended recipient of a transfer.            |
+|      viewAccountName      |                            array $accountIdentifier                             | AccountHolderName  |           Retrieve the name of the intended recipient of a transfer.            |
 |      createQuotation      |                    Quotation $quotation, $callBackUrl = null                    |    RequestState    | Make a bulk disbursement to a mobile money customer using the Mobile Money API. |
 |       viewQuotation       |                           string $quotationReference                            |     Quotation      |                          Returns a specific quotation                           |
 | createTransferTransaction |              Transaction $transaction, string $callBackUrl = null               |    RequestState    |                          To make transfer transaction.                          |

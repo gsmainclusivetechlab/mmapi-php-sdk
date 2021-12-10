@@ -262,6 +262,6 @@ class Quote extends BaseModel
 
     public function hydratorStrategies()
     {
-        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fee());
+        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fees());
     }
 }
