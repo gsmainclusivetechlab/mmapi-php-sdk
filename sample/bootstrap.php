@@ -3,7 +3,7 @@
 require dirname(__DIR__, 1) . '/autoload.php';
 
 //Parse the config file
-$ini = parse_ini_file(__DIR__ . '/config.ini');
+$env = parse_ini_file(__DIR__ . '../../config.env');
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
@@ -13,11 +13,11 @@ use mmpsdk\Common\Exceptions\SDKException;
 try {
     MobileMoney::initialize(
         MobileMoney::PRODUCTION,
-        $ini['consumer_key'],
-        $ini['consumer_secret'],
-        $ini['api_key']
+        $env['consumer_key'],
+        $env['consumer_secret'],
+        $env['api_key']
     );
-    MobileMoney::setCallbackUrl($ini['callback_url']);
+    MobileMoney::setCallbackUrl($env['callback_url']);
     MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
 } catch (SDKException $exception) {
     prettyPrint($exception->getMessage());
