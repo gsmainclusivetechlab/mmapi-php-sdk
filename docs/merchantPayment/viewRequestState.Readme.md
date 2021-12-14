@@ -16,7 +16,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewRequestState("<<SERVER-CORRELATION-ID>>");
+    $request = MerchantPayment::viewRequestState('<<SERVER-CORRELATION-ID>>');
 
     /**
      *Execute the request
@@ -28,7 +28,6 @@ try {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
-
 ```
 
 ### Example Output

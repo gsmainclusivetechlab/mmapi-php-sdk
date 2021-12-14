@@ -17,7 +17,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewTransaction("<<TRANSACTION-REFERENCE>>");
+    $request = MerchantPayment::viewTransaction('<<TRANSACTION-REFERENCE>>');
 
     /**
      *Execute the request
@@ -29,7 +29,6 @@ try {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
-
 ```
 
 ### Example Output

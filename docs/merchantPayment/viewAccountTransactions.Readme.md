@@ -24,7 +24,9 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewAccountTransactions($accountIdentifier, ['limit' => 5]);
+    $request = MerchantPayment::viewAccountTransactions($accountIdentifier, [
+        'limit' => 5
+    ]);
 
     /**
      *Execute the request
@@ -36,7 +38,6 @@ try {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
-
 ```
 
 ### Example Output

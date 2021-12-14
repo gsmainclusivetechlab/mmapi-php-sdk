@@ -21,7 +21,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewAuthorisationCode("<<AUTHORISATION-CODE>>");
+    $request = MerchantPayment::viewAuthorisationCode('<<AUTHORISATION-CODE>>');
 
     /**
      *Execute the request
@@ -33,7 +33,6 @@ try {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
-
 ```
 
 ### Example Output

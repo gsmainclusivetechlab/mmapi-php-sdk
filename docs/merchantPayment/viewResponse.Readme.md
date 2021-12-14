@@ -14,7 +14,6 @@ use mmpsdk\MerchantPayment\MerchantPayment;
 use mmpsdk\Common\Models\Transaction;
 
 try {
-
     /**
      *Reference of the required object. Response will be of type stdObject if not provided
      */
@@ -23,7 +22,10 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewResponse("<<CLIENT-CORRELATION-ID>>", $objectReference);
+    $request = MerchantPayment::viewResponse(
+        '<<CLIENT-CORRELATION-ID>>',
+        $objectReference
+    );
 
     /**
      *Execute the request
@@ -35,7 +37,6 @@ try {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
-
 ```
 
 ### Example Output
