@@ -1,4 +1,4 @@
-# View Account Balance
+# Retrieve An Authorisation Code
 
 1. `viewAuthorisationCode([ 'identifierType1' => 'identifier1' ], $authorisationCode) creates a GET request to /accounts/{identifierType}/{identifier}/authorisationcodes/{authorisationCode}`
 

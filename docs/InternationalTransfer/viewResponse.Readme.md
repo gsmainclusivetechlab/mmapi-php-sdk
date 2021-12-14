@@ -10,7 +10,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\MerchantPayment\MerchantPayment;
+use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdk\Common\Models\Transaction;
 
 try {
@@ -22,7 +22,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::viewResponse(
+    $request = InternationalTransfer::viewResponse(
         '<<CLIENT-CORRELATION-ID>>',
         $objectReference
     );
