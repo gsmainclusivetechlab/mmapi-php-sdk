@@ -11,15 +11,13 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
+use mmpsdk\P2PTransfer\P2PTransfer;
 
 try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = InternationalTransfer::viewTransaction(
-        '<<TRANSACTION-REFERENCE>>'
-    );
+    $request = P2PTransfer::viewTransaction('<<TRANSACTION-REFERENCE>>');
 
     /**
      *Execute the request

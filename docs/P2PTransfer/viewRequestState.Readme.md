@@ -10,15 +10,13 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
+use mmpsdk\P2PTransfer\P2PTransfer;
 
 try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = InternationalTransfer::viewRequestState(
-        '<<SERVER-CORRELATION-ID>>'
-    );
+    $request = P2PTransfer::viewRequestState('<<SERVER-CORRELATION-ID>>');
 
     /**
      *Execute the request
