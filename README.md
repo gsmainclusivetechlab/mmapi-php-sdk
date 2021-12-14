@@ -69,108 +69,87 @@ If you prefer not to use Composer, you can manually install the SDK.
 </thead>
 <tbody>
   <tr>
-    <td>Payer-Initiated Merchant Payment</td>
-    <td><a href="docs/transactions/createMerchantTransaction.Readme.md">Payer Initiated Merchant Payment</a></td>
+    <td>Payee-Initiated Merchant Payment</td>
+    <td><a href="docs/merchantPayment/createMerchantTransaction.Readme.md">Payee Initiated Merchant Payment</a></td>
     <td>createMerchantTransaction</td>
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
   <tr>
     <td rowspan="3">Payee-Initiated Merchant Payment using the Polling Method</td>
-    <td>Payee Initiated Merchant Payment</td>
+    <td><a href="docs/merchantPayment/createMerchantTransaction.Readme.md">Payee Initiated Merchant Payment</a></td>
     <td>createMerchantTransaction</td>
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
   <tr>
-    <td>Poll to Determine the Request State</td>
+    <td><a href="docs/merchantPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
     <td>viewRequestState</td>
     <td>string $serverCorrelationId</td>
   </tr>
   <tr>
-    <td>Retrieve a Transaction</td>
+    <td><a href="docs/merchantPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
     <td>viewTransaction</td>
     <td>string $transactionReference</td>
   </tr>
   <tr>
-    <td rowspan="3">Payee-Initiated Merchant Payment using a Pre-authorised Payment Code</td>
-    <td>Obtain an Authorisation Code</td>
-    <td>createAuthorisationCode</td>
-    <td>array $accountIdentifier, AuthorisationCode $authorisationCode</td>
-  </tr>
-  <tr>
-    <td>Perform a Merchant Payment</td>
+    <td>Payer-Initiated Merchant Payment</td>
+    <td><a href="docs/merchantPayment/createMerchantTransaction.Readme.md">Payer Initiated Merchant Payment</a></td>
     <td>createMerchantTransaction</td>
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
   <tr>
-    <td>View An Authorisation Code</td>
+    <td rowspan="3">Payee-Initiated Merchant Payment using a Pre-authorised Payment Code</td>
+    <td><a href="docs/merchantPayment/createAuthorisationCode.Readme.md">Obtain an Authorisation Code</a></td>
+    <td>createAuthorisationCode</td>
+    <td>array $accountIdentifier, AuthorisationCode $authorisationCode</td>
+  </tr>
+  <tr>
+    <td><a href="docs/merchantPayment/createMerchantTransaction.Readme.md">Perform a Merchant Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/merchantPayment/viewAuthorisationCode.Readme.md">View An Authorisation Code</a></td>
     <td>viewAuthorisationCode</td>
     <td>string $accountIdentifier, string $authorisationCode</td>
   </tr>
   <tr>
     <td>Merchant Payment Refund</td>
-    <td>Perform a Merchant Payment Refund</td>
+    <td><a href="docs/merchantPayment/createRefundTransaction.Readme.md">Perform a Merchant Payment Refund</a></td>
     <td>createRefundTransaction</td>
     <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
   </tr>
   <tr>
     <td>Merchant Payment Reversal</td>
-    <td>Perform a Merchant Payment Reversal</td>
+    <td><a href="docs/merchantPayment/createReversal.Readme.md">Perform a Merchant Payment Reversal</a></td>
     <td>createReversal</td>
     <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
   </tr>
   <tr>
     <td>Obtain a Merchant Balance</td>
-    <td>Get an Account Balance</td>
+    <td><a href="docs/merchantPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
     <td>array $accountIdentifier, array $filter=null</td>
   </tr>
   <tr>
     <td>Retrieve Payments for a Merchant</td>
-    <td>Retrieve a Set of Transactions for an Account</td>
+    <td><a href="docs/merchantPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
     <td>viewAccountTransactions</td>
     <td>array $accountIdentifier, array $filter=null</td>
   </tr>
   <tr>
     <td>Check for Service Availability</td>
-    <td>Check for Service Availability</td>
+    <td><a href="docs/merchantPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
     <td>viewServiceAvailability</td>
     <td>NA</td>
   </tr>
   <tr>
     <td>Retrieve a Missing API Response</td>
-    <td>Retrieve a Missing Response</td>
+    <td><a href="docs/merchantPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>
 </tbody>
 </table>
-* Payee-Initiated Merchant Payment
-   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-* Payee-Initiated Merchant Payment Failure
-* Payee-Initiated Merchant Payment using the Polling Method
-   * [POST Payee Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-   * loop [GET Poll to Determine the Request State](/docs/supporting/viewRequestState.Readme.md)
-   * optional [GET Retrieve a Transaction](/docs/transactions/viewTransaction.Readme.md)
-* Payer-Initiated Merchant Payment
-   * [POST Payer Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-* Payer-Initiated Merchant Payment Failure
-* Payee-Initiated Merchant Payment using a Pre-authorised Payment Code
-   * [POST Obtain an Authorisation Code](/docs/authorisationCodes/createAuthorisationCode.Readme.md)
-   * [POST Perform a Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)
-   * optional [GET View An Authorisation Code](/docs/authorisationCodes/viewAuthorisationCode.Readme.md)
-* Merchant Payment Refund
-   * [POST Perform a Merchant Payment Refund](/docs/transactions/createRefundTransaction.Readme.md)
-* Merchant Payment Reversal
-   * [POST Perform a Merchant Payment Reversal](/docs/transactions/createReversal.Readme.md)
-* Obtain a Merchant Balance
-   * [GET Get an Account Balance](/docs/accounts/viewAccountBalance.Readme.md)
-* Retrieve Payments for a Merchant
-   * [GET Retrieve a Set of Transactions for an Account](/docs/accounts/viewAccountTransactions.Readme.md)
-* Check for Service Availability
-   * [GET Check for Service Availability](/docs/supporting/viewServiceAvailability.Readme.md)
-* Retrieve a Missing API Response
-   * [GET Retrieve a Missing Response](/docs/supporting/viewResponse.Readme.md)
-   * [GET Retrieve a Missing Resource](/docs/supporting/viewResource.Readme.md)
 
 ## Using the Test Scripts
 
