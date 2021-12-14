@@ -1,10 +1,10 @@
 # Create An Authorisation Code Via An Account Identifier
 
-`Here, createAuthorisationCode({ identifierType1: identifier1 }) creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
+`Here, createAuthorisationCode(['identifierType' => 'identifier'], $authorisationObj) creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
 
 > `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where one identifier suffices to uniquely identify an account.`
 
-`Here, createAuthorisationCode({ identifierType1: identifier1, identifierType2: identifier2, identifierType3: identifier3 }) creates a POST request to /accounts/{AccountIdentifiers}/authorisationcodes`
+`Here, createAuthorisationCode([ 'identifierType1' => 'identifier1', 'identifierType2' => 'identifier2', 'identifierType3' => 'identifier3' ], $authorisationObj) creates a POST request to /accounts/{AccountIdentifiers}/authorisationcodes`
 
 > `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where a single identifier is not sufficient to identify an account.`
 
@@ -63,30 +63,44 @@ try {
 
 ### Example Output - Callback
 
-```javascript
-202
+```php
+0e277ed2-08fd-4872-99bd-8fbf523482d2
 
-{
-  "serverCorrelationId": "dae8ef64-4340-40b4-863e-ddbe9d63374b",
-  "status": "pending",
-  "notificationMethod": "callback",
-  "objectReference": "1056",
-  "pollLimit": 100
-}
+mmpsdk\Common\Models\RequestState Object
+(
+    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 3eee90eb-ed25-459f-9653-71ea95c9c04a
+    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 0e277ed2-08fd-4872-99bd-8fbf523482d2
+    [objectReference:mmpsdk\Common\Models\RequestState:private] => 2309
+    [status:mmpsdk\Common\Models\RequestState:private] => pending
+    [notificationMethod:mmpsdk\Common\Models\RequestState:private] => callback
+    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
+    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
+    [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
+    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
+    [hydratorStrategies:protected] =>
+    [availableCount:protected] => 0
+)
 ```
 
 ### Example Output - Polling
 
-```javascript
-202
+```php
+4890d1ab-0995-4523-94ef-97cedae212c1
 
-{
-  "serverCorrelationId": "679b684e-9b2f-4140-b0b8-dc53d183ffaf",
-  "status": "pending",
-  "notificationMethod": "polling",
-  "objectReference": "1707",
-  "pollLimit": 100
-}
+mmpsdk\Common\Models\RequestState Object
+(
+    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 75659c6e-d48a-42d7-9355-ee4e2f3b5112
+    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 4890d1ab-0995-4523-94ef-97cedae212c1
+    [objectReference:mmpsdk\Common\Models\RequestState:private] => 2308
+    [status:mmpsdk\Common\Models\RequestState:private] => pending
+    [notificationMethod:mmpsdk\Common\Models\RequestState:private] => polling
+    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
+    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
+    [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
+    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
+    [hydratorStrategies:protected] =>
+    [availableCount:protected] => 0
+)
 ```
 
 <table>
