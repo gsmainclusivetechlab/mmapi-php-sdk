@@ -70,7 +70,7 @@ If you prefer not to use Composer, you can manually install the SDK.
 <tbody>
   <tr>
     <td>Payer-Initiated Merchant Payment</td>
-    <td> *[Payer Initiated Merchant Payment](/docs/transactions/createMerchantTransaction.Readme.md)* </td>
+    <td><a href="docs/transactions/createMerchantTransaction.Readme.md">Payer Initiated Merchant Payment</a></td>
     <td>createMerchantTransaction</td>
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
