@@ -1,45 +1,34 @@
-# Create An Authorisation Code Via An Account Identifier
+# Create A Refund Transaction
 
-`Here, createAuthorisationCode(['identifierType' => 'identifier'], $authorisationObj) creates a POST request to /accounts/{identifierType}/{identifier}/authorisationcodes`
+`createRefundTransaction() creates a POST request to /transactions/type/adjustment`
 
-> `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where one identifier suffices to uniquely identify an account.`
-
-`Here, createAuthorisationCode([ 'identifierType1' => 'identifier1', 'identifierType2' => 'identifier2', 'identifierType3' => 'identifier3' ], $authorisationObj) creates a POST request to /accounts/{AccountIdentifiers}/authorisationcodes`
-
-> `This endpoint allows a mobile money payer or payee to generate a code which when presented to the other party, can be redeemed for an amount set by the payer or payee, depending upon the use case where a single identifier is not sufficient to identify an account.`
+> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'adjustment' passed via the URL.`
 
 ### Usage/Examples
 
 ```php
 <?php
 require_once __DIR__ . './../bootstrap.php';
-
-use mmpsdk\Common\Enums\NotificationMethod;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\MerchantPayment\MerchantPayment;
-use mmpsdk\Common\Models\AuthorisationCode;
 
-$authorisationObj = new AuthorisationCode();
-$authorisationObj
-    ->setRequestDate(date('Y-m-d\TH:i:s\.40z'))
-    ->setCurrency('GBP')
-    ->setAmount('1001.00');
-$accountIdentifier = [
-    'accountid' => 2000
-];
+$transaction = new Transaction();
+$transaction
+    ->setAmount('16.00')
+    ->setCurrency('USD')
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678']);
 try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = MerchantPayment::createAuthorisationCode(
-        $accountIdentifier,
-        $authorisationObj
-    );
+    $request = MerchantPayment::createRefundTransaction($transaction);
 
     /**
      * Choose notification method can be either Callback or Polling
      */
-    $request->setNotificationMethod(NotificationMethod::POLLING);
+    $request->setNotificationMethod(NotificationMethod::CALLBACK);
 
     /**
      * Get Client Correlation Id that will be sent along with request
@@ -63,13 +52,13 @@ try {
 ### Example Output - Callback
 
 ```php
-0e277ed2-08fd-4872-99bd-8fbf523482d2
+a5bc3278-1cf8-4250-8a24-9ebea61a6651
 
 mmpsdk\Common\Models\RequestState Object
 (
-    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 3eee90eb-ed25-459f-9653-71ea95c9c04a
-    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 0e277ed2-08fd-4872-99bd-8fbf523482d2
-    [objectReference:mmpsdk\Common\Models\RequestState:private] => 2309
+    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 4620aadc-ba80-44c1-8a98-18df4716f9bf
+    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => a5bc3278-1cf8-4250-8a24-9ebea61a6651
+    [objectReference:mmpsdk\Common\Models\RequestState:private] => 18257
     [status:mmpsdk\Common\Models\RequestState:private] => pending
     [notificationMethod:mmpsdk\Common\Models\RequestState:private] => callback
     [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
@@ -79,6 +68,7 @@ mmpsdk\Common\Models\RequestState Object
     [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
+
 ```
 
 ### Example Output - Polling
