@@ -116,7 +116,7 @@ If you prefer not to use Composer, you can manually install the SDK.
     <td>Merchant Payment Refund</td>
     <td><a href="docs/merchantPayment/createRefundTransaction.Readme.md">Perform a Merchant Payment Refund</a></td>
     <td>createRefundTransaction</td>
-    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+    <td>Transaction $transaction, string $callBackUrl=null</td>
   </tr>
   <tr>
     <td>Merchant Payment Reversal</td>
@@ -128,7 +128,7 @@ If you prefer not to use Composer, you can manually install the SDK.
     <td>Obtain a Merchant Balance</td>
     <td><a href="docs/merchantPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
     <td>viewAccountBalance</td>
-    <td>array $accountIdentifier, array $filter=null</td>
+    <td>array $accountIdentifier</td>
   </tr>
   <tr>
     <td>Retrieve Payments for a Merchant</td>
