@@ -1,10 +1,10 @@
 <?php
 
-namespace mmpsdk\InternationalTransfer\Enums;
+namespace mmpsdk\Common\Enums;
 
 /**
  * Class DeliveryMethodType
- * @package mmpsdk\InternationalTransfer\Enums
+ * @package mmpsdk\Common\Enums
  */
 class DeliveryMethodType
 {

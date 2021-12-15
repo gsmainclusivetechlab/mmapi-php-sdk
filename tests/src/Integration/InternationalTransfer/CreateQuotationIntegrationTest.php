@@ -6,7 +6,7 @@ use mmpsdk\Common\Process\TransferQuotation;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdkTest\src\Integration\IntegrationTestCase;
-use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
+use mmpsdk\Common\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
 
 class CreateQuotationIntegrationTest extends IntegrationTestCase

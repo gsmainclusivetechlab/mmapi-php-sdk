@@ -3,6 +3,7 @@ require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\P2PTransfer\P2PTransfer;
 use mmpsdk\Common\Enums\NotificationMethod;
+use mmpsdk\Common\Enums\DeliveryMethodType;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Models\Address;
 use mmpsdk\Common\Models\IdDocument;
@@ -19,7 +20,7 @@ $quotation
     ->setRequestDate('2018-07-03T11:43:27.405Z')
     ->setType('transfer')
     ->setSubtype('abc')
-    ->setChosenDeliveryMethod('agent')
+    ->setChosenDeliveryMethod(DeliveryMethodType::AGENT)
     ->setSendingServiceProviderCountry('AD')
     ->setOriginCountry('AD')
     ->setReceivingCountry('AD')

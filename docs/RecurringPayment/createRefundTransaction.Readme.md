@@ -1,37 +1,29 @@
-# Request a P2P Quotation
+# Perform a Recurring Payment Refund
 
-`Here, createQuotation(quotation) creates a POST request to /quotations`
+`createRefundTransaction() creates a POST request to /transactions/type/adjustment`
 
-> `Provided with a valid object representation, this endpoint allows for a new quotation to be created.`
+> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'adjustment' passed via the URL.`
 
 ### Usage/Examples
 
 ```php
 <?php
 require_once __DIR__ . './../bootstrap.php';
-
-use mmpsdk\P2PTransfer\P2PTransfer;
-use mmpsdk\Common\Enums\NotificationMethod;
+use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\Common\Enums\DeliveryMethodType;
-use mmpsdk\Common\Models\Quotation;
+use mmpsdk\RecurringPayment\RecurringPayment;
 
-$quotation = new Quotation();
-$quotation
+$transaction = new Transaction();
+$transaction
+    ->setAmount('16.00')
+    ->setCurrency('USD')
     ->setCreditParty(['walletid' => '1'])
-    ->setDebitParty(['msisdn' => '+44012345678'])
-    ->setRequestAmount('77.30')
-    ->setRequestCurrency('RWF')
-    ->setRequestDate('2018-07-03T11:43:27.405Z')
-    ->setType('transfer')
-    ->setSubtype('abc')
-    ->setChosenDeliveryMethod(DeliveryMethodType::DIRECT_TO_ACCOUNT)
-    ->setCustomData(['keytest' => 'keyvalue']);
+    ->setDebitParty(['msisdn' => '+44012345678']);
 try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = P2PTransfer::createQuotation($quotation);
+    $request = RecurringPayment::createRefundTransaction($transaction);
 
     /**
      * Choose notification method can be either Callback or Polling
@@ -48,23 +40,25 @@ try {
      *Execute the request
      */
     $repsonse = $request->execute();
+
     prettyPrint($repsonse);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
+
 ```
 
 ### Example Output - Callback
 
 ```php
-d9f875e0-6317-4b7b-82f2-06c709043b04
+a5bc3278-1cf8-4250-8a24-9ebea61a6651
 
 mmpsdk\Common\Models\RequestState Object
 (
-    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => efa39ae1-04d8-4511-b350-2ead2c8f6cd0
-    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => d9f875e0-6317-4b7b-82f2-06c709043b04
-    [objectReference:mmpsdk\Common\Models\RequestState:private] => 1498
+    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 4620aadc-ba80-44c1-8a98-18df4716f9bf
+    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => a5bc3278-1cf8-4250-8a24-9ebea61a6651
+    [objectReference:mmpsdk\Common\Models\RequestState:private] => 18257
     [status:mmpsdk\Common\Models\RequestState:private] => pending
     [notificationMethod:mmpsdk\Common\Models\RequestState:private] => callback
     [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
@@ -74,18 +68,19 @@ mmpsdk\Common\Models\RequestState Object
     [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
+
 ```
 
 ### Example Output - Polling
 
 ```php
-9d28aa77-1f18-497f-8f96-3367e4b61fd8
+4890d1ab-0995-4523-94ef-97cedae212c1
 
 mmpsdk\Common\Models\RequestState Object
 (
-    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 563ae419-2eac-4099-b146-06085a5e96b4
-    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 9d28aa77-1f18-497f-8f96-3367e4b61fd8
-    [objectReference:mmpsdk\Common\Models\RequestState:private] => 1499
+    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 75659c6e-d48a-42d7-9355-ee4e2f3b5112
+    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 4890d1ab-0995-4523-94ef-97cedae212c1
+    [objectReference:mmpsdk\Common\Models\RequestState:private] => 2308
     [status:mmpsdk\Common\Models\RequestState:private] => pending
     [notificationMethod:mmpsdk\Common\Models\RequestState:private] => polling
     [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
