@@ -264,8 +264,6 @@ If you prefer not to use Composer, you can manually install the SDK.
 
 ### International Transfers
 
-Contains functions for all the use case scenarios within International Transfers.
-
 <table>
 <thead>
   <tr>
