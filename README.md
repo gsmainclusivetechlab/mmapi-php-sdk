@@ -50,6 +50,8 @@ If you prefer not to use Composer, you can manually install the SDK.
 
 -   [Merchant Payments](#merchant-payments)
 -   [Disbursements](#disbursements)
+-   [International Transfer](#international-transfers)
+-   [P2P Transfers](#p2p-transfers)
 
 ### Merchant Payments
 
@@ -254,6 +256,175 @@ If you prefer not to use Composer, you can manually install the SDK.
   <tr>
     <td>Retrieve a Missing API Response</td>
     <td><a href="docs/disbursement/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### International Transfers
+
+Contains functions for all the use case scenarios within International Transfers.
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">International Transfer via Hub</td>
+    <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
+    <td>createQuotation</td>
+    <td>Quotation quotation, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
+    <td>createInternationalTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
+    <td>viewQuotation</td>
+    <td>String quotationReference</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Bilateral International Transfer</td>
+    <td><a href="/docs/internationalTransfer/createQuotation.Readme.md">Request a International Transfer Quotation</a></td>
+    <td>createQuotation</td>
+    <td>Quotation quotation, string $callBackUrl = null</td>
+  </tr>
+
+ <tr>
+    <td><a href="/docs/internationalTransfer/createInternationalTransaction.Readme.md">Perform an International Transfer</a></td>
+    <td>createInternationalTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/internationalTransfer/viewQuotation.Readme.md">View A Quotation</a></td>
+    <td>viewQuotation</td>
+    <td>String quotationReference</td>
+  </tr>
+  <tr>
+  <tr>
+    <td>International Transfer Reversal</td>
+    <td><a href="/docs/internationalTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+  <tr>
+    <td>Obtain an FSP Balance</td>
+    <td><a href="/docs/internationalTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+  <tr>
+    <td>Retrieve Transactions for an FSP</td>
+    <td><a href="/docs/internationalTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/internationalTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/internationalTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### P2P Transfers
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td rowspan="3">P2P Transfer via Switch</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
+    <td>createQuotation</td>
+    <td>Quotation quotation, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td>Optional <a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Bilateral P2P Transfer</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td rowspan="3">‘On-us’ P2P Transfer Initiated by a Third Party Provider</td>
+    <td><a href="/docs/p2pTransfer/viewAccountName.Readme.md">Retrieve the Name of the Recipient</a></td>
+    <td>viewAccountName</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createQuotation.Readme.md">Request a P2P Quotation</a></td>
+    <td>createQuotation</td>
+    <td>Quotation quotation, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td>P2P Transfer Reversal</td>
+    <td><a href="/docs/p2pTransfer/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+  <tr>
+    <td>Obtain an FSP Balance</td>
+    <td><a href="/docs/p2pTransfer/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+   <tr>
+    <td>Retrieve Transactions for an FSP</td>
+    <td><a href="/docs/p2pTransfer/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/p2pTransfer/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/p2pTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>

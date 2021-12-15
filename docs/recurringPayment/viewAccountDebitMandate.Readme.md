@@ -70,7 +70,7 @@ mmpsdk\RecurringPayment\Models\DebitMandate Object
     [endDate:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 2028-07-03
     [frequencyType:mmpsdk\RecurringPayment\Models\DebitMandate:private] => sixmonths
     [numberOfPayments:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 2
-    [requestingOrganisation:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 
+    [requestingOrganisation:mmpsdk\RecurringPayment\Models\DebitMandate:private] =>
     [creationDate:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 2021-11-30T07:41:38
     [modificationDate:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 2021-11-30T07:41:38
     [requestDate:mmpsdk\RecurringPayment\Models\DebitMandate:private] => 2018-07-03T10:43:27
@@ -84,7 +84,7 @@ mmpsdk\RecurringPayment\Models\DebitMandate Object
 
         )
 
-    [hydratorStrategies:protected] => 
+    [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
 

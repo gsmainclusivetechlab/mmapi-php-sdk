@@ -82,11 +82,11 @@ mmpsdk\Common\Models\RequestState Object
     [objectReference:mmpsdk\Common\Models\RequestState:private] => 537
     [status:mmpsdk\Common\Models\RequestState:private] => pending
     [notificationMethod:mmpsdk\Common\Models\RequestState:private] => callback
-    [pendingReason:mmpsdk\Common\Models\RequestState:private] => 
-    [expiryTime:mmpsdk\Common\Models\RequestState:private] => 
+    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
+    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
     [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
-    [errorReference:mmpsdk\Common\Models\RequestState:private] => 
-    [hydratorStrategies:protected] => 
+    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
+    [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
 ```
@@ -103,11 +103,11 @@ mmpsdk\Common\Models\RequestState Object
     [objectReference:mmpsdk\Common\Models\RequestState:private] => 538
     [status:mmpsdk\Common\Models\RequestState:private] => pending
     [notificationMethod:mmpsdk\Common\Models\RequestState:private] => polling
-    [pendingReason:mmpsdk\Common\Models\RequestState:private] => 
-    [expiryTime:mmpsdk\Common\Models\RequestState:private] => 
+    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
+    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
     [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
-    [errorReference:mmpsdk\Common\Models\RequestState:private] => 
-    [hydratorStrategies:protected] => 
+    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
+    [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
 ```
