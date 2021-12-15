@@ -48,16 +48,8 @@ If you prefer not to use Composer, you can manually install the SDK.
 
 ## Use Cases
 
--   [mmapi-php-sdk](#mmapi-php-sdk)
-    -   [Requirements](#requirements)
-    -   [Installation](#installation)
-        -   [Composer](#composer)
-        -   [Manual Installation](#manual-installation)
-    -   [Use Cases](#use-cases)
-        -   [Merchant Payments](#merchant-payments)
-        -   [Disbursements](#disbursements)
-    -   [Using the Test Scripts](#using-the-test-scripts)
-    -   [Building & Testing the SDK](#building--testing-the-sdk)
+-   [Merchant Payments](#merchant-payments)
+-   [Disbursements](#disbursements)
 
 ### Merchant Payments
 
