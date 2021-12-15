@@ -1,4 +1,4 @@
-# View Account Balance
+# Obtain an FSP Balance
 
 1. `viewAccountBalance([ identifierType => identifier ]) creates a GET request to /accounts/{identifierType}/{identifier}/balance`
 
@@ -19,7 +19,7 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\InternationalTransfer\InternationalTransfer;
+use mmpsdk\P2PTransfer\P2PTransfer;
 
 $accountIdentifier = [
     'accountid' => 2000
@@ -28,7 +28,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = InternationalTransfer::viewAccountBalance($accountIdentifier);
+    $request = P2PTransfer::viewAccountBalance($accountIdentifier);
 
     /**
      *Execute the request

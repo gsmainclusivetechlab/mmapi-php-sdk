@@ -4,7 +4,7 @@
 
 > `This endpoint returns the balance of an account where one identifier suffices to uniquely identify an account.`
 
-1. `Here, viewAccountBalance([ 'identifierType1' => 'identifier1', 'identifierType2' => 'identifier2', 'identifierType3' => 'identifier3' ]) creates a GET request to /accounts/{AccountIdentifiers}/balance`
+2. `Here, viewAccountBalance([ 'identifierType1' => 'identifier1', 'identifierType2' => 'identifier2', 'identifierType3' => 'identifier3' ]) creates a GET request to /accounts/{AccountIdentifiers}/balance`
 
 > `This endpoint returns the balance of an account where a single identifier is not sufficient to identify an account.`
 
