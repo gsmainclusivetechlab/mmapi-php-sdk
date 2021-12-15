@@ -16,7 +16,7 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = Disbursement::viewBatchTransaction("<<BATCH-ID>>");
+    $request = Disbursement::viewBatchTransaction('<<BATCH-ID>>');
 
     /**
      *Execute the request

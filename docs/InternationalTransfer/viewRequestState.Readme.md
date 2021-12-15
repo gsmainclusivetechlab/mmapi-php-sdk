@@ -16,7 +16,9 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = InternationalTransfer::viewRequestState('<<SERVER-CORRELATION-ID>>');
+    $request = InternationalTransfer::viewRequestState(
+        '<<SERVER-CORRELATION-ID>>'
+    );
 
     /**
      *Execute the request

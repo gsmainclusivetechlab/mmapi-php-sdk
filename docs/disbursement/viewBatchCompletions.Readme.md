@@ -17,14 +17,14 @@ try {
      * Filter parameters
      */
     $filter = [
-        "limit" => 10,
-        "offset" => 0
+        'limit' => 10,
+        'offset' => 0
     ];
 
     /**
      * Construct request object and set desired parameters
      */
-    $request = Disbursement::viewBatchCompletions("<<BATCH-ID>>", $filter);
+    $request = Disbursement::viewBatchCompletions('<<BATCH-ID>>', $filter);
 
     /**
      *Execute the request
