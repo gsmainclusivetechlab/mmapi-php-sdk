@@ -48,13 +48,16 @@ If you prefer not to use Composer, you can manually install the SDK.
 
 ## Use Cases
 
--   [Merchant Payments](#merchant-payments)
--   [Disbursements](#disbursements)
--   [International Transfers](#international-transfers)
--   [P2P Transfers](#p2p-transfers)
--   [Recurring Payments](#recurring-payments)
--   [Account Linking](#account-linking)
--   [Bill Payments](#bill-payments)
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+    - [Composer](#composer)
+    - [Manual Installation](#manual-installation)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+  - [Using the Test Scripts](#using-the-test-scripts)
+  - [Building & Testing the SDK](#building--testing-the-sdk)
 
 ### Merchant Payments
 
@@ -145,6 +148,120 @@ If you prefer not to use Composer, you can manually install the SDK.
   <tr>
     <td>Retrieve a Missing API Response</td>
     <td><a href="docs/merchantPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Disbursements
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Individual Disbursement</td>
+    <td><a href="docs/disbursement/createDisbursementTransaction.Readme.md">Create a Individual Disbursement request </a></td>
+    <td>createDisbursementTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td rowspan="4">Bulk Disbursement</td>
+    <td><a href="docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
+    <td>createBatchTransaction</td>
+    <td>BatchTransaction $batchTransaction, $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>
+    <td>viewBatchTransaction</td>
+    <td>string $batchId</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
+    <td>viewBatchCompletions</td>
+    <td>string $batchId, array $filter = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
+    <td>viewBatchRejections</td>
+    <td>string $batchId, array $filter = null</td>
+  </tr>
+  <tr>
+    <td rowspan="5">Bulk Disbursement with Maker / Checker</td>
+    <td><a href="docs/disbursement/createBatchTransaction.Readme.md">Create A Transaction Batch</a></td>
+    <td>createBatchTransaction</td>
+    <td>BatchTransaction $batchTransaction, $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/updateBatchTransaction.Readme.md">Update A Transaction Batch</a></td>
+    <td>updateBatchTransaction</td>
+    <td>string $batchId, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>
+    <td>viewBatchTransaction</td>
+    <td>string $batchId</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchCompletions.Readme.md">View Batch Completions</a></td>
+    <td>viewBatchCompletions</td>
+    <td> string $batchId, array $filter = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewBatchRejections.Readme.md">View Batch Rejections</a></td>
+    <td>viewBatchRejections</td>
+    <td>string $batchId, array $filter = null</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Individual Disbursement Using the Polling Method</td>
+    <td><a href="docs/disbursement/createDisbursementTransaction.Readme.md">Create a Individual Disbursement request </a></td>
+    <td>createDisbursementTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string $serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="docs/disbursement/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>string $transactionReference</td>
+  </tr>
+  <tr>
+    <td>Disbursement Reversal</td>
+    <td><a href="docs/disbursement/createReversal.Readme.md">Perform a Disbursement Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+  <tr>
+    <td>Obtain a Disbursement Organisation Balance</td>
+    <td><a href="docs/disbursement/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+  <tr>
+    <td>Retrieve Transactions for a Disbursement Organisation</td>
+    <td><a href="docs/disbursement/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="docs/disbursement/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="docs/disbursement/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>
