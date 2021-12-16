@@ -8,6 +8,27 @@ The Mobile Money PHP SDK helps you to communicate with the Mobile Money Server A
 -   handling of all the details concerning authentication
 -   handling of required meta data
 
+## Index
+
+This document contains the following sections:
+
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Index](#index)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [Composer](#composer)
+      - [Manual Installation](#manual-installation)
+    - [Development and testing](#development-and-testing)
+  - [Setting Up](#setting-up)
+    - [Initialization of PHP SDK](#initialization-of-php-sdk)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+    - [International Transfers](#international-transfers)
+    - [P2P Transfers](#p2p-transfers)
+  - [Samples](#samples)
+
 ## Requirements
 
 -   PHP 5.4+
@@ -484,3 +505,37 @@ try {
   </tr>
 </tbody>
 </table>
+
+## Samples
+
+The sample test codes are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method works.
+
+-   Clone this repository:
+
+```
+git clone git@github.com:gsmainclusivetechlab/mmapi-php-sdk.git
+cd mmapi-php-sdk
+```
+
+-   Create config.env file for API credentials:
+
+```
+cp config.env.sample config.env
+```
+
+-   Set the API credentials in the config.env file:
+
+e.g.
+
+```
+    consumer_key = <your_consumer_key_here>
+    consumer_secret = <your_consumer_secret_here>
+    api_key = <your_api_key_here>
+    callback_url = <your_callback_url_here>
+```
+
+-   Run each sample directly from the command line. For example:
+
+```
+php sample/MerchantPayment/InitiatePayment.php
+```
