@@ -240,7 +240,7 @@ abstract class IntegrationTestCase extends TestCase
                 $this->assertArrayHasKey(
                     $field,
                     $jsonData,
-                    'Mandatory Field ' . $field . ' not found in response'
+                    'Mandatory Field ' . $field . ' not found in API response'
                 );
                 $this->assertNotNull(
                     $response->$getterMethod(),
