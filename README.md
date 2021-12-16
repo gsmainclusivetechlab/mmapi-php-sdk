@@ -498,7 +498,7 @@ try {
 
 ## Samples
 
-The sample test codes are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method works.
+The sample test codes are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method works. Sample code snippets can be found [here](/samples)
 
 -   Clone this repository:
 
