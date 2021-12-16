@@ -17,7 +17,7 @@ use mmpsdk\Common\Models\Address;
 use mmpsdk\Common\Models\IdDocument;
 use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
-use mmpsdk\InternationalTransfer\Enums\DeliveryMethodType;
+use mmpsdk\Common\Enums\DeliveryMethodType;
 use mmpsdk\InternationalTransfer\Enums\InternationalTransactionType;
 use mmpsdk\Common\Models\Quotation;
 
