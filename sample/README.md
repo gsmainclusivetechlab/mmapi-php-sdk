@@ -1,4 +1,4 @@
-# Running Sample Test Code
+# Running Sample Code Snippets
 
 The sample test codes are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method works.
 
@@ -9,18 +9,17 @@ git clone git@github.com:gsmainclusivetechlab/mmapi-php-sdk.git
 cd mmapi-php-sdk
 ```
 
--   Create config.ini file for API credentials:
+-   Create config.env file for API credentials:
 
 ```
-cp sample/config-sample.ini sample/config.ini
+cp config.env.sample config.env
 ```
 
--   Set the API credentials in the config.ini file:
+-   Set the API credentials in the config.env file:
 
 e.g.
 
 ```
-    [sdk]
     consumer_key = <your_consumer_key_here>
     consumer_secret = <your_consumer_secret_here>
     api_key = <your_api_key_here>
@@ -37,7 +36,7 @@ php sample/MerchantPayment/InitiatePayment.php
 
 **NOTE :**
 
--   callback_url in config.ini is optional. Callback urls can also be passed as a parameter directly when calling the methods.
+-   callback_url in config.env is optional. Callback urls can also be passed as a parameter directly when calling the methods.
 -   Before the methods are called, the SDK needs to be initialized. Initialization of the SDK for the test code is done in sample/bootstrap.php.
     You can analyze the file to get an understanding on how the SDK is initialized with all the credentials and configurations.
 

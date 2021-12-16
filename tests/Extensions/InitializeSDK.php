@@ -6,18 +6,21 @@ use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
 use PHPUnit\Runner\AfterLastTestHook;
 use PHPUnit\Runner\BeforeFirstTestHook;
+use Dotenv\Dotenv;
 
 class InitializeSDK implements BeforeFirstTestHook, AfterLastTestHook
 {
     public function executeBeforeFirstTest(): void
     {
-        $ini = parse_ini_file(dirname(__DIR__, 2) . '/sdk-test-config.ini');
+        $dotenv = Dotenv::createImmutable(__DIR__, '../../config.env');
+        $dotenv->load();
         MobileMoney::initialize(
             MobileMoney::SANDBOX,
-            $ini['consumer_key'],
-            $ini['consumer_secret'],
-            $ini['api_key']
+            $_ENV['consumer_key'],
+            $_ENV['consumer_secret'],
+            $_ENV['api_key']
         );
+        MobileMoney::setCallbackUrl($_ENV['callback_url']);
         MobileMoney::setSecurityLevel(SecurityLevel::DEVELOPMENT);
     }
 

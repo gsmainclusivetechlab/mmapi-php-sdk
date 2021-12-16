@@ -3,7 +3,6 @@ require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\Disbursement\Disbursement;
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\Common\Process\RetrieveTransaction;
 
 try {
     $response = Disbursement::viewTransaction('REF-1636106992007')->execute();

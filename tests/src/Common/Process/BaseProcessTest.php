@@ -14,7 +14,7 @@ class BaseProcessTest extends TestCase
 
     protected function tearDown(): void
     {
-        MobileMoney::setCallbackUrl(null);
+        MobileMoney::setCallbackUrl($_ENV['callback_url']);
     }
 
     public function testSynchronousProcess()
