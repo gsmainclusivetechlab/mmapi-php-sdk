@@ -136,7 +136,7 @@ try {
     <td>string $serverCorrelationId</td>
   </tr>
   <tr>
-    <td><a href="docs/merchantPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>Optional <a href="docs/merchantPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
     <td>viewTransaction</td>
     <td>string $transactionReference</td>
   </tr>
@@ -158,7 +158,7 @@ try {
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
   <tr>
-    <td><a href="docs/merchantPayment/viewAuthorisationCode.Readme.md">View An Authorisation Code</a></td>
+    <td>Optional <a href="docs/merchantPayment/viewAuthorisationCode.Readme.md">View An Authorisation Code</a></td>
     <td>viewAuthorisationCode</td>
     <td>string $accountIdentifier, string $authorisationCode</td>
   </tr>
@@ -418,7 +418,7 @@ try {
     <td>Quotation quotation, string $callBackUrl = null</td>
   </tr>
   <tr>
-    <td>Optional <a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
+    <td><a href="/docs/p2pTransfer/createTransferTransaction.Readme.md">Perform a P2P Transfer</a></td>
     <td>createTransferTransaction</td>
     <td>Transaction $transaction, string $callBackUrl = null</td>
   </tr>
