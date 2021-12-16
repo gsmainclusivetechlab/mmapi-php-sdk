@@ -9,22 +9,15 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
--   [mmapi-php-sdk](#mmapi-php-sdk)
-    -   [Index](#index)
-    -   [Requirements](#requirements)
-    -   [Getting Started](#getting-started)
-        -   [Installation](#installation)
-            -   [Composer](#composer)
-            -   [Manual Installation](#manual-installation)
-        -   [Development and testing](#development-and-testing)
-    -   [Setting Up](#setting-up)
-        -   [Initialization of PHP SDK](#initialization-of-php-sdk)
-    -   [Use Cases](#use-cases)
-        -   [Merchant Payments](#merchant-payments)
-        -   [Disbursements](#disbursements)
-        -   [International Transfers](#international-transfers)
-        -   [P2P Transfers](#p2p-transfers)
-    -   [Samples](#samples)
+-   [Index](#index)
+-   [Requirements](#requirements)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+    -   [Development and testing](#development-and-testing)
+-   [Setting Up](#setting-up)
+    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+-   [Use Cases](#use-cases)
+-   [Samples](#samples)
 
 ## Requirements
 
