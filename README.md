@@ -53,7 +53,7 @@ If you prefer not to use Composer, you can manually install the SDK.
 1. Install [Composer](https://getcomposer.org/download/)
 2. From the root of the sdk-php project, run `composer install`
 3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
-4. From the root of the sdk-php project, `composer run tests`.
+4. From the root of the sdk-php project, `composer run tests` to run the test suite.
 
 ## Setting Up
 
