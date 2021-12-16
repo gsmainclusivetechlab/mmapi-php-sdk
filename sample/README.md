@@ -1,4 +1,4 @@
-# Running Sample Test Code
+# Running Sample Code Snippets
 
 The sample test codes are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method works.
 
