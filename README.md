@@ -481,15 +481,3 @@ try {
   </tr>
 </tbody>
 </table>
-
-## Using the Test Scripts
-
-You can find details on how to run the sample code [here](sample/)
-
-## Building & Testing the SDK
-
-Unit tests for the SDK are in the tests directory. These tests are mainly for SDK development.
-
--   Run `composer update --dev` to load the `PHPUnit` test library.
--   Copy the config.env.sample file to config.env and enter your credentials in the appropriate fields.
--   Run `composer run tests` to run the test suite.
