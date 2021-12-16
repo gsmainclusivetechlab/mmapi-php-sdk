@@ -9,7 +9,6 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
--   [Index](#index)
 -   [Requirements](#requirements)
 -   [Getting Started](#getting-started)
     -   [Installation](#installation)
