@@ -1,12 +1,12 @@
 # mmapi-php-sdk
 
-This SDK provides for an easy way to connect to [GSMA Mobile Money API](https://developer.mobilemoneyapi.io/1.2).
+The Mobile Money PHP SDK helps you to communicate with the Mobile Money Server API. Its primary features are:
 
-Please refer to the following documentation for installation instructions and usage information.
-
--   [API Documentation](https://developer.mobilemoneyapi.io/1.2)
--   [PHP SDK Documentation](docs/)
--   [How to use the test scripts](sample/)
+-   convenient PHP wrapper around the API calls and responses:
+    -   PHP request objects are marshalled to HTTP requests.
+    -   unmarshalls HTTP responses to PHP response objects or PHP exceptions
+-   handling of all the details concerning authentication
+-   handling of required meta data
 
 ## Requirements
 
@@ -14,9 +14,11 @@ Please refer to the following documentation for installation instructions and us
 -   cURL PHP Extension
 -   JSON PHP Extension
 
-## Installation
+## Getting Started
 
-### Composer
+### Installation
+
+#### Composer
 
 Update your composer.json file as per the example below and then run for this specific release `composer update`.
 
@@ -35,7 +37,7 @@ After installation through Composer, don't forget to require its autoloader in y
 require 'vendor/autoload.php';
 ```
 
-### Manual Installation
+#### Manual Installation
 
 If you prefer not to use Composer, you can manually install the SDK.
 
@@ -45,6 +47,57 @@ If you prefer not to use Composer, you can manually install the SDK.
     ```php
     require 'path/to/sdk/autoload.php';
     ```
+
+### Development and testing
+
+1. Install [Composer](https://getcomposer.org/download/)
+2. From the root of the sdk-php project, run `composer install`
+3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
+4. From the root of the sdk-php project, `composer run tests`.
+
+## Setting Up
+
+### Initialization of PHP SDK
+
+All PHP code snippets presented [here](/docs) assumes that you have initialized the PHP SDK before using them in your Development Environment. This section details the initialization of the PHP SDK.
+
+To initialize the PHP SDK, the static method `initialize()` of `MobileMoney` class is used. `initialize()` has the following required parameters:
+
+1.  `Environment` value can be one of the following
+    -   `MobileMoney::SANDBOX` for Sandbox
+    -   `MobileMoney::PRODUCTION` for Production
+2.  `$consumerKey` the API consumer key (can be obtained from developer portal)
+3.  `$counsumerSecret` the API consumer secret (can be obtained from developer portal)
+4.  `$apiKey` the API Key (can be obtained from developer portal)
+
+Other optional functions available for `MobileMoney` class are:
+
+-   `setCallbackUrl()` - URL for your application where you want MobileMoney API to push data as a `PUT` request. This is optional; if you wish to specify different callback urls for different use cases, you can pass the callback url with each request.
+-   `setSecurityLevel()` - When making API requests, this property is used to specify the type of authentication to be used. If not set the default is set to `SecurityLevel::DEVELOPMENT`. Value can be one of the following
+    -   `SecurityLevel::DEVELOPMENT` - Uses Basic authentication for requests.
+    -   `SecurityLevel::STANDARD` - Uses OAuth2 authentication for requests.
+
+```php
+<?php
+//require the autoload file
+require dirname(__DIR__, 1) . '/autoload.php';
+
+use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Enums\SecurityLevel;
+use mmpsdk\Common\Exceptions\SDKException;
+
+//Initialize SDK
+try {
+    MobileMoney::initialize(
+        MobileMoney::SANDBOX,
+        $consumerKey,
+        $counsumerSecret,
+        $apiKey
+    );
+} catch (SDKException $exception) {
+    print_r($exception->getMessage());
+}
+```
 
 ## Use Cases
 
