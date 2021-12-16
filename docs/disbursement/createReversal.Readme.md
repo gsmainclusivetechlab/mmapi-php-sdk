@@ -59,6 +59,7 @@ mmpsdk\Common\Models\RequestState Object
     [availableCount:protected] => 0
 )
 ```
+
 ---
 
 **NOTE**

@@ -80,7 +80,10 @@ Other optional functions available for `MobileMoney` class are:
 ```php
 <?php
 //require the autoload file
-require dirname(__DIR__, 1) . '/autoload.php';
+require 'path/to/sdk/autoload.php';
+
+// or if you are using composer
+// require 'vendor/autoload.php';
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
