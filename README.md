@@ -1,12 +1,22 @@
 # mmapi-php-sdk
 
-The Mobile Money PHP SDK helps you to communicate with the Mobile Money Server API. Its primary features are:
+The MMAPI SDK for PHP enables PHP developers to easily work with [GSMA Mobile Money API Specification 1.2.0](https://developer.mobilemoneyapi.io/1.2).
 
--   convenient PHP wrapper around the API calls and responses:
-    -   PHP request objects are marshalled to HTTP requests.
-    -   unmarshalls HTTP responses to PHP response objects or PHP exceptions
--   handling of all the details concerning authentication
--   handling of required meta data
+The SDK provides separate use cases to handle necessary MMAPI functionality including Merchant Payments, Disbursements, International Transfers, P2P Transfers, Recurring Payments, Account Linking, Bill Payments and Agent Services (including Cash-In and Cash-Out). Each use case exposes use case scenarios
+to customize your application integrations as needed. The SDK also includes a Samples, so you can test interactions before integration.
+
+## Index
+
+This document contains the following sections:
+
+-   [Requirements](#requirements)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+    -   [Development and testing](#development-and-testing)
+-   [Setting Up](#setting-up)
+    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+-   [Use Cases](#use-cases)
+-   [Samples](#samples)
 
 ## Requirements
 
@@ -484,3 +494,37 @@ try {
   </tr>
 </tbody>
 </table>
+
+## Samples
+
+The sample code snippets are all completely independent and self-contained. You can analyze them to get an understanding of how a particular method can be implemented in your application. Sample code snippets can be found [here](/sample). Steps to run the sample code snippets are as follows:
+
+-   Clone this repository:
+
+```
+git clone git@github.com:gsmainclusivetechlab/mmapi-php-sdk.git
+cd mmapi-php-sdk
+```
+
+-   Create config.env file for API credentials:
+
+```
+cp config.env.sample config.env
+```
+
+-   Set the API credentials in the config.env file:
+
+e.g.
+
+```
+    consumer_key = <your_consumer_key_here>
+    consumer_secret = <your_consumer_secret_here>
+    api_key = <your_api_key_here>
+    callback_url = <your_callback_url_here>
+```
+
+-   Run each sample directly from the command line. For example:
+
+```
+php sample/MerchantPayment/InitiatePayment.php
+```
