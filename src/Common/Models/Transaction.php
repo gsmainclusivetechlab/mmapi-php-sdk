@@ -91,7 +91,7 @@ class Transaction extends BaseModel
     /**
      * Undocumented variable
      *
-     * @var Fee[]
+     * @var Fees[]
      */
     protected $fees;
 
@@ -354,7 +354,7 @@ class Transaction extends BaseModel
     /**
      * Sets unique reference for the transaction.
      *
-     * @param Fee[] $transactionReference
+     * @param Fees[] $transactionReference
      */
     public function setFees($fees)
     {
@@ -627,7 +627,7 @@ class Transaction extends BaseModel
             'requestingOrganisation',
             new \mmpsdk\Common\Models\RequestingOrganisation()
         );
-        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fee());
+        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fees());
         $this->addHydratorStrategy(
             'senderKyc',
             new \mmpsdk\Common\Models\KYCInformation()

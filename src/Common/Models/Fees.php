@@ -5,10 +5,10 @@ namespace mmpsdk\Common\Models;
 use mmpsdk\Common\Models\BaseModel;
 
 /**
- * Class Fee
+ * Class Fees
  * @package mmpsdk\Common\Models
  */
-class Fee extends BaseModel
+class Fees extends BaseModel
 {
     /**
      * @var string

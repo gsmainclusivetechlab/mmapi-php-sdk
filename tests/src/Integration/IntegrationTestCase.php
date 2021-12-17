@@ -207,7 +207,7 @@ abstract class IntegrationTestCase extends TestCase
                     );
                 }
                 break;
-            case \mmpsdk\Common\Models\AccountHolder::class:
+            case \mmpsdk\Common\Models\AccountHolderName::class:
                 $this->validateFields(['name'], $response, $jsonData);
                 break;
             default:
@@ -240,7 +240,7 @@ abstract class IntegrationTestCase extends TestCase
                 $this->assertArrayHasKey(
                     $field,
                     $jsonData,
-                    'Mandatory Field ' . $field . ' not found in response'
+                    'Mandatory Field ' . $field . ' not found in API response'
                 );
                 $this->assertNotNull(
                     $response->$getterMethod(),

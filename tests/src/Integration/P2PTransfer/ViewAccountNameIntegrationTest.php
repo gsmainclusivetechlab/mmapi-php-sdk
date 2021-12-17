@@ -1,6 +1,6 @@
 <?php
 
-use mmpsdk\Common\Models\AccountHolder;
+use mmpsdk\Common\Models\AccountHolderName;
 use mmpsdk\Common\Process\RetrieveAccountName;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\P2PTransfer\P2PTransfer;
@@ -17,7 +17,7 @@ class ViewAccountNameIntegrationTest extends IntegrationTestCase
 
     protected function getResponseInstanceType()
     {
-        return AccountHolder::class;
+        return AccountHolderName::class;
     }
 
     protected function getRequestType()

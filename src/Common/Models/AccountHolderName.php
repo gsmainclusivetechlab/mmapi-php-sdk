@@ -3,10 +3,10 @@
 namespace mmpsdk\Common\Models;
 
 /**
- * Class AccountHolder
+ * Class AccountHolderName
  * @package mmpsdk\Common\Models
  */
-class AccountHolder extends BaseModel
+class AccountHolderName extends BaseModel
 {
     /**
      * @var Name
@@ -29,7 +29,7 @@ class AccountHolder extends BaseModel
     /**
      * @param Name|null $name
      *
-     * @return AccountHolder
+     * @return AccountHolderName
      */
     public function setName($name)
     {

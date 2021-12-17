@@ -1,6 +1,6 @@
 <?php
 
-use mmpsdk\Common\Models\Fee;
+use mmpsdk\Common\Models\Fees;
 use mmpsdk\Common\Models\RequestingOrganisation;
 use mmpsdk\Common\Models\Transaction;
 use PHPUnit\Framework\TestCase;
@@ -18,12 +18,12 @@ class MerchantTransactionModel extends TestCase
 
     //     $this->assertIsArray(
     //         $hydratedObj->getFees(),
-    //         'Should return array of Fee Objects'
+    //         'Should return array of Fees Objects'
     //     );
     //     $this->assertContainsOnlyInstancesOf(
-    //         Fee::class,
+    //         Fees::class,
     //         $hydratedObj->getFees(),
-    //         'Should be array of Fee Objects'
+    //         'Should be array of Fees Objects'
     //     );
     //     $this->assertInstanceOf(
     //         RequestingOrganisation::class,
