@@ -19,7 +19,7 @@ try {
         $accountIdentifier,
         $authorisationObj
     );
-    $request->setNotificationMethod(NotificationMethod::POLLING);
+    $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

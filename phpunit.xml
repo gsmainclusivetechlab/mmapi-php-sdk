@@ -14,8 +14,12 @@
         <extension class="mmpsdkTest\Extensions\InitializeSDK"/>
     </extensions>
     <testsuites>
-        <testsuite name="Project Test Suite">
+        <testsuite name="UnitTest">
             <directory>tests</directory>
+            <exclude>tests/src/Integration</exclude>
+        </testsuite>
+        <testsuite name="IntegrationTest">
+            <directory>tests/src/Integration</directory>
         </testsuite>
     </testsuites>
 

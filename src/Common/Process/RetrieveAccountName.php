@@ -5,7 +5,7 @@ namespace mmpsdk\Common\Process;
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Models\AccountHolder;
+use mmpsdk\Common\Models\AccountHolderName;
 use mmpsdk\Common\Process\BaseProcess;
 
 /**
@@ -43,7 +43,7 @@ class RetrieveAccountName extends BaseProcess
 
     /**
      *
-     * @return AccountHolder
+     * @return AccountHolderName
      */
     public function execute()
     {
@@ -56,6 +56,6 @@ class RetrieveAccountName extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
-        return $this->parseResponse($response, new AccountHolder());
+        return $this->parseResponse($response, new AccountHolderName());
     }
 }
