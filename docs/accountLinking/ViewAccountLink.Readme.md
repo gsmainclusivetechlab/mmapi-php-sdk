@@ -69,13 +69,13 @@ mmpsdk\AccountLinking\Models\Link Object
         (
             [requestingOrganisationIdentifierType:mmpsdk\Common\Models\RequestingOrganisation:private] => organisationid
             [requestingOrganisationIdentifier:mmpsdk\Common\Models\RequestingOrganisation:private] => 12345
-            [hydratorStrategies:protected] => 
-            [availableCount:protected] => 
+            [hydratorStrategies:protected] =>
+            [availableCount:protected] =>
         )
 
     [creationDate:mmpsdk\AccountLinking\Models\Link:private] => 2021-11-29T11:29:15
     [modificationDate:mmpsdk\AccountLinking\Models\Link:private] => 2021-11-29T11:29:15
-    [requestDate:mmpsdk\AccountLinking\Models\Link:private] => 
+    [requestDate:mmpsdk\AccountLinking\Models\Link:private] =>
     [customData:mmpsdk\AccountLinking\Models\Link:private] => Array
         (
             [0] => stdClass Object
@@ -86,7 +86,7 @@ mmpsdk\AccountLinking\Models\Link Object
 
         )
 
-    [hydratorStrategies:protected] => 
+    [hydratorStrategies:protected] =>
     [availableCount:protected] => 0
 )
 ```
