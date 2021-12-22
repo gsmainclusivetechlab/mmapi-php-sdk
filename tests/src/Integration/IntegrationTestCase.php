@@ -210,6 +210,9 @@ abstract class IntegrationTestCase extends TestCase
             case \mmpsdk\Common\Models\AccountHolderName::class:
                 $this->validateFields(['name'], $response, $jsonData);
                 break;
+            case \mmpsdk\Common\Models\Bill::class:
+                $this->validateFields(['billReference'], $response, $jsonData);
+                break;
             default:
                 break;
         }
@@ -266,9 +269,11 @@ abstract class IntegrationTestCase extends TestCase
     {
         if (is_array($response)) {
             foreach ($response as $key => $value) {
-                $this->validateFields(array_keys($jsonData[$key]), $value, [
-                    $key
-                ]);
+                $this->validateFields(
+                    array_keys($jsonData[$key]),
+                    $value,
+                    $jsonData[$key]
+                );
             }
         } else {
             return $this->validateFields(

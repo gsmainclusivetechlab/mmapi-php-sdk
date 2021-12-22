@@ -5,10 +5,10 @@ namespace mmpsdk\BillPayment\Models;
 use mmpsdk\Common\Models\BaseModel;
 
 /**
- * Class BillPayment
+ * Class BillPay
  * @package mmpsdk\BillPayment\Models
  */
-class BillPayment extends BaseModel
+class BillPay extends BaseModel
 {
     /**
      * @var string
@@ -101,7 +101,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $serviceProviderPaymentReference
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setServiceProviderPaymentReference(
         $serviceProviderPaymentReference
@@ -122,7 +122,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $requestingOrganisationTransactionReference
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setRequestingOrganisationTransactionReference(
         $requestingOrganisationTransactionReference
@@ -143,7 +143,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $paymentType
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setPaymentType($paymentType)
     {
@@ -163,7 +163,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $billPaymentStatus
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setBillPaymentStatus($billPaymentStatus)
     {
@@ -183,7 +183,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $amountPaid
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setAmountPaid($amountPaid)
     {
@@ -203,7 +203,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $currency
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setCurrency($currency)
     {
@@ -223,7 +223,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $customerReference
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setCustomerReference($customerReference)
     {
@@ -243,7 +243,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $requestingOrganisation
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setRequestingOrganisation($requestingOrganisation)
     {
@@ -263,7 +263,7 @@ class BillPayment extends BaseModel
     /**
      * @param array|null $supplementaryBillReferenceDetails
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setSupplementaryBillReferenceDetails(
         $supplementaryBillReferenceDetails
@@ -284,7 +284,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $serviceProviderComment
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setServiceProviderComment($serviceProviderComment)
     {
@@ -304,7 +304,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $serviceProviderNotification
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setServiceProviderNotification($serviceProviderNotification)
     {
@@ -324,7 +324,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $creationDate
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setCreationDate($creationDate)
     {
@@ -344,7 +344,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $modificationDate
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setModificationDate($modificationDate)
     {
@@ -364,7 +364,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $requestDate
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setRequestDate($requestDate)
     {
@@ -384,7 +384,7 @@ class BillPayment extends BaseModel
     /**
      * @param string|null $customData
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setCustomData($customData)
     {
@@ -404,7 +404,7 @@ class BillPayment extends BaseModel
     /**
      * @param array|null $metadata
      *
-     * @return BillPayment
+     * @return BillPay
      */
     public function setMetadata($metadata)
     {
