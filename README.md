@@ -9,14 +9,23 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
--   [Requirements](#requirements)
--   [Getting Started](#getting-started)
-    -   [Installation](#installation)
-    -   [Development and testing](#development-and-testing)
--   [Setting Up](#setting-up)
-    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
--   [Use Cases](#use-cases)
--   [Samples](#samples)
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Index](#index)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [Composer](#composer)
+      - [Manual Installation](#manual-installation)
+    - [Development and testing](#development-and-testing)
+  - [Setting Up](#setting-up)
+    - [Initialization of PHP SDK](#initialization-of-php-sdk)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+    - [International Transfers](#international-transfers)
+    - [P2P Transfers](#p2p-transfers)
+    - [Account Linking](#account-linking)
+  - [Samples](#samples)
 
 ## Requirements
 
@@ -114,11 +123,23 @@ try {
 
 ## Use Cases
 
--   [Merchant Payments](#merchant-payments)
--   [Disbursements](#disbursements)
--   [International Transfer](#international-transfers)
--   [P2P Transfers](#p2p-transfers)
--   [Account Linking](#account-linking)
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Index](#index)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [Composer](#composer)
+      - [Manual Installation](#manual-installation)
+    - [Development and testing](#development-and-testing)
+  - [Setting Up](#setting-up)
+    - [Initialization of PHP SDK](#initialization-of-php-sdk)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+    - [International Transfers](#international-transfers)
+    - [P2P Transfers](#p2p-transfers)
+    - [Account Linking](#account-linking)
+  - [Samples](#samples)
 
 ### Merchant Payments
 
@@ -511,7 +532,7 @@ try {
   <tr>
     <td>Setup an Account Link</td>
     <td><a href="/docs/accountLinking/createAccountLink.Readme.md">Establish an Account to Account Link</a></td>
-    <td>CreateAccountLink</td>
+    <td>createAccountLink</td>
     <td>array $accountIdentifier, Link $link</td>
   </tr>
   <tr>
