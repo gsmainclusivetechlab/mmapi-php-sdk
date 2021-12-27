@@ -25,6 +25,7 @@ This document contains the following sections:
         -   [International Transfers](#international-transfers)
         -   [P2P Transfers](#p2p-transfers)
         -   [Account Linking](#account-linking)
+        -   [Bill Payments](#bill-payments)
     -   [Samples](#samples)
 
 ## Requirements
@@ -123,23 +124,12 @@ try {
 
 ## Use Cases
 
--   [mmapi-php-sdk](#mmapi-php-sdk)
-    -   [Index](#index)
-    -   [Requirements](#requirements)
-    -   [Getting Started](#getting-started)
-        -   [Installation](#installation)
-            -   [Composer](#composer)
-            -   [Manual Installation](#manual-installation)
-        -   [Development and testing](#development-and-testing)
-    -   [Setting Up](#setting-up)
-        -   [Initialization of PHP SDK](#initialization-of-php-sdk)
-    -   [Use Cases](#use-cases)
-        -   [Merchant Payments](#merchant-payments)
-        -   [Disbursements](#disbursements)
-        -   [International Transfers](#international-transfers)
-        -   [P2P Transfers](#p2p-transfers)
-        -   [Account Linking](#account-linking)
-    -   [Samples](#samples)
+-   [Merchant Payments](#merchant-payments)
+-   [Disbursements](#disbursements)
+-   [International Transfers](#international-transfers)
+-   [P2P Transfers](#p2p-transfers)
+-   [Account Linking](#account-linking)
+-   [Bill Payments](#bill-payments)
 
 ### Merchant Payments
 
@@ -584,6 +574,72 @@ try {
   <tr>
     <td rowspan="2">Retrieve a Missing API Response</td>
     <td><a href="/docs/accountLinking/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Bill Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Successful Retrieval of Bills</td>
+    <td><a href="/docs/billPayment/viewAccountBills.Readme.md">Retrieve a Set of Bills</a></td>
+    <td>viewAccountBills</td>
+    <td>array $accountIdentifier, array $filter = null</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Make a Successful Bill Payment with Callback</td>
+    <td><a href="/docs/billPayment/createBillTransaction.Readme.md">Create a Bill Transaction</a></td>
+    <td>createBillTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
+    <td>createBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, BillPay $billPay</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Make a Bill Payment with Polling</td>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
+    <td>createBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, BillPay $billPay</td>
+  </tr>
+   <tr>
+    <td><a href="/docs/billPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string $serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve Bill Payments for a Given Bill</a></td>
+    <td>viewBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, array $filter=null</td>
+  </tr>
+   <tr>
+    <td>Retrieval of Bill Payments</td>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Set of Bill Payments</a></td>
+    <td>viewBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/billPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>
