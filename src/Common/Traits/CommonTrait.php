@@ -39,4 +39,18 @@ trait CommonTrait
     {
         return new \mmpsdk\Common\Process\ServiceAvailability();
     }
+
+    /**
+     * Retrieve transaction object using reference id
+     *
+     * @param array $transactionReference
+     * @param object $ObjRef
+     * @return RetrieveTransaction
+     */
+    public static function viewTransaction($transactionReference)
+    {
+        return new \mmpsdk\Common\Process\RetrieveTransaction(
+            $transactionReference
+        );
+    }
 }
