@@ -9,24 +9,23 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
--   [mmapi-php-sdk](#mmapi-php-sdk)
-    -   [Index](#index)
-    -   [Requirements](#requirements)
-    -   [Getting Started](#getting-started)
-        -   [Installation](#installation)
-            -   [Composer](#composer)
-            -   [Manual Installation](#manual-installation)
-        -   [Development and testing](#development-and-testing)
-    -   [Setting Up](#setting-up)
-        -   [Initialization of PHP SDK](#initialization-of-php-sdk)
-    -   [Use Cases](#use-cases)
-        -   [Merchant Payments](#merchant-payments)
-        -   [Disbursements](#disbursements)
-        -   [International Transfers](#international-transfers)
-        -   [P2P Transfers](#p2p-transfers)
-        -   [Account Linking](#account-linking)
-        -   [Bill Payments](#bill-payments)
-    -   [Samples](#samples)
+-   [Requirements](#requirements)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+        -   [Composer](#composer)
+        -   [Manual Installation](#manual-installation)
+    -   [Development and testing](#development-and-testing)
+-   [Setting Up](#setting-up)
+    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+-   [Use Cases](#use-cases)
+    -   [Merchant Payments](#merchant-payments)
+    -   [Disbursements](#disbursements)
+    -   [International Transfers](#international-transfers)
+    -   [P2P Transfers](#p2p-transfers)
+    -   [Recurring Payments](#recurring-payments)
+    -   [Account Linking](#account-linking)
+    -   [Bill Payments](#bill-payments)
+-   [Samples](#samples)
 
 ## Requirements
 
@@ -128,6 +127,7 @@ try {
 -   [Disbursements](#disbursements)
 -   [International Transfers](#international-transfers)
 -   [P2P Transfers](#p2p-transfers)
+-   [Recurring Payments](#recurring-payments)
 -   [Account Linking](#account-linking)
 -   [Bill Payments](#bill-payments)
 
@@ -501,6 +501,100 @@ try {
   <tr>
     <td rowspan="2">Retrieve a Missing API Response</td>
     <td><a href="/docs/p2pTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Recurring Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Setup a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>array $accountIdentifier, DebitMandate $debitMandate, $callBackUrl = null</td>
+  </tr>
+
+  <tr>
+    <td>Take a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td>NA</td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Take a Recurring Payment using the Polling Method</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/recurringPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/recurringPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>string $transactionReference</td>
+  </tr>
+
+  <tr>
+    <td>Recurring Payment Refund</td>
+    <td><a href="/docs/recurringPayment/createRefundTransaction.Readme.md">Perform a Recurring Payment Refund</a></td>
+    <td>createRefundTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl=null</td>
+  </tr>
+
+  <tr>
+    <td>Recurring Payment Reversal</td>
+    <td><a href="/docs/recurringPayment/createReversal.Readme.md">Perform a Merchant Payment Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+
+  <tr>
+    <td>Payer sets up a Recurring Payment using MMP Channel</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>array $accountIdentifier, DebitMandate $debitMandate, $callBackUrl = null</td>
+  </tr>
+
+  <tr>
+    <td>Obtain a Service Provider Balance</td>
+    <td><a href="/docs/recurringPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+
+  <tr>
+    <td>Retrieve Payments for a Service Provider</td>
+    <td><a href="/docs/recurringPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/recurringPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/recurringPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>
