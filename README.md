@@ -12,10 +12,19 @@ This document contains the following sections:
 -   [Requirements](#requirements)
 -   [Getting Started](#getting-started)
     -   [Installation](#installation)
+        -   [Composer](#composer)
+        -   [Manual Installation](#manual-installation)
     -   [Development and testing](#development-and-testing)
 -   [Setting Up](#setting-up)
     -   [Initialization of PHP SDK](#initialization-of-php-sdk)
 -   [Use Cases](#use-cases)
+    -   [Merchant Payments](#merchant-payments)
+    -   [Disbursements](#disbursements)
+    -   [International Transfers](#international-transfers)
+    -   [P2P Transfers](#p2p-transfers)
+    -   [Recurring Payments](#recurring-payments)
+    -   [Account Linking](#account-linking)
+    -   [Bill Payments](#bill-payments)
 -   [Samples](#samples)
 
 ## Requirements
@@ -116,8 +125,11 @@ try {
 
 -   [Merchant Payments](#merchant-payments)
 -   [Disbursements](#disbursements)
--   [International Transfer](#international-transfers)
+-   [International Transfers](#international-transfers)
 -   [P2P Transfers](#p2p-transfers)
+-   [Recurring Payments](#recurring-payments)
+-   [Account Linking](#account-linking)
+-   [Bill Payments](#bill-payments)
 
 ### Merchant Payments
 
@@ -262,7 +274,7 @@ try {
   <tr>
     <td><a href="docs/disbursement/updateBatchTransaction.Readme.md">Update A Transaction Batch</a></td>
     <td>updateBatchTransaction</td>
-    <td>string $batchId, string $callBackUrl = null</td>
+    <td>array $patchData, string $batchId, string $callBackUrl = null</td>
   </tr>
   <tr>
     <td><a href="docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>
@@ -489,6 +501,239 @@ try {
   <tr>
     <td rowspan="2">Retrieve a Missing API Response</td>
     <td><a href="/docs/p2pTransfer/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Recurring Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Setup a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>array $accountIdentifier, DebitMandate $debitMandate, $callBackUrl = null</td>
+  </tr>
+
+  <tr>
+    <td>Take a Recurring Payment</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td>NA</td>
+  </tr>
+
+  <tr>
+    <td rowspan="3">Take a Recurring Payment using the Polling Method</td>
+    <td><a href="/docs/recurringPayment/createMerchantTransaction.Readme.md">Take a Recurring Payment</a></td>
+    <td>createMerchantTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/recurringPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/recurringPayment/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>string $transactionReference</td>
+  </tr>
+
+  <tr>
+    <td>Recurring Payment Refund</td>
+    <td><a href="/docs/recurringPayment/createRefundTransaction.Readme.md">Perform a Recurring Payment Refund</a></td>
+    <td>createRefundTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl=null</td>
+  </tr>
+
+  <tr>
+    <td>Recurring Payment Reversal</td>
+    <td><a href="/docs/recurringPayment/createReversal.Readme.md">Perform a Merchant Payment Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+
+  <tr>
+    <td>Payer sets up a Recurring Payment using MMP Channel</td>
+    <td><a href="/docs/recurringPayment/createAccountDebitMandate.Readme.md">Setup a Recurring Payment</a></td>
+    <td>createAccountDebitMandate</td>
+    <td>array $accountIdentifier, DebitMandate $debitMandate, $callBackUrl = null</td>
+  </tr>
+
+  <tr>
+    <td>Obtain a Service Provider Balance</td>
+    <td><a href="/docs/recurringPayment/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+
+  <tr>
+    <td>Retrieve Payments for a Service Provider</td>
+    <td><a href="/docs/recurringPayment/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/recurringPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/recurringPayment/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Account Linking
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Setup an Account Link</td>
+    <td><a href="/docs/accountLinking/createAccountLink.Readme.md">Establish an Account to Account Link</a></td>
+    <td>createAccountLink</td>
+    <td>array $accountIdentifier, Link $link</td>
+  </tr>
+  <tr>
+    <td>Perform a Transfer for a Linked Account</td>
+    <td><a href="/docs/accountLinking/createTransferTransaction.Readme.md">Use a Link to make a Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Perform a Transfer using an Account Link via the Polling Method</td>
+    <td><a href="/docs/accountLinking/createTransferTransaction.Readme.md">Use a Link to make a Transfer</a></td>
+    <td>createTransferTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="docs/accountLinking/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string $serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="docs/accountLinking/viewTransaction.Readme.md">Retrieve a Transaction</a></td>
+    <td>viewTransaction</td>
+    <td>string $transactionReference</td>
+  </tr>
+  <tr>
+    <td>Perform a Transfer Reversal</td>
+    <td><a href="/docs/accountLinking/createReversal.Readme.md">Perform a Transaction Reversal</a></td>
+    <td>createReversal</td>
+    <td>string $transactionReference, Reversal $reversal=null, string $callBackUrl=null</td>
+  </tr>
+  <tr>
+    <td>Obtain a Financial Service Provider Balance</td>
+    <td><a href="/docs/accountLinking/viewAccountBalance.Readme.md">Get an Account Balance</a></td>
+    <td>viewAccountBalance</td>
+    <td>array $accountIdentifier</td>
+  </tr>
+   <tr>
+    <td>Retrieve Transfers for a Financial Service Provider</td>
+    <td><a href="/docs/accountLinking/viewAccountTransactions.Readme.md">Retrieve a Set of Transactions for an Account</a></td>
+    <td>viewAccountTransactions</td>
+    <td>array $accountIdentifier, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/accountLinking/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Retrieve a Missing API Response</td>
+    <td><a href="/docs/accountLinking/viewResponse.Readme.md">Retrieve a Missing Response</a></td>
+    <td>viewResponse</td>
+    <td>string $clientCorrelationId, Object $objRef=null</td>
+  </tr>
+</tbody>
+</table>
+
+### Bill Payments
+
+<table>
+<thead>
+  <tr>
+    <th>Scenarios</th>
+    <th>API</th>
+    <th>Function</th>
+    <th>Parameters</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Successful Retrieval of Bills</td>
+    <td><a href="/docs/billPayment/viewAccountBills.Readme.md">Retrieve a Set of Bills</a></td>
+    <td>viewAccountBills</td>
+    <td>array $accountIdentifier, array $filter = null</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Make a Successful Bill Payment with Callback</td>
+    <td><a href="/docs/billPayment/createBillTransaction.Readme.md">Create a Bill Transaction</a></td>
+    <td>createBillTransaction</td>
+    <td>Transaction $transaction, string $callBackUrl = null</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
+    <td>createBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, BillPay $billPay</td>
+  </tr>
+  <tr>
+    <td rowspan="3">Make a Bill Payment with Polling</td>
+    <td><a href="/docs/billPayment/createBillPayment.Readme.md">Make a Bill Payment</a></td>
+    <td>createBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, BillPay $billPay</td>
+  </tr>
+   <tr>
+    <td><a href="/docs/billPayment/viewRequestState.Readme.md">Poll to Determine the Request State</a></td>
+    <td>viewRequestState</td>
+    <td>string $serverCorrelationId</td>
+  </tr>
+  <tr>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve Bill Payments for a Given Bill</a></td>
+    <td>viewBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, array $filter=null</td>
+  </tr>
+   <tr>
+    <td>Retrieval of Bill Payments</td>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Set of Bill Payments</a></td>
+    <td>viewBillPayment</td>
+    <td>array $accountIdentifier, string $billReference, array $filter=null</td>
+  </tr>
+  <tr>
+    <td>Check for Service Availability</td>
+    <td><a href="/docs/billPayment/viewServiceAvailability.Readme.md">Check for Service Availability</a></td>
+    <td>viewServiceAvailability</td>
+    <td>NA</td>
+  </tr>
+  <tr>
+    <td>Retrieve a Missing API Response</td>
+    <td><a href="/docs/billPayment/viewBillPayment.Readme.md">Retrieve a Missing Response</a></td>
     <td>viewResponse</td>
     <td>string $clientCorrelationId, Object $objRef=null</td>
   </tr>

@@ -4,14 +4,24 @@ use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Process\ApproveBatchTransaction;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
-
+use mmpsdk\Common\Models\PatchData;
 class ApproveBatchTransactionTest extends ProcessTestCase
 {
     protected function setUp(): void
     {
         $batchId = 'ABC123';
 
-        $this->constructorArgs = [$batchId, 'http://example.com/'];
+        $patchRequest = new PatchData();
+        $patchRequest
+            ->setOp(PatchData::REPLACE)
+            ->setPath('/batchStatus')
+            ->setValue('approved');
+
+        $this->constructorArgs = [
+            [$patchRequest],
+            $batchId,
+            'http://example.com/'
+        ];
         $this->requestMethod = 'PATCH';
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId;

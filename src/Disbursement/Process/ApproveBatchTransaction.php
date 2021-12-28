@@ -8,7 +8,7 @@ use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Utils\CommonUtil;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Models\GenericPatchRequest;
+use mmpsdk\Common\Models\PatchData;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 
@@ -36,11 +36,12 @@ class ApproveBatchTransaction extends BaseProcess
      * Approve a batch trandsaction.
      * Asynchronous payment flow is used with a final callback.
      *
+     * @param array $patchData
      * @param BatchTransaction $batchTransaction
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct($batchId, $callBackUrl = null)
+    public function __construct($patchData, $batchId, $callBackUrl = null)
     {
         CommonUtil::validateArgument(
             $batchId,
@@ -48,12 +49,7 @@ class ApproveBatchTransaction extends BaseProcess
             CommonUtil::TYPE_STRING
         );
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
-        $patchRequest = new GenericPatchRequest();
-        $patchRequest
-            ->setOp(GenericPatchRequest::REPLACE)
-            ->setPath('/batchStatus')
-            ->setValue('approved');
-        $this->batchTransaction = [$patchRequest];
+        $this->batchTransaction = $patchData;
         $this->batchId = $batchId;
         return $this;
     }

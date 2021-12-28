@@ -4,6 +4,7 @@ use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Disbursement;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdkTest\src\Common\Process\WrapperTestCase;
+use mmpsdk\Common\Models\PatchData;
 
 class DisbursementTest extends WrapperTestCase
 {
@@ -65,7 +66,10 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\RetrieveBatchTransaction::class
         );
 
-        $batchUpdate = Disbursement::updateBatchTransaction('REF123');
+        $batchUpdate = Disbursement::updateBatchTransaction(
+            new PatchData(),
+            'REF123'
+        );
         $this->checkStaticFunctionParamCount(
             'updateBatchTransaction',
             mmpsdk\Disbursement\Process\ApproveBatchTransaction::class

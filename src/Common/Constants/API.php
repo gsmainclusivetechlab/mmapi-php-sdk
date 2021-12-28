@@ -64,7 +64,21 @@ class API
          */
         AUTHORISATION_CODE = '/accounts/{accountId}/authorisationcodes',
         VIEW_AUTHORISATION_CODE = '/accounts/{accountId}/authorisationcodes/{authorisationCode}',
-        CREATE_AUTHORISATION_CODE_VIA_IDENTIFIER = '/accounts/{identifierType}/{identifier}/authorisationcodes';
+        CREATE_AUTHORISATION_CODE_VIA_IDENTIFIER = '/accounts/{identifierType}/{identifier}/authorisationcodes',
+        /**
+         * Account Links
+         * The Links APIs are used to establish a link between two separate accounts on the client and provider systems.
+         */
+        CREATE_LINK = '/accounts/{accountId}/links',
+        VIEW_LINK = '/accounts/{accountId}/links/{linkReference}',
+        UPDATE_LINK = '/accounts/{accountId}/links/{linkReference}',
+        /**
+         * Bills
+         * The Bills APIs allow a mobile money provider to allow customers to retrieve and pay bills.
+         */
+        VIEW_ACCOUNT_BILLS = '/accounts/{accountId}/bills',
+        CREATE_BILL_PAYMENT = '/accounts/{accountId}/bills/{billReference}/payments',
+        VIEW_BILL_PAYMENT = '/accounts/{accountId}/bills/{billReference}/payments';
 
     /**
      * Other API endpoints TBD

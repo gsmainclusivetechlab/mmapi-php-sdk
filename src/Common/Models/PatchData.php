@@ -4,7 +4,11 @@ namespace mmpsdk\Common\Models;
 
 use mmpsdk\Common\Models\BaseModel;
 
-class GenericPatchRequest extends BaseModel
+/**
+ * Class PatchData
+ * @package mmpsdk\Common\Models
+ */
+class PatchData extends BaseModel
 {
     const REPLACE = 'replace',
         ADD = 'add';
@@ -34,7 +38,7 @@ class GenericPatchRequest extends BaseModel
     /**
      * @param string|null $op
      *
-     * @return GenericPatchRequest
+     * @return PatchData
      */
     public function setOp($op)
     {
@@ -54,7 +58,7 @@ class GenericPatchRequest extends BaseModel
     /**
      * @param string|null $path
      *
-     * @return GenericPatchRequest
+     * @return PatchData
      */
     public function setPath($path)
     {
@@ -74,7 +78,7 @@ class GenericPatchRequest extends BaseModel
     /**
      * @param string|null $value
      *
-     * @return GenericPatchRequest
+     * @return PatchData
      */
     public function setValue($value)
     {

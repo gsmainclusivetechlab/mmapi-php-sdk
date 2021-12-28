@@ -2,9 +2,18 @@
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Disbursement\Disbursement;
+use mmpsdk\Common\Models\PatchData;
 
 try {
-    $request = Disbursement::updateBatchTransaction('REF-1635847150151');
+    $patchRequest = new PatchData();
+    $patchRequest
+        ->setOp(PatchData::REPLACE)
+        ->setPath('/batchStatus')
+        ->setValue('approved');
+    $request = Disbursement::updateBatchTransaction(
+        [$patchRequest],
+        'REF-1635847150151'
+    );
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
