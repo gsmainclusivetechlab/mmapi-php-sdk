@@ -274,7 +274,7 @@ try {
   <tr>
     <td><a href="docs/disbursement/updateBatchTransaction.Readme.md">Update A Transaction Batch</a></td>
     <td>updateBatchTransaction</td>
-    <td>string $batchId, string $callBackUrl = null</td>
+    <td>array $patchData, string $batchId, string $callBackUrl = null</td>
   </tr>
   <tr>
     <td><a href="docs/disbursement/viewBatchTransaction.Readme.md">View A Transaction Batch</a></td>

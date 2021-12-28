@@ -10,6 +10,8 @@ use mmpsdk\Common\Models\BaseModel;
  */
 class PatchData extends BaseModel
 {
+    const REPLACE = 'replace',
+        ADD = 'add';
     /**
      * @var string
      */

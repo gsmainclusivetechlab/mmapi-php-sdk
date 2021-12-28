@@ -8,10 +8,13 @@ use mmpsdk\Disbursement\Disbursement;
 use mmpsdkTest\src\Integration\IntegrationTestCase;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Disbursement\Process\ApproveBatchTransaction;
+use mmpsdk\Common\Models\PatchData;
 
 class UpdateBatchTransactionIntegrationTest extends IntegrationTestCase
 {
     private static $batchTransactionRef;
+
+    private static $patchData;
 
     protected function getProcessInstanceType()
     {
@@ -61,11 +64,19 @@ class UpdateBatchTransactionIntegrationTest extends IntegrationTestCase
         )
             ->execute()
             ->getObjectReference();
+        $patchRequest = new PatchData();
+        $patchRequest
+            ->setOp(PatchData::REPLACE)
+            ->setPath('/batchStatus')
+            ->setValue('approved');
+        self::$patchData = [$patchRequest];
+
     }
 
     protected function setUp(): void
     {
         $this->request = Disbursement::updateBatchTransaction(
+            self::$patchData,
             self::$batchTransactionRef
         );
     }

@@ -97,13 +97,15 @@ class Disbursement
      * Approve a batch trandsaction.
      * Asynchronous payment flow is used with a final callback.
      *
+     * @param array $patchData
      * @param BatchTransaction $batchTransaction
      * @param string $callBackUrl
      * @return ApproveBatchTransaction
      */
-    public static function updateBatchTransaction($batchId, $callBackUrl = null)
+    public static function updateBatchTransaction($patchData, $batchId, $callBackUrl = null)
     {
         return new \mmpsdk\Disbursement\Process\ApproveBatchTransaction(
+            $patchData,
             $batchId,
             $callBackUrl
         );
