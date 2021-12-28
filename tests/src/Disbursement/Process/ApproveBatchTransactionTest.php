@@ -17,7 +17,11 @@ class ApproveBatchTransactionTest extends ProcessTestCase
             ->setPath('/batchStatus')
             ->setValue('approved');
 
-        $this->constructorArgs = [[$patchRequest], $batchId, 'http://example.com/'];
+        $this->constructorArgs = [
+            [$patchRequest],
+            $batchId,
+            'http://example.com/'
+        ];
         $this->requestMethod = 'PATCH';
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/batchtransactions/' . $batchId;

@@ -66,7 +66,10 @@ class DisbursementTest extends WrapperTestCase
             mmpsdk\Disbursement\Process\RetrieveBatchTransaction::class
         );
 
-        $batchUpdate = Disbursement::updateBatchTransaction(new PatchData(), 'REF123');
+        $batchUpdate = Disbursement::updateBatchTransaction(
+            new PatchData(),
+            'REF123'
+        );
         $this->checkStaticFunctionParamCount(
             'updateBatchTransaction',
             mmpsdk\Disbursement\Process\ApproveBatchTransaction::class

@@ -23,7 +23,10 @@ try {
     /**
      * Construct request object and set desired parameters
      */
-    $request = Disbursement::updateBatchTransaction([$patchRequest], '<<BATCH-ID>>');
+    $request = Disbursement::updateBatchTransaction(
+        [$patchRequest],
+        '<<BATCH-ID>>'
+    );
 
     /**
      *Execute the request

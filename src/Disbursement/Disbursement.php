@@ -102,8 +102,11 @@ class Disbursement
      * @param string $callBackUrl
      * @return ApproveBatchTransaction
      */
-    public static function updateBatchTransaction($patchData, $batchId, $callBackUrl = null)
-    {
+    public static function updateBatchTransaction(
+        $patchData,
+        $batchId,
+        $callBackUrl = null
+    ) {
         return new \mmpsdk\Disbursement\Process\ApproveBatchTransaction(
             $patchData,
             $batchId,

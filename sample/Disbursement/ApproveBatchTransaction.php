@@ -10,7 +10,10 @@ try {
         ->setOp(PatchData::REPLACE)
         ->setPath('/batchStatus')
         ->setValue('approved');
-    $request = Disbursement::updateBatchTransaction([$patchRequest], 'REF-1635847150151');
+    $request = Disbursement::updateBatchTransaction(
+        [$patchRequest],
+        'REF-1635847150151'
+    );
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
