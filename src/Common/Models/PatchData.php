@@ -1,6 +1,7 @@
 <?php
 
 namespace mmpsdk\Common\Models;
+
 use mmpsdk\Common\Models\BaseModel;
 
 /**
@@ -23,7 +24,6 @@ class PatchData extends BaseModel
      * @var string
      */
     private $value;
-
 
     /**
      * @return string|null
@@ -94,4 +94,3 @@ class PatchData extends BaseModel
         ]);
     }
 }
-
