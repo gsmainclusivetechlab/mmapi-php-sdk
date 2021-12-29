@@ -51,7 +51,7 @@ class InitiateAccountTest extends ProcessTestCase
             ->setContactPhone('+447777777777')
             ->setGender('m')
             ->setEmailAddress('xyz@xyz.com')
-            ->setBirthCountry('GB')
+            ->setBirthCountry('AD')
             ->setIdDocument($idDocument)
             ->setPostalAddress($postalAddress)
             ->setSubjectName($subjectName);
@@ -60,7 +60,7 @@ class InitiateAccountTest extends ProcessTestCase
                 ->setAccountRelationship('accountholder')
                 ->setKycVerificationStatus('verified')
                 ->setKycVerificationEntity('ABC Agent')
-                ->setKycLevel('1')
+                ->setKycLevel(1)
                 ->setIdentityKyc($identityKyc)
         ];
 
