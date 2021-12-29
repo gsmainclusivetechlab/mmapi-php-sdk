@@ -11,7 +11,6 @@ use mmpsdk\Common\Models\IdDocument;
 use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
 
-
 $postalAddress = new Address();
 $postalAddress
     ->setCountry('AD')
@@ -70,9 +69,7 @@ $account
     ->setrequestDate('2021-02-17T15:41:45.194Z');
 
 try {
-    $request = AgentService::createAccount(
-        $account
-    );
+    $request = AgentService::createAccount($account);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
