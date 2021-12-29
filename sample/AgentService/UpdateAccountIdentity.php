@@ -12,11 +12,9 @@ try {
         ->setOp(PatchData::REPLACE)
         ->setPath('/kycVerificationStatus')
         ->setValue('verified');
-    $request = AgentService::updateAccountIdentity(
-        $accountIdentifier,
-        '105',
-        [$patchRequest],
-    );
+    $request = AgentService::updateAccountIdentity($accountIdentifier, '105', [
+        $patchRequest
+    ]);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
