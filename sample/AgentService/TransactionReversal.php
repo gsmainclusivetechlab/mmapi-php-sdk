@@ -1,12 +1,12 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
-use mmpsdk\P2PTransfer\P2PTransfer;
+use mmpsdk\AgentService\AgentService;
 use mmpsdk\Common\Exceptions\SDKException;
 
 try {
     $transactionReference = 'REF-1635251574104';
-    $request = P2PTransfer::createReversal($transactionReference);
+    $request = AgentService::createReversal($transactionReference);
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);

@@ -4,7 +4,7 @@ namespace mmpsdk\AgentService;
 
 use mmpsdk\Common\Traits\CommonTrait;
 use mmpsdk\Common\Traits\CommonAccountTrait;
-use mmpsdk\Common\Traits\QuotationTrait;
+use mmpsdk\Common\Traits\AuthorizationCodeTrait;
 use mmpsdk\Common\Traits\AccountNameTrait;
 
 /**
@@ -15,7 +15,7 @@ class AgentService
 {
     use CommonTrait;
     use CommonAccountTrait;
-    use QuotationTrait;
+    use AuthorizationCodeTrait;
     use AccountNameTrait;
 
     /**
@@ -58,18 +58,15 @@ class AgentService
      * Initiates a Account Request.
      * Asynchronous payment flow is used with a final callback.
      *
-     * @param String $identityType
      * @param Account $account
      * @param string $callBackUrl
      * @return InitiateAccount
      */
     public static function createAccount(
-        $identityType,
         \mmpsdk\AgentService\Models\Account $account,
         $callBackUrl = null
     ) {
         return new \mmpsdk\AgentService\Process\InitiateAccount(
-            $identityType,
             $account,
             $callBackUrl
         );
@@ -98,7 +95,7 @@ class AgentService
      * @param string $callBackUrl
      * @return UpdateAccountIdentity
      */
-    public static function UpdateAccountIdentity(
+    public static function updateAccountIdentity(
         $accountIdentifier,
         $identityId,
         $patchData,

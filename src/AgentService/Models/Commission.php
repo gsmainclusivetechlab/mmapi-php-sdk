@@ -2,7 +2,9 @@
 
 namespace mmpsdk\AgentService\Models;
 
-class CommissionEarned
+use mmpsdk\Common\Models\BaseModel;
+
+class Commission extends BaseModel
 {
     /**
      * @var string

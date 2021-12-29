@@ -25,35 +25,18 @@ class InitiateAccount extends BaseProcess
     private $account;
 
     /**
-     * String
-     *
-     * @var String
-     */
-    protected $identityType;
-
-    /**
      * Initiates a Account Request.
      * Asynchronous payment flow is used with a final callback.
      *
-     * @param String $identityType
      * @param Account $account
      * @param string $callBackUrl
      * @return this
      */
-    public function __construct(
-        $identityType,
-        Account $account,
-        $callBackUrl = null
-    ) {
-        CommonUtil::validateArgument(
-            $identityType,
-            'identityType',
-            CommonUtil::TYPE_STRING
-        );
+    public function __construct(Account $account, $callBackUrl = null)
+    {
         CommonUtil::validateArgument($account, 'account');
         $this->setUp(self::ASYNCHRONOUS_PROCESS, $callBackUrl);
         $this->account = $account;
-        $this->identityType = $identityType;
         return $this;
     }
 
@@ -68,7 +51,7 @@ class InitiateAccount extends BaseProcess
             json_encode($this->account)
         )
             ->setUrlParams([
-                '{identityType}' => $this->identityType
+                '{identityType}' => 'individual'
             ])
             ->setClientCorrelationId($this->clientCorrelationId)
             ->httpHeader(Header::X_CALLBACK_URL, $this->callBackUrl)

@@ -1,19 +1,37 @@
 <?php
 
+use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Process\BaseProcess;
-use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdkTest\src\Common\Process\ProcessTestCase;
+use mmpsdk\AgentService\Process\InitiateAccount;
 use mmpsdk\AgentService\Models\Account;
 use mmpsdk\AgentService\Models\Identity;
 use mmpsdk\Common\Models\Address;
 use mmpsdk\Common\Models\IdDocument;
 use mmpsdk\Common\Models\KYCInformation;
 use mmpsdk\Common\Models\Name;
-use mmpsdk\AgentService\Process\InitiateAccount;
+use mmpsdk\AgentService\AgentService;
+use mmpsdkTest\src\Integration\IntegrationTestCase;
 
-class InitiateAccountTest extends ProcessTestCase
+class CreateAccountIntegrationTest extends IntegrationTestCase
 {
-    protected function setUp(): void
+    private static $account;
+
+    protected function getProcessInstanceType()
+    {
+        return InitiateAccount::class;
+    }
+
+    protected function getResponseInstanceType()
+    {
+        return RequestState::class;
+    }
+
+    protected function getRequestType()
+    {
+        return BaseProcess::ASYNCHRONOUS_PROCESS;
+    }
+
+    public static function setUpBeforeClass(): void
     {
         $postalAddress = new Address();
         $postalAddress
@@ -64,26 +82,17 @@ class InitiateAccountTest extends ProcessTestCase
                 ->setIdentityKyc($identityKyc)
         ];
 
-        $account = new Account();
-        $account
-            ->setAccountIdentifiers(['accountid' => '2000'])
+        self::$account = new Account();
+        self::$account
+            ->setAccountIdentifiers(['accountid' => '12345'])
             ->setIdentity($identity)
             ->setAccountType('string')
             ->setRegisteringEntity('ABC Agent')
             ->setrequestDate('2021-02-17T15:41:45.194Z');
-        $this->constructorArgs = [$account, 'http://example.com/'];
-        $this->requestMethod = 'POST';
-        $this->requestUrl = MobileMoney::getBaseUrl() . '/accounts/individual';
-        $this->requestParams = [
-            '{"accountIdentifiers":[{"key":"accountid","value":"2000"}],"identity":[{"identityKyc":{"birthCountry":"AD","contactPhone":"+447777777777","dateOfBirth":"2000-11-20","emailAddress":"xyz@xyz.com","employerName":"string","gender":"m","idDocument":[{"idType":"passport","idNumber":"111111","issueDate":"2018-11-20","expiryDate":"2018-11-20","issuer":"ABC","issuerPlace":"DEF","issuerCountry":"AD"}],"nationality":"AD","occupation":"Miner","postalAddress":{"addressLine1":"37","addressLine2":"ABC Drive","addressLine3":"string","city":"Berlin","stateProvince":"string","postalCode":"AF1234","country":"AD"},"subjectName":{"title":"Mr","firstName":"H","middleName":"I","lastName":"J","fullName":"H I J","nativeName":"string"}},"accountRelationship":"accountholder","kycVerificationStatus":"verified","kycVerificationEntity":"ABC Agent","kycLevel":1}],"accountType":"string","registeringEntity":"ABC Agent","requestDate":"2021-02-17T15:41:45.194Z"}'
-        ];
+    }
 
-        $this->className = InitiateAccount::class;
-        $this->requestOptions = ['X-Callback-URL: http://example.com/'];
-        $this->reqObj = $this->instantiateClass(
-            $this->className,
-            $this->constructorArgs
-        );
-        $this->processType = BaseProcess::ASYNCHRONOUS_PROCESS;
+    protected function setUp(): void
+    {
+        $this->request = AgentService::createAccount(self::$account);
     }
 }

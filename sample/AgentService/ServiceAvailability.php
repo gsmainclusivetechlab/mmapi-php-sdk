@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Exceptions\SDKException;
-use mmpsdk\P2PTransfer\P2PTransfer;
+use mmpsdk\AgentService\AgentService;
 
 try {
-    $response = P2PTransfer::viewServiceAvailability()->execute();
+    $response = AgentService::viewServiceAvailability()->execute();
     prettyPrint($response);
 } catch (SDKException $ex) {
     prettyPrint($ex->getMessage());

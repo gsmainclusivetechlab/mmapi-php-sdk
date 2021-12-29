@@ -457,9 +457,6 @@ class Account extends BaseModel
             'commissionEarned',
             new \mmpsdk\AgentService\Models\Commission()
         );
-        $this->addHydratorStrategy(
-            'fees',
-            new \mmpsdk\AgentService\Models\Fees()
-        );
+        $this->addHydratorStrategy('fees', new \mmpsdk\Common\Models\Fees());
     }
 }

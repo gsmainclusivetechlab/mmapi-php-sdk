@@ -2,7 +2,9 @@
 
 namespace mmpsdk\AgentService\Models;
 
-class Identity
+use mmpsdk\Common\Models\BaseModel;
+
+class Identity extends BaseModel
 {
     /**
      * @var string
