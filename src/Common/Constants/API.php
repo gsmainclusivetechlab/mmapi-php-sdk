@@ -40,6 +40,7 @@ class API
          */
         GENERAL_ACCOUNT = '/accounts/{identityType}', //POST, GET, PATCH
         GENERAL_ACCOUNT_IDENTIFIER = '/accounts/{identifierType}/{identifier}', //GET, PATCH
+        GENERAL_ACCOUNT_ID = '/accounts/{accountId}',
         UPDATE_ACCOUNT_IDENDITY = '/accounts/{accountId}/identities/{identityId}',
         UPDATE_ACCOUNT_IDENDITY_BY_ID = '/accounts/{identifierType}/{identifier}/identities/{identityId}',
         VIEW_ACCOUNT_STATUS = '/accounts/{accountId}/status',
