@@ -32,7 +32,7 @@ class ViewAccountIntegrationTest extends IntegrationTestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$accountIdentifier = ['accountid' => '2000'];
+        self::$accountIdentifier = ['accountid' => '12345'];
     }
 
     protected function setUp(): void
