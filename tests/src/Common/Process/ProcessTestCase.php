@@ -3,6 +3,8 @@ namespace mmpsdkTest\src\Common\Process;
 use PHPUnit\Framework\TestCase;
 use mmpsdkTest\Extensions\PropertyAccessor;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use mmpsdk\Common\Models\Response;
+use mmpsdkTest\src\mocks\MockObject;
 use ReflectionClass;
 
 abstract class ProcessTestCase extends TestCase
@@ -110,6 +112,13 @@ abstract class ProcessTestCase extends TestCase
             );
         $mockObj->expects($this->once())->method('parseResponse');
         $response = $mockObj->execute();
+    }
+
+    private function buildMockResponse(){
+        $mockObject = MockObject::get('RequestState.json');
+        $response = new Response();
+        // $repsonse->setResult($mockResponse['result']);
+        return $response;
     }
 
     protected function instantiateClass($className, $args = null)

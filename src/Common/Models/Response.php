@@ -33,7 +33,7 @@ class Response extends BaseModel
     /**
      * @var string
      */
-    private $erroCode;
+    private $errorCode;
 
     /**
      * @var string
