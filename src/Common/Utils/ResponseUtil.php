@@ -6,6 +6,7 @@ use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Models\Response;
 
 /**
  * Class ResponseUtil
@@ -29,33 +30,32 @@ class ResponseUtil
      */
     public static function parse($response, $obj = null, $request)
     {
-        switch ($response->httpCode) {
+        switch ($response->getHttpCode()) {
             //Success Responses
             case self::OK:
             case self::ACCEPTED:
             case self::CREATED:
-                $decodedResponse = json_decode($response->result);
+                $decodedResponse = json_decode($response->getResult());
                 if (is_array($decodedResponse) && empty($decodedResponse)) {
                     return $decodedResponse;
                 }
                 //Add client correlation id along with response
                 $data = $decodedResponse;
-                if ($response->clientCorrelationId) {
-                    $data->clientCorrelationId = $response->clientCorrelationId;
+                if ($response->getClientCorrelationId()) {
+                    $data->clientCorrelationId = $response->getClientCorrelationId();
                 }
                 if ($obj !== null) {
                     $count = 0;
                     if (
-                        isset($response->headers) &&
+                        $response->getHeaders() !== null &&
                         array_key_exists(
                             Header::X_RECORDS_AVAILABLE_COUNT,
-                            $response->headers
+                            $response->getHeaders()
                         )
                     ) {
-                        $count =
-                            $response->headers[
-                                Header::X_RECORDS_AVAILABLE_COUNT
-                            ];
+                        $count = $response->getHeaders()[
+                            Header::X_RECORDS_AVAILABLE_COUNT
+                        ];
                     }
                     $data = $obj->hydrate($decodedResponse, null, $count);
                 }
@@ -64,7 +64,7 @@ class ResponseUtil
 
             //Failed Responses
             case self::BAD_REQUEST:
-                $errorObject = new Error(json_decode($response->result));
+                $errorObject = new Error(json_decode($response->getResult()));
                 throw new SDKException(
                     self::BAD_REQUEST .
                         ': ' .
@@ -73,7 +73,7 @@ class ResponseUtil
                 );
                 break;
             case self::UNAUTHORIZED:
-                $errorObject = json_decode($response->result);
+                $errorObject = json_decode($response->getResult());
                 if (isset($errorObject->errorCode)) {
                     throw new SDKException(
                         self::UNAUTHORIZED,
@@ -100,7 +100,7 @@ class ResponseUtil
                 break;
 
             case self::NOT_FOUND:
-                $errorObject = json_decode($response->result);
+                $errorObject = json_decode($response->getResult());
                 if (isset($errorObject->errorCode)) {
                     $errObj = new Error($errorObject);
                     throw new SDKException(
@@ -120,8 +120,8 @@ class ResponseUtil
             default:
                 throw new SDKException(
                     'Unknown Response: ' .
-                        $response->httpCode .
-                        $response->result
+                        $response->getHttpCode() .
+                        $response->getResult()
                 );
         }
     }

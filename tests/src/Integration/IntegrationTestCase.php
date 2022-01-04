@@ -47,12 +47,12 @@ abstract class IntegrationTestCase extends TestCase
         if ($this->getRequestType() == BaseProcess::ASYNCHRONOUS_PROCESS) {
             $this->assertEquals(
                 202,
-                $this->request->getRawResponse()->httpCode
+                $this->request->getRawResponse()->getHttpCode()
             );
         } else {
             $this->assertEquals(
                 200,
-                $this->request->getRawResponse()->httpCode
+                $this->request->getRawResponse()->getHttpCode()
             );
         }
 
@@ -112,7 +112,10 @@ abstract class IntegrationTestCase extends TestCase
 
     private function asynchronusProcessAssertions($notificationMethod)
     {
-        $this->assertEquals(202, $this->request->getRawResponse()->httpCode);
+        $this->assertEquals(
+            202,
+            $this->request->getRawResponse()->getHttpCode()
+        );
         $this->assertInstanceOf(
             $this->getResponseInstanceType(),
             $this->response
@@ -141,7 +144,7 @@ abstract class IntegrationTestCase extends TestCase
     protected function responseAssertions($request, $response)
     {
         $rawResponse = $request->getRawResponse();
-        $jsonData = json_decode($rawResponse->result, true);
+        $jsonData = json_decode($rawResponse->getResult(), true);
         $this->assertNotNull($jsonData, 'Invalid JSON Response from API');
         $this->validateResponse($response, $jsonData);
         switch ($this->getResponseInstanceType()) {

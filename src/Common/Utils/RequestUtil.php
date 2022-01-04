@@ -7,6 +7,7 @@ use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Constants\API;
 use mmpsdk\Common\Utils\AuthUtil;
+use mmpsdk\Common\Models\Response;
 
 /**
  * Class RequestUtil
@@ -512,15 +513,16 @@ class RequestUtil
         $ch = $this->_curlHandle;
         $output = curl_exec($ch);
         $outputData = $this->getResponseHeaders($output);
-        $response = new stdClass();
-        $response->result = $outputData['Data'];
-        $response->info = curl_getinfo($ch);
-        $response->httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $response->error = curl_error($ch);
-        $response->error_code = curl_errno($ch);
-        $response->clientCorrelationId = $this->_clientCorrelationId;
-        $response->headers = $outputData['Headers'];
-        $response->requestObj = $this;
+        $response = new Response();
+        $response
+            ->setResult($outputData['Data'])
+            ->setInfo(curl_getinfo($ch))
+            ->setHttpCode(curl_getinfo($ch, CURLINFO_HTTP_CODE))
+            ->setError(curl_error($ch))
+            ->setErrorCode(curl_errno($ch))
+            ->setClientCorrelationId($this->_clientCorrelationId)
+            ->setHeaders($outputData['Headers'])
+            ->setRequestObj($this);
         curl_close($ch);
         return $response;
     }
