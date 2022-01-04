@@ -59,6 +59,11 @@ abstract class BaseProcess
      */
     public $retryCount = 0;
 
+    /**
+     * Raw response from the API
+     *
+     * @var mixed
+     */
     public $rawResponse;
 
     /**
@@ -168,7 +173,7 @@ abstract class BaseProcess
     }
 
     /**
-     * Make the API request
+     * Parse the response from the API
      *
      * @param Curl $response
      * @return mixed

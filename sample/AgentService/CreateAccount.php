@@ -62,7 +62,7 @@ $identity = [
 
 $account = new Account();
 $account
-    ->setAccountIdentifiers(['accountid' => '2001'])
+    ->setAccountIdentifiers(['accountid' => time() . '_' . rand(0, 1000)])
     ->setIdentity($identity)
     ->setAccountType('string')
     ->setRegisteringEntity('ABC Agent')

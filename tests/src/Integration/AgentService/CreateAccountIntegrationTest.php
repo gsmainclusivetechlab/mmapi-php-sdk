@@ -93,6 +93,9 @@ class CreateAccountIntegrationTest extends IntegrationTestCase
 
     protected function setUp(): void
     {
+        //To create a new account identifier for each test in the test case
+        self::$account->setAccountIdentifiers(['accountid' => time() . '_sdkTest_' . rand(0, 1000)]);
+
         $this->request = AgentService::createAccount(self::$account);
     }
 }
