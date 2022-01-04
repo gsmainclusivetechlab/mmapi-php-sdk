@@ -114,7 +114,8 @@ abstract class ProcessTestCase extends TestCase
         $response = $mockObj->execute();
     }
 
-    private function buildMockResponse(){
+    private function buildMockResponse()
+    {
         $mockObject = MockObject::get('RequestState.json');
         $response = new Response();
         // $repsonse->setResult($mockResponse['result']);
