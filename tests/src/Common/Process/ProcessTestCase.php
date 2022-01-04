@@ -92,8 +92,8 @@ abstract class ProcessTestCase extends TestCase
                     );
                     if ($this->requestParams) {
                         $this->assertEqualsCanonicalizing(
-                            json_decode($this->requestParams[0]),
-                            json_decode($requestObj['params'][0]),
+                            json_decode($this->requestParams[0], true),
+                            json_decode($requestObj['params'][0], true),
                             'Params must be: ' .
                                 implode(',', $this->requestParams)
                         );
