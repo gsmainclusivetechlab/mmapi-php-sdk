@@ -85,6 +85,60 @@ abstract class ProcessTestCase extends TestCase
      */
     protected $arrayResponse = false;
 
+    public function testCheckInstance()
+    {
+        $this->assertInstanceOf(
+            $this->className,
+            $this->reqObj,
+            'Should be of type ' . $this->className
+        );
+    }
+
+    public function testCheckProcessType()
+    {
+        $this->assertEquals(
+            $this->processType,
+            $this->reqObj->getProcessType(),
+            'Wrong Process Type'
+        );
+    }
+
+    public function testCheckRequest()
+    {
+        $mockObj = $this->buildMockObject(function ($request) {
+            $requestObj = PropertyAccessor::getRequestProperties($request);
+            $this->assertEquals(
+                $this->requestMethod,
+                $requestObj['method'],
+                'Method must be: ' . $this->requestMethod
+            );
+            $this->assertEquals(
+                $this->requestUrl,
+                $requestObj['url'],
+                'URL must be: ' . $this->requestUrl
+            );
+            if ($this->requestParams) {
+                $this->assertEqualsCanonicalizing(
+                    json_decode($this->requestParams[0], true),
+                    json_decode($requestObj['params'][0], true),
+                    'Params must be: ' . implode(',', $this->requestParams)
+                );
+            }
+            if ($this->requestOptions) {
+                $this->assertArraySubset(
+                    $this->requestOptions,
+                    $requestObj['options'],
+                    'Options must be: ' . implode(',', $this->requestOptions)
+                );
+            }
+            return $this->buildSuccessMockResponse(
+                $request,
+                $this->mockResponseObject
+            );
+        });
+        $mockObj->execute();
+    }
+
     public function testCheckSuccessResponse()
     {
         $mockObj = $this->buildMockObject(function ($request) {
@@ -127,42 +181,6 @@ abstract class ProcessTestCase extends TestCase
         } catch (SDKException $e) {
             $this->assertNotEmpty($e->getErrorObj(), 'Error object is empty');
         }
-    }
-
-    public function testCheckRequest()
-    {
-        $mockObj = $this->buildMockObject(function ($request) {
-            $requestObj = PropertyAccessor::getRequestProperties($request);
-            $this->assertEquals(
-                $this->requestMethod,
-                $requestObj['method'],
-                'Method must be: ' . $this->requestMethod
-            );
-            $this->assertEquals(
-                $this->requestUrl,
-                $requestObj['url'],
-                'URL must be: ' . $this->requestUrl
-            );
-            if ($this->requestParams) {
-                $this->assertEqualsCanonicalizing(
-                    json_decode($this->requestParams[0], true),
-                    json_decode($requestObj['params'][0], true),
-                    'Params must be: ' . implode(',', $this->requestParams)
-                );
-            }
-            if ($this->requestOptions) {
-                $this->assertArraySubset(
-                    $this->requestOptions,
-                    $requestObj['options'],
-                    'Options must be: ' . implode(',', $this->requestOptions)
-                );
-            }
-            return $this->buildSuccessMockResponse(
-                $request,
-                $this->mockResponseObject
-            );
-        });
-        $mockObj->execute();
     }
 
     private function buildSuccessMockResponse(
@@ -229,24 +247,6 @@ abstract class ProcessTestCase extends TestCase
         } else {
             return $reflect->newInstance();
         }
-    }
-
-    public function testCheckInstance()
-    {
-        $this->assertInstanceOf(
-            $this->className,
-            $this->reqObj,
-            'Should be of type ' . $this->className
-        );
-    }
-
-    public function testCheckProcessType()
-    {
-        $this->assertEquals(
-            $this->processType,
-            $this->reqObj->getProcessType(),
-            'Wrong Process Type'
-        );
     }
 
     private function buildListResponse($response)
