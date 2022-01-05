@@ -29,5 +29,6 @@ class RetrieveAccountTransactionsTest extends ProcessTestCase
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
         $this->mockResponseObject = 'Transaction.json';
         $this->responseType = Transaction::class;
+        $this->arrayResponse = true;
     }
 }
