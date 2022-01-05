@@ -1,7 +1,7 @@
 <?php
 namespace mmpsdkTest\src\mocks;
 
-class MockObject
+class MockResponse
 {
     public static function get($fileName)
     {

@@ -2,6 +2,7 @@
 
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
+use mmpsdk\Common\Models\Quotation;
 use mmpsdk\Common\Process\ViewQuotation;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
@@ -20,5 +21,7 @@ class ViewQuotationTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'Quotation.json';
+        $this->responseType = Quotation::class;
     }
 }

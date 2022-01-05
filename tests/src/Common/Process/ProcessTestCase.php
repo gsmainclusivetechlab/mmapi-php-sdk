@@ -3,8 +3,11 @@ namespace mmpsdkTest\src\Common\Process;
 use PHPUnit\Framework\TestCase;
 use mmpsdkTest\Extensions\PropertyAccessor;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
+use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Models\Response;
-use mmpsdkTest\src\mocks\MockObject;
+use mmpsdk\Common\Process\BaseProcess;
+use mmpsdkTest\src\mocks\MockResponse;
 use ReflectionClass;
 
 abstract class ProcessTestCase extends TestCase
@@ -21,7 +24,7 @@ abstract class ProcessTestCase extends TestCase
      *
      * @var array
      */
-    protected $mockMethods = ['makeRequest', 'parseResponse'];
+    protected $mockMethods = ['makeRequest'];
 
     /**
      *
@@ -40,6 +43,12 @@ abstract class ProcessTestCase extends TestCase
      * @var array
      */
     protected $requestOptions;
+
+    /**
+     *
+     * @var string
+     */
+    protected $mockResponseObject;
 
     /**
      *
@@ -65,8 +74,99 @@ abstract class ProcessTestCase extends TestCase
      */
     protected $reqObj;
 
+    /**
+     * @var string
+     */
+    protected $responseType;
+
+    public function testCheckSuccessResponse(){
+        $mockObj = $this->buildMockObject(function ($request) {
+            return $this->buildSuccessMockResponse($request, $this->mockResponseObject);
+        });
+        $response = $mockObj->execute();
+        if ($this->processType == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            $this->assertInstanceOf(RequestState::class, $response);
+        } else {
+            $this->assertInstanceOf($this->responseType, $response);
+        }
+    }
+
+    public function testCheckFailureResponse(){
+        $mockObj = $this->buildMockObject(function ($request) {
+            return $this->buildFailureMockResponse($request);
+        });
+        try{
+            $mockObj->execute();
+            $this->expectException(SDKException::class);
+        } catch (SDKException $e) {
+            $this->assertNotEmpty($e->getErrorObj(), 'Error object is empty');
+        }
+    }
+
     public function testCheckRequest()
     {
+        $mockObj = $this->buildMockObject(function ($request) {
+            $requestObj = PropertyAccessor::getRequestProperties(
+                $request
+            );
+            $this->assertEquals(
+                $this->requestMethod,
+                $requestObj['method'],
+                'Method must be: ' . $this->requestMethod
+            );
+            $this->assertEquals(
+                $this->requestUrl,
+                $requestObj['url'],
+                'URL must be: ' . $this->requestUrl
+            );
+            if ($this->requestParams) {
+                $this->assertEqualsCanonicalizing(
+                    json_decode($this->requestParams[0], true),
+                    json_decode($requestObj['params'][0], true),
+                    'Params must be: ' .
+                        implode(',', $this->requestParams)
+                );
+            }
+            if ($this->requestOptions) {
+                $this->assertArraySubset(
+                    $this->requestOptions,
+                    $requestObj['options'],
+                    'Options must be: ' .
+                        implode(',', $this->requestOptions)
+                );
+            }
+            return $this->buildSuccessMockResponse($request, $this->mockResponseObject);
+        });
+        $mockObj->execute();
+    }
+
+    private function buildSuccessMockResponse($request, $mockResponse = 'RequestState.json')
+    {
+        $response = new Response();
+        if($this->processType == BaseProcess::ASYNCHRONOUS_PROCESS){
+            return $response->setResult(MockResponse::get('RequestState.json'))
+                ->setHttpCode(202)
+                ->setClientCorrelationId('123456789')
+                ->setRequestObj($request);
+        } else {
+            return $response->setResult(MockResponse::get($mockResponse))
+            ->setHttpCode(200)
+            ->setRequestObj($request);
+        }
+    }
+
+    private function buildFailureMockResponse($request) {
+        $response = new Response();
+        return $response->setResult(MockResponse::get('Error.json'))
+            ->setHttpCode(400)
+            ->setRequestObj($request);
+    }
+
+    /**
+     * @param callable $callback
+     * @return BaseProcess
+     */
+    private function buildMockObject($callback){
         $mockObj = $this->getMockBuilder($this->className)->onlyMethods(
             $this->mockMethods
         );
@@ -78,48 +178,9 @@ abstract class ProcessTestCase extends TestCase
             ->expects($this->once())
             ->method('makeRequest')
             ->will(
-                $this->returnCallback(function ($request) {
-                    $requestObj = PropertyAccessor::getRequestProperties(
-                        $request
-                    );
-                    $this->assertEquals(
-                        $this->requestMethod,
-                        $requestObj['method'],
-                        'Method must be: ' . $this->requestMethod
-                    );
-                    $this->assertEquals(
-                        $this->requestUrl,
-                        $requestObj['url'],
-                        'URL must be: ' . $this->requestUrl
-                    );
-                    if ($this->requestParams) {
-                        $this->assertEqualsCanonicalizing(
-                            json_decode($this->requestParams[0], true),
-                            json_decode($requestObj['params'][0], true),
-                            'Params must be: ' .
-                                implode(',', $this->requestParams)
-                        );
-                    }
-                    if ($this->requestOptions) {
-                        $this->assertArraySubset(
-                            $this->requestOptions,
-                            $requestObj['options'],
-                            'Options must be: ' .
-                                implode(',', $this->requestOptions)
-                        );
-                    }
-                })
+                $this->returnCallback($callback)
             );
-        $mockObj->expects($this->once())->method('parseResponse');
-        $response = $mockObj->execute();
-    }
-
-    private function buildMockResponse()
-    {
-        $mockObject = MockObject::get('RequestState.json');
-        $response = new Response();
-        // $repsonse->setResult($mockResponse['result']);
-        return $response;
+        return $mockObj;
     }
 
     protected function instantiateClass($className, $args = null)
