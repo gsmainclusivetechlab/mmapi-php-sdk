@@ -26,5 +26,6 @@ class CompletedBatchTransactionTest extends ProcessTestCase
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
         $this->mockResponseObject = 'BatchCompletion.json';
         $this->responseType = BatchCompletion::class;
+        $this->arrayResponse = true;
     }
 }
