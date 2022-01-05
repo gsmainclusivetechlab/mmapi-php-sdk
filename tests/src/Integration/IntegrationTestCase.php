@@ -210,8 +210,25 @@ abstract class IntegrationTestCase extends TestCase
             case \mmpsdk\Common\Models\AccountHolderName::class:
                 $this->validateFields(['name'], $response, $jsonData);
                 break;
-            case \mmpsdk\Common\Models\Bill::class:
+            case \mmpsdk\BillPayment\Models\Bill::class:
                 $this->validateFields(['billReference'], $response, $jsonData);
+                break;
+            case \mmpsdk\BillPayment\Models\BillPay::class:
+                $this->validateFields(
+                    ['amountPaid', 'currency'],
+                    $response,
+                    $jsonData
+                );
+                break;
+            case \mmpsdk\AgentService\Models\Account::class:
+                $this->validateFields(['identity'], $response, $jsonData);
+                break;
+            case \mmpsdk\AccountLinking\Models\Link::class:
+                $this->validateFields(
+                    ['sourceAccountIdentifiers', 'mode', 'status'],
+                    $response,
+                    $jsonData
+                );
                 break;
             default:
                 break;
