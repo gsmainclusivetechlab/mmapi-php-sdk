@@ -4,6 +4,7 @@ use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 use mmpsdk\Common\Process\RetrieveAccountTransactions;
+use mmpsdk\Common\Models\Transaction;
 
 class RetrieveAccountTransactionsTest extends ProcessTestCase
 {
@@ -26,5 +27,7 @@ class RetrieveAccountTransactionsTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'Transaction.json';
+        $this->responseType = Transaction::class;
     }
 }

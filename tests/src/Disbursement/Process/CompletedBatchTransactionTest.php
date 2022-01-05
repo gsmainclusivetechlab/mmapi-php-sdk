@@ -3,6 +3,7 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Process\CompletedBatchTransaction;
+use mmpsdk\Disbursement\Models\BatchCompletion;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class CompletedBatchTransactionTest extends ProcessTestCase
@@ -23,5 +24,7 @@ class CompletedBatchTransactionTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'BatchCompletion.json';
+        $this->responseType = BatchCompletion::class;
     }
 }

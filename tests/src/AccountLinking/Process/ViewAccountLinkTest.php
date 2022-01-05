@@ -20,5 +20,7 @@ class ViewAccountLinkTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'Link.json';
+        $this->responseType = Link::class;
     }
 }

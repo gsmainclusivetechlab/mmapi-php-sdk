@@ -3,6 +3,7 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Process\RejectedBatchTransaction;
+use mmpsdk\Disbursement\Models\BatchRejection;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class RejectedBatchTransactionTest extends ProcessTestCase
@@ -23,5 +24,7 @@ class RejectedBatchTransactionTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'BatchRejection.json';
+        $this->responseType = BatchRejection::class;
     }
 }

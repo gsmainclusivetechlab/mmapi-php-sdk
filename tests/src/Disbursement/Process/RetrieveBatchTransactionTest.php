@@ -3,6 +3,7 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Disbursement\Process\RetrieveBatchTransaction;
+use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class RetrieveBatchTransactionTest extends ProcessTestCase
@@ -20,5 +21,7 @@ class RetrieveBatchTransactionTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'BatchTransaction.json';
+        $this->responseType = BatchTransaction::class;
     }
 }
