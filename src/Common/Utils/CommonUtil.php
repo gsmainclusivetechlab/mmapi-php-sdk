@@ -20,7 +20,7 @@ class CommonUtil
             return null;
         }
 
-        if(isset($data[0]) && gettype($data[0]) == 'object'){
+        if (isset($data[0]) && gettype($data[0]) == 'object') {
             return $data;
         }
 
