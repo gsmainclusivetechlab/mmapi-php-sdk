@@ -2,7 +2,9 @@
 
 namespace mmpsdk\Common\Models;
 
+use Exception;
 use JsonSerializable;
+use mmpsdk\Common\Exceptions\SDKException;
 
 /**
  * Class BaseModel
@@ -14,10 +16,18 @@ class BaseModel implements JsonSerializable
 
     protected $availableCount;
 
-    public function __construct($value = [])
+    public function __construct($value = null)
     {
-        if (!empty($value)) {
-            $this->hydrate($value);
+        try{
+            if (is_string($value)) {
+                $decodeJson = json_decode($value);
+                if($decodeJson === false || is_null($decodeJson)){
+                    throw new SDKException('Could not encode JSON');
+                }
+                $this->hydrate($decodeJson);
+            }
+        }catch (Exception $e){
+            throw new SDKException($e->getMessage());
         }
     }
 
