@@ -79,6 +79,11 @@ abstract class ProcessTestCase extends TestCase
      */
     protected $responseType;
 
+    /**
+     * @var bool
+     */
+    protected $arrayResponse = false;
+
     public function testCheckSuccessResponse()
     {
         $mockObj = $this->buildMockObject(function ($request) {
