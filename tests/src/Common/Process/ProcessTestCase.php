@@ -108,7 +108,7 @@ abstract class ProcessTestCase extends TestCase
                 $response
             );
         }
-        if($this->responseType !== stdClass::class){
+        if ($this->responseType !== stdClass::class) {
             $this->validateResponse(
                 $response,
                 json_decode($mockObj->getRawResponse()->getResult(), true)
