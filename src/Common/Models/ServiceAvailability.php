@@ -2,7 +2,7 @@
 
 namespace mmpsdk\Common\Models;
 
-class HeartBeat extends BaseModel
+class ServiceAvailability extends BaseModel
 {
     /**
      * @var string

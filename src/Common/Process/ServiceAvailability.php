@@ -4,7 +4,7 @@ namespace mmpsdk\Common\Process;
 
 use mmpsdk\Common\Utils\RequestUtil;
 use mmpsdk\Common\Constants\API;
-use mmpsdk\Common\Models\HeartBeat;
+use mmpsdk\Common\Models\ServiceAvailability as HeartBeat;
 
 /**
  * Class ServiceAvailability
