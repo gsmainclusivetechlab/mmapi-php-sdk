@@ -18,15 +18,15 @@ class BaseModel implements JsonSerializable
 
     public function __construct($value = null)
     {
-        try{
+        try {
             if (is_string($value)) {
                 $decodeJson = json_decode($value);
-                if($decodeJson === false || is_null($decodeJson)){
+                if ($decodeJson === false || is_null($decodeJson)) {
                     throw new SDKException('Could not encode JSON');
                 }
                 $this->hydrate($decodeJson);
             }
-        }catch (Exception $e){
+        } catch (Exception $e) {
             throw new SDKException($e->getMessage());
         }
     }
