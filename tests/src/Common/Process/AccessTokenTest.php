@@ -23,5 +23,7 @@ class AccessTokenTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'AccessToken.json';
+        $this->responseType = stdClass::class;
     }
 }

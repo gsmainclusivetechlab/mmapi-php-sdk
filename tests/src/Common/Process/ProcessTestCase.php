@@ -9,6 +9,7 @@ use mmpsdk\Common\Models\Response;
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdkTest\src\mocks\MockResponse;
 use ReflectionClass;
+use stdClass;
 
 abstract class ProcessTestCase extends TestCase
 {
@@ -93,10 +94,25 @@ abstract class ProcessTestCase extends TestCase
             );
         });
         $response = $mockObj->execute();
-        if ($this->processType == BaseProcess::ASYNCHRONOUS_PROCESS) {
-            $this->assertInstanceOf(RequestState::class, $response);
+
+        if ($this->arrayResponse) {
+            $this->assertContainsOnlyInstancesOf(
+                $this->responseType,
+                $response
+            );
         } else {
-            $this->assertInstanceOf($this->responseType, $response);
+            $this->assertInstanceOf(
+                $this->processType == BaseProcess::ASYNCHRONOUS_PROCESS
+                    ? RequestState::class
+                    : $this->responseType,
+                $response
+            );
+        }
+        if($this->responseType !== stdClass::class){
+            $this->validateResponse(
+                $response,
+                json_decode($mockObj->getRawResponse()->getResult(), true)
+            );
         }
     }
 
@@ -155,14 +171,22 @@ abstract class ProcessTestCase extends TestCase
     ) {
         $response = new Response();
         if ($this->processType == BaseProcess::ASYNCHRONOUS_PROCESS) {
+            $jsonData = $this->arrayResponse
+                ? $this->buildListResponse(
+                    MockResponse::get('RequestState.json')
+                )
+                : MockResponse::get('RequestState.json');
             return $response
-                ->setResult(MockResponse::get('RequestState.json'))
+                ->setResult($jsonData)
                 ->setHttpCode(202)
                 ->setClientCorrelationId('123456789')
                 ->setRequestObj($request);
         } else {
+            $jsonData = $this->arrayResponse
+                ? $this->buildListResponse(MockResponse::get($mockResponse))
+                : MockResponse::get($mockResponse);
             return $response
-                ->setResult(MockResponse::get($mockResponse))
+                ->setResult($jsonData)
                 ->setHttpCode(200)
                 ->setRequestObj($request);
         }
@@ -223,5 +247,77 @@ abstract class ProcessTestCase extends TestCase
             $this->reqObj->getProcessType(),
             'Wrong Process Type'
         );
+    }
+
+    private function buildListResponse($response)
+    {
+        $response = json_decode($response, true);
+        return json_encode([$response, $response]);
+    }
+
+    private function getterMethod($attribute)
+    {
+        return 'get' .
+            str_replace(' ', '', ucwords(str_replace('_', ' ', $attribute)));
+    }
+
+    private function validateResponse($response, $jsonData)
+    {
+        if (is_array($response)) {
+            foreach ($response as $key => $value) {
+                $this->validateFields(
+                    array_keys($jsonData[$key]),
+                    $value,
+                    $jsonData[$key]
+                );
+            }
+        } else {
+            return $this->validateFields(
+                array_keys($jsonData),
+                $response,
+                $jsonData
+            );
+        }
+    }
+
+    private function validateFields($fields, $response, $jsonData)
+    {
+        if (is_array($response)) {
+            foreach ($response as $key => $value) {
+                $this->validateFields($fields, $value, $jsonData[$key]);
+            }
+        } else {
+            foreach ($fields as $field) {
+                $getterMethod = $this->getterMethod($field);
+                $this->assertTrue(
+                    method_exists(get_class($response), $getterMethod),
+                    'Class ' .
+                        get_class($response) .
+                        ' does not have method ' .
+                        $getterMethod
+                );
+                $this->assertArrayHasKey(
+                    $field,
+                    $jsonData,
+                    'Mandatory Field ' . $field . ' not found in API response'
+                );
+                $this->assertNotNull(
+                    $response->$getterMethod(),
+                    'Field ' . $field . ' has no value.'
+                );
+                if (
+                    !in_array(gettype($response->$getterMethod()), [
+                        'object',
+                        'array'
+                    ])
+                ) {
+                    $this->assertEquals(
+                        $jsonData[$field],
+                        $response->$getterMethod(),
+                        'Field ' . $field . ' has invalid value.'
+                    );
+                }
+            }
+        }
     }
 }
