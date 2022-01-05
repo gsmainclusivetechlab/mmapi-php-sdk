@@ -29,5 +29,6 @@ class RetrieveAccountBillsTest extends ProcessTestCase
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
         $this->mockResponseObject = 'Bill.json';
         $this->responseType = Bill::class;
+        $this->arrayResponse = true;
     }
 }

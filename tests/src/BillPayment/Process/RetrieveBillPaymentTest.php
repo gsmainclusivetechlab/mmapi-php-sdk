@@ -29,5 +29,6 @@ class RetrieveBillPaymentTest extends ProcessTestCase
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
         $this->mockResponseObject = 'BillPay.json';
         $this->responseType = BillPay::class;
+        $this->arrayResponse = true;
     }
 }

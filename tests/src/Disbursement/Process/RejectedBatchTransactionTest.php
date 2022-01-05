@@ -26,5 +26,6 @@ class RejectedBatchTransactionTest extends ProcessTestCase
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
         $this->mockResponseObject = 'BatchRejection.json';
         $this->responseType = BatchRejection::class;
+        $this->arrayResponse = true;
     }
 }
