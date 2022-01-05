@@ -180,6 +180,10 @@ abstract class ProcessTestCase extends TestCase
             $this->expectException(SDKException::class);
         } catch (SDKException $e) {
             $this->assertNotEmpty($e->getErrorObj(), 'Error object is empty');
+            $this->validateResponse(
+                $e->getErrorObj(),
+                json_decode($mockObj->getRawResponse()->getResult(), true)
+            );
         }
     }
 

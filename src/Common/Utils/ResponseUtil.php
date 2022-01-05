@@ -6,7 +6,6 @@ use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Constants\MobileMoney;
-use mmpsdk\Common\Models\Response;
 
 /**
  * Class ResponseUtil
@@ -64,7 +63,7 @@ class ResponseUtil
 
             //Failed Responses
             case self::BAD_REQUEST:
-                $errorObject = new Error(json_decode($response->getResult()));
+                $errorObject = new Error($response->getResult());
                 throw new SDKException(
                     self::BAD_REQUEST .
                         ': ' .
@@ -77,7 +76,7 @@ class ResponseUtil
                 if (isset($errorObject->errorCode)) {
                     throw new SDKException(
                         self::UNAUTHORIZED,
-                        new Error($errorObject)
+                        new Error($response->getResult())
                     );
                 } else {
                     if (!isset($request->isAuthTokenRequest)) {
@@ -102,7 +101,7 @@ class ResponseUtil
             case self::NOT_FOUND:
                 $errorObject = json_decode($response->getResult());
                 if (isset($errorObject->errorCode)) {
-                    $errObj = new Error($errorObject);
+                    $errObj = new Error($response->getResult());
                     throw new SDKException(
                         self::NOT_FOUND . ': ' . $errObj->getErrorDescription(),
                         $errObj
