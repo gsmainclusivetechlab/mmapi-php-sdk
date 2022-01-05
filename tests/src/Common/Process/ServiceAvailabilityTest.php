@@ -3,6 +3,7 @@
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Process\ServiceAvailability;
 use mmpsdk\Common\Process\BaseProcess;
+use mmpsdk\Common\Models\HeartBeat;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class ServiceAvailabilityTest extends ProcessTestCase
@@ -17,5 +18,7 @@ class ServiceAvailabilityTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'HeartBeat.json';
+        $this->responseType = HeartBeat::class;
     }
 }

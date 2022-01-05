@@ -4,6 +4,7 @@ use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 use mmpsdk\Common\Process\ViewAuthorisationCode;
+use mmpsdk\Common\Models\AuthorisationCode;
 
 class ViewAuthorisationCodeTest extends ProcessTestCase
 {
@@ -20,5 +21,7 @@ class ViewAuthorisationCodeTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'AuthorisationCode.json';
+        $this->responseType = AuthorisationCode::class;
     }
 }

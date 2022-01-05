@@ -3,6 +3,7 @@
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Process\PollRequest;
 use mmpsdk\Common\Process\BaseProcess;
+use mmpsdk\Common\Models\RequestState;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class PollRequestTest extends ProcessTestCase
@@ -23,5 +24,7 @@ class PollRequestTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'RequestState.json';
+        $this->responseType = RequestState::class;
     }
 }

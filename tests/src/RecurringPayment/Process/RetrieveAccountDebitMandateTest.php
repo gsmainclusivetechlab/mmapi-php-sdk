@@ -3,6 +3,7 @@
 use mmpsdk\Common\Process\BaseProcess;
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\RecurringPayment\Process\RetrieveAccountDebitMandate;
+use mmpsdk\RecurringPayment\Models\DebitMandate;
 use mmpsdkTest\src\Common\Process\ProcessTestCase;
 
 class RetrieveAccountDebitMandateTest extends ProcessTestCase
@@ -21,5 +22,7 @@ class RetrieveAccountDebitMandateTest extends ProcessTestCase
             $this->constructorArgs
         );
         $this->processType = BaseProcess::SYNCHRONOUS_PROCESS;
+        $this->mockResponseObject = 'DebitMandate.json';
+        $this->responseType = DebitMandate::class;
     }
 }
