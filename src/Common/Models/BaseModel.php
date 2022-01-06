@@ -20,11 +20,7 @@ class BaseModel implements JsonSerializable
     {
         try {
             if (is_string($value)) {
-                $decodeJson = json_decode($value);
-                if ($decodeJson === false || is_null($decodeJson)) {
-                    throw new SDKException('Could not encode JSON');
-                }
-                $this->hydrate($decodeJson);
+                $this->hydrate($this->parseJsonString($value));
             }
         } catch (Exception $e) {
             throw new SDKException($e->getMessage());
@@ -60,6 +56,9 @@ class BaseModel implements JsonSerializable
      */
     public function hydrate($data, $context = null, $availableItemCount = null)
     {
+        if (is_string($data)) {
+            $data = $this->parseJsonString($data);
+        }
         if (is_array($data) && !empty($data)) {
             $objectArray = [];
             foreach ($data as $item) {
@@ -102,5 +101,17 @@ class BaseModel implements JsonSerializable
         return array_filter($array, function ($val) {
             return !is_null($val);
         });
+    }
+
+    private function parseJsonString($data)
+    {
+        if (is_string($data)) {
+            $decodeJson = json_decode($data);
+            if ($decodeJson === false || is_null($decodeJson)) {
+                throw new SDKException('Could not encode JSON');
+            }
+            return $decodeJson;
+        }
+        return $data;
     }
 }
