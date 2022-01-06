@@ -152,7 +152,7 @@ abstract class ProcessTestCase extends TestCase
         if ($this->arrayResponse) {
             $this->assertContainsOnlyInstancesOf(
                 $this->responseType,
-                $response
+                $response['data']
             );
         } else {
             $this->assertInstanceOf(
@@ -268,7 +268,7 @@ abstract class ProcessTestCase extends TestCase
     private function validateResponse($response, $jsonData)
     {
         if (is_array($response)) {
-            foreach ($response as $key => $value) {
+            foreach ($response['data'] as $key => $value) {
                 $this->validateFields(
                     array_keys($jsonData[$key]),
                     $value,

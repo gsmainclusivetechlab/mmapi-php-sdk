@@ -60,13 +60,20 @@ class BaseModel implements JsonSerializable
             $data = $this->parseJsonString($data);
         }
         if (is_array($data) && !empty($data)) {
-            $objectArray = [];
+            $objectArray = [
+                "data" => [],
+                "metadata" => []
+            ];
             foreach ($data as $item) {
                 array_push(
-                    $objectArray,
+                    $objectArray["data"],
                     $this->hydrate($item, new $this(), $availableItemCount)
                 );
             }
+            $objectArray["metadata"] = [
+                "returnedCount" => 10,
+                "availableCount" => $availableItemCount
+            ];
             return $objectArray;
         } elseif ($data) {
             $context = $context ? $context : $this;
