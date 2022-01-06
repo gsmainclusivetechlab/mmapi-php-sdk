@@ -4,6 +4,7 @@ namespace mmpsdk\Common\Utils;
 
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
+use mmpsdk\Common\Models\MetaData;
 use mmpsdk\Common\Exceptions\SDKException;
 use mmpsdk\Common\Constants\MobileMoney;
 
@@ -44,7 +45,7 @@ class ResponseUtil
                     $data->clientCorrelationId = $response->getClientCorrelationId();
                 }
                 if ($obj !== null) {
-                    $count = 0;
+                    $metaData = new MetaData();
                     if (
                         $response->getHeaders() !== null &&
                         array_key_exists(
@@ -52,11 +53,26 @@ class ResponseUtil
                             $response->getHeaders()
                         )
                     ) {
-                        $count = $response->getHeaders()[
-                            Header::X_RECORDS_AVAILABLE_COUNT
-                        ];
+                        $metaData->setAvailableCount(
+                            $response->getHeaders()[
+                                Header::X_RECORDS_AVAILABLE_COUNT
+                            ]
+                        );
                     }
-                    $data = $obj->hydrate($decodedResponse, null, $count);
+                    if (
+                        $response->getHeaders() !== null &&
+                        array_key_exists(
+                            Header::X_RECORDS_RETURNED_COUNT,
+                            $response->getHeaders()
+                        )
+                    ) {
+                        $metaData->setReturnedCount(
+                            $response->getHeaders()[
+                                Header::X_RECORDS_RETURNED_COUNT
+                            ]
+                        );
+                    }
+                    $data = $obj->hydrate($decodedResponse, null, $metaData);
                 }
                 return $data;
                 break;

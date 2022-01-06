@@ -247,7 +247,7 @@ abstract class IntegrationTestCase extends TestCase
     private function validateFields($fields, $response, $jsonData)
     {
         if (is_array($response)) {
-            foreach ($response as $key => $value) {
+            foreach ($response['data'] as $key => $value) {
                 $this->validateFields($fields, $value, $jsonData[$key]);
             }
         } else {
@@ -288,7 +288,7 @@ abstract class IntegrationTestCase extends TestCase
     private function validateResponse($response, $jsonData)
     {
         if (is_array($response)) {
-            foreach ($response as $key => $value) {
+            foreach ($response['data'] as $key => $value) {
                 $this->validateFields(
                     array_keys($jsonData[$key]),
                     $value,

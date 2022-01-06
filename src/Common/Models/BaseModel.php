@@ -51,10 +51,10 @@ class BaseModel implements JsonSerializable
      *
      * @param object $data
      * @param $context
-     * @param $availableItemCount
+     * @param object $metaData
      * @return self
      */
-    public function hydrate($data, $context = null, $availableItemCount = null)
+    public function hydrate($data, $context = null, $metaData = null)
     {
         if (is_string($data)) {
             $data = $this->parseJsonString($data);
@@ -67,18 +67,15 @@ class BaseModel implements JsonSerializable
             foreach ($data as $item) {
                 array_push(
                     $objectArray['data'],
-                    $this->hydrate($item, new $this(), $availableItemCount)
+                    $this->hydrate($item, new $this())
                 );
             }
-            $objectArray['metadata'] = [
-                'returnedCount' => 10,
-                'availableCount' => $availableItemCount
-            ];
+            $objectArray['metadata'] = $metaData;
             return $objectArray;
         } elseif ($data) {
             $context = $context ? $context : $this;
             $context->hydratorStrategies();
-            $context->availableCount = $availableItemCount;
+            // $context->availableCount = $availableItemCount;
             foreach ($data as $attribute => $value) {
                 $context->hydrateAttribute($attribute, $value);
             }
