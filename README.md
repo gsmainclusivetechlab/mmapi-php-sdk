@@ -9,27 +9,25 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
-- [mmapi-php-sdk](#mmapi-php-sdk)
-  - [Index](#index)
-  - [Requirements](#requirements)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-      - [Composer](#composer)
-      - [Manual Installation](#manual-installation)
-    - [Development and testing](#development-and-testing)
-  - [Setting Up](#setting-up)
-    - [Initialization of PHP SDK](#initialization-of-php-sdk)
-    - [Handling errors](#handling-errors)
-  - [Use Cases](#use-cases)
-    - [Merchant Payments](#merchant-payments)
-    - [Disbursements](#disbursements)
-    - [International Transfers](#international-transfers)
-    - [P2P Transfers](#p2p-transfers)
-    - [Recurring Payments](#recurring-payments)
-    - [Account Linking](#account-linking)
-    - [Bill Payments](#bill-payments)
-    - [Agent Services](#agent-services)
-  - [Samples](#samples)
+-   [Requirements](#requirements)
+-   [Getting Started](#getting-started)
+    -   [Installation](#installation)
+        -   [Composer](#composer)
+        -   [Manual Installation](#manual-installation)
+    -   [Development and testing](#development-and-testing)
+-   [Setting Up](#setting-up)
+    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+    -   [Handling errors](#handling-errors)
+-   [Use Cases](#use-cases)
+    -   [Merchant Payments](#merchant-payments)
+    -   [Disbursements](#disbursements)
+    -   [International Transfers](#international-transfers)
+    -   [P2P Transfers](#p2p-transfers)
+    -   [Recurring Payments](#recurring-payments)
+    -   [Account Linking](#account-linking)
+    -   [Bill Payments](#bill-payments)
+    -   [Agent Services](#agent-services)
+-   [Samples](#samples)
 
 ## Requirements
 
@@ -129,7 +127,7 @@ try {
 
 Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
 
-The PHP SDK provides an SDKException class that is used for common scenarios where exceptions are thrown. The getErrorObj() and getMessage() methods can provide useful information to understand the cause of errors.
+The PHP SDK provides an `SDKException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
 
 ```php
 <?php
@@ -154,13 +152,10 @@ try {
      *Execute the request
      */
     $repsonse = $request->execute();
-
-    print($repsonse);
 } catch (SDKException $ex) {
-    print($ex->getMessage());
-    print($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
-
 ```
 
 Sample Response:
@@ -183,35 +178,19 @@ mmpsdk\Common\Models\Error Object
                 )
 
         )
-
-    [hydratorStrategies:protected] =>
-    [availableCount:protected] =>
 )
 ```
 
 ## Use Cases
 
-- [mmapi-php-sdk](#mmapi-php-sdk)
-  - [Index](#index)
-  - [Requirements](#requirements)
-  - [Getting Started](#getting-started)
-    - [Installation](#installation)
-      - [Composer](#composer)
-      - [Manual Installation](#manual-installation)
-    - [Development and testing](#development-and-testing)
-  - [Setting Up](#setting-up)
-    - [Initialization of PHP SDK](#initialization-of-php-sdk)
-    - [Handling errors](#handling-errors)
-  - [Use Cases](#use-cases)
-    - [Merchant Payments](#merchant-payments)
-    - [Disbursements](#disbursements)
-    - [International Transfers](#international-transfers)
-    - [P2P Transfers](#p2p-transfers)
-    - [Recurring Payments](#recurring-payments)
-    - [Account Linking](#account-linking)
-    - [Bill Payments](#bill-payments)
-    - [Agent Services](#agent-services)
-  - [Samples](#samples)
+-   [Merchant Payments](#merchant-payments)
+-   [Disbursements](#disbursements)
+-   [International Transfers](#international-transfers)
+-   [P2P Transfers](#p2p-transfers)
+-   [Recurring Payments](#recurring-payments)
+-   [Account Linking](#account-linking)
+-   [Bill Payments](#bill-payments)
+-   [Agent Services](#agent-services)
 
 ### Merchant Payments
 
