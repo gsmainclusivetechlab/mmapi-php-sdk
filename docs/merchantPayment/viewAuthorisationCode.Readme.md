@@ -38,7 +38,7 @@ try {
 ### Example Output
 
 ```php
-mmpsdk\Common\Models\Balance Object
+mmpsdk\Common\Models\AuthorisationCode Object
 (
     [authorisationCode:mmpsdk\Common\Models\AuthorisationCode:private] => ad922511-77ae-4c17-b674-f85a96fffbf7
     [codeState:mmpsdk\Common\Models\AuthorisationCode:private] => active

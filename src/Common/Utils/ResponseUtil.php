@@ -36,12 +36,12 @@ class ResponseUtil
             case self::ACCEPTED:
             case self::CREATED:
                 $decodedResponse = json_decode($response->getResult());
-                $data = $decodedResponse;
                 if (is_array($decodedResponse) && empty($decodedResponse)) {
                     $data['data'] = $data;
                     $data['metadata'] = new MetaData();
                     return $data;
                 }
+                $data = $decodedResponse;
                 //Add client correlation id along with response
                 if ($response->getClientCorrelationId()) {
                     $data->clientCorrelationId = $response->getClientCorrelationId();
@@ -76,8 +76,9 @@ class ResponseUtil
                     }
                     $data = $obj->hydrate($decodedResponse, null);
                     if (is_array($data)) {
-                        $data['data'] = $data;
-                        $data['metadata'] = $metaData;
+                        $dataResponse['data'] = $data;
+                        $dataResponse['metadata'] = $metaData;
+                        $data = $dataResponse;
                     }
                 }
                 return $data;
