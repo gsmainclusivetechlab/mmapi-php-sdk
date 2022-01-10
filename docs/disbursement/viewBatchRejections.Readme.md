@@ -42,44 +42,53 @@ try {
 ```php
 Array
 (
-    [0] => mmpsdk\Disbursement\Models\BatchRejection Object
+    [data] => Array
         (
-            [rejectionReason:mmpsdk\Disbursement\Models\BatchRejection:private] => string
-            [rejectionDate:mmpsdk\Disbursement\Models\BatchRejection:private] => 2021-12-15T07:51:34.934Z
-            [transactionReference:protected] => REF-1635751208477
-            [requestingOrganisationTransactionReference:protected] => REF-1625751208478
-            [creditParty:protected] => Array
+            [0] => mmpsdk\Disbursement\Models\BatchRejection Object
                 (
-                    [0] => stdClass Object
+                    [rejectionReason:mmpsdk\Disbursement\Models\BatchRejection:private] => string
+                    [rejectionDate:mmpsdk\Disbursement\Models\BatchRejection:private] => 2021-12-15T07:51:34.934Z
+                    [transactionReference:protected] => REF-1635751208477
+                    [requestingOrganisationTransactionReference:protected] => REF-1625751208478
+                    [creditParty:protected] => Array
                         (
-                            [key] => msisdn
-                            [value] => +33555123456
+                            [0] => stdClass Object
+                                (
+                                    [key] => msisdn
+                                    [value] => +33555123456
+                                )
+
                         )
 
-                )
-
-            [debitParty:protected] => Array
-                (
-                    [0] => stdClass Object
+                    [debitParty:protected] => Array
                         (
-                            [key] => msisdn
-                            [value] => +33555123456
+                            [0] => stdClass Object
+                                (
+                                    [key] => msisdn
+                                    [value] => +33555123456
+                                )
+
                         )
 
-                )
-
-            [customData:protected] => Array
-                (
-                    [0] => stdClass Object
+                    [customData:protected] => Array
                         (
-                            [key] => string
-                            [value] => string
+                            [0] => stdClass Object
+                                (
+                                    [key] => string
+                                    [value] => string
+                                )
+
                         )
 
+                    [hydratorStrategies:protected] =>
+                    [availableCount:protected] => 0
                 )
+        )
 
-            [hydratorStrategies:protected] =>
-            [availableCount:protected] => 0
+    [metadata] => mmpsdk\Common\Models\MetaData Object
+        (
+            [returnedCount:mmpsdk\Common\Models\MetaData:private] =>
+            [availableCount:mmpsdk\Common\Models\MetaData:private] =>
         )
 
 )
