@@ -123,6 +123,30 @@ try {
 }
 ```
 
+### Instantiating the models
+
+When making a specific API call using the PHP SDK, you usually have to include a specific class used for the data sent or returned as part of that API request. The PHP classes used to pass data to and from API endpoints are called models.
+We will use the `Transaction` object as an example.
+The `amount` property is an example of a string that is part of the `Transaction` class that has both a public getter and a public setter. To set the `amount` property of a `Transaction` object, use this code:
+
+```php
+    $transaction = new Transaction();
+    $transaction->setAmount($amount);
+```
+
+To get the value of the amount property, you can simply use the string that it returns, like this:
+
+```php
+    $transaction->getAmount();
+```
+
+PHP SDK models also provide a method called hydrate() that enables developers to initialize many of the object’s properties by passing raw json string to the method as parameter.
+Instead of using the getter and setter methods, you could set property values by using the `hydrate()` method.
+
+```php
+    $transaction->hydrate('{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2000"}],"debitParty":[{"key":"accountid","value":"2999"}],"type":"transfer"}');
+```
+
 ### Handling errors
 
 Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
