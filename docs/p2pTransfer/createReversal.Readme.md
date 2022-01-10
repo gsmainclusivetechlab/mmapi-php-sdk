@@ -29,17 +29,17 @@ try {
      * Get Client Correlation Id that will be sent along with request
      */
     $clientCorrelationId = $request->getClientCorrelationId()
-    prettyPrint($clientCorrelationId);
+    print_r($clientCorrelationId);
 
     /**
      *Execute the request
      */
     $repsonse = $request->execute();
 
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 
 ```
