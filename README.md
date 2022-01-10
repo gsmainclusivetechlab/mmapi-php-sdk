@@ -9,23 +9,27 @@ to customize your application integrations as needed. The SDK also includes a Sa
 
 This document contains the following sections:
 
--   [Requirements](#requirements)
--   [Getting Started](#getting-started)
-    -   [Installation](#installation)
-        -   [Composer](#composer)
-        -   [Manual Installation](#manual-installation)
-    -   [Development and testing](#development-and-testing)
--   [Setting Up](#setting-up)
-    -   [Initialization of PHP SDK](#initialization-of-php-sdk)
--   [Use Cases](#use-cases)
-    -   [Merchant Payments](#merchant-payments)
-    -   [Disbursements](#disbursements)
-    -   [International Transfers](#international-transfers)
-    -   [P2P Transfers](#p2p-transfers)
-    -   [Recurring Payments](#recurring-payments)
-    -   [Account Linking](#account-linking)
-    -   [Bill Payments](#bill-payments)
--   [Samples](#samples)
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Index](#index)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [Composer](#composer)
+      - [Manual Installation](#manual-installation)
+    - [Development and testing](#development-and-testing)
+  - [Setting Up](#setting-up)
+    - [Initialization of PHP SDK](#initialization-of-php-sdk)
+    - [Handling errors](#handling-errors)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+    - [International Transfers](#international-transfers)
+    - [P2P Transfers](#p2p-transfers)
+    - [Recurring Payments](#recurring-payments)
+    - [Account Linking](#account-linking)
+    - [Bill Payments](#bill-payments)
+    - [Agent Services](#agent-services)
+  - [Samples](#samples)
 
 ## Requirements
 
@@ -121,16 +125,93 @@ try {
 }
 ```
 
+### Handling errors
+
+Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
+
+The PHP SDK provides an SDKException class that is used for common scenarios where exceptions are thrown. The getErrorObj() and getMessage() methods can provide useful information to understand the cause of errors.
+
+```php
+<?php
+require_once __DIR__ . './../bootstrap.php';
+use mmpsdk\Common\Models\Transaction;
+use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\MerchantPayment\MerchantPayment;
+
+$transaction = new Transaction();
+$transaction
+    ->setAmount('-16.00')
+    ->setCurrency('USD')
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678']);
+try {
+    /**
+     * Construct request object and set desired parameters
+     */
+    $request = MerchantPayment::createMerchantTransaction($transaction);
+
+    /**
+     *Execute the request
+     */
+    $repsonse = $request->execute();
+
+    print($repsonse);
+} catch (SDKException $ex) {
+    print($ex->getMessage());
+    print($ex->getErrorObj());
+}
+
+```
+
+Sample Response:
+
+```php
+400: Invalid JSON Field
+
+mmpsdk\Common\Models\Error Object
+(
+    [errorCategory:mmpsdk\Common\Models\Error:private] => validation
+    [errorCode:mmpsdk\Common\Models\Error:private] => formatError
+    [errorDescription:mmpsdk\Common\Models\Error:private] => Invalid JSON Field
+    [errorDateTime:mmpsdk\Common\Models\Error:private] => 2022-01-10T07:46:56.529Z
+    [errorParameters:mmpsdk\Common\Models\Error:private] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [key] => amount
+                    [value] => must match "^([0]|([1-9][0-9]{0,17}))([.][0-9]{0,3}[0-9])?$"
+                )
+
+        )
+
+    [hydratorStrategies:protected] =>
+    [availableCount:protected] =>
+)
+```
+
 ## Use Cases
 
--   [Merchant Payments](#merchant-payments)
--   [Disbursements](#disbursements)
--   [International Transfers](#international-transfers)
--   [P2P Transfers](#p2p-transfers)
--   [Recurring Payments](#recurring-payments)
--   [Account Linking](#account-linking)
--   [Bill Payments](#bill-payments)
--   [Agent Services](#agent-services)
+- [mmapi-php-sdk](#mmapi-php-sdk)
+  - [Index](#index)
+  - [Requirements](#requirements)
+  - [Getting Started](#getting-started)
+    - [Installation](#installation)
+      - [Composer](#composer)
+      - [Manual Installation](#manual-installation)
+    - [Development and testing](#development-and-testing)
+  - [Setting Up](#setting-up)
+    - [Initialization of PHP SDK](#initialization-of-php-sdk)
+    - [Handling errors](#handling-errors)
+  - [Use Cases](#use-cases)
+    - [Merchant Payments](#merchant-payments)
+    - [Disbursements](#disbursements)
+    - [International Transfers](#international-transfers)
+    - [P2P Transfers](#p2p-transfers)
+    - [Recurring Payments](#recurring-payments)
+    - [Account Linking](#account-linking)
+    - [Bill Payments](#bill-payments)
+    - [Agent Services](#agent-services)
+  - [Samples](#samples)
 
 ### Merchant Payments
 
