@@ -17,17 +17,6 @@ require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\AgentService\AgentService;
 use mmpsdk\Common\Exceptions\SDKException;
 
-try {
-    $response = AgentService::viewAccount([
-
-    ])->execute();
-    prettyPrint($response);
-} catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
-}
-
-
 $accountIdentifier = [
     'msisdn' => '+411111111'
 ];
@@ -42,10 +31,10 @@ try {
      */
     $repsonse = $request->execute();
 chat
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 ```
 

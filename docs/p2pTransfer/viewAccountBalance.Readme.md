@@ -35,10 +35,10 @@ try {
      */
     $repsonse = $request->execute();
 
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 ```
 

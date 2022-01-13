@@ -2,7 +2,9 @@
 
 namespace mmpsdk\Common\Models;
 
+use Exception;
 use JsonSerializable;
+use mmpsdk\Common\Exceptions\SDKException;
 
 /**
  * Class BaseModel
@@ -14,10 +16,14 @@ class BaseModel implements JsonSerializable
 
     protected $availableCount;
 
-    public function __construct($value = [])
+    public function __construct($value = null)
     {
-        if (!empty($value)) {
-            $this->hydrate($value);
+        try {
+            if (is_string($value)) {
+                $this->hydrate($this->parseJsonString($value));
+            }
+        } catch (Exception $e) {
+            throw new SDKException($e->getMessage());
         }
     }
 
@@ -45,24 +51,23 @@ class BaseModel implements JsonSerializable
      *
      * @param object $data
      * @param $context
-     * @param $availableItemCount
+     * @param object $metaData
      * @return self
      */
-    public function hydrate($data, $context = null, $availableItemCount = null)
+    public function hydrate($data, $context = null)
     {
+        if (is_string($data)) {
+            $data = $this->parseJsonString($data);
+        }
         if (is_array($data) && !empty($data)) {
             $objectArray = [];
             foreach ($data as $item) {
-                array_push(
-                    $objectArray,
-                    $this->hydrate($item, new $this(), $availableItemCount)
-                );
+                array_push($objectArray, $this->hydrate($item, new $this()));
             }
             return $objectArray;
         } elseif ($data) {
             $context = $context ? $context : $this;
             $context->hydratorStrategies();
-            $context->availableCount = $availableItemCount;
             foreach ($data as $attribute => $value) {
                 $context->hydrateAttribute($attribute, $value);
             }
@@ -92,5 +97,17 @@ class BaseModel implements JsonSerializable
         return array_filter($array, function ($val) {
             return !is_null($val);
         });
+    }
+
+    private function parseJsonString($data)
+    {
+        if (is_string($data)) {
+            $decodeJson = json_decode($data);
+            if ($decodeJson === false || is_null($decodeJson)) {
+                throw new SDKException('Could not encode JSON');
+            }
+            return $decodeJson;
+        }
+        return $data;
     }
 }

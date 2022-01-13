@@ -32,9 +32,9 @@ try {
      *Execute the request
      */
     $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getErrorObj());
 }
 ```
 

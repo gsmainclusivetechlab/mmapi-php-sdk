@@ -34,10 +34,10 @@ try {
      */
     $repsonse = $request->execute();
 
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 ```
 
@@ -46,37 +46,46 @@ try {
 ```php
 Array
 (
-    [0] => mmpsdk\BillPayment\Models\BillPay Object
+    [data] => Array
         (
-            [serviceProviderPaymentReference:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [requestingOrganisationTransactionReference:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [paymentType:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [billPaymentStatus:mmpsdk\BillPayment\Models\BillPay:private] => unpaid
-            [amountPaid:mmpsdk\BillPayment\Models\BillPay:private] => 0.99
-            [currency:mmpsdk\BillPayment\Models\BillPay:private] => GBP
-            [customerReference:mmpsdk\BillPayment\Models\BillPay:private] => customer ref 0001
-            [requestingOrganisation:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [supplementaryBillReferenceDetails:mmpsdk\BillPayment\Models\BillPay:private] => Array
+            [0] => mmpsdk\BillPayment\Models\BillPay Object
                 (
-                    [0] => mmpsdk\BillPayment\Models\BillReference Object
+                    [serviceProviderPaymentReference:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [requestingOrganisationTransactionReference:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [paymentType:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [billPaymentStatus:mmpsdk\BillPayment\Models\BillPay:private] => unpaid
+                    [amountPaid:mmpsdk\BillPayment\Models\BillPay:private] => 0.99
+                    [currency:mmpsdk\BillPayment\Models\BillPay:private] => GBP
+                    [customerReference:mmpsdk\BillPayment\Models\BillPay:private] => customer ref 0001
+                    [requestingOrganisation:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [supplementaryBillReferenceDetails:mmpsdk\BillPayment\Models\BillPay:private] => Array
                         (
-                            [paymentReferenceType:mmpsdk\BillPayment\Models\BillReference:private] => type 1
-                            [paymentReferenceValue:mmpsdk\BillPayment\Models\BillReference:private] => value 1
-                            [hydratorStrategies:protected] =>
-                            [availableCount:protected] =>
+                            [0] => mmpsdk\BillPayment\Models\BillReference Object
+                                (
+                                    [paymentReferenceType:mmpsdk\BillPayment\Models\BillReference:private] => type 1
+                                    [paymentReferenceValue:mmpsdk\BillPayment\Models\BillReference:private] => value 1
+                                    [hydratorStrategies:protected] =>
+                                    [availableCount:protected] =>
+                                )
+
                         )
 
+                    [serviceProviderComment:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [serviceProviderNotification:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [creationDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-17T00:00:00
+                    [modificationDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-18T08:20:58
+                    [requestDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-18T08:21:27
+                    [customData:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [metadata:mmpsdk\BillPayment\Models\BillPay:private] =>
+                    [hydratorStrategies:protected] =>
+                    [availableCount:protected] => 0
                 )
+        )
 
-            [serviceProviderComment:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [serviceProviderNotification:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [creationDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-17T00:00:00
-            [modificationDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-18T08:20:58
-            [requestDate:mmpsdk\BillPayment\Models\BillPay:private] => 2021-02-18T08:21:27
-            [customData:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [metadata:mmpsdk\BillPayment\Models\BillPay:private] =>
-            [hydratorStrategies:protected] =>
-            [availableCount:protected] => 0
+    [metadata] => mmpsdk\Common\Models\MetaData Object
+        (
+            [returnedCount:mmpsdk\Common\Models\MetaData:private] =>
+            [availableCount:mmpsdk\Common\Models\MetaData:private] =>
         )
 )
 

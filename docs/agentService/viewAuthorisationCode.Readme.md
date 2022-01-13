@@ -28,17 +28,17 @@ try {
      */
     $repsonse = $request->execute();
 
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 ```
 
 ### Example Output
 
 ```php
-mmpsdk\Common\Models\Balance Object
+mmpsdk\Common\Models\AuthorisationCode Object
 (
     [authorisationCode:mmpsdk\Common\Models\AuthorisationCode:private] => ad922511-77ae-4c17-b674-f85a96fffbf7
     [codeState:mmpsdk\Common\Models\AuthorisationCode:private] => active

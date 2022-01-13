@@ -67,7 +67,6 @@ class RetrieveAccountBills extends BaseProcess
             ->build();
 
         $response = $this->makeRequest($request);
-        // print_r($response);exit();
         return $this->parseResponse($response, new Bill());
     }
 }

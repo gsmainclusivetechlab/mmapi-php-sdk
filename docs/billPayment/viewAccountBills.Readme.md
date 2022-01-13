@@ -32,10 +32,10 @@ try {
      */
     $repsonse = $request->execute();
 
-    prettyPrint($repsonse);
+    print_r($repsonse);
 } catch (SDKException $ex) {
-    prettyPrint($ex->getMessage());
-    prettyPrint($ex->getErrorObj());
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
 }
 ```
 
@@ -43,21 +43,30 @@ try {
 
 ```php
 Array(
-    [0] => mmpsdk\BillPayment\Models\Bill Object
+    [data] => Array
         (
-            [billReference:mmpsdk\BillPayment\Models\Bill:private] => REF-000001
-            [billStatus:mmpsdk\BillPayment\Models\Bill:private] =>
-            [amountDue:mmpsdk\BillPayment\Models\Bill:private] => 50.00
-            [billDescription:mmpsdk\BillPayment\Models\Bill:private] =>
-            [currency:mmpsdk\BillPayment\Models\Bill:private] => GBP
-            [dueDate:mmpsdk\BillPayment\Models\Bill:private] => 2016-08-02
-            [minimumAmountDue:mmpsdk\BillPayment\Models\Bill:private] => 0.00
-            [creationDate:mmpsdk\BillPayment\Models\Bill:private] => 2021-01-17T00:00:00
-            [modificationDate:mmpsdk\BillPayment\Models\Bill:private] => 2021-02-17T00:00:00
-            [customData:mmpsdk\BillPayment\Models\Bill:private] =>
-            [metadata:mmpsdk\BillPayment\Models\Bill:private] =>
-            [hydratorStrategies:protected] =>
-            [availableCount:protected] => 0
+            [0] => mmpsdk\BillPayment\Models\Bill Object
+                (
+                    [billReference:mmpsdk\BillPayment\Models\Bill:private] => REF-000001
+                    [billStatus:mmpsdk\BillPayment\Models\Bill:private] =>
+                    [amountDue:mmpsdk\BillPayment\Models\Bill:private] => 50.00
+                    [billDescription:mmpsdk\BillPayment\Models\Bill:private] =>
+                    [currency:mmpsdk\BillPayment\Models\Bill:private] => GBP
+                    [dueDate:mmpsdk\BillPayment\Models\Bill:private] => 2016-08-02
+                    [minimumAmountDue:mmpsdk\BillPayment\Models\Bill:private] => 0.00
+                    [creationDate:mmpsdk\BillPayment\Models\Bill:private] => 2021-01-17T00:00:00
+                    [modificationDate:mmpsdk\BillPayment\Models\Bill:private] => 2021-02-17T00:00:00
+                    [customData:mmpsdk\BillPayment\Models\Bill:private] =>
+                    [metadata:mmpsdk\BillPayment\Models\Bill:private] =>
+                    [hydratorStrategies:protected] =>
+                    [availableCount:protected] => 0
+                )
+        )
+
+    [metadata] => mmpsdk\Common\Models\MetaData Object
+        (
+            [returnedCount:mmpsdk\Common\Models\MetaData:private] =>
+            [availableCount:mmpsdk\Common\Models\MetaData:private] =>
         )
 )
 

@@ -14,9 +14,10 @@ This document contains the following sections:
     -   [Installation](#installation)
         -   [Composer](#composer)
         -   [Manual Installation](#manual-installation)
-    -   [Development and testing](#development-and-testing)
 -   [Setting Up](#setting-up)
     -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+    -   [Instantiating the models](#instantiating-the-models)
+    -   [Handling errors](#handling-errors)
 -   [Use Cases](#use-cases)
     -   [Merchant Payments](#merchant-payments)
     -   [Disbursements](#disbursements)
@@ -25,6 +26,11 @@ This document contains the following sections:
     -   [Recurring Payments](#recurring-payments)
     -   [Account Linking](#account-linking)
     -   [Bill Payments](#bill-payments)
+    -   [Agent Services](#agent-services)
+-   [Tests](#tests)
+    -   [Execute unit tests only](#execute-unit-tests-only)
+    -   [Execute integration tests only](#execute-integration-tests-only)
+    -   [Execute all tests (unit + integration)](#execute-all-tests-unit--integration)
 -   [Samples](#samples)
 
 ## Requirements
@@ -66,13 +72,6 @@ If you prefer not to use Composer, you can manually install the SDK.
     ```php
     require 'path/to/sdk/autoload.php';
     ```
-
-### Development and testing
-
-1. Install [Composer](https://getcomposer.org/download/)
-2. From the root of the sdk-php project, run `composer install`
-3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
-4. From the root of the sdk-php project, `composer run tests` to run the test suite.
 
 ## Setting Up
 
@@ -119,6 +118,90 @@ try {
 } catch (SDKException $exception) {
     print_r($exception->getMessage());
 }
+```
+
+### Instantiating the models
+
+When making a specific API call using the PHP SDK, you usually have to include a specific class used for the data sent or returned as part of that API request. The PHP classes used to pass data to and from API endpoints are called models.
+We will use the `Transaction` object as an example.
+The `amount` property is an example of a string that is part of the `Transaction` class that has both a public getter and a public setter. To set the `amount` property of a `Transaction` object, use this code:
+
+```php
+$transaction = new Transaction();
+$transaction->setAmount($amount);
+```
+
+To get the value of the amount property, you can simply use the string that it returns, like this:
+
+```php
+$transaction->getAmount();
+```
+
+PHP SDK models also provide a method called hydrate() that enables developers to initialize many of the object’s properties by passing raw json string to the method as parameter.
+Instead of using the getter and setter methods, you could set property values by using the `hydrate()` method.
+
+```php
+$transaction->hydrate(
+    '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2000"}],"debitParty":[{"key":"accountid","value":"2999"}],"type":"transfer"}'
+);
+```
+
+### Handling errors
+
+Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
+
+The PHP SDK provides an `SDKException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
+
+```php
+<?php
+require_once __DIR__ . './../bootstrap.php';
+use mmpsdk\Common\Models\Transaction;
+use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\MerchantPayment\MerchantPayment;
+
+$transaction = new Transaction();
+$transaction
+    ->setAmount('-16.00')
+    ->setCurrency('USD')
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678']);
+try {
+    /**
+     * Construct request object and set desired parameters
+     */
+    $request = MerchantPayment::createMerchantTransaction($transaction);
+
+    /**
+     *Execute the request
+     */
+    $repsonse = $request->execute();
+} catch (SDKException $ex) {
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
+}
+```
+
+Sample Response:
+
+```php
+400: Invalid JSON Field
+
+mmpsdk\Common\Models\Error Object
+(
+    [errorCategory:mmpsdk\Common\Models\Error:private] => validation
+    [errorCode:mmpsdk\Common\Models\Error:private] => formatError
+    [errorDescription:mmpsdk\Common\Models\Error:private] => Invalid JSON Field
+    [errorDateTime:mmpsdk\Common\Models\Error:private] => 2022-01-10T07:46:56.529Z
+    [errorParameters:mmpsdk\Common\Models\Error:private] => Array
+        (
+            [0] => stdClass Object
+                (
+                    [key] => amount
+                    [value] => must match "^([0]|([1-9][0-9]{0,17}))([.][0-9]{0,3}[0-9])?$"
+                )
+
+        )
+)
 ```
 
 ## Use Cases
@@ -857,6 +940,44 @@ try {
   </tr>
 </tbody>
 </table>
+
+## Tests
+
+The `tests` folder contains the test cases. These are logically divided in unit and integration tests. Integration tests require an active `consumer key`, `consumer secret` and `api key`.
+
+1. Install [Composer](https://getcomposer.org/download/)
+2. From the root of the sdk-php project, run `composer install --dev` to install the dependencies
+3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
+
+### Execute unit tests only
+
+```shell
+composer run unit-tests
+```
+
+To run tests individually (be sure not to be pointing to an integration test file):
+
+```shell
+composer run unit-tests path/to/class/file
+```
+
+### Execute integration tests only
+
+```shell
+composer run integration-tests
+```
+
+To run tests individually (be sure not to be pointing to an unit test file):
+
+```shell
+composer run integration-tests path/to/class/file
+```
+
+### Execute all tests (unit + integration)
+
+```shell
+composer run tests
+```
 
 ## Samples
 
