@@ -15,11 +15,12 @@
     </extensions>
     <testsuites>
         <testsuite name="UnitTest">
-            <directory>tests</directory>
-            <exclude>tests/src/Integration</exclude>
+            <directory>tests/Unit/src</directory>
+            <exclude>tests/Integration</exclude>
         </testsuite>
         <testsuite name="IntegrationTest">
-            <directory>tests/src/Integration</directory>
+            <directory>tests/Integration/src</directory>
+            <exclude>tests/Unit</exclude>
         </testsuite>
     </testsuites>
 
