@@ -14,9 +14,9 @@ This document contains the following sections:
     -   [Installation](#installation)
         -   [Composer](#composer)
         -   [Manual Installation](#manual-installation)
-    -   [Development and testing](#development-and-testing)
 -   [Setting Up](#setting-up)
     -   [Initialization of PHP SDK](#initialization-of-php-sdk)
+    -   [Instantiating the models](#instantiating-the-models)
     -   [Handling errors](#handling-errors)
 -   [Use Cases](#use-cases)
     -   [Merchant Payments](#merchant-payments)
@@ -27,6 +27,10 @@ This document contains the following sections:
     -   [Account Linking](#account-linking)
     -   [Bill Payments](#bill-payments)
     -   [Agent Services](#agent-services)
+-   [Tests](#tests)
+    -   [Execute unit tests only](#execute-unit-tests-only)
+    -   [Execute integration tests only](#execute-integration-tests-only)
+    -   [Execute all tests (unit + integration)](#execute-all-tests-unit--integration)
 -   [Samples](#samples)
 
 ## Requirements
@@ -68,13 +72,6 @@ If you prefer not to use Composer, you can manually install the SDK.
     ```php
     require 'path/to/sdk/autoload.php';
     ```
-
-### Development and testing
-
-1. Install [Composer](https://getcomposer.org/download/)
-2. From the root of the sdk-php project, run `composer install`
-3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
-4. From the root of the sdk-php project, `composer run tests` to run the test suite.
 
 ## Setting Up
 
@@ -943,6 +940,44 @@ mmpsdk\Common\Models\Error Object
   </tr>
 </tbody>
 </table>
+
+## Tests
+
+The `tests` folder contains the test cases. These are logically divided in unit and integration tests. Integration tests require an active `consumer key`, `consumer secret` and `api key`.
+
+1. Install [Composer](https://getcomposer.org/download/)
+2. From the root of the sdk-php project, run `composer install --dev` to install the dependencies
+3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
+
+### Execute unit tests only
+
+```shell
+composer run unit-tests
+```
+
+To run tests individually (be sure not to be pointing to an integration test file):
+
+```shell
+composer run unit-tests path/to/class/file
+```
+
+### Execute integration tests only
+
+```shell
+composer run integration-tests
+```
+
+To run tests individually (be sure not to be pointing to an unit test file):
+
+```shell
+composer run integration-tests path/to/class/file
+```
+
+### Execute all tests (unit + integration)
+
+```shell
+composer run tests
+```
 
 ## Samples
 
