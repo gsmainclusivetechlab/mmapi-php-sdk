@@ -4,7 +4,7 @@ namespace mmpsdk\Common\Models;
 
 use Exception;
 use JsonSerializable;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 /**
  * Class BaseModel
@@ -23,7 +23,7 @@ class BaseModel implements JsonSerializable
                 $this->hydrate($this->parseJsonString($value));
             }
         } catch (Exception $e) {
-            throw new SDKException($e->getMessage());
+            throw new MobileMoneyException($e->getMessage());
         }
     }
 
@@ -104,7 +104,7 @@ class BaseModel implements JsonSerializable
         if (is_string($data)) {
             $decodeJson = json_decode($data);
             if ($decodeJson === false || is_null($decodeJson)) {
-                throw new SDKException('Could not encode JSON');
+                throw new MobileMoneyException('Could not encode JSON');
             }
             return $decodeJson;
         }

@@ -93,7 +93,7 @@ abstract class BaseProcess
                     break;
                 case NotificationMethod::CALLBACK:
                     if (empty($this->callBackUrl)) {
-                        throw new \mmpsdk\Common\Exceptions\SDKException(
+                        throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                             'Callback URL is empty'
                         );
                     }
@@ -103,7 +103,7 @@ abstract class BaseProcess
                     break;
             }
         } elseif ($this->processType == self::ASYNCHRONOUS_PROCESS) {
-            throw new \mmpsdk\Common\Exceptions\SDKException(
+            throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                 'Unknown notification method: ' . $notificationMethod
             );
         }

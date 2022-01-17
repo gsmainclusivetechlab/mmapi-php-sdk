@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\Common\Enums\NotificationMethod;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\AgentService\AgentService;
 use mmpsdk\Common\Models\AuthorisationCode;
 
@@ -23,7 +23,7 @@ try {
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }

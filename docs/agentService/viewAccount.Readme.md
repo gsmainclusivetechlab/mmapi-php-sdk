@@ -15,7 +15,7 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\AgentService\AgentService;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 $accountIdentifier = [
     'msisdn' => '+411111111'
@@ -32,7 +32,7 @@ try {
     $repsonse = $request->execute();
 chat
     print_r($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }

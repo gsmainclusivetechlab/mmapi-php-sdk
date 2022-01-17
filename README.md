@@ -105,7 +105,7 @@ require 'path/to/sdk/autoload.php';
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 //Initialize SDK
 try {
@@ -115,7 +115,7 @@ try {
         $counsumerSecret,
         $apiKey
     );
-} catch (SDKException $exception) {
+} catch (MobileMoneyException $exception) {
     print_r($exception->getMessage());
 }
 ```
@@ -150,13 +150,13 @@ $transaction->hydrate(
 
 Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
 
-The PHP SDK provides an `SDKException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
+The PHP SDK provides an `MobileMoneyException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
 
 ```php
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\MerchantPayment\MerchantPayment;
 
 $transaction = new Transaction();
@@ -175,7 +175,7 @@ try {
      *Execute the request
      */
     $repsonse = $request->execute();
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }

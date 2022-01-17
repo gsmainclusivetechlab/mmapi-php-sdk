@@ -59,7 +59,7 @@ abstract class AuthorizationCache
             !is_dir(dirname($cachePath)) &&
             !mkdir(dirname($cachePath), 0755, true)
         ) {
-            throw new \mmpsdk\Common\Exceptions\SDKException(
+            throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                 "Failed to create directory at: $cachePath"
             );
         }
@@ -76,7 +76,7 @@ abstract class AuthorizationCache
             ];
         }
         if (!file_put_contents($cachePath, json_encode($tokens))) {
-            throw new \mmpsdk\Common\Exceptions\SDKException(
+            throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                 'Failed to write cache'
             );
         }

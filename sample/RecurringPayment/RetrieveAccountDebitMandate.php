@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\RecurringPayment\RecurringPayment;
 
 $debitMandateReference = 'REF-1638258098398';
@@ -16,7 +16,7 @@ try {
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }

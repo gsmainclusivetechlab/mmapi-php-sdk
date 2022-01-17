@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\InternationalTransfer\InternationalTransfer;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Models\Transaction;
 
 try {
@@ -13,6 +13,6 @@ try {
     );
     $response = $request->execute();
     prettyPrint($response);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }

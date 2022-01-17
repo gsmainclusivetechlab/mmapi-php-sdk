@@ -3,7 +3,7 @@ namespace mmpsdkTest\Unit\src\Common\Process;
 use PHPUnit\Framework\TestCase;
 use mmpsdkTest\Extensions\PropertyAccessor;
 use DMS\PHPUnitExtensions\ArraySubset\ArraySubsetAsserts;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Models\RequestState;
 use mmpsdk\Common\Models\Response;
 use mmpsdk\Common\Process\BaseProcess;
@@ -177,8 +177,8 @@ abstract class ProcessTestCase extends TestCase
         });
         try {
             $mockObj->execute();
-            $this->expectException(SDKException::class);
-        } catch (SDKException $e) {
+            $this->expectException(MobileMoneyException::class);
+        } catch (MobileMoneyException $e) {
             $this->assertNotEmpty($e->getErrorObj(), 'Error object is empty');
             $this->validateResponse(
                 $e->getErrorObj(),
