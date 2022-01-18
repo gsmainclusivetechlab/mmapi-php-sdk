@@ -12,7 +12,7 @@ require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\InternationalTransfer\InternationalTransfer;
 use mmpsdk\Common\Enums\NotificationMethod;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Models\Address;
 use mmpsdk\Common\Models\IdDocument;
 use mmpsdk\Common\Models\KYCInformation;
@@ -97,7 +97,7 @@ try {
      */
     $repsonse = $request->execute();
     print_r($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }

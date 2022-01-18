@@ -14,7 +14,7 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\BillPayment\Models\BillPay;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\BillPayment\BillPayment;
 
 $accountIdentifier = [
@@ -51,7 +51,7 @@ try {
     $repsonse = $request->execute();
 
     print_r($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }

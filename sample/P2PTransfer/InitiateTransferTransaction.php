@@ -4,7 +4,7 @@ require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\P2PTransfer\P2PTransfer;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Enums\NotificationMethod;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 $transaction = new Transaction();
 $transaction
@@ -19,7 +19,7 @@ try {
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }

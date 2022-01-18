@@ -329,13 +329,13 @@ class RequestUtil
      * Execute request
      *
      * @return  Curl
-     * @throws  SDKException
+     * @throws  MobileMoneyException
      */
     public function build()
     {
         // cURL is not enabled
         if (!$this->_isEnabled()) {
-            throw new \mmpsdk\Common\Exceptions\SDKException(
+            throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                 __CLASS__ .
                     ': PHP was not built with cURL enabled. Rebuild PHP with --with-curl to use cURL.'
             );
@@ -346,7 +346,7 @@ class RequestUtil
 
         // Unrecognized request method?
         if (!in_array($method, $this->_methods)) {
-            throw new \mmpsdk\Common\Exceptions\SDKException(
+            throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                 __CLASS__ . ': Unrecognized request method of ' . $this->_method
             );
         }
@@ -438,7 +438,7 @@ class RequestUtil
                 }
                 break;
             default:
-                throw new \mmpsdk\Common\Exceptions\SDKException(
+                throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                     "Unknown Request Method: $method"
                 );
                 break;
@@ -572,7 +572,7 @@ class RequestUtil
      *
      * @param   string  $key
      * @param   string  $value
-     * @throws  SDKException
+     * @throws  MobileMoneyException
      */
     protected function _option($key = '', $value = '')
     {
@@ -582,7 +582,7 @@ class RequestUtil
             if (defined($const)) {
                 $key = constant(strtoupper($key));
             } else {
-                throw new \mmpsdk\Common\Exceptions\SDKException(
+                throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                     'Curl: Constant [' . $const . '] not defined.'
                 );
             }

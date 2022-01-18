@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Disbursement\Models\BatchTransaction;
 use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Disbursement\Disbursement;
@@ -35,7 +35,7 @@ try {
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }

@@ -5,7 +5,7 @@ namespace mmpsdk\Common\Utils;
 use mmpsdk\Common\Constants\Header;
 use mmpsdk\Common\Models\Error;
 use mmpsdk\Common\Models\MetaData;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Constants\MobileMoney;
 
 /**
@@ -87,7 +87,7 @@ class ResponseUtil
             //Failed Responses
             case self::BAD_REQUEST:
                 $errorObject = new Error($response->getResult());
-                throw new SDKException(
+                throw new MobileMoneyException(
                     self::BAD_REQUEST .
                         ': ' .
                         $errorObject->getErrorDescription(),
@@ -97,7 +97,7 @@ class ResponseUtil
             case self::UNAUTHORIZED:
                 $errorObject = json_decode($response->getResult());
                 if (isset($errorObject->errorCode)) {
-                    throw new SDKException(
+                    throw new MobileMoneyException(
                         self::UNAUTHORIZED,
                         new Error($response->getResult())
                     );
@@ -114,8 +114,8 @@ class ResponseUtil
                     if ($request->retryCount <= $request->retryLimit) {
                         return $request->execute();
                     } else {
-                        throw new SDKException(
-                            SDKException::MAX_RETRIES_EXCEEDED
+                        throw new MobileMoneyException(
+                            MobileMoneyException::MAX_RETRIES_EXCEEDED
                         );
                     }
                 }
@@ -125,22 +125,22 @@ class ResponseUtil
                 $errorObject = json_decode($response->getResult());
                 if (isset($errorObject->errorCode)) {
                     $errObj = new Error($response->getResult());
-                    throw new SDKException(
+                    throw new MobileMoneyException(
                         self::NOT_FOUND . ': ' . $errObj->getErrorDescription(),
                         $errObj
                     );
                 } else {
-                    throw new SDKException('Resource Not Found');
+                    throw new MobileMoneyException('Resource Not Found');
                 }
                 break;
             case self::INTERNAL_SERVER_ERROR:
-                throw new SDKException('Internal Server Error');
+                throw new MobileMoneyException('Internal Server Error');
                 break;
             case self::SERVICE_UNAVAILABLE:
-                throw new SDKException('Service Unavailable');
+                throw new MobileMoneyException('Service Unavailable');
                 break;
             default:
-                throw new SDKException(
+                throw new MobileMoneyException(
                     'Unknown Response: ' .
                         $response->getHttpCode() .
                         $response->getResult()

@@ -7,12 +7,12 @@ use RuntimeException;
 use mmpsdk\Common\Models\Error;
 
 /**
- * SDKException creates exception which are originated from Merchant code
+ * MobileMoneyException creates exception which are originated from Merchant code
  *
- * Class SDKException
+ * Class MobileMoneyException
  * @package mmpsdk\Common\Exceptions
  */
-class SDKException extends RuntimeException
+class MobileMoneyException extends RuntimeException
 {
     /** Result message when any required parameter is missing in api calling */
     const MISSING_MANDATORY_PARAMETERS = 'Missing Mandatory Parameters',
@@ -35,7 +35,7 @@ class SDKException extends RuntimeException
     private $errorObj;
 
     /**
-     * SDKException constructor.
+     * MobileMoneyException constructor.
      * @param string $msg
      * @throws Exception
      */
@@ -83,21 +83,21 @@ class SDKException extends RuntimeException
     }
 
     /**
-     * @return SDKException when any mandatory parameter is missing
+     * @return MobileMoneyException when any mandatory parameter is missing
      * @throws Exception
      */
     public static function getPropertyInitializationException()
     {
-        return new SDKException(self::MISSING_PROPERTY);
+        return new MobileMoneyException(self::MISSING_PROPERTY);
     }
 
     /**
-     * @return SDKException when any mandatory parameter is missing
+     * @return MobileMoneyException when any mandatory parameter is missing
      * @throws Exception
      */
     public static function getMissingMandatoryParametersException()
     {
-        return new SDKException(self::MISSING_MANDATORY_PARAMETERS);
+        return new MobileMoneyException(self::MISSING_MANDATORY_PARAMETERS);
     }
 
     /**
@@ -124,12 +124,12 @@ class SDKException extends RuntimeException
     /**
      * @param $exceptionMessage
      * @param $jsonObject
-     * @return SDKException
+     * @return MobileMoneyException
      * @throws Exception
      */
     public static function getSDKException($exceptionMessage, $rawJsonResponse)
     {
-        $sdkException = new SDKException($exceptionMessage);
-        return $sdkException->setRawData($rawJsonResponse);
+        $MobileMoneyException = new MobileMoneyException($exceptionMessage);
+        return $MobileMoneyException->setRawData($rawJsonResponse);
     }
 }

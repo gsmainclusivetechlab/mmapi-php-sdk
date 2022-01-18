@@ -28,8 +28,8 @@ This document contains the following sections:
     -   [Bill Payments](#bill-payments)
     -   [Agent Services](#agent-services)
 -   [Tests](#tests)
-    -   [Execute unit tests only](#execute-unit-tests-only)
-    -   [Execute integration tests only](#execute-integration-tests-only)
+    -   [Unit tests](#unit-tests)
+    -   [Integration tests](#integration-tests)
     -   [Execute all tests (unit + integration)](#execute-all-tests-unit--integration)
 -   [Samples](#samples)
 
@@ -105,7 +105,7 @@ require 'path/to/sdk/autoload.php';
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 //Initialize SDK
 try {
@@ -115,7 +115,7 @@ try {
         $counsumerSecret,
         $apiKey
     );
-} catch (SDKException $exception) {
+} catch (MobileMoneyException $exception) {
     print_r($exception->getMessage());
 }
 ```
@@ -150,13 +150,13 @@ $transaction->hydrate(
 
 Error handling is a crucial aspect of software development. Both expected and unexpected errors should be handled by your code.
 
-The PHP SDK provides an `SDKException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
+The PHP SDK provides an `MobileMoneyException` class that is used for common scenarios where exceptions are thrown. The `getErrorObj()` and `getMessage()` methods can provide useful information to understand the cause of errors.
 
 ```php
 <?php
 require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\Common\Models\Transaction;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\MerchantPayment\MerchantPayment;
 
 $transaction = new Transaction();
@@ -175,7 +175,7 @@ try {
      *Execute the request
      */
     $repsonse = $request->execute();
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }
@@ -949,7 +949,11 @@ The `tests` folder contains the test cases. These are logically divided in unit 
 2. From the root of the sdk-php project, run `composer install --dev` to install the dependencies
 3. Copy `config.env.sample` to `config.env` and replace the template values by actual values
 
-### Execute unit tests only
+### Unit tests
+
+These tests are located in `tests/Unit` and are responsible for ensuring each class is behaving as expected, without considering the rest of the system. Unit tests heavily leverage mocking and are an essential part of the testing harness.
+
+To run unit tests,
 
 ```shell
 composer run unit-tests
@@ -961,7 +965,11 @@ To run tests individually (be sure not to be pointing to an integration test fil
 composer run unit-tests path/to/class/file
 ```
 
-### Execute integration tests only
+### Integration tests
+
+These tests are located in `tests/Integration` and are responsible for ensuring a proper communication with server/simulator. With the integration tests, we ensure all communications between the SDK and the server/simulator are behaving accordingly.
+
+To run the integration tests,
 
 ```shell
 composer run integration-tests

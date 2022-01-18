@@ -2,12 +2,12 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\Disbursement\Disbursement;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 try {
     $serverCorrelationId = 'ea495e98-b5d2-4b03-ba43-4dfbce39cc60';
     $response = Disbursement::viewRequestState($serverCorrelationId)->execute();
     prettyPrint($response);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }

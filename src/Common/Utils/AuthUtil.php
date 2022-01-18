@@ -63,7 +63,7 @@ class AuthUtil
                 return $request;
                 break;
             default:
-                throw new \mmpsdk\Common\Exceptions\SDKException(
+                throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                     'Undefined security level:' .
                         MobileMoney::getSecurityLevel()
                 );
@@ -161,7 +161,7 @@ class AuthUtil
                 return true;
                 break;
             default:
-                throw new \mmpsdk\Common\Exceptions\SDKException(
+                throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
                     'Undefined security level:' .
                         MobileMoney::getSecurityLevel()
                 );

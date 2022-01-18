@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\BillPayment\BillPayment;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 $accountIdentifier = ['accountid' => '1'];
 $billReference = 'REF-000001';
@@ -15,7 +15,7 @@ try {
         $filter
     )->execute();
     prettyPrint($response);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }

@@ -2,7 +2,7 @@
 require_once __DIR__ . './../bootstrap.php';
 
 use mmpsdk\P2PTransfer\P2PTransfer;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 try {
     $transactionReference = 'REF-1635251574104';
@@ -10,6 +10,6 @@ try {
     prettyPrint($request->getClientCorrelationId());
     $repsonse = $request->execute();
     prettyPrint($repsonse);
-} catch (SDKException $ex) {
+} catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }

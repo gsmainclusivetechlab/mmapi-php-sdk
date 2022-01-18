@@ -7,7 +7,7 @@ $env = parse_ini_file(__DIR__ . '../../config.env');
 
 use mmpsdk\Common\Constants\MobileMoney;
 use mmpsdk\Common\Enums\SecurityLevel;
-use mmpsdk\Common\Exceptions\SDKException;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 //Initialize SDK
 try {
@@ -19,7 +19,7 @@ try {
     );
     MobileMoney::setCallbackUrl($env['callback_url']);
     MobileMoney::setSecurityLevel(SecurityLevel::STANDARD);
-} catch (SDKException $exception) {
+} catch (MobileMoneyException $exception) {
     prettyPrint($exception->getMessage());
 }
 
