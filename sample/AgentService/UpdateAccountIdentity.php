@@ -6,13 +6,13 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Models\PatchData;
 
 try {
-    $accountIdentifier = ['accountid' => '2000'];
+    $accountIdentifier = ['walletid' => '1'];
     $patchRequest = new PatchData();
     $patchRequest
         ->setOp(PatchData::REPLACE)
         ->setPath('/kycVerificationStatus')
         ->setValue('verified');
-    $request = AgentService::updateAccountIdentity($accountIdentifier, '105', [
+    $request = AgentService::updateAccountIdentity($accountIdentifier, '1', [
         $patchRequest
     ]);
     prettyPrint($request->getClientCorrelationId());

@@ -9,7 +9,7 @@ use mmpsdk\AccountLinking\Enums\OperationMode;
 
 $link = new Link();
 $link
-    ->setSourceAccountIdentifiers(['accountid' => '2999'])
+    ->setSourceAccountIdentifiers(['walletid' => '1'])
     ->setStatus(LinkStatus::ACTIVE)
     ->setMode(OperationMode::BOTH)
     ->setCustomData(['keytest' => 'keyvalue']);
@@ -20,7 +20,7 @@ $requestingOrganisation
 $link->setRequestingOrganisation($requestingOrganisation);
 
 $accountIdentifier = [
-    'accountid' => 2000
+    'msisdn' => '+44012345678'
 ];
 
 try {

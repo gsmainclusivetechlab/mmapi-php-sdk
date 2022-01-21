@@ -4,7 +4,7 @@ require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\MerchantPayment\MerchantPayment;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
 
-$accountIdentifier = ['accountid' => '2999'];
+$accountIdentifier = ['msisdn' => '+44012345678'];
 $filter = ['limit' => 5];
 
 try {

@@ -5,7 +5,7 @@ use mmpsdk\Common\Common;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 $accountIdentifier = [
-    'accountid' => 2000
+    'msisdn' => '+44012345678'
 ];
 
 try {

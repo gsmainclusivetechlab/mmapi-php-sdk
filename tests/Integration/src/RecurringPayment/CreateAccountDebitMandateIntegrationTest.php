@@ -35,7 +35,7 @@ class CreateAccountDebitMandateIntegrationTest extends IntegrationTestCase
         self::$debitMandate = new DebitMandate();
         self::$debitMandate
             ->setPayee([
-                'accountid' => '2999'
+                'walletid' => '1'
             ])
             ->setCurrency('GBP')
             ->setAmountLimit('1000.00')
@@ -48,7 +48,7 @@ class CreateAccountDebitMandateIntegrationTest extends IntegrationTestCase
                 'keytest' => 'keyvalue'
             ]);
         self::$accountIdentifier = [
-            'accountid' => '2000'
+            'msisdn' => '+44012345678'
         ];
     }
 

@@ -5,7 +5,7 @@ use mmpsdk\AgentService\AgentService;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 try {
-    $serverCorrelationId = '0947ad88-fb10-44b8-a415-4fb817042ec9';
+    $serverCorrelationId = '59648245-5d24-4b78-a4a9-41ecc8e305a0';
     $response = AgentService::viewRequestState($serverCorrelationId)->execute();
     prettyPrint($response);
 } catch (MobileMoneyException $ex) {

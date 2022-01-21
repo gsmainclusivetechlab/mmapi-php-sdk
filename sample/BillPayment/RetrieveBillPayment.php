@@ -4,7 +4,7 @@ require_once __DIR__ . './../bootstrap.php';
 use mmpsdk\BillPayment\BillPayment;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
 
-$accountIdentifier = ['accountid' => '1'];
+$accountIdentifier = ['walletid' => '1'];
 $billReference = 'REF-000001';
 $filter = ['limit' => 5];
 

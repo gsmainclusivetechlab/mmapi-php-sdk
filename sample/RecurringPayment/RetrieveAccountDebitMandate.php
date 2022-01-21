@@ -5,7 +5,7 @@ use mmpsdk\RecurringPayment\RecurringPayment;
 
 $debitMandateReference = 'REF-1638258098398';
 $accountIdentifier = [
-    'accountid' => '2000'
+    'msisdn' => '+44012345678'
 ];
 
 try {
