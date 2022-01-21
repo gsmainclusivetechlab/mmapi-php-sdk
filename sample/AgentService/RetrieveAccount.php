@@ -6,7 +6,7 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 try {
     $response = AgentService::viewAccount([
-        'msisdn' => '+411111111'
+        'walletid' => '1'
     ])->execute();
     prettyPrint($response);
 } catch (MobileMoneyException $ex) {

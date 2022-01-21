@@ -30,7 +30,7 @@ class ViewBillPaymentIntegrationTest extends IntegrationTestCase
     public static function setUpBeforeClass(): void
     {
         self::$accountIdentifier = [
-            'accountid' => 1
+            'walletid' => '1'
         ];
         self::$billReference = 'REF-000001';
         self::$filter = [

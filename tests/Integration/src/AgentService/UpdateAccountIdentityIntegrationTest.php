@@ -30,8 +30,8 @@ class UpdateAccountIdentityIntegrationTest extends IntegrationTestCase
 
     public static function setUpBeforeClass(): void
     {
-        self::$accountIdentifier = ['accountid' => '2000'];
-        self::$identityId = '105';
+        self::$accountIdentifier = ['walletid' => '1'];
+        self::$identityId = '1';
         self::$patchRequest = new PatchData();
         self::$patchRequest
             ->setOp(PatchData::REPLACE)

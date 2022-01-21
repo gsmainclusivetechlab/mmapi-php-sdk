@@ -14,14 +14,14 @@ class PaymentRefundTest extends ProcessTestCase
         $transaction
             ->setAmount('200.00')
             ->setCurrency('RWF')
-            ->setCreditParty(['accountid' => '2999'])
+            ->setCreditParty(['accountid' => '2000'])
             ->setDebitParty(['accountid' => '2999']);
         $this->constructorArgs = [$transaction, 'http://example.com/'];
         $this->requestMethod = 'POST';
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/transactions/type/adjustment';
         $this->requestParams = [
-            '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2999"}],"debitParty":[{"key":"accountid","value":"2999"}]}'
+            '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2000"}],"debitParty":[{"key":"accountid","value":"2999"}]}'
         ];
         $this->className = PaymentRefund::class;
         $this->requestOptions = ['X-Callback-URL: http://example.com/'];

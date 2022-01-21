@@ -32,7 +32,7 @@ class ViewAuthorisationCodeIntegrationTest extends IntegrationTestCase
     public static function setUpBeforeClass(): void
     {
         self::$accountIdentifier = [
-            'accountid' => 2000
+            'msisdn' => '+44012345678'
         ];
         $authorizationCode = new AuthorisationCode();
         $authorizationCode

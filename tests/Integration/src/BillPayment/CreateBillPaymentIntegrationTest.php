@@ -32,7 +32,7 @@ class CreateBillPaymentIntegrationTest extends IntegrationTestCase
     {
         self::$billPay = new BillPay();
         self::$billPay->setCurrency('GBP')->setAmountPaid('5.30');
-        self::$accountIdentifier = ['accountid' => 2000];
+        self::$accountIdentifier = ['msisdn' => '+44012345678'];
         self::$billReference = 'REF-000001';
     }
 

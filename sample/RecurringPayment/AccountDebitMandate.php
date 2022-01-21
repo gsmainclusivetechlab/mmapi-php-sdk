@@ -9,7 +9,7 @@ use mmpsdk\RecurringPayment\RecurringPayment;
 $debitMandate = new DebitMandate();
 $debitMandate
     ->setPayee([
-        'accountid' => '2999'
+        'walletid' => '1'
     ])
     ->setCurrency('GBP')
     ->setAmountLimit('1000.00')
@@ -22,7 +22,7 @@ $debitMandate
         'keytest' => 'keyvalue'
     ]);
 $accountIdentifier = [
-    'accountid' => '2000'
+    'msisdn' => '+44012345678'
 ];
 
 try {

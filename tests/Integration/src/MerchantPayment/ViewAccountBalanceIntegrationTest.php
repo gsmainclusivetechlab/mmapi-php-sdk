@@ -28,7 +28,7 @@ class ViewAccountBalanceIntegrationTest extends IntegrationTestCase
     public static function setUpBeforeClass(): void
     {
         self::$accountIdentifier = [
-            'accountid' => 2000
+            'msisdn' => '+44012345678'
         ];
     }
 

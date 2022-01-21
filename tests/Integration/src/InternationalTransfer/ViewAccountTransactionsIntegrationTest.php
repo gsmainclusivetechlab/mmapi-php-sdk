@@ -29,7 +29,7 @@ class ViewAccountTransactionsIntegrationTest extends IntegrationTestCase
     public static function setUpBeforeClass(): void
     {
         self::$accountIdentifier = [
-            'accountid' => 2000
+            'accountid' => '2999'
         ];
         self::$filter = [
             'limit' => 5

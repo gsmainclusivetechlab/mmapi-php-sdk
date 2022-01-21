@@ -12,7 +12,7 @@ $authorisationObj
     ->setCurrency('GBP')
     ->setAmount('1001.00');
 $accountIdentifier = [
-    'accountid' => 2000
+    'msisdn' => '+44012345678'
 ];
 try {
     $request = MerchantPayment::createAuthorisationCode(

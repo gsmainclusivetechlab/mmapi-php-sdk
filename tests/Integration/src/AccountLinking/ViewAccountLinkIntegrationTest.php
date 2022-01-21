@@ -31,7 +31,7 @@ class ViewAccountLinkIntegrationTest extends IntegrationTestCase
     {
         $link = new Link();
         $link
-            ->setSourceAccountIdentifiers(['accountid' => '2999'])
+            ->setSourceAccountIdentifiers(['walletid' => '1'])
             ->setStatus('active')
             ->setMode('both')
             ->setCustomData(['keytest' => 'keyvalue']);
@@ -43,7 +43,7 @@ class ViewAccountLinkIntegrationTest extends IntegrationTestCase
         $link->setRequestingOrganisation($requestingOrganisation);
 
         self::$accountIdentifier = [
-            'accountid' => '2000'
+            'msisdn' => '+44012345678'
         ];
 
         $response = AccountLinking::createAccountLink(

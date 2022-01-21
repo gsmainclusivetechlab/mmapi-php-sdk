@@ -4,12 +4,12 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\MerchantPayment\MerchantPayment;
 
 $accountIdentifier = [
-    'accountid' => 2000
+    'msisdn' => '+44012345678'
 ];
 try {
     $repsonse = MerchantPayment::viewAuthorisationCode(
         $accountIdentifier,
-        '2b68c2a7-e0ef-4fa8-b180-ec092993016c'
+        '8abed542-df3a-41fa-a4e9-3dbc2b7205d2'
     )->execute();
     prettyPrint($repsonse);
 } catch (MobileMoneyException $ex) {

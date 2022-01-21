@@ -8,8 +8,8 @@ $transaction = new Transaction();
 $transaction
     ->setAmount('200.00')
     ->setCurrency('RWF')
-    ->setCreditParty(['accountid' => '2999'])
-    ->setDebitParty(['accountid' => '2999']);
+    ->setCreditParty(['walletid' => '1'])
+    ->setDebitParty(['msisdn' => '+44012345678']);
 
 try {
     $request = RecurringPayment::createRefundTransaction($transaction);

@@ -14,7 +14,7 @@ class InitiateDisbursementTest extends ProcessTestCase
         $disbursementTransaction
             ->setAmount('200.00')
             ->setCurrency('RWF')
-            ->setCreditParty(['accountid' => '2999'])
+            ->setCreditParty(['accountid' => '2000'])
             ->setDebitParty(['accountid' => '2999']);
         $this->constructorArgs = [
             $disbursementTransaction,
@@ -24,7 +24,7 @@ class InitiateDisbursementTest extends ProcessTestCase
         $this->requestUrl =
             MobileMoney::getBaseUrl() . '/transactions/type/disbursement';
         $this->requestParams = [
-            '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2999"}],"debitParty":[{"key":"accountid","value":"2999"}]}'
+            '{"amount":"200.00","currency":"RWF","creditParty":[{"key":"accountid","value":"2000"}],"debitParty":[{"key":"accountid","value":"2999"}]}'
         ];
         $this->className = InitiateDisbursement::class;
         $this->requestOptions = ['X-Callback-URL: http://example.com/'];

@@ -39,14 +39,14 @@ class ViewBatchCompletionsIntegrationTest extends IntegrationTestCase
         $transactionItem1 = new Transaction();
         $transactionItem2 = new Transaction();
         $transactionItem1
-            ->setCreditParty(['accountid' => '2000'])
-            ->setDebitParty(['accountid' => '2999'])
+            ->setCreditParty(['walletid' => '1'])
+            ->setDebitParty(['msisdn' => '+44012345678'])
             ->setCurrency('RWF')
             ->setAmount('200.00')
             ->setType('transfer');
         $transactionItem2
-            ->setCreditParty(['accountid' => '2999'])
-            ->setDebitParty(['accountid' => '2000'])
+            ->setCreditParty(['msisdn' => '+44012345678'])
+            ->setDebitParty(['walletid' => '1'])
             ->setCurrency('RWF')
             ->setAmount('200.00')
             ->setType('transfer');

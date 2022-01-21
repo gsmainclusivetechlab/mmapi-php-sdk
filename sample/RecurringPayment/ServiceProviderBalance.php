@@ -5,7 +5,7 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\RecurringPayment\RecurringPayment;
 
 $accountIdentifier = [
-    'accountid' => 2000
+    'msisdn' => '+44012345678'
 ];
 
 try {

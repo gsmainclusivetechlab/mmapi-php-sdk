@@ -5,7 +5,7 @@ use mmpsdk\AccountLinking\AccountLinking;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
 
 try {
-    $serverCorrelationId = 'ea495e98-b5d2-4b03-ba43-4dfbce39cc60';
+    $serverCorrelationId = 'a554ff60-36bb-4ab4-808a-7b095452f976';
     $response = AccountLinking::viewRequestState(
         $serverCorrelationId
     )->execute();

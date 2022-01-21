@@ -34,7 +34,7 @@ class CreateAuthorisationCodeIntegrationTest extends IntegrationTestCase
             ->setRequestDate(date('Y-m-d\TH:i:s\.40z'))
             ->setCurrency('GBP')
             ->setAmount('1001.00');
-        self::$accountIdentifier = ['accountid' => 2000];
+        self::$accountIdentifier = ['walletid' => '1'];
     }
 
     protected function setUp(): void

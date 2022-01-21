@@ -34,7 +34,7 @@ class ViewAccountDebitMandateIntegrationTest extends IntegrationTestCase
         $debitMandate = new DebitMandate();
         $debitMandate
             ->setPayee([
-                'accountid' => '2999'
+                'walletid' => '1'
             ])
             ->setCurrency('GBP')
             ->setAmountLimit('1000.00')
@@ -47,7 +47,7 @@ class ViewAccountDebitMandateIntegrationTest extends IntegrationTestCase
                 'keytest' => 'keyvalue'
             ]);
         self::$accountIdentifier = [
-            'accountid' => '2000'
+            'msisdn' => '+44012345678'
         ];
         $response = RecurringPayment::createAccountDebitMandate(
             self::$accountIdentifier,
