@@ -118,6 +118,14 @@ abstract class BaseProcess
             $this->callBackUrl = $callBackUrl
                 ? $callBackUrl
                 : MobileMoney::getCallbackUrl();
+            if (
+                $this->callBackUrl !== null &&
+                filter_var($this->callBackUrl, FILTER_VALIDATE_URL) === false
+            ) {
+                throw new \mmpsdk\Common\Exceptions\MobileMoneyException(
+                    'Invalid Callback URL format: ' . $this->callBackUrl
+                );
+            }
         }
     }
 
