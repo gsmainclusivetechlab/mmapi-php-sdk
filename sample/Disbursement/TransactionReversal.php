@@ -8,8 +8,8 @@ try {
     $transactionReference = 'REF-1635251574104';
     $request = Disbursement::createReversal($transactionReference);
     prettyPrint($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }

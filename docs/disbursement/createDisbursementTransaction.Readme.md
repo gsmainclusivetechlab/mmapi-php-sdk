@@ -40,8 +40,8 @@ try {
     /**
      *Execute the request
      */
-    $repsonse = $request->execute();
-    print_r($repsonse);
+    $response = $request->execute();
+    print_r($response);
 } catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());

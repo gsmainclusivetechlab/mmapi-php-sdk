@@ -29,8 +29,8 @@ try {
     $request = P2PTransfer::createQuotation($quotation);
     $request->setNotificationMethod(NotificationMethod::CALLBACK);
     prettyPrint($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());

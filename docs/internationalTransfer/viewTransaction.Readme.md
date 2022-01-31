@@ -24,9 +24,9 @@ try {
     /**
      *Execute the request
      */
-    $repsonse = $request->execute();
+    $response = $request->execute();
 
-    print_r($repsonse);
+    print_r($response);
 } catch (MobileMoneyException $ex) {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());

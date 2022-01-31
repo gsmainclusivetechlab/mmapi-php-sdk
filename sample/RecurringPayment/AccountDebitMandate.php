@@ -1,8 +1,6 @@
 <?php
 require_once __DIR__ . './../bootstrap.php';
-use mmpsdk\Common\Models\Transaction;
 use mmpsdk\Common\Exceptions\MobileMoneyException;
-use mmpsdk\MerchantPayment\MerchantPayment;
 use mmpsdk\RecurringPayment\Models\DebitMandate;
 use mmpsdk\RecurringPayment\RecurringPayment;
 
@@ -31,8 +29,8 @@ try {
         $debitMandate
     );
     prettyPrint($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());

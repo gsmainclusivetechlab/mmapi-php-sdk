@@ -4,10 +4,10 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\InternationalTransfer\InternationalTransfer;
 
 try {
-    $repsonse = InternationalTransfer::viewQuotation(
+    $response = InternationalTransfer::viewQuotation(
         'REF-1637057900018'
     )->execute();
-    prettyPrint($repsonse);
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }
