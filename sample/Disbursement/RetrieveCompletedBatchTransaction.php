@@ -5,8 +5,8 @@ use mmpsdk\Disbursement\Disbursement;
 
 try {
     $request = Disbursement::viewBatchCompletions('REF-1635751208477');
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());

@@ -33,8 +33,8 @@ $batchTransaction->setTransactions($transactionsArray);
 try {
     $request = Disbursement::createBatchTransaction($batchTransaction);
     prettyPrint($request->getClientCorrelationId());
-    $repsonse = $request->execute();
-    prettyPrint($repsonse);
+    $response = $request->execute();
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());

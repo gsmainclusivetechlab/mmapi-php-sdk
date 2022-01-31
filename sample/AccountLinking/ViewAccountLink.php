@@ -7,11 +7,11 @@ $accountIdentifier = [
     'msisdn' => '+44012345678'
 ];
 try {
-    $repsonse = AccountLinking::ViewAccountLink(
+    $response = AccountLinking::ViewAccountLink(
         $accountIdentifier,
         'REF-1642746239816'
     )->execute();
-    prettyPrint($repsonse);
+    prettyPrint($response);
 } catch (MobileMoneyException $ex) {
     prettyPrint($ex->getErrorObj());
 }
