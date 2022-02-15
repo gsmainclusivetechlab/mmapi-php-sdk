@@ -171,12 +171,7 @@ abstract class IntegrationTestCase extends TestCase
                 break;
             case \mmpsdk\Disbursement\Models\BatchTransaction::class:
                 $this->validateFields(
-                    [
-                        'batchId',
-                        'batchStatus',
-                        'approvalDate',
-                        'completionDate'
-                    ],
+                    ['batchId', 'batchStatus'],
                     $response,
                     $jsonData
                 );
