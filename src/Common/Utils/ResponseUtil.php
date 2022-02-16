@@ -35,7 +35,7 @@ class ResponseUtil
             case self::OK:
             case self::ACCEPTED:
             case self::CREATED:
-                $decodedResponse = json_decode($response->getResult());
+                $decodedResponse = self::decodeJson($response->getResult());
                 $data = $decodedResponse;
                 if (is_array($decodedResponse) && empty($decodedResponse)) {
                     $data['data'] = $data;
@@ -95,7 +95,7 @@ class ResponseUtil
                 );
                 break;
             case self::UNAUTHORIZED:
-                $errorObject = json_decode($response->getResult());
+                $errorObject = self::decodeJson($response->getResult());
                 if (isset($errorObject->errorCode)) {
                     throw new MobileMoneyException(
                         self::UNAUTHORIZED,
@@ -122,7 +122,7 @@ class ResponseUtil
                 break;
 
             case self::NOT_FOUND:
-                $errorObject = json_decode($response->getResult());
+                $errorObject = self::decodeJson($response->getResult());
                 if (isset($errorObject->errorCode)) {
                     $errObj = new Error($response->getResult());
                     throw new MobileMoneyException(
@@ -146,5 +146,14 @@ class ResponseUtil
                         $response->getResult()
                 );
         }
+    }
+
+    public static function decodeJson($jsonData)
+    {
+        $decodedJson = json_decode($jsonData);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new MobileMoneyException('Invalid JSON Response from API');
+        }
+        return $decodedJson;
     }
 }
