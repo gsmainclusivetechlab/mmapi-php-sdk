@@ -171,7 +171,18 @@ abstract class IntegrationTestCase extends TestCase
                 break;
             case \mmpsdk\Disbursement\Models\BatchTransaction::class:
                 $this->validateFields(
-                    ['batchId', 'batchStatus'],
+                    array_merge(
+                        ['batchId', 'batchStatus'],
+                        $response->getBatchStatus() === 'created'
+                            ? ['creationDate']
+                            : [],
+                        $response->getBatchStatus() === 'approved'
+                            ? ['approvalDate']
+                            : [],
+                        $response->getBatchStatus() === 'completed'
+                            ? ['completionDate']
+                            : []
+                    ),
                     $response,
                     $jsonData
                 );

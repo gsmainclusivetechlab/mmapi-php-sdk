@@ -6,7 +6,7 @@ use mmpsdk\Common\Exceptions\MobileMoneyException;
 use mmpsdk\Common\Models\Transaction;
 
 try {
-    $clientCorrelationId = '56647bb2-24e7-43d5-8aa6-b70f568d53c2';
+    $clientCorrelationId = 'ad6fed44-ff55-46fb-8ec2-bb1f8dfbcbe7';
     $request = MerchantPayment::viewResponse(
         $clientCorrelationId,
         new Transaction()
@@ -14,5 +14,6 @@ try {
     $response = $request->execute();
     prettyPrint($response);
 } catch (MobileMoneyException $ex) {
+    prettyPrint($ex->getMessage());
     prettyPrint($ex->getErrorObj());
 }
