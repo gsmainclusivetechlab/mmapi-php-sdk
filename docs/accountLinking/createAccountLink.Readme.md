@@ -11,7 +11,7 @@
 ### Usage/Examples
 
 ```php
-readme /codesnippets/accountLinking/creatAccounLinking.php 
+require /codesnippets/accountLinking/creatAccounLinking.php 
 ```
 
 ### Example Output - Callback
