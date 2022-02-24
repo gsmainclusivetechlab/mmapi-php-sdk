@@ -1,17 +1,54 @@
-# Establish an Account to Account Link
+# Update an Account Identity
 
-`Here, createAccountLink(['identifierType' => 'identifier'], $link) creates a POST request to /accounts/{identifierType}/{identifier}/links`
+`Here, updateAccountIdentity() creates a PATCH request to /accounts/{accountId}/identities/{identityId}`
 
-> `Provided with a valid object representation, this endpoint allows a new link to be created for a specific account where one identifier suffices to uniquely identify an account.`
-
-`Here, createAccountLink([ 'identifierType1' => 'identifier1', 'identifierType2' => 'identifier2', 'identifierType3' => 'identifier3' ], $link) creates a POST request to /accounts/{identifierType}/{identifier}/links`
-
-> `Provided with a valid object representation, this endpoint allows a new link to be created for a specific account where a single identifier is not sufficient to identify an account.`
+> `This endpoint updates an account identity. identityStatus, kycVerificationStatus, kycVerificationEntity and kycLevel field updates are permitted.`
 
 ### Usage/Examples
 
 ```php
-readme /codesnippets/accountLinking/creatAccounLinking.php 
+<?php
+require_once __DIR__ . './../bootstrap.php';
+
+use mmpsdk\AgentService\AgentService;
+use mmpsdk\Common\Exceptions\MobileMoneyException;
+use mmpsdk\Common\Models\PatchData;
+
+$accountIdentifier = ['accountid' => '2000'];
+$patchRequest = new PatchData();
+$patchRequest
+    ->setOp(PatchData::REPLACE)
+    ->setPath('/kycVerificationStatus')
+    ->setValue('verified');
+
+try {
+    /**
+     * Construct request object and set desired parameters
+     */
+    $request = AgentService::updateAccountIdentity($accountIdentifier, '<<IDENDITY_ID>>', [
+        $patchRequest
+    ]);
+
+    /**
+     * Choose notification method can be either Callback or Polling
+     */
+    $request->setNotificationMethod(NotificationMethod::POLLING);
+
+    /**
+     * Get Client Correlation Id that will be sent along with request
+     */
+    $clientCorrelationId = $request->getClientCorrelationId()
+    print_r($clientCorrelationId);
+
+    /**
+     *Execute the request
+     */
+    $response = $request->execute();
+    print_r($response);
+} catch (MobileMoneyException $ex) {
+    print_r($ex->getMessage());
+    print_r($ex->getErrorObj());
+}
 ```
 
 ### Example Output - Callback
@@ -60,6 +97,6 @@ mmpsdk\Common\Models\RequestState Object
 
 **NOTE**
 
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewAccountLink()](viewAccountLink.Readme.md) function to acquire the final representation of the AccountLink object.
+In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewAccount()](viewAccount.Readme.md) function to acquire the final representation of the Account object.
 
 ---
