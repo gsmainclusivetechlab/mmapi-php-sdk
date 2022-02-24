@@ -11,7 +11,7 @@
 ### Usage/Examples
 
 ```php
-require '/codesnippets/accountLinking/creatAccounLinking.php' 
+https://github.com/gsmainclusivetechlab/mmapi-php-sdk/blob/576a62a6f3cd24e987559fbcca3c99fd5520dcdd/code-snippets/accountLinking/ViewAccountLink.php#L1-L28
 ```
 
 ### Example Output - Callback
