@@ -1,13 +1,3 @@
-# Perform an International Transfer
-
-`Here, createInternationalTransaction() creates a POST request to /transactions/type/inttransfer`
-
-> `Provided with a valid object representation, this endpoint allows for a new transaction to be created for a given transaction type 'inttransfer' passed via the URL.`
-
-### Usage/Examples
-
-```php
-
 <?php
 require_once __DIR__ . './../bootstrap.php';
 
@@ -112,54 +102,3 @@ try {
     print_r($ex->getMessage());
     print_r($ex->getErrorObj());
 }
-```
-
-### Example Output - Callback
-
-```php
-6c5b581d-bc99-46f3-96ca-8b80bb19c0ae
-
-mmpsdk\Common\Models\RequestState Object
-(
-    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 495495d3-9780-4d05-a995-d2fe9768e2c1
-    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 6c5b581d-bc99-46f3-96ca-8b80bb19c0ae
-    [objectReference:mmpsdk\Common\Models\RequestState:private] => 18321
-    [status:mmpsdk\Common\Models\RequestState:private] => pending
-    [notificationMethod:mmpsdk\Common\Models\RequestState:private] => callback
-    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
-    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
-    [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
-    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
-    [hydratorStrategies:protected] =>
-    [availableCount:protected] => 0
-)
-```
-
-### Example Output - Polling
-
-```php
-6258d653-e076-4470-93f5-f958fbfff6ab
-
-mmpsdk\Common\Models\RequestState Object
-(
-    [serverCorrelationId:mmpsdk\Common\Models\RequestState:private] => 30c42873-1714-439a-8a5b-b82e43d28ea1
-    [clientCorrelationId:mmpsdk\Common\Models\RequestState:private] => 6258d653-e076-4470-93f5-f958fbfff6ab
-    [objectReference:mmpsdk\Common\Models\RequestState:private] => 18324
-    [status:mmpsdk\Common\Models\RequestState:private] => pending
-    [notificationMethod:mmpsdk\Common\Models\RequestState:private] => polling
-    [pendingReason:mmpsdk\Common\Models\RequestState:private] =>
-    [expiryTime:mmpsdk\Common\Models\RequestState:private] =>
-    [pollLimit:mmpsdk\Common\Models\RequestState:private] => 100
-    [errorReference:mmpsdk\Common\Models\RequestState:private] =>
-    [hydratorStrategies:protected] =>
-    [availableCount:protected] => 0
-)
-```
-
----
-
-**NOTE**
-
-In asynchronous flows, a callback mechanism or polling mechanism is utilised to allow the client to determine the request's final state. Use the [viewRequestState()](viewRequestState.Readme.md) function for the polling mechanism to receive the status of a request, and the [viewTransaction()](viewTransaction.Readme.md) function to acquire the final representation of the Transaction object.
-
----
