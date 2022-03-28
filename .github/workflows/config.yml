@@ -30,12 +30,11 @@ jobs:
                   echo "consumer_secret = ${{ secrets.CONSUMER_SECRET }}" >> config.env
                   echo "api_key = ${{ secrets.API_KEY }}" >> config.env
                   echo "callback_url = ${{ secrets.CALLBACK_URL }}" >> config.env
-                  cat config.env
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
               with:
-                php-version: 7.4
+                  php-version: 7.4
 
             - name: Install dependencies
               run: composer install
