@@ -70,6 +70,7 @@ class UpdateBatchTransactionIntegrationTest extends IntegrationTestCase
             ->setPath('/batchStatus')
             ->setValue('approved');
         self::$patchData = [$patchRequest];
+        sleep(5);
     }
 
     protected function setUp(): void
